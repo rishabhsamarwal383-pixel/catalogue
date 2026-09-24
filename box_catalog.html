@@ -1,0 +1,2687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<title>Box Company Udaipur - 3D Box Studio & Instant Order</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<!-- Three.js + OrbitControls for 3D Engine -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<!-- Canvas Confetti for Order Celebrations -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+  :root {
+    --bg-main: #F4F1EA;
+    --bg-card: #FFFFFF;
+    --text-primary: #1F1B18;
+    --text-secondary: #6B6358;
+    --border-light: #E4DDD2;
+    --brand-primary: #0F766E;
+    --brand-dark: #064E3B;
+    --brand-wa: #25D366;
+    --brand-wa-dark: #128C7E;
+    --accent-gold: #D97706;
+    --accent-orange: #EA580C;
+    --radius-xl: 20px;
+    --radius-lg: 14px;
+    --radius-md: 10px;
+    --radius-sm: 6px;
+    --shadow-soft: 0 4px 14px rgba(0,0,0,0.04);
+    --shadow-card: 0 8px 24px rgba(0,0,0,0.06);
+    --shadow-lift: 0 16px 36px rgba(0,0,0,0.12);
+  }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
+  body {
+    background: var(--bg-main);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    padding: 0 0 110px 0;
+    line-height: 1.45;
+    overflow-x: hidden;
+  }
+
+  /* Store Top Ticker Bar */
+  .store-top-bar {
+    background: #1F1B18;
+    color: #F5EFEB;
+    padding: 7px 14px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .store-top-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+    flex-wrap: wrap;
+  }
+  .store-pulse-dot {
+    width: 7px; height: 7px;
+    background: #10B981;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #10B981;
+    display: inline-block;
+  }
+  .ticker-sep { color: #8E5A2D; font-weight: bold; }
+
+  /* Store Highlights Strip */
+  .store-perks-strip {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 12px 16px;
+    background: #FFFFFF;
+    border-bottom: 1px solid var(--border-light);
+  }
+  @media (min-width: 600px) {
+    .store-perks-strip {
+      grid-template-columns: repeat(4, 1fr);
+      padding: 14px 20px;
+    }
+  }
+  .store-perk-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    background: #FAF8F5;
+    padding: 9px 11px;
+    border-radius: var(--radius-md);
+    border: 1px solid #ECE5D8;
+  }
+  .perk-icon { font-size: 1.35rem; line-height: 1; }
+  .perk-text { display: flex; flex-direction: column; }
+  .perk-title { font-size: 0.74rem; font-weight: 800; color: var(--text-primary); line-height: 1.15; }
+  .perk-sub { font-size: 0.64rem; color: var(--text-secondary); font-weight: 500; margin-top: 1px; }
+
+  /* Header */
+  .header {
+    background: #FFFFFF;
+    border-bottom: 1px solid var(--border-light);
+    padding: 12px 18px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+  }
+  .header-brand { display: flex; align-items: center; gap: 10px; }
+  .header-logo {
+    width: 38px; height: 38px;
+    background: linear-gradient(135deg, #8E5A2D, #6D3F1B);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 20px;
+    box-shadow: 0 4px 10px rgba(110, 63, 27, 0.35);
+  }
+  .header-title { font-family: 'Oswald', sans-serif; font-size: 1.3rem; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-primary); line-height: 1.1; }
+  .header-subtitle { font-size: 0.72rem; color: var(--text-secondary); font-weight: 500; }
+  .header-wa-btn {
+    background: var(--brand-wa);
+    color: #fff;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    display: flex; align-items: center; gap: 6px;
+    text-decoration: none;
+    box-shadow: 0 3px 10px rgba(37, 211, 102, 0.35);
+    transition: transform 0.2s ease;
+  }
+  .header-wa-btn:active { transform: scale(0.95); }
+
+  /* Hero Live 3D Stage Section */
+  .hero-3d-stage {
+    background: linear-gradient(180deg, #FFFFFF 0%, #F8F5EE 100%);
+    border-bottom: 1px solid var(--border-light);
+    padding: 16px 16px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-top-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .badge-live-delivery {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #FEF3C7;
+    color: #92400E;
+    font-size: 0.68rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+  }
+  .badge-live-dot {
+    width: 6px; height: 6px;
+    background: #10B981;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #10B981;
+  }
+  .hero-box-info {
+    margin-bottom: 10px;
+  }
+  .hero-box-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.65rem;
+    color: var(--text-primary);
+    line-height: 1.15;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .hero-box-ply {
+    font-size: 0.72rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #EAE3D6;
+    color: #5D5245;
+    padding: 2px 7px;
+    border-radius: 6px;
+    font-weight: 700;
+  }
+  .hero-box-desc {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-top: 2px;
+  }
+
+  /* 3D WebGL Canvas Container */
+  .stage-viewport-wrap {
+    width: 100%;
+    height: 250px;
+    background: radial-gradient(circle at center, #FFFFFF 0%, #EDE7D8 100%);
+    border-radius: var(--radius-xl);
+    position: relative;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+  #hero-webgl-canvas {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+    cursor: grab;
+    touch-action: none;
+  }
+  #hero-webgl-canvas:active { cursor: grabbing; }
+
+  .stage-drag-pill {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(31, 27, 24, 0.78);
+    backdrop-filter: blur(4px);
+    color: #FFFFFF;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    pointer-events: none;
+    letter-spacing: 0.2px;
+  }
+
+  /* Camera Angle Controls */
+  .camera-angles-row {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .cam-btn {
+    background: #FFFFFF;
+    border: 1.5px solid var(--border-light);
+    border-radius: 16px;
+    padding: 5px 11px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    transition: all 0.15s ease;
+  }
+  .cam-btn:active, .cam-btn.active {
+    background: #1F1B18;
+    color: #FFFFFF;
+    border-color: #1F1B18;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.18);
+  }
+  .specs-guarantee-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+    font-size: 0.66rem;
+    color: #6B6358;
+    font-weight: 600;
+  }
+  .specs-dot { color: #0F766E; font-size: 8px; }
+
+  /* Stage Controls */
+  .stage-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .stage-btn {
+    background: #FFFFFF;
+    border: 1.5px solid var(--border-light);
+    color: var(--text-primary);
+    padding: 9px 12px;
+    border-radius: var(--radius-md);
+    font-size: 0.78rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    cursor: pointer;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .stage-btn:active { transform: scale(0.96); }
+  .stage-btn.active {
+    background: #1F1B18;
+    color: #FFFFFF;
+    border-color: #1F1B18;
+  }
+
+  /* Stage Order Banner (Direct conversion on Hero) */
+  .stage-order-banner {
+    background: #FFFFFF;
+    border: 1.5px solid #FCD34D;
+    border-radius: var(--radius-lg);
+    padding: 12px 14px;
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 14px rgba(217, 119, 6, 0.08);
+  }
+  .stage-price-group { text-align: left; }
+  .stage-price-label { font-size: 0.64rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; }
+  .stage-price-val { font-family: 'Oswald', sans-serif; font-size: 1.6rem; color: #B45309; line-height: 1; }
+  .stage-price-sub { font-size: 0.66rem; color: #059669; font-weight: 700; }
+
+  .btn-stage-order {
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    color: #FFFFFF;
+    border: none;
+    padding: 11px 20px;
+    border-radius: 24px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4);
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .btn-stage-order:active { transform: scale(0.95); }
+
+  /* Category Quick Filters */
+  .category-nav {
+    padding: 16px 16px 8px;
+  }
+  .cat-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+  }
+  .cat-heading {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .cat-hint {
+    font-size: 0.7rem;
+    color: var(--brand-primary);
+    font-weight: 700;
+  }
+
+  .niche-scroll {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 6px;
+  }
+  .niche-scroll::-webkit-scrollbar { display: none; }
+  .niche-chip {
+    padding: 9px 15px;
+    border-radius: 20px;
+    background: #FFFFFF;
+    border: 1.5px solid var(--border-light);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    cursor: pointer;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.2s ease;
+  }
+  .niche-chip:active { transform: scale(0.95); }
+  .niche-chip.active {
+    background: #1F1B18;
+    color: #FFFFFF;
+    border-color: #1F1B18;
+    box-shadow: 0 4px 14px rgba(31, 27, 24, 0.2);
+  }
+
+  /* Search & Filter Bar */
+  .search-wrap {
+    padding: 0 16px 12px;
+  }
+  .search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  .search-box input {
+    width: 100%;
+    padding: 10px 38px 10px 14px;
+    border-radius: var(--radius-md);
+    border: 1.5px solid var(--border-light);
+    background: #FFFFFF;
+    font-family: inherit;
+    font-size: 0.84rem;
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  .search-box input:focus {
+    border-color: var(--brand-primary);
+  }
+  .search-icon {
+    position: absolute;
+    right: 12px;
+    color: var(--text-secondary);
+    font-size: 14px;
+  }
+
+  /* Catalog Grid Container */
+  .catalog-section { padding: 4px 16px 20px; }
+  .section-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .catalog-sec-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.15rem;
+    color: var(--text-primary);
+  }
+  .catalog-count-badge {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    font-weight: 700;
+    background: #EAE3D6;
+    padding: 3px 8px;
+    border-radius: 12px;
+  }
+
+  /* Box Cards Grid */
+  .boxes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  @media (min-width: 500px) {
+    .boxes-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (min-width: 768px) {
+    .boxes-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  .box-card {
+    background: var(--bg-card);
+    border: 1.5px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 12px 10px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    box-shadow: var(--shadow-soft);
+    cursor: pointer;
+    transition: all 0.22s ease;
+  }
+  .box-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lift);
+    border-color: #8E5A2D;
+  }
+
+  .card-top-tags {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+  .card-tag-ply {
+    background: #EFE9DE;
+    color: #6B6358;
+    font-size: 0.6rem;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .card-tag-hot {
+    background: #DC2626;
+    color: #FFFFFF;
+    font-size: 0.58rem;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+  .card-tag-shelf {
+    background: #F4EFE6;
+    color: #8C592D;
+    font-size: 0.58rem;
+    font-weight: 800;
+    padding: 2px 5px;
+    border-radius: 4px;
+    border: 1px solid #E4D8C7;
+  }
+  .card-tag-stock {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    color: #065F46;
+    background: #ECFDF5;
+    padding: 2px 7px;
+    border-radius: 10px;
+    margin-bottom: 4px;
+  }
+  .stock-dot {
+    width: 5px; height: 5px;
+    background: #10B981;
+    border-radius: 50%;
+  }
+
+  .card-svg-wrap {
+    width: 100%;
+    height: 84px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 4px 0 6px;
+    transition: transform 0.25s ease;
+  }
+  .box-card:hover .card-svg-wrap { transform: scale(1.06); }
+  .card-svg-wrap svg { width: 100%; height: 100%; max-height: 84px; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.08)); }
+
+  .card-size-title {
+    font-size: 0.96rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.2px;
+    margin-bottom: 2px;
+  }
+  .card-usage-sub {
+    font-size: 0.66rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    height: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    margin-bottom: 6px;
+  }
+
+  .card-price-row {
+    width: 100%;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+  .card-price-main {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.25rem;
+    color: #B45309;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .card-price-unit { font-size: 0.62rem; color: var(--text-secondary); font-weight: 600; }
+
+  /* Card Action Buttons */
+  .card-actions-row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 6px;
+    margin-top: auto;
+  }
+  .btn-card-order {
+    background: #059669;
+    border: none;
+    color: #FFFFFF;
+    padding: 8px 6px;
+    border-radius: var(--radius-sm);
+    font-size: 0.74rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    box-shadow: 0 2px 6px rgba(5, 150, 105, 0.3);
+    transition: all 0.15s ease;
+  }
+  .btn-card-order:active { transform: scale(0.95); background: #047857; }
+  .btn-card-3d {
+    background: #F4F1EA;
+    border: 1px solid var(--border-light);
+    color: var(--text-primary);
+    padding: 8px 4px;
+    border-radius: var(--radius-sm);
+    font-size: 0.68rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .btn-card-3d:hover { background: #E9E3D5; }
+
+  /* =========================================================================
+     INSTANT ORDER CHECKOUT POPUP MODAL
+     ========================================================================= */
+  .order-modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(15, 12, 10, 0.78);
+    backdrop-filter: blur(8px);
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0;
+  }
+  @media (min-width: 500px) {
+    .order-modal-backdrop {
+      align-items: center;
+      padding: 16px;
+    }
+  }
+  .order-modal-backdrop.active { display: flex; }
+
+  .order-sheet {
+    background: #FFFFFF;
+    width: 100%;
+    max-width: 440px;
+    border-radius: 24px 24px 0 0;
+    padding: 22px 20px 28px;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.3);
+    position: relative;
+    max-height: 92vh;
+    overflow-y: auto;
+    animation: sheetSlideUp 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @media (min-width: 500px) {
+    .order-sheet {
+      border-radius: 24px;
+      animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+  }
+  @keyframes sheetSlideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+  @keyframes modalPop {
+    from { opacity: 0; transform: scale(0.92); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .sheet-header {
+    border-bottom: 1.5px solid var(--border-light);
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .modal-close-icon {
+    position: absolute;
+    top: 0; right: 0;
+    background: #F4F1EA;
+    border: none;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    font-size: 18px;
+    color: var(--text-secondary);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+  .order-modal-badge {
+    display: inline-block;
+    background: #ECFDF5;
+    color: #065F46;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 12px;
+    margin-bottom: 4px;
+  }
+  .order-modal-box-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.45rem;
+    line-height: 1.15;
+    color: var(--text-primary);
+  }
+  .order-modal-box-sub {
+    font-size: 0.74rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  /* Form Groups */
+  .form-group { margin-bottom: 14px; }
+  .form-label {
+    display: block;
+    font-size: 0.74rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+    letter-spacing: 0.2px;
+  }
+
+  /* Quantity Chips + Stepper */
+  .qty-chips-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+  .qty-chip {
+    padding: 8px 4px;
+    text-align: center;
+    background: #F4F1EA;
+    border: 1.5px solid var(--border-light);
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .qty-chip.active {
+    background: #1F1B18;
+    color: #FFFFFF;
+    border-color: #1F1B18;
+  }
+
+  .custom-qty-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .qty-stepper-btn {
+    width: 40px; height: 38px;
+    background: #EAE3D6;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 1.1rem;
+    font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    color: var(--text-primary);
+  }
+  .qty-stepper-btn:active { background: #DBD3C3; }
+  .custom-qty-wrapper input {
+    flex: 1;
+    padding: 9px 12px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--border-light);
+    background: #FFFFFF;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-align: center;
+    outline: none;
+  }
+  .custom-qty-wrapper input:focus { border-color: var(--brand-primary); }
+
+  /* Inputs & Textareas */
+  .form-input {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--border-light);
+    background: #FFFFFF;
+    font-family: inherit;
+    font-size: 0.86rem;
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  .form-input:focus, .form-textarea:focus { border-color: var(--brand-primary); }
+
+  .form-textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--border-light);
+    background: #FFFFFF;
+    font-family: inherit;
+    font-size: 0.86rem;
+    color: var(--text-primary);
+    outline: none;
+    resize: vertical;
+    transition: border-color 0.2s ease;
+  }
+
+  .btn-gps-locate {
+    background: #ECFDF5;
+    border: 1.5px solid #A7F3D0;
+    color: #065F46;
+    padding: 4px 10px;
+    border-radius: 14px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.15s ease;
+  }
+  .btn-gps-locate:active { transform: scale(0.95); background: #D1FAE5; }
+
+  /* Price Live Summary Box */
+  .summary-invoice {
+    background: #F8F5EE;
+    border: 1.5px dashed #8E5A2D;
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    margin: 16px 0;
+  }
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.76rem;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+  }
+  .summary-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-top: 1px solid rgba(142, 90, 45, 0.3);
+    padding-top: 8px;
+    margin-top: 6px;
+  }
+  .summary-total-label {
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+  .summary-total-price {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.6rem;
+    color: #B45309;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  /* Confirm Button */
+  .btn-confirm-order {
+    width: 100%;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: #FFFFFF;
+    border: none;
+    padding: 14px 18px;
+    border-radius: 28px;
+    font-size: 0.98rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    box-shadow: 0 8px 22px rgba(37, 211, 102, 0.4);
+    transition: transform 0.15s ease;
+  }
+  .btn-confirm-order:active { transform: scale(0.97); }
+
+  .order-trust-notice {
+    font-size: 0.68rem;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+  .modal-view-3d-link {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: var(--brand-primary);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+
+  /* Store Showroom Footer */
+  .store-footer {
+    padding: 20px 16px 36px;
+  }
+  .store-footer-card {
+    background: #FFFFFF;
+    border: 1.5px solid var(--border-light);
+    border-radius: var(--radius-xl);
+    padding: 20px 18px;
+    box-shadow: var(--shadow-card);
+  }
+  .store-footer-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1.5px solid var(--border-light);
+    padding-bottom: 12px;
+  }
+  .store-footer-icon {
+    font-size: 2rem;
+    background: #F8F5EE;
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid #EAE3D6;
+  }
+  .store-footer-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    line-height: 1.15;
+  }
+  .store-footer-sub {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+  }
+  .store-footer-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .store-detail-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.76rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+  .store-detail-icon { font-size: 1rem; line-height: 1.2; }
+  .store-footer-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .btn-store-wa {
+    background: var(--brand-wa);
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 10px 12px;
+    border-radius: var(--radius-md);
+    font-size: 0.78rem;
+    font-weight: 800;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    box-shadow: 0 3px 10px rgba(37, 211, 102, 0.3);
+  }
+  .btn-store-call {
+    background: #1F1B18;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 10px 12px;
+    border-radius: var(--radius-md);
+    font-size: 0.78rem;
+    font-weight: 800;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .store-footer-copy {
+    font-size: 0.68rem;
+    color: var(--text-secondary);
+    text-align: center;
+    border-top: 1px solid var(--border-light);
+    padding-top: 10px;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Store Announcement Ticker Bar -->
+  <div class="store-top-bar">
+    <div class="store-top-inner">
+      <span class="store-pulse-dot"></span>
+      <span>📦 <b>BOX COMPANY UDAIPUR • DIRECT PACKAGING SUPPLY</b></span>
+      <span class="ticker-sep">•</span>
+      <span>⚡ 45-Min Express Doorstep Delivery Across Udaipur</span>
+      <span class="ticker-sep">•</span>
+      <span>📦 Ready Wholesale Stock (From ₹7)</span>
+      <span class="ticker-sep">•</span>
+      <span>📞 <b>+91 8619661325</b></span>
+    </div>
+  </div>
+
+  <!-- Sticky Top Header -->
+  <header class="header">
+    <div class="header-brand">
+      <div class="header-logo">📦</div>
+      <div>
+        <h1 class="header-title">Box Company</h1>
+        <p class="header-subtitle">Udaipur Doorstep Packaging Supply</p>
+      </div>
+    </div>
+    <a href="https://wa.me/918619661325?text=Hi%20Box%20Company,%20I%20need%20corrugated%20boxes%20in%20Udaipur" class="header-wa-btn" target="_blank">
+      <span>💬</span> WhatsApp Store
+    </a>
+  </header>
+
+  <!-- =========================================================================
+       HERO 3D SHOWROOM STAGE (INTERACTIVE 3D BOX VIEWER BUILT RIGHT INTO THE TOP)
+       ========================================================================= -->
+  <section class="hero-3d-stage">
+    <div class="hero-top-meta">
+      <div class="badge-live-delivery">
+        <span class="badge-live-dot"></span> 🏬 UDAIPUR PACKAGING STORE &bull; 45-MIN EXPRESS DELIVERY
+      </div>
+      <span style="font-size: 0.7rem; color: var(--text-secondary); font-weight: 600;">Drag 360° to inspect sample carton</span>
+    </div>
+
+    <!-- Active Box Title & Specs -->
+    <div class="hero-box-info">
+      <div class="hero-box-title">
+        <span id="hero-title">13 &times; 9 &times; 6"</span>
+        <span class="hero-box-ply" id="hero-ply">3-Ply Heavy</span>
+      </div>
+      <div class="hero-box-desc" id="hero-desc">Pack of 6 Master Box / Garbage Bag Rolls &bull; Standard Shipping</div>
+    </div>
+
+    <!-- 3D Canvas Stage -->
+    <div class="stage-viewport-wrap">
+      <canvas id="hero-webgl-canvas"></canvas>
+      <div class="stage-drag-pill">👆 Drag 360° &bull; Pinch to Zoom</div>
+    </div>
+
+    <!-- Camera Angles Row -->
+    <div class="camera-angles-row">
+      <button class="cam-btn active" id="cam-orbit" onclick="setCameraAngle('orbit', this)">🔄 3D Free Rotate</button>
+      <button class="cam-btn" id="cam-front" onclick="setCameraAngle('front', this)">📦 Front</button>
+      <button class="cam-btn" id="cam-top" onclick="setCameraAngle('top', this)">📐 Top View</button>
+      <button class="cam-btn" id="cam-flaps" onclick="setCameraAngle('flaps', this)">🔍 Flap Zoom</button>
+    </div>
+
+    <!-- Interactive 3D Controls -->
+    <div class="stage-controls">
+      <button class="stage-btn" id="btn-flaps" onclick="toggleFlapsAction()">
+        <span>📦</span> <span id="lbl-flaps">Open Flaps</span>
+      </button>
+      <button class="stage-btn" id="btn-apple" onclick="toggleAppleAction()">
+        <span>🍎</span> <span id="lbl-apple">Put Apple Inside</span>
+      </button>
+    </div>
+
+    <div class="specs-guarantee-strip">
+      <span>✓ Real Corrugation Fluting</span>
+      <span class="specs-dot">●</span>
+      <span>Tested ECT-32</span>
+      <span class="specs-dot">●</span>
+      <span>Reinforced Tape Seal</span>
+    </div>
+
+    <!-- Live Wholesale Order Banner -->
+    <div class="stage-order-banner">
+      <div class="stage-price-group">
+        <div class="stage-price-label">Wholesale Doorstep Rate</div>
+        <div class="stage-price-val" id="hero-price">₹23</div>
+        <div class="stage-price-sub">✓ Same-day delivery ready</div>
+      </div>
+      <button class="btn-stage-order" onclick="triggerOrderModalForActive()">
+        <span>⚡</span> Order Now
+      </button>
+    </div>
+  </section>
+
+  <!-- Store Showroom Quick Highlights Strip -->
+  <div class="store-perks-strip">
+    <div class="store-perk-item">
+      <div class="perk-icon">🚚</div>
+      <div class="perk-text">
+        <span class="perk-title">Doorstep Delivery</span>
+        <span class="perk-sub">Direct to Your Shop / Factory</span>
+      </div>
+    </div>
+    <div class="store-perk-item">
+      <div class="perk-icon">⚡</div>
+      <div class="perk-text">
+        <span class="perk-title">45-Min Express</span>
+        <span class="perk-sub">Fast Auto Dispatch across Udaipur</span>
+      </div>
+    </div>
+    <div class="store-perk-item">
+      <div class="perk-icon">📦</div>
+      <div class="perk-text">
+        <span class="perk-title">53 Ready Sizes</span>
+        <span class="perk-sub">Wholesale Factory Rates (From ₹7)</span>
+      </div>
+    </div>
+    <div class="store-perk-item">
+      <div class="perk-icon">💵</div>
+      <div class="perk-text">
+        <span class="perk-title">Gate-pe-Scan / UPI</span>
+        <span class="perk-sub">100% Advance • Zero Udhaari</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       CATEGORY QUICK SELECTOR (ALL 53 SIZES STAYS AT FRONT!)
+       ========================================================================= -->
+  <section class="category-nav">
+    <div class="cat-title-row">
+      <span class="cat-heading">Store Department Aisles</span>
+      <span class="cat-hint">Tap any box to order</span>
+    </div>
+    <div class="niche-scroll">
+      <button class="niche-chip active" onclick="filterNiche('all', this)">📦 All 53 Standard Sizes</button>
+      <button class="niche-chip" onclick="filterNiche('popular', this)">🔥 Udaipur Top 8 Bestsellers</button>
+      <button class="niche-chip" onclick="filterNiche('dispo', this)">🗑️ Aisle 1: Dustbin Rolls (13x9x6)</button>
+      <button class="niche-chip" onclick="filterNiche('garments', this)">👗 Aisle 2: Kurti & Garments</button>
+      <button class="niche-chip" onclick="filterNiche('jewelry', this)">💎 Aisle 3: Jewelry & Compact</button>
+      <button class="niche-chip" onclick="filterNiche('heavy5', this)">🚚 Aisle 4: 5-Ply Heavy Industrial</button>
+    </div>
+  </section>
+
+  <!-- Live Search Box -->
+  <div class="search-wrap">
+    <div class="search-box">
+      <input type="text" id="inp-search" placeholder="Search size e.g. 13x9x6, kurti, jewelry, 5-ply..." oninput="handleSearch(this.value)">
+      <span class="search-icon">🔍</span>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       ANIMATED BOX CATALOG GRID (REAL PHOTOREALISTIC BOXES)
+       ========================================================================= -->
+  <section class="catalog-section">
+    <div class="section-meta-row">
+      <span class="catalog-sec-title" id="grid-title">All 53 Standard Packaging Boxes</span>
+      <span class="catalog-count-badge" id="grid-count">53 Sizes</span>
+    </div>
+    <div class="boxes-grid" id="grid"></div>
+  </section>
+
+  <!-- =========================================================================
+       BOX COMPANY STORE & WAREHOUSE DISPATCH FOOTER
+       ========================================================================= -->
+  <footer class="store-footer">
+    <div class="store-footer-card">
+      <div class="store-footer-header">
+        <div class="store-footer-icon">📦</div>
+        <div>
+          <h3 class="store-footer-title">Box Company Udaipur</h3>
+          <p class="store-footer-sub">Udaipur's Direct Doorstep Corrugated Packaging Supplier</p>
+        </div>
+      </div>
+      <div class="store-footer-details">
+        <div class="store-detail-row">
+          <span class="store-detail-icon">🚚</span>
+          <span><b>Doorstep Delivery:</b> Express 45-minute auto delivery directly to your shop, boutique, godown or factory across Udaipur (MIA Madri, Sukher, Delhi Gate, Bapu Bazaar, Hiran Magri, Chetak, Hathipole).</span>
+        </div>
+        <div class="store-detail-row">
+          <span class="store-detail-icon">🕒</span>
+          <span><b>Operating Hours:</b> Mon - Sat: 9:00 AM - 8:30 PM &bull; Sunday Open for Urgent Dispatches</span>
+        </div>
+        <div class="store-detail-row">
+          <span class="store-detail-icon">🛡️</span>
+          <span><b>Payment Policy:</b> Strictly 100% advance UPI or Gate-pe-Scan on delivery. Zero udhaari policy.</span>
+        </div>
+      </div>
+      <div class="store-footer-btns">
+        <a href="https://wa.me/918619661325?text=Hi%20Box%20Company,%20I%20need%20corrugated%20boxes%20delivered%20in%20Udaipur" target="_blank" class="btn-store-wa">
+          <span>💬</span> WhatsApp Order Hotline
+        </a>
+        <a href="tel:+918619661325" class="btn-store-call">
+          <span>📞</span> Call +91 8619661325
+        </a>
+      </div>
+      <p class="store-footer-copy">&copy; 2026 Box Company Udaipur &bull; 53 Standard Corrugated Box Sizes in Ready Inventory</p>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       INSTANT ORDER CHECKOUT POPUP MODAL (WITH MAP / GPS LOCATOR & MANUAL ADDRESS)
+       ========================================================================= -->
+  <div class="order-modal-backdrop" id="order-backdrop" onclick="closeOrderBackdrop(event)">
+    <div class="order-sheet">
+      <button class="modal-close-icon" onclick="closeOrderModal()">&times;</button>
+      
+      <div class="sheet-header">
+        <span class="order-modal-badge" id="ord-badge">⚡ 45-Min Express Doorstep Delivery</span>
+        <div class="order-modal-box-title" id="ord-title">13 &times; 9 &times; 6 Inches</div>
+        <div class="order-modal-box-sub" id="ord-sub">3-Ply Heavy Corrugated Carton &bull; Dispo Well Standard</div>
+      </div>
+
+      <!-- Quantity Picker -->
+      <div class="form-group">
+        <label class="form-label">Select Quantity (MOQ: 50 Boxes):</label>
+        <div class="qty-chips-row">
+          <div class="qty-chip active" onclick="setQuantity(50, this)">50 pcs</div>
+          <div class="qty-chip" onclick="setQuantity(100, this)">100 pcs</div>
+          <div class="qty-chip" onclick="setQuantity(250, this)">250 pcs</div>
+          <div class="qty-chip" onclick="setQuantity(500, this)">500 pcs</div>
+        </div>
+        <div class="custom-qty-wrapper">
+          <button type="button" class="qty-stepper-btn" onclick="stepQuantity(-25)">&minus;</button>
+          <input type="number" id="inp-custom-qty" value="50" min="50" step="25" oninput="customQuantityInput(this)">
+          <button type="button" class="qty-stepper-btn" onclick="stepQuantity(25)">&plus;</button>
+        </div>
+      </div>
+
+      <!-- Customer Shop/Business Name -->
+      <div class="form-group">
+        <label class="form-label">Shop / Business / Brand Name:</label>
+        <input type="text" id="inp-shop" class="form-input" placeholder="e.g. Dispo Well / Maya Boutique / Sweet Shop">
+      </div>
+
+      <!-- Free-Form Delivery Address with Map / GPS Detector -->
+      <div class="form-group">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+          <label class="form-label" style="margin-bottom:0;">Delivery Address in Udaipur:</label>
+          <button type="button" class="btn-gps-locate" onclick="detectGPSLocation()">
+            <span id="gps-icon">📍</span> <span id="gps-text">Attach Live Map Pin</span>
+          </button>
+        </div>
+        <textarea id="inp-address" class="form-textarea" rows="2" placeholder="Type your shop name, street, road, colony or landmark in Udaipur (e.g. Shop #14, Road No. 3, MIA Madri / Near Delhi Gate)..."></textarea>
+        <div id="gps-status-badge" style="display:none; margin-top:5px; font-size:0.7rem; color:#065F46; background:#ECFDF5; padding:4px 8px; border-radius:6px; font-weight:600;"></div>
+      </div>
+
+      <!-- Customer WhatsApp Phone Number -->
+      <div class="form-group">
+        <label class="form-label">WhatsApp Phone Number (For Dispatch Updates):</label>
+        <input type="tel" id="inp-phone" class="form-input" placeholder="e.g. 98290XXXXX" maxlength="10">
+      </div>
+
+      <!-- Live Order Bill Summary -->
+      <div class="summary-invoice">
+        <div class="summary-row">
+          <span>Box Rate:</span>
+          <span id="inv-unit-rate">₹23 / box</span>
+        </div>
+        <div class="summary-row">
+          <span>Quantity:</span>
+          <span id="inv-qty-count">50 Boxes</span>
+        </div>
+        <div class="summary-row">
+          <span>Doorstep Delivery:</span>
+          <span style="color:#059669; font-weight:700;">FREE (Udaipur City)</span>
+        </div>
+        <div class="summary-total-row">
+          <span class="summary-total-label">Total Payable:</span>
+          <span class="summary-total-price" id="inv-total-price">₹1,150</span>
+        </div>
+      </div>
+
+      <!-- Confirm Order Button -->
+      <button class="btn-confirm-order" onclick="submitOrderToWhatsApp()">
+        <span>💬</span> Confirm Order on WhatsApp
+      </button>
+      <div class="order-trust-notice">
+        🔒 Pay on delivery or advance UPI. Direct warehouse dispatch.
+      </div>
+      <a class="modal-view-3d-link" onclick="viewIn3DFromModal()">👁️ View This Size in 3D Showroom at Top</a>
+    </div>
+  </div>
+
+<script>
+/* =========================================================================
+   MASTER SUPPLIER DATABASE (53 SIZES)
+   Format: [Length, Width, Height, WholesaleCost, Note, Ply, IsFeatured]
+   ========================================================================= */
+const BOX_DATA = [
+  // 3-Ply Boxes
+  [3, 3, 1.5, 3.5, 'Jewelry Ring Box', 3, false],
+  [3.5, 3.5, 3.5, 4.5, 'Watch / Small Decor', 3, false],
+  [4.5, 4.5, 2, 4.5, 'Cosmetic Cream Box', 3, false],
+  [4.5, 3.5, 1.5, 4.0, 'Earrings / Trinket', 3, false],
+  [4, 4, 1.5, 5.0, 'Jewelry / Craft', 3, false],
+  [4, 4, 1.5, 6.0, 'White Premium Finish', 3, false],
+  [4.5, 3.5, 4, 5.0, 'Small Mug / Bottle', 3, false],
+  [5, 4, 2.5, 7.0, 'Perfume / White', 3, false],
+  [5, 4, 2.5, 5.0, 'Mobile Accessories', 3, true],
+  [5.75, 1.75, 7.5, 5.0, 'Phone Cover / Slim', 3, false],
+  [4, 4, 4, 5.0, 'Coffee Mug Cube', 3, false],
+  [4, 4, 4, 6.0, 'White Cube Box', 3, false],
+  [6.25, 3.25, 3.25, 5.0, 'Tea / Spices Jar', 3, false],
+  [6, 4, 3.5, 5.5, 'Skincare / Bottles', 3, false],
+  [4.5, 2.5, 6.5, 6.0, 'Tall Cosmetic Flap', 3, false],
+  [6, 4, 5, 6.0, 'Soap / Candle 2-Pack', 3, false],
+  [7, 4, 2, 6.0, 'Mobile Box Size', 3, false],
+  [8, 4, 2.5, 6.0, 'Eyewear / Sunglasses', 3, true],
+  [9, 3, 3, 6.0, 'Bottle / Tube', 3, false],
+  [6, 4, 2, 7.0, 'Rigid Small Carton', 3, false],
+  [7, 4, 2, 7.0, 'Compact Packaging', 3, false],
+  [5, 5, 2, 7.0, 'Sweets / Snack Box', 3, false],
+  [5, 5, 5, 7.0, 'Handicrafts Mini Statue', 3, false],
+  [7.25, 4, 3, 7.0, 'Leather Wallet Box', 3, false],
+  [6, 4, 2, 8.0, 'White Gift Box', 3, false],
+  [6.25, 3.25, 7.25, 8.0, 'Spice Shaker Pack', 3, false],
+  [7, 5, 4, 8.0, 'Bakery Cupcakes 2-Pack', 3, false],
+  [7, 7, 3, 8.0, 'Square Gift / Choco', 3, false],
+  [8, 4, 3, 8.0, 'Small Hardware / Parts', 3, false],
+  [8, 6, 4, 8.0, 'Kurti Single / T-Shirt', 3, true],
+  [9, 4.5, 3, 8.0, 'Clutch / Pouch Box', 3, false],
+  [9, 6, 3, 9.0, 'Garments / Shirts', 3, true],
+  [8, 4, 4, 9.0, 'White Clean Shipping', 3, false],
+  [6.5, 2, 7, 10.0, 'Diary / Stationery', 3, false],
+  [6, 6, 6, 10.0, 'Medium Cube Statue', 3, false],
+  [9, 7, 4, 10.0, 'T-Shirt 2-Pack / Kurti', 3, true],
+  [8, 6, 4, 10.0, 'White Premium E-Com', 3, false],
+  [9, 6, 6, 12.0, 'Bakery Cake / Snack Box', 3, false],
+  [10, 10, 3, 12.0, 'Flat Apparel / Saree', 3, true],
+  [11, 6, 5, 12.0, 'Shoe Box Regular', 3, false],
+  [11, 8, 4, 12.0, 'Heavy Garment / Kurti Bulk', 3, false],
+  [11.5, 9.5, 5, 14.0, 'Lehenga / Poshak Medium', 3, true],
+  [12, 5.5, 4, 15.0, 'Wide Apparel / Decor', 3, false],
+  [13, 9, 6, 15.0, 'Pack of 6 / Master Dustbin Roll', 3, true],
+  [12, 8, 8, 20.0, 'Heavy Boot / Shoe Box', 3, false],
+  [14, 11, 8, 22.0, 'Large Saree / Blanket Carton', 3, false],
+
+  // 5-Ply Heavy Duty Boxes
+  [17, 7, 10, 35.0, '5-Ply Export Carton', 5, true],
+  [15, 15, 8, 40.0, '5-Ply Heavy Marble Statue', 5, false],
+  [15, 11, 14, 45.0, '5-Ply Master Shipper', 5, false],
+  [18, 18, 14, 70.0, '5-Ply Jumbo Heavy Cargo', 5, false],
+  [24, 16, 10, 70.0, '5-Ply Bulk Apparel Master', 5, false],
+  [24, 18, 18, 90.0, '5-Ply Mega Industrial Box', 5, false],
+  [31, 18, 15, 90.0, '5-Ply Pallet Shipper', 5, false]
+];
+
+// TIERED PRICING FORMULA (Rishabh's Rule):
+function calculateSellingPrice(cost, l, w, h) {
+  if (l === 13 && w === 9 && h === 6) return 23; // Special competitive wholesale rate for Dustbin Roll bulk
+  if (cost < 20) return Math.round(cost * 2);
+  return Math.round(cost + 10);
+}
+
+/* =========================================================================
+   PHOTOREALISTIC ISOMETRIC CARDBOARD BOX GENERATOR (FOR CATALOG CARDS)
+   - Real Golden-Tan Indian Kraft Gradients (Reduced Muddy Darkness)
+   - Micro feTurbulence Organic Paper Grain / Wood Pulp Fiber Filter
+   - Tactile Corrugation Flute Washboarding Telegraphing
+   - Water-Activated Reinforced Brown Sealing Tape with Gloss Sheen
+   - Printed ISO Handling Marks (Fragile Glass, Up Arrows, Barcode)
+   - Circular Factory Box Certificate Stamp (BMC)
+   - Soft Ground Contact Shadow on Store Shelf
+   ========================================================================= */
+function makePhotorealisticBoxSVG(l, w, h, ply) {
+  const maxDim = Math.max(l, w, h);
+  const scale = 54 / maxDim;
+  const wl = Math.max(22, l * scale);
+  const ww = Math.max(18, w * scale);
+  const wh = Math.max(16, h * scale);
+
+  const ox = ww * 0.72;
+  const oy = ww * 0.42;
+
+  const pA = { x: ox, y: 6 };
+  const pB = { x: ox + wl, y: 6 };
+  const pC = { x: wl + 6, y: oy + 6 };
+  const pD = { x: 6, y: oy + 6 };
+
+  const pE = { x: 6, y: oy + wh + 6 };
+  const pF = { x: wl + 6, y: oy + wh + 6 };
+  const pG = { x: ox + wl, y: wh + 6 };
+
+  const totalW = ox + wl + 18;
+  const totalH = oy + wh + 20;
+
+  // Center seam tape on top face
+  const mAD = { x: (pA.x + pD.x) / 2, y: (pA.y + pD.y) / 2 };
+  const mBC = { x: (pB.x + pC.x) / 2, y: (pB.y + pC.y) / 2 };
+  const tapeW = Math.max(4.5, wl * 0.16);
+
+  const t1 = { x: mAD.x - tapeW * 0.4, y: mAD.y };
+  const t2 = { x: mBC.x - tapeW * 0.4, y: mBC.y };
+  const t3 = { x: mBC.x + tapeW * 0.4, y: mBC.y };
+  const t4 = { x: mAD.x + tapeW * 0.4, y: mAD.y };
+
+  const shadowCx = (pD.x + pF.x + pG.x + pA.x) / 4;
+  const shadowCy = oy + wh + 8;
+
+  const topPoly = `${pA.x},${pA.y} ${pB.x},${pB.y} ${pC.x},${pC.y} ${pD.x},${pD.y}`;
+  const frontPoly = `${pD.x},${pD.y} ${pC.x},${pC.y} ${pF.x},${pF.y} ${pE.x},${pE.y}`;
+  const sidePoly = `${pC.x},${pC.y} ${pB.x},${pB.y} ${pG.x},${pG.y} ${pF.x},${pF.y}`;
+  const tapePoly = `${t1.x},${t1.y} ${t2.x},${t2.y} ${t3.x},${t3.y} ${t4.x},${t4.y}`;
+
+  const is5P = ply === 5;
+  // Natural Golden-Tan Indian Kraft Cardboard Hues
+  const topColor1 = is5P ? '#BD854C' : '#D09E66';
+  const topColor2 = is5P ? '#AB743E' : '#BF8D54';
+  const frontColor1 = is5P ? '#A76F39' : '#BA8750';
+  const frontColor2 = is5P ? '#935D29' : '#A6733D';
+  const sideColor1 = is5P ? '#945E2A' : '#A6733D';
+  const sideColor2 = is5P ? '#7E4919' : '#8E5B26';
+
+  const uid = `${l}_${w}_${h}_${ply}`;
+
+  return `
+  <svg viewBox="-4 -2 ${totalW + 8} ${totalH + 14}" xmlns="http://www.w3.org/2000/svg" style="overflow:visible; filter: drop-shadow(0 4px 8px rgba(130, 85, 40, 0.12));">
+    <defs>
+      <!-- Real Kraft Paper Fiber Noise Filter -->
+      <filter id="kraftFiber-${uid}" x="0%" y="0%" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" result="noise"/>
+        <feColorMatrix type="matrix" values="0 0 0 0 0.8  0 0 0 0 0.6  0 0 0 0 0.4  0 0 0 0.22 0" in="noise" result="coloredNoise"/>
+        <feBlend mode="multiply" in="SourceGraphic" in2="coloredNoise"/>
+      </filter>
+
+      <!-- Facet Gradients -->
+      <linearGradient id="topG-${uid}" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="${topColor1}"/>
+        <stop offset="100%" stop-color="${topColor2}"/>
+      </linearGradient>
+      <linearGradient id="frontG-${uid}" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="${frontColor1}"/>
+        <stop offset="100%" stop-color="${frontColor2}"/>
+      </linearGradient>
+      <linearGradient id="sideG-${uid}" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="${sideColor1}"/>
+        <stop offset="100%" stop-color="${sideColor2}"/>
+      </linearGradient>
+      <!-- Reinforced Brown Gummed Tape Gradient -->
+      <linearGradient id="tapeG-${uid}" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#9C6730"/>
+        <stop offset="45%" stop-color="#C28F54"/>
+        <stop offset="55%" stop-color="#DEB078"/>
+        <stop offset="100%" stop-color="#925E28"/>
+      </linearGradient>
+      <radialGradient id="shG-${uid}" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="rgba(35, 20, 8, 0.35)"/>
+        <stop offset="65%" stop-color="rgba(50, 28, 12, 0.10)"/>
+        <stop offset="100%" stop-color="rgba(0, 0, 0, 0)"/>
+      </radialGradient>
+      <!-- Vertical Corrugation Fluting Washboard Pattern -->
+      <pattern id="flutes-${uid}" width="3.2" height="10" patternUnits="userSpaceOnUse">
+        <line x1="0" y1="0" x2="0" y2="10" stroke="rgba(40,20,5,0.08)" stroke-width="1.2"/>
+        <line x1="1.6" y1="0" x2="1.6" y2="10" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
+      </pattern>
+    </defs>
+
+    <!-- Ground Contact Shadow on Store Shelf -->
+    <ellipse cx="${shadowCx}" cy="${shadowCy}" rx="${(wl + ox) * 0.58}" ry="${(wh + oy) * 0.22}" fill="url(#shG-${uid})"/>
+
+    <!-- Top Face -->
+    <polygon points="${topPoly}" fill="url(#topG-${uid})" stroke="rgba(70,35,10,0.25)" stroke-width="0.75" filter="url(#kraftFiber-${uid})"/>
+    <!-- Top Flap Seam Line -->
+    <line x1="${mAD.x}" y1="${mAD.y}" x2="${mBC.x}" y2="${mBC.y}" stroke="rgba(60,30,10,0.5)" stroke-width="0.9"/>
+    <!-- Reinforced Sealing Tape on Top -->
+    <polygon points="${tapePoly}" fill="url(#tapeG-${uid})" stroke="rgba(70,35,10,0.3)" stroke-width="0.5"/>
+
+    <!-- Front Face -->
+    <polygon points="${frontPoly}" fill="url(#frontG-${uid})" stroke="rgba(70,35,10,0.3)" stroke-width="0.75" filter="url(#kraftFiber-${uid})"/>
+    <polygon points="${frontPoly}" fill="url(#flutes-${uid})" opacity="0.9"/>
+
+    <!-- Printed Shipping Marks on Front (Fragile Glass, Up Arrows, Barcode) -->
+    <g transform="translate(${pD.x + 4}, ${pD.y + 4})" fill="rgba(45,22,8,0.75)" stroke="rgba(45,22,8,0.75)">
+      <!-- Wine glass fragile -->
+      <path d="M 2 1 L 6 1 L 6 3 Q 6 6 4 7 L 4 10 L 2 10 L 2 7 Q 2 6 2 3 Z" stroke-width="0.4"/>
+      <!-- Up Arrows -->
+      <path d="M 10 9 L 10 3 M 9 5 L 10 3 L 11 5" stroke-width="0.7" fill="none"/>
+      <!-- Barcode -->
+      <line x1="15" y1="3" x2="15" y2="9" stroke-width="0.7"/>
+      <line x1="17" y1="3" x2="17" y2="9" stroke-width="1.2"/>
+      <line x1="19" y1="3" x2="19" y2="9" stroke-width="0.6"/>
+      <line x1="21" y1="3" x2="21" y2="9" stroke-width="1.4"/>
+      <line x1="24" y1="3" x2="24" y2="9" stroke-width="0.8"/>
+    </g>
+
+    <!-- Right Side Face -->
+    <polygon points="${sidePoly}" fill="url(#sideG-${uid})" stroke="rgba(70,35,10,0.35)" stroke-width="0.75" filter="url(#kraftFiber-${uid})"/>
+    <polygon points="${sidePoly}" fill="url(#flutes-${uid})" opacity="0.7"/>
+
+    <!-- Factory Box Certificate Stamp on Side -->
+    <g transform="translate(${(pC.x + pB.x + pG.x + pF.x)/4}, ${(pC.y + pB.y + pG.y + pF.y)/4}) rotate(-5)">
+      <circle cx="0" cy="0" r="${Math.min(wl, wh) * 0.22}" fill="none" stroke="rgba(45,22,8,0.65)" stroke-width="0.7"/>
+      <circle cx="0" cy="0" r="${Math.min(wl, wh) * 0.18}" fill="none" stroke="rgba(45,22,8,0.4)" stroke-width="0.4"/>
+      <text x="0" y="1" font-size="${Math.min(wl, wh) * 0.09}" font-family="sans-serif" font-weight="bold" fill="rgba(45,22,8,0.6)" text-anchor="middle">BMC</text>
+    </g>
+  </svg>
+  `;
+}
+
+/* =========================================================================
+   PHOTOREALISTIC 3D STUDIO ENGINE (HERO STAGE)
+   - Deep Authentic Indian Kraft Cardboard Texture
+   - Free, Silky-Smooth 360° Orbit Rotation (No Camera Lerp Lock)
+   - Flap Open/Close with Realistic Physics & Tape Release
+   - Volumetric Sculpted Apple for Visual Scale
+   - Studio 4-Point Lighting with Warm Highlights & Rim Backlight
+   ========================================================================= */
+
+let scene, camera, renderer, controls;
+let boxGroup = null;
+let flapFrontHinge, flapBackHinge, flapLeftHinge, flapRightHinge;
+let tapeMesh = null;
+let contactShadowMesh = null;
+let appleGroup = null;
+let activeBox = { l: 13, w: 9, h: 6, cost: 15, note: 'Pack of 6 Master Box / Garbage Bag Rolls', ply: 3 };
+
+let areFlapsOpen = false;
+let isAppleInside = false;
+
+let currentFlapProg = 0;
+let targetFlapProg = 0;
+let appleTargetPos = new THREE.Vector3(0, 0, 0);
+
+// Camera Preset Animation Flag
+let isPresetTransitioning = false;
+let targetCamPos = new THREE.Vector3(12, 10, 14);
+let targetLookAt = new THREE.Vector3(0, 2.5, 0);
+
+/* --- PROCEDURAL TEXTURE GENERATORS --- */
+
+// 1. High-Res Multi-Layer Kraft Paper Diffuse Texture (1024x1024) - GOLDEN-TAN NATURAL KRAFT
+function createMasterKraftDiffuse(is5Ply, hasMarks) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 1024; canvas.height = 1024;
+  const ctx = canvas.getContext('2d');
+
+  // Base natural golden-tan kraft color gradient (Lightened from muddy brown to authentic virgin kraft)
+  const baseGrad = ctx.createLinearGradient(0, 0, 1024, 1024);
+  if (is5Ply) {
+    baseGrad.addColorStop(0, '#B8834A');
+    baseGrad.addColorStop(0.5, '#A97239');
+    baseGrad.addColorStop(1, '#9A642D');
+  } else {
+    baseGrad.addColorStop(0, '#C8945A');
+    baseGrad.addColorStop(0.5, '#BA844A');
+    baseGrad.addColorStop(1, '#AB753C');
+  }
+  ctx.fillStyle = baseGrad;
+  ctx.fillRect(0, 0, 1024, 1024);
+
+  // Organic pulp clouds / uneven paper slurry
+  for (let i = 0; i < 45; i++) {
+    const rx = Math.random() * 1024, ry = Math.random() * 1024, rad = 35 + Math.random() * 130;
+    const g = ctx.createRadialGradient(rx, ry, 0, rx, ry, rad);
+    g.addColorStop(0, Math.random() > 0.5 ? 'rgba(235, 185, 130, 0.16)' : 'rgba(120, 70, 30, 0.11)');
+    g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(rx, ry, rad, 0, Math.PI * 2); ctx.fill();
+  }
+
+  // 45,000 multi-scale organic wood pulp fibers
+  for (let i = 0; i < 45000; i++) {
+    const px = Math.random() * 1024, py = Math.random() * 1024;
+    const rType = Math.random();
+    if (rType < 0.45) {
+      // Dark recycled wood fibers
+      ctx.strokeStyle = `rgba(50, 25, 10, ${0.06 + Math.random() * 0.12})`;
+      ctx.lineWidth = 0.8 + Math.random() * 0.8;
+      const len = 2 + Math.random() * 4;
+      const angle = Math.random() * Math.PI * 2;
+      ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px + Math.cos(angle) * len, py + Math.sin(angle) * len); ctx.stroke();
+    } else if (rType < 0.82) {
+      // Light bleached straw / flax fibers
+      ctx.strokeStyle = `rgba(255, 235, 205, ${0.08 + Math.random() * 0.14})`;
+      ctx.lineWidth = 0.7 + Math.random() * 0.6;
+      const len = 2 + Math.random() * 5;
+      const angle = Math.random() * Math.PI * 2;
+      ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px + Math.cos(angle) * len, py + Math.sin(angle) * len); ctx.stroke();
+    } else {
+      // Dark specks of unbleached bark
+      ctx.fillStyle = `rgba(45, 20, 8, ${0.16 + Math.random() * 0.25})`;
+      ctx.fillRect(px, py, 1.2, 1.2);
+    }
+  }
+
+  // Vertical corrugation flute washboard telegraphing bands (alternating ridge highlight & trough shadow)
+  const fluteSpacing = is5Ply ? 16 : 12;
+  for (let x = 0; x < 1024; x += fluteSpacing) {
+    const fluteGrad = ctx.createLinearGradient(x, 0, x + fluteSpacing, 0);
+    fluteGrad.addColorStop(0, 'rgba(40, 20, 5, 0.07)');
+    fluteGrad.addColorStop(0.35, 'rgba(255, 245, 225, 0.05)');
+    fluteGrad.addColorStop(0.7, 'rgba(40, 20, 5, 0.04)');
+    fluteGrad.addColorStop(1, 'rgba(40, 20, 5, 0.07)');
+    ctx.fillStyle = fluteGrad;
+    ctx.fillRect(x, 0, fluteSpacing, 1024);
+  }
+
+  // Die-cutter score lines (folding crease indentations)
+  ctx.fillStyle = 'rgba(50, 25, 10, 0.24)';
+  ctx.fillRect(0, 250, 1024, 3);
+  ctx.fillRect(0, 774, 1024, 3);
+
+  if (hasMarks) {
+    // Authentic Industrial Box Maker's Certificate (BMC) Stamp on bottom right
+    drawBoxCertificateStamp(ctx, 820, 800, is5Ply);
+
+    // Official ISO Shipping & Handling Graphics on front left
+    drawShippingMarks(ctx, 140, 680);
+  }
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  return texture;
+}
+
+// BMC Stamp Drawer
+function drawBoxCertificateStamp(ctx, cx, cy, is5Ply) {
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate(-0.04);
+
+  ctx.strokeStyle = 'rgba(35, 18, 6, 0.85)';
+  ctx.fillStyle = 'rgba(35, 18, 6, 0.85)';
+  ctx.lineWidth = 2.5;
+
+  // Outer circle
+  ctx.beginPath(); ctx.arc(0, 0, 78, 0, Math.PI * 2); ctx.stroke();
+  // Inner circle
+  ctx.lineWidth = 1.2;
+  ctx.beginPath(); ctx.arc(0, 0, 68, 0, Math.PI * 2); ctx.stroke();
+
+  // Stamp Text
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.font = 'bold 8.5px Arial, sans-serif';
+  ctx.fillText('BOX COMPANY UDAIPUR', 0, -52);
+  ctx.fillText('• RAJASTHAN •', 0, -42);
+
+  ctx.beginPath(); ctx.moveTo(-50, -34); ctx.lineTo(50, -34); ctx.stroke();
+
+  ctx.font = 'bold 7px Arial, sans-serif';
+  ctx.fillText('BOX CERTIFICATE', 0, -24);
+  ctx.font = '6.5px Arial, sans-serif';
+  ctx.fillText(is5Ply ? 'DOUBLEWALL 5-PLY' : 'SINGLEWALL 3-PLY', 0, -12);
+  ctx.fillText('BURSTING TEST: 175 LBS', 0, 0);
+  ctx.fillText('MIN COMB WT: 75 LBS', 0, 12);
+  ctx.fillText('SIZE LIMIT: 40 INCHES', 0, 24);
+
+  ctx.beginPath(); ctx.moveTo(-50, 32); ctx.lineTo(50, 32); ctx.stroke();
+  ctx.font = 'bold 8px Arial, sans-serif';
+  ctx.fillText('100% RECYCLED KRAFT', 0, 44);
+  ctx.fillText('♻️', 0, 56);
+
+  ctx.restore();
+}
+
+// Shipping Marks (Wine Glass, Arrows, Umbrella, Barcode)
+function drawShippingMarks(ctx, ox, oy) {
+  ctx.save();
+  ctx.translate(ox, oy);
+  ctx.fillStyle = 'rgba(32, 16, 6, 0.88)';
+  ctx.strokeStyle = 'rgba(32, 16, 6, 0.88)';
+  ctx.lineWidth = 2.2;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+
+  // 1. Wine glass (Fragile)
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(0, -20, 12, 0, Math.PI, false);
+  ctx.lineTo(0, 6);
+  ctx.moveTo(-10, 6);
+  ctx.lineTo(10, 6);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(3, -26); ctx.lineTo(-1, -20); ctx.lineTo(4, -14);
+  ctx.stroke();
+  ctx.restore();
+
+  // 2. Double Arrows (This Side Up)
+  ctx.save();
+  ctx.translate(38, -14);
+  [-7, 7].forEach(xOff => {
+    ctx.beginPath();
+    ctx.moveTo(xOff, 12); ctx.lineTo(xOff, -14);
+    ctx.moveTo(xOff - 5, -8); ctx.lineTo(xOff, -14); ctx.lineTo(xOff + 5, -8);
+    ctx.stroke();
+  });
+  ctx.beginPath(); ctx.moveTo(-14, 16); ctx.lineTo(14, 16); ctx.stroke();
+  ctx.restore();
+
+  // 3. Umbrella (Keep Dry)
+  ctx.save();
+  ctx.translate(76, -14);
+  ctx.beginPath();
+  ctx.arc(0, -6, 14, Math.PI, 0, false);
+  ctx.closePath();
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(0, -6); ctx.lineTo(0, 10);
+  ctx.arc(-4, 10, 4, 0, Math.PI, false);
+  ctx.stroke();
+  [-12, -4, 4, 12].forEach((rx) => {
+    ctx.beginPath(); ctx.moveTo(rx, -24); ctx.lineTo(rx - 2, -18); ctx.stroke();
+  });
+  ctx.restore();
+
+  // 4. Barcode Block
+  ctx.save();
+  ctx.translate(-14, 38);
+  ctx.fillStyle = 'rgba(32, 16, 6, 0.88)';
+  const bars = [2, 1, 3, 1, 2, 2, 1, 3, 1, 2, 3, 1, 1, 2, 3, 2, 1, 1, 3, 2, 1, 3, 2, 1, 2, 3];
+  let curX = 0;
+  bars.forEach((w, idx) => {
+    if (idx % 2 === 0) ctx.fillRect(curX, 0, w * 1.6, 24);
+    curX += w * 1.6 + 1.2;
+  });
+  ctx.font = 'bold 8px monospace';
+  ctx.textAlign = 'left';
+  ctx.fillText('8 61966 13250 4', 4, 34);
+  ctx.restore();
+
+  ctx.restore();
+}
+
+// 2. High-Res Kraft Bump Map (1024x1024) - TACTILE CORRUGATION FLUTING & WOOD FIBER GRAIN
+function createMasterKraftBump() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 1024; canvas.height = 1024;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#808080';
+  ctx.fillRect(0, 0, 1024, 1024);
+
+  const imgData = ctx.getImageData(0, 0, 1024, 1024);
+  const data = imgData.data;
+  const period = 12;
+
+  for (let y = 0; y < 1024; y++) {
+    for (let x = 0; x < 1024; x++) {
+      const idx = (y * 1024 + x) * 4;
+      const flute = Math.sin((x / period) * Math.PI * 2) * 22;
+      const noise = (Math.random() - 0.5) * 16;
+      let val = 128 + flute + noise;
+
+      const distToScore1 = Math.abs(y - 250);
+      const distToScore2 = Math.abs(y - 774);
+      if (distToScore1 < 4) val -= (4 - distToScore1) * 18;
+      if (distToScore2 < 4) val -= (4 - distToScore2) * 18;
+
+      val = Math.max(0, Math.min(255, val));
+      data[idx] = val;
+      data[idx + 1] = val;
+      data[idx + 2] = val;
+    }
+  }
+  ctx.putImageData(imgData, 0, 0);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  return texture;
+}
+
+// 3. Kraft Roughness Map (512x512)
+function createMasterKraftRoughness() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 512; canvas.height = 512;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#D6D6D6';
+  ctx.fillRect(0, 0, 512, 512);
+
+  const period = 14;
+  for (let x = 0; x < 512; x++) {
+    const shine = (Math.sin((x / period) * Math.PI * 2) + 1) * 0.5;
+    ctx.fillStyle = `rgba(180, 180, 180, ${shine * 0.35})`;
+    ctx.fillRect(x, 0, 1, 512);
+  }
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  return texture;
+}
+
+// 4. Exposed Cut Edge Texture (Corrugated Fluting Sandwich)
+function createFluteCutEdgeTexture() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 256; canvas.height = 64;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#221508';
+  ctx.fillRect(0, 0, 256, 64);
+
+  ctx.fillStyle = '#9A6232';
+  ctx.fillRect(0, 0, 256, 8);
+  ctx.fillRect(0, 56, 256, 8);
+
+  ctx.strokeStyle = '#9A6232';
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  for (let x = 0; x <= 256; x++) {
+    const y = 32 + Math.sin(x * 0.22) * 19;
+    if (x === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(6, 1);
+  return texture;
+}
+
+// 5. Water-Activated Reinforced Kraft Sealing Tape
+function createReinforcedTapeTexture() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 512; canvas.height = 128;
+  const ctx = canvas.getContext('2d');
+
+  const grad = ctx.createLinearGradient(0, 0, 0, 128);
+  grad.addColorStop(0, '#8E5A23');
+  grad.addColorStop(0.5, '#A67035');
+  grad.addColorStop(1, '#7C481A');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 512, 128);
+
+  // Fiberglass threads
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.28)';
+  ctx.lineWidth = 0.9;
+  for (let x = -128; x < 512 + 128; x += 24) {
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x + 90, 128); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(x + 90, 0); ctx.lineTo(x, 128); ctx.stroke();
+  }
+  for (let y = 16; y < 128; y += 24) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(512, y); ctx.stroke();
+  }
+
+  // Specular sheen
+  const gHighlight = ctx.createLinearGradient(0, 0, 0, 128);
+  gHighlight.addColorStop(0, 'rgba(255,255,255,0.18)');
+  gHighlight.addColorStop(0.3, 'rgba(255,255,255,0.02)');
+  gHighlight.addColorStop(0.7, 'rgba(0,0,0,0.06)');
+  gHighlight.addColorStop(1, 'rgba(0,0,0,0.14)');
+  ctx.fillStyle = gHighlight;
+  ctx.fillRect(0, 0, 512, 128);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.ClampToEdgeWrapping;
+  return texture;
+}
+
+// 6. Photorealistic Apple Skin Texture
+function createAppleTexture() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 512; canvas.height = 512;
+  const ctx = canvas.getContext('2d');
+
+  const g = ctx.createLinearGradient(0, 0, 0, 512);
+  g.addColorStop(0, '#A3B838');
+  g.addColorStop(0.12, '#D97706');
+  g.addColorStop(0.28, '#DC2626');
+  g.addColorStop(0.65, '#991B1B');
+  g.addColorStop(0.9, '#B91C1C');
+  g.addColorStop(1, '#84CC16');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, 512, 512);
+
+  for (let x = 0; x < 512; x += 2) {
+    const alpha = 0.04 + Math.random() * 0.10;
+    ctx.fillStyle = Math.random() > 0.4 ? `rgba(127, 29, 29, ${alpha})` : `rgba(251, 191, 36, ${alpha})`;
+    ctx.fillRect(x, 0, 1.5, 512);
+  }
+
+  for (let i = 0; i < 1200; i++) {
+    const px = Math.random() * 512, py = Math.random() * 512;
+    ctx.fillStyle = `rgba(254, 243, 199, ${0.15 + Math.random() * 0.35})`;
+    ctx.fillRect(px, py, 1.2, 1.2);
+  }
+
+  return new THREE.CanvasTexture(canvas);
+}
+
+// 7. Ground Soft Contact Shadow
+function createContactShadowTexture() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 512; canvas.height = 512;
+  const ctx = canvas.getContext('2d');
+
+  const g = ctx.createRadialGradient(256, 256, 10, 256, 256, 250);
+  g.addColorStop(0, 'rgba(15, 10, 5, 0.72)');
+  g.addColorStop(0.3, 'rgba(25, 16, 8, 0.45)');
+  g.addColorStop(0.65, 'rgba(40, 25, 12, 0.15)');
+  g.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, 512, 512);
+
+  return new THREE.CanvasTexture(canvas);
+}
+
+// 8. Packaging Store Inspection Workbench Counter Texture (1024x1024)
+function createPackagingWorkbenchTexture() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 1024; canvas.height = 1024;
+  const ctx = canvas.getContext('2d');
+
+  // Baltic birch plywood packaging counter
+  const grad = ctx.createLinearGradient(0, 0, 1024, 1024);
+  grad.addColorStop(0, '#E8DDD0');
+  grad.addColorStop(0.5, '#DFCEBC');
+  grad.addColorStop(1, '#D5C1AC');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 1024, 1024);
+
+  // Natural wood grain streaks
+  ctx.strokeStyle = 'rgba(120, 85, 55, 0.07)';
+  for (let y = 0; y < 1024; y += 5) {
+    ctx.lineWidth = 1 + Math.random() * 2;
+    ctx.beginPath();
+    ctx.moveTo(0, y + (Math.random() - 0.5) * 8);
+    ctx.bezierCurveTo(340, y + (Math.random() - 0.5) * 14, 680, y + (Math.random() - 0.5) * 14, 1024, y + (Math.random() - 0.5) * 8);
+    ctx.stroke();
+  }
+
+  // Packaging alignment grid
+  ctx.strokeStyle = 'rgba(90, 65, 45, 0.07)';
+  ctx.lineWidth = 1;
+  const gridSize = 64;
+  for (let i = 0; i <= 1024; i += gridSize) {
+    ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 1024); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(1024, i); ctx.stroke();
+  }
+
+  // Heavy Industrial Steel Ruler along front edge (bottom)
+  const rulerY = 955;
+  ctx.fillStyle = 'rgba(215, 195, 170, 0.92)';
+  ctx.fillRect(35, rulerY, 954, 52);
+  ctx.strokeStyle = 'rgba(60, 35, 15, 0.45)';
+  ctx.lineWidth = 1.5;
+  ctx.strokeRect(35, rulerY, 954, 52);
+
+  ctx.fillStyle = 'rgba(45, 25, 10, 0.85)';
+  ctx.font = 'bold 11px monospace';
+  ctx.textAlign = 'center';
+  for (let inIdx = 0; inIdx <= 24; inIdx++) {
+    const rx = 35 + (inIdx / 24) * 954;
+    ctx.beginPath(); ctx.moveTo(rx, rulerY); ctx.lineTo(rx, rulerY + 18); ctx.stroke();
+    ctx.fillText(`${inIdx}"`, rx, rulerY + 36);
+
+    if (inIdx < 24) {
+      const halfX = rx + (1 / 48) * 954;
+      ctx.beginPath(); ctx.moveTo(halfX, rulerY); ctx.lineTo(halfX, rulerY + 12); ctx.stroke();
+      const q1X = rx + (0.5 / 48) * 954;
+      const q3X = rx + (1.5 / 48) * 954;
+      ctx.beginPath(); ctx.moveTo(q1X, rulerY); ctx.lineTo(q1X, rulerY + 7); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(q3X, rulerY); ctx.lineTo(q3X, rulerY + 7); ctx.stroke();
+    }
+  }
+
+  // Store Inspection Stencil Stamped on Workbench
+  ctx.save();
+  ctx.translate(240, 110);
+  ctx.rotate(-0.02);
+  ctx.fillStyle = 'rgba(50, 25, 10, 0.55)';
+  ctx.strokeStyle = 'rgba(50, 25, 10, 0.55)';
+  ctx.lineWidth = 1.5;
+  ctx.strokeRect(-160, -26, 320, 52);
+  ctx.font = 'bold 12px Arial, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('BOX COMPANY UDAIPUR', 0, -8);
+  ctx.font = 'bold 9px Arial, sans-serif';
+  ctx.fillText('SHOWROOM PACKAGING BENCH #1 • UDAIPUR', 0, 12);
+  ctx.restore();
+
+  const texture = new THREE.CanvasTexture(canvas);
+  return texture;
+}
+
+/* --- MASTER MATERIALS --- */
+let masterBumpTex, masterRoughTex, cutEdgeTex, tapeTex, contactShadowTex, workbenchTex;
+let cardboardFrontMat, cardboardBackMat, cardboardPlainMat, cardboardInnerMat, cutEdgeMat, tapeMat, workbenchMat;
+
+function initMaterials() {
+  masterBumpTex = createMasterKraftBump();
+  masterRoughTex = createMasterKraftRoughness();
+  cutEdgeTex = createFluteCutEdgeTexture();
+  tapeTex = createReinforcedTapeTexture();
+  contactShadowTex = createContactShadowTexture();
+  workbenchTex = createPackagingWorkbenchTexture();
+
+  cardboardFrontMat = new THREE.MeshStandardMaterial({
+    map: createMasterKraftDiffuse(false, true),
+    bumpMap: masterBumpTex,
+    bumpScale: 0.052,
+    roughnessMap: masterRoughTex,
+    roughness: 0.84,
+    metalness: 0.02
+  });
+
+  cardboardBackMat = new THREE.MeshStandardMaterial({
+    map: createMasterKraftDiffuse(false, true),
+    bumpMap: masterBumpTex,
+    bumpScale: 0.052,
+    roughnessMap: masterRoughTex,
+    roughness: 0.84,
+    metalness: 0.02
+  });
+
+  cardboardPlainMat = new THREE.MeshStandardMaterial({
+    map: createMasterKraftDiffuse(false, false),
+    bumpMap: masterBumpTex,
+    bumpScale: 0.048,
+    roughnessMap: masterRoughTex,
+    roughness: 0.85,
+    metalness: 0.02
+  });
+
+  cardboardInnerMat = new THREE.MeshStandardMaterial({
+    color: 0xBA844A,
+    roughness: 0.88,
+    metalness: 0.0
+  });
+
+  cutEdgeMat = new THREE.MeshStandardMaterial({
+    map: cutEdgeTex,
+    roughness: 0.88,
+    metalness: 0.0
+  });
+
+  tapeMat = new THREE.MeshStandardMaterial({
+    map: tapeTex,
+    roughness: 0.22,
+    metalness: 0.04,
+    transparent: true,
+    opacity: 0.96
+  });
+
+  workbenchMat = new THREE.MeshStandardMaterial({
+    map: workbenchTex,
+    roughness: 0.74,
+    metalness: 0.03
+  });
+}
+
+function initHero3D() {
+  const container = document.querySelector('.stage-viewport-wrap');
+  const canvas = document.getElementById('hero-webgl-canvas');
+
+  const width = container.clientWidth;
+  const height = container.clientHeight;
+
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0xF5EFEB);
+
+  camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 100);
+  camera.position.set(13, 11, 15);
+
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setSize(width, height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.04;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+  controls = new THREE.OrbitControls(camera, canvas);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.08;
+  controls.rotateSpeed = 0.95;
+  controls.maxDistance = 28;
+  controls.minDistance = 6;
+  controls.maxPolarAngle = Math.PI / 2 + 0.04;
+  controls.autoRotate = false; // Never fight user touch/drag!
+
+  controls.addEventListener('start', () => {
+    isPresetTransitioning = false;
+    document.querySelectorAll('.cam-btn').forEach(b => b.classList.remove('active'));
+  });
+
+  // 1. Warm Studio Key Light
+  const keyLight = new THREE.DirectionalLight(0xFFF7EC, 1.15);
+  keyLight.position.set(16, 24, 16);
+  keyLight.castShadow = true;
+  keyLight.shadow.mapSize.width = 2048;
+  keyLight.shadow.mapSize.height = 2048;
+  keyLight.shadow.camera.near = 5;
+  keyLight.shadow.camera.far = 60;
+  keyLight.shadow.camera.left = -12;
+  keyLight.shadow.camera.right = 12;
+  keyLight.shadow.camera.top = 12;
+  keyLight.shadow.camera.bottom = -12;
+  keyLight.shadow.bias = -0.0003;
+  keyLight.shadow.radius = 2.5;
+  scene.add(keyLight);
+
+  // 2. Cool Sky Bounce Fill Light
+  const fillLight = new THREE.DirectionalLight(0xDBEBFA, 0.45);
+  fillLight.position.set(-16, 14, -12);
+  scene.add(fillLight);
+
+  // 3. Golden Rim Backlight for razor-sharp edge pop
+  const rimLight = new THREE.DirectionalLight(0xFFE2B8, 0.75);
+  rimLight.position.set(0, 18, -22);
+  scene.add(rimLight);
+
+  // 4. Soft Ambient Hemisphere Light
+  const hemiLight = new THREE.HemisphereLight(0xFFFFFF, 0x8C6B4A, 0.50);
+  scene.add(hemiLight);
+
+  // 5. Packaging Store Inspection Workbench (Baltic Birch table with inch ruler & warehouse stencil)
+  const benchGeo = new THREE.BoxGeometry(32, 1.0, 32);
+  const workbenchMesh = new THREE.Mesh(benchGeo, workbenchMat);
+  workbenchMesh.position.set(0, -0.5, 0); // Top surface sits flush at y = 0!
+  workbenchMesh.receiveShadow = true;
+  scene.add(workbenchMesh);
+
+  // Studio Floor Shadow receiver beneath table
+  const floor = new THREE.Mesh(
+    new THREE.PlaneGeometry(60, 60),
+    new THREE.ShadowMaterial({ opacity: 0.15 })
+  );
+  floor.rotation.x = -Math.PI / 2;
+  floor.position.y = -1.01;
+  floor.receiveShadow = true;
+  scene.add(floor);
+
+  initMaterials();
+  createTrue3DApple();
+  build3DBox(activeBox.l, activeBox.w, activeBox.h);
+  animate();
+}
+
+function createTrue3DApple() {
+  appleGroup = new THREE.Group();
+  const appleGeo = new THREE.SphereGeometry(1.0, 32, 28);
+  const posAttr = appleGeo.attributes.position;
+  for (let i = 0; i < posAttr.count; i++) {
+    let x = posAttr.getX(i), y = posAttr.getY(i), z = posAttr.getZ(i);
+    if (y < -0.6) y *= 0.88;
+    if (y > 0.7 && Math.hypot(x, z) < 0.6) y -= 0.28 * (1 - Math.hypot(x, z) / 0.6);
+    posAttr.setXYZ(i, x, y, z);
+  }
+  appleGeo.computeVertexNormals();
+
+  const appleTex = createAppleTexture();
+  const appleBody = new THREE.Mesh(appleGeo, new THREE.MeshStandardMaterial({
+    map: appleTex,
+    roughness: 0.16,
+    metalness: 0.04
+  }));
+  appleBody.castShadow = true;
+  appleGroup.add(appleBody);
+
+  // Wooden Stem with natural tilt
+  const stem = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.04, 0.065, 0.55, 8),
+    new THREE.MeshStandardMaterial({ color: 0x3D2411, roughness: 0.85 })
+  );
+  stem.position.set(0.03, 1.05, 0);
+  stem.rotation.z = -0.22;
+  appleGroup.add(stem);
+
+  // Fresh Green Leaf
+  const leaf = new THREE.Mesh(
+    new THREE.SphereGeometry(0.32, 12, 8),
+    new THREE.MeshStandardMaterial({ color: 0x228B22, roughness: 0.45 })
+  );
+  leaf.scale.set(1.0, 0.14, 0.55);
+  leaf.position.set(0.24, 1.06, 0.06);
+  leaf.rotation.set(0.4, 0.2, 0.3);
+  appleGroup.add(leaf);
+
+  appleGroup.scale.set(0.9, 0.9, 0.9);
+  scene.add(appleGroup);
+}
+
+function build3DBox(l, w, h) {
+  if (boxGroup) scene.remove(boxGroup);
+  boxGroup = new THREE.Group();
+
+  const is5P = activeBox.ply === 5;
+  const maxDim = Math.max(l, w, h);
+  const scale = 7.0 / maxDim;
+  const L = l * scale, W = w * scale, H = h * scale;
+  boxGroup.userData = { L, W, H, scale, is5P };
+
+  const thick = is5P ? 0.12 : 0.08;
+
+  // Box Base Floor
+  const bottom = new THREE.Mesh(new THREE.BoxGeometry(L, thick, W), cardboardPlainMat);
+  bottom.position.set(0, thick / 2, 0);
+  bottom.castShadow = true;
+  bottom.receiveShadow = true;
+  boxGroup.add(bottom);
+
+  // Inside bottom liner
+  const innerFloor = new THREE.Mesh(new THREE.PlaneGeometry(L - thick * 2, W - thick * 2), cardboardInnerMat);
+  innerFloor.rotation.x = -Math.PI / 2;
+  innerFloor.position.set(0, thick + 0.005, 0);
+  boxGroup.add(innerFloor);
+
+  // Front Wall (With ISO Shipping Marks)
+  const frontMats = [cardboardPlainMat, cardboardPlainMat, cutEdgeMat, cutEdgeMat, cardboardFrontMat, cardboardInnerMat];
+  const front = new THREE.Mesh(new THREE.BoxGeometry(L, H, thick), frontMats);
+  front.position.set(0, H / 2, W / 2 - thick / 2);
+  front.castShadow = true;
+  boxGroup.add(front);
+
+  // Back Wall (With BMC Stamp)
+  const backMats = [cardboardPlainMat, cardboardPlainMat, cutEdgeMat, cutEdgeMat, cardboardInnerMat, cardboardBackMat];
+  const back = new THREE.Mesh(new THREE.BoxGeometry(L, H, thick), backMats);
+  back.position.set(0, H / 2, -W / 2 + thick / 2);
+  back.castShadow = true;
+  boxGroup.add(back);
+
+  // Left & Right Walls
+  const sideMats = [cardboardPlainMat, cardboardInnerMat, cutEdgeMat, cutEdgeMat, cardboardPlainMat, cardboardPlainMat];
+  const left = new THREE.Mesh(new THREE.BoxGeometry(thick, H, W - thick * 2), sideMats);
+  left.position.set(-L / 2 + thick / 2, H / 2, 0);
+  left.castShadow = true;
+  boxGroup.add(left);
+
+  const right = new THREE.Mesh(new THREE.BoxGeometry(thick, H, W - thick * 2), sideMats);
+  right.position.set(L / 2 - thick / 2, H / 2, 0);
+  right.castShadow = true;
+  boxGroup.add(right);
+
+  // 4 Hinged RSC Top Flaps
+  const flapReach = W / 2;
+  const flapMats = [cardboardPlainMat, cardboardPlainMat, cardboardPlainMat, cardboardInnerMat, cutEdgeMat, cutEdgeMat];
+
+  // Front Outer Flap
+  flapFrontHinge = new THREE.Group();
+  flapFrontHinge.position.set(0, H, W / 2);
+  const fFrontMesh = new THREE.Mesh(new THREE.BoxGeometry(L, thick, flapReach), flapMats);
+  fFrontMesh.position.set(0, 0, -flapReach / 2);
+  fFrontMesh.castShadow = true;
+  flapFrontHinge.add(fFrontMesh);
+  boxGroup.add(flapFrontHinge);
+
+  // Back Outer Flap
+  flapBackHinge = new THREE.Group();
+  flapBackHinge.position.set(0, H, -W / 2);
+  const fBackMesh = new THREE.Mesh(new THREE.BoxGeometry(L, thick, flapReach), flapMats);
+  fBackMesh.position.set(0, 0, flapReach / 2);
+  fBackMesh.castShadow = true;
+  flapBackHinge.add(fBackMesh);
+  boxGroup.add(flapBackHinge);
+
+  // Left Inner Flap
+  flapLeftHinge = new THREE.Group();
+  flapLeftHinge.position.set(-L / 2, H, 0);
+  const fLeftMesh = new THREE.Mesh(new THREE.BoxGeometry(flapReach, thick, W), flapMats);
+  fLeftMesh.position.set(flapReach / 2, -thick, 0);
+  fLeftMesh.castShadow = true;
+  flapLeftHinge.add(fLeftMesh);
+  boxGroup.add(flapLeftHinge);
+
+  // Right Inner Flap
+  flapRightHinge = new THREE.Group();
+  flapRightHinge.position.set(L / 2, H, 0);
+  const fRightMesh = new THREE.Mesh(new THREE.BoxGeometry(flapReach, thick, W), flapMats);
+  fRightMesh.position.set(-flapReach / 2, -thick, 0);
+  fRightMesh.castShadow = true;
+  flapRightHinge.add(fRightMesh);
+  boxGroup.add(flapRightHinge);
+
+  // Reinforced Sealing Tape Along Center Seam
+  const tapeGeo = new THREE.BoxGeometry(L + 0.1, 0.005, 0.85);
+  tapeMesh = new THREE.Mesh(tapeGeo, tapeMat);
+  tapeMesh.position.set(0, H + thick / 2 + 0.002, 0);
+  tapeMesh.castShadow = true;
+  boxGroup.add(tapeMesh);
+
+  // Contact Shadow Plane Underneath Box Base
+  if (contactShadowMesh) scene.remove(contactShadowMesh);
+  contactShadowMesh = new THREE.Mesh(
+    new THREE.PlaneGeometry(L * 1.45, W * 1.45),
+    new THREE.MeshBasicMaterial({
+      map: contactShadowTex,
+      transparent: true,
+      opacity: 0.85,
+      depthWrite: false
+    })
+  );
+  contactShadowMesh.rotation.x = -Math.PI / 2;
+  contactShadowMesh.position.set(0, 0.003, 0);
+  scene.add(contactShadowMesh);
+
+  scene.add(boxGroup);
+
+  // Reset Flap & Apple state
+  currentFlapProg = 0; targetFlapProg = 0;
+  applyFlapProgression(0);
+  areFlapsOpen = false;
+  document.getElementById('btn-flaps').classList.remove('active');
+  document.getElementById('lbl-flaps').textContent = 'Open Flaps';
+
+  isAppleInside = false;
+  document.getElementById('btn-apple').classList.remove('active');
+  document.getElementById('lbl-apple').textContent = 'Put Apple Inside';
+  appleTargetPos.set(L / 2 + 2.2, 0.9, 0);
+
+  controls.target.set(0, H / 2, 0);
+}
+
+function applyFlapProgression(prog) {
+  if (!flapFrontHinge) return;
+  const maxOpen = 2.25;
+  flapFrontHinge.rotation.x = prog * maxOpen;
+  flapBackHinge.rotation.x = -prog * maxOpen;
+  flapLeftHinge.rotation.z = -prog * (maxOpen * 0.9);
+  flapRightHinge.rotation.z = prog * (maxOpen * 0.9);
+
+  // Tape split/fade behavior
+  if (tapeMesh) {
+    tapeMesh.scale.z = Math.max(0.001, 1 - prog * 1.5);
+    tapeMesh.material.opacity = Math.max(0, 0.96 * (1 - prog * 2.2));
+  }
+}
+
+// Camera Angle Presets (Smooth transition without blocking manual drag)
+function setCameraAngle(angle, btn) {
+  document.querySelectorAll('.cam-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const { H } = boxGroup.userData;
+  isPresetTransitioning = true;
+
+  if (angle === 'orbit') {
+    targetCamPos.set(13, 11, 15);
+    targetLookAt.set(0, H / 2, 0);
+  } else if (angle === 'front') {
+    targetCamPos.set(0, H / 2 + 1, 18);
+    targetLookAt.set(0, H / 2, 0);
+  } else if (angle === 'top') {
+    targetCamPos.set(0, 18, 0.05);
+    targetLookAt.set(0, H / 2, 0);
+  } else if (angle === 'flaps') {
+    if (!areFlapsOpen) toggleFlapsAction();
+    targetCamPos.set(7, H + 4.5, 9);
+    targetLookAt.set(0, H * 0.8, 0);
+  }
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+
+  // Smooth Flap Easing
+  if (Math.abs(targetFlapProg - currentFlapProg) > 0.001) {
+    currentFlapProg += (targetFlapProg - currentFlapProg) * 0.12;
+    applyFlapProgression(currentFlapProg);
+  }
+
+  // Smooth Apple Easing
+  if (appleGroup) appleGroup.position.lerp(appleTargetPos, 0.12);
+
+  // Preset camera lerping (only runs during active button transition, never during manual drag!)
+  if (isPresetTransitioning && camera && controls) {
+    camera.position.lerp(targetCamPos, 0.1);
+    controls.target.lerp(targetLookAt, 0.1);
+    if (camera.position.distanceTo(targetCamPos) < 0.08) {
+      isPresetTransitioning = false;
+    }
+  }
+
+  if (controls) controls.update();
+  if (renderer && scene && camera) renderer.render(scene, camera);
+}
+
+window.addEventListener('resize', () => {
+  const container = document.querySelector('.stage-viewport-wrap');
+  if (!container || !renderer || !camera) return;
+  const width = container.clientWidth;
+  const height = container.clientHeight;
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+  renderer.setSize(width, height);
+});
+
+function toggleFlapsAction() {
+  areFlapsOpen = !areFlapsOpen;
+  targetFlapProg = areFlapsOpen ? 1 : 0;
+  document.getElementById('btn-flaps').classList.toggle('active', areFlapsOpen);
+  document.getElementById('lbl-flaps').textContent = areFlapsOpen ? 'Close Flaps' : 'Open Flaps';
+}
+
+function toggleAppleAction() {
+  const { L } = boxGroup.userData;
+  if (!isAppleInside) {
+    isAppleInside = true;
+    if (!areFlapsOpen) toggleFlapsAction();
+    appleTargetPos.set(0, 0.9, 0);
+    document.getElementById('btn-apple').classList.add('active');
+    document.getElementById('lbl-apple').textContent = 'Take Apple Out';
+  } else {
+    isAppleInside = false;
+    appleTargetPos.set(L / 2 + 2.2, 0.9, 0);
+    document.getElementById('btn-apple').classList.remove('active');
+    document.getElementById('lbl-apple').textContent = 'Put Apple Inside';
+  }
+}
+
+// Explicit function to load into 3D Showroom and scroll to top
+function loadInto3DShowroom(l, w, h, cost, note, ply) {
+  activeBox = { l, w, h, cost, note, ply };
+  const sellPrice = calculateSellingPrice(cost, l, w, h);
+
+  document.getElementById('hero-title').innerHTML = `${l} &times; ${w} &times; ${h}"`;
+  document.getElementById('hero-ply').textContent = `${ply}-Ply Heavy`;
+  document.getElementById('hero-desc').textContent = `${note || 'Standard Corrugated Shipper'} \u2022 Doorstep delivery in Udaipur`;
+  document.getElementById('hero-price').textContent = `₹${sellPrice}`;
+
+  build3DBox(l, w, h);
+
+  // Smooth scroll to top 3D stage
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function viewIn3DFromModal() {
+  closeOrderModal();
+  const { l, w, h, cost, note, ply } = currentOrderBox;
+  loadInto3DShowroom(l, w, h, cost, note, ply);
+}
+
+/* =========================================================================
+   GRID RENDERING & SEARCH / FILTER
+   ========================================================================= */
+
+const gridEl = document.getElementById('grid');
+
+function renderGrid(boxes) {
+  gridEl.innerHTML = '';
+  boxes.forEach(([l, w, h, cost, note, ply, isFeatured], idx) => {
+    const sellPrice = calculateSellingPrice(cost, l, w, h);
+    const card = document.createElement('div');
+    card.className = `box-card ${activeBox.l === l && activeBox.w === w && activeBox.h === h ? 'active-in-3d' : ''}`;
+    card.id = `card-${l}-${w}-${h}`;
+    
+    // Store shelf rack tag e.g. Shelf A-01, Shelf B-05
+    const rowLetter = String.fromCharCode(65 + Math.floor(idx / 12));
+    const shelfNum = (idx % 12) + 1;
+    const shelfTag = `Shelf ${rowLetter}-${String(shelfNum).padStart(2, '0')}`;
+
+    // Tapping the card opens the Order Modal right on the screen!
+    card.onclick = () => openOrderModalDirect(l, w, h, cost, note, ply);
+
+    card.innerHTML = `
+      <div class="card-top-tags">
+        <span class="card-tag-ply">${ply}P</span>
+        <span class="card-tag-shelf">${shelfTag}</span>
+        ${isFeatured ? '<span class="card-tag-hot">HOT</span>' : '<span></span>'}
+      </div>
+      <div class="card-svg-wrap">
+        ${makePhotorealisticBoxSVG(l, w, h, ply)}
+      </div>
+      <div class="card-size-title">${l}&times;${w}&times;${h}"</div>
+      <div class="card-tag-stock"><span class="stock-dot"></span> In Stock</div>
+      <div class="card-usage-sub">${note || (ply + '-Ply')}</div>
+      <div class="card-price-row">
+        <span class="card-price-main">₹${sellPrice}</span>
+        <span class="card-price-unit">/ box</span>
+      </div>
+      <div class="card-actions-row">
+        <button class="btn-card-order" onclick="event.stopPropagation(); openOrderModalDirect(${l}, ${w}, ${h}, ${cost}, '${note}', ${ply})">⚡ Order Now</button>
+        <button class="btn-card-3d" onclick="event.stopPropagation(); loadInto3DShowroom(${l}, ${w}, ${h}, ${cost}, '${note}', ${ply})">👁️ 3D</button>
+      </div>
+    `;
+    gridEl.appendChild(card);
+  });
+
+  document.getElementById('grid-count').textContent = `${boxes.length} Sizes`;
+}
+
+// Default Grid: Show ALL 53 sizes so customers see complete range!
+renderGrid(BOX_DATA);
+
+function filterNiche(niche, btn) {
+  document.querySelectorAll('.niche-chip').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('inp-search').value = '';
+
+  const titleEl = document.getElementById('grid-title');
+
+  if (niche === 'all') {
+    titleEl.textContent = '📋 All 53 Standard Packaging Boxes';
+    renderGrid(BOX_DATA);
+  } else if (niche === 'popular') {
+    titleEl.textContent = '🔥 Fastest-Moving Boxes in Udaipur';
+    renderGrid(BOX_DATA.filter(b => b[6] === true));
+  } else if (niche === 'dispo') {
+    titleEl.textContent = '🗑️ Dustbin Bag 6-Pack (Dispo Well Standard)';
+    renderGrid(BOX_DATA.filter(b => b[0] === 13 && b[1] === 9 && b[2] === 6));
+  } else if (niche === 'garments') {
+    titleEl.textContent = '👗 Kurti, Sarees & Apparel Packaging';
+    renderGrid(BOX_DATA.filter(b => (b[0] >= 8 && b[0] <= 14) && (b[1] >= 6 && b[1] <= 11) && b[2] <= 5));
+  } else if (niche === 'jewelry') {
+    titleEl.textContent = '💎 Jewelry, Watch & Cosmetics Boxes';
+    renderGrid(BOX_DATA.filter(b => Math.max(b[0], b[1], b[2]) <= 7));
+  } else if (niche === 'heavy5') {
+    titleEl.textContent = '🚚 5-Ply Heavy-Duty Export Cartons';
+    renderGrid(BOX_DATA.filter(b => b[5] === 5));
+  }
+}
+
+function handleSearch(query) {
+  const q = query.toLowerCase().trim();
+  if (!q) {
+    document.getElementById('grid-title').textContent = 'All 53 Standard Packaging Boxes';
+    renderGrid(BOX_DATA);
+    return;
+  }
+  document.querySelectorAll('.niche-chip').forEach(b => b.classList.remove('active'));
+  document.getElementById('grid-title').textContent = `Search: "${q}"`;
+
+  const filtered = BOX_DATA.filter(([l, w, h, cost, note, ply]) => {
+    const sizeStr = `${l}x${w}x${h} ${l}*${w}*${h} ${l} ${w} ${h}`.toLowerCase();
+    const noteStr = (note || '').toLowerCase();
+    const plyStr = `${ply}-ply ${ply}ply`.toLowerCase();
+    return sizeStr.includes(q) || noteStr.includes(q) || plyStr.includes(q);
+  });
+  renderGrid(filtered);
+}
+
+/* =========================================================================
+   INSTANT ORDER CHECKOUT POPUP MODAL (WITH MAP / GPS LOCATOR & MANUAL ADDRESS)
+   ========================================================================= */
+
+const orderBackdrop = document.getElementById('order-backdrop');
+let currentOrderBox = activeBox;
+let currentQty = 50;
+let attachedGPSLocation = null;
+function triggerOrderModalForActive() {
+  openOrderModalDirect(activeBox.l, activeBox.w, activeBox.h, activeBox.cost, activeBox.note, activeBox.ply);
+}
+
+function openOrderModalDirect(l, w, h, cost, note, ply) {
+  currentOrderBox = { l, w, h, cost, note, ply };
+  const unitPrice = calculateSellingPrice(cost, l, w, h);
+
+  document.getElementById('ord-title').innerHTML = `${l} &times; ${w} &times; ${h} Inches`;
+  document.getElementById('ord-sub').textContent = `${ply}-Ply Corrugated Carton \u2022 ${note || 'Standard Shipping'}`;
+
+  // Reset Quantity
+  currentQty = 50;
+  document.getElementById('inp-custom-qty').value = 50;
+  document.querySelectorAll('.qty-chip').forEach(c => c.classList.remove('active'));
+  document.querySelector('.qty-chip').classList.add('active');
+
+  document.getElementById('ord-badge').textContent = '⚡ 45-Min Express Doorstep Delivery';
+
+  updateInvoiceCalculations();
+  orderBackdrop.classList.add('active');
+}
+
+function closeOrderModal() {
+  orderBackdrop.classList.remove('active');
+}
+
+function closeOrderBackdrop(e) {
+  if (e.target.id === 'order-backdrop') closeOrderModal();
+}
+
+function setQuantity(qty, chipEl) {
+  currentQty = qty;
+  document.getElementById('inp-custom-qty').value = qty;
+  document.querySelectorAll('.qty-chip').forEach(c => c.classList.remove('active'));
+  chipEl.classList.add('active');
+  updateInvoiceCalculations();
+}
+
+function stepQuantity(delta) {
+  let val = parseInt(document.getElementById('inp-custom-qty').value) || 50;
+  val = Math.max(50, val + delta);
+  document.getElementById('inp-custom-qty').value = val;
+  currentQty = val;
+
+  document.querySelectorAll('.qty-chip').forEach(c => {
+    c.classList.toggle('active', parseInt(c.textContent) === val);
+  });
+  updateInvoiceCalculations();
+}
+
+function customQuantityInput(input) {
+  const val = parseInt(input.value);
+  if (val && val >= 50) {
+    currentQty = val;
+    document.querySelectorAll('.qty-chip').forEach(c => {
+      c.classList.toggle('active', parseInt(c.textContent) === val);
+    });
+    updateInvoiceCalculations();
+  }
+}
+
+function updateInvoiceCalculations() {
+  const unitPrice = calculateSellingPrice(currentOrderBox.cost, currentOrderBox.l, currentOrderBox.w, currentOrderBox.h);
+  const total = currentQty * unitPrice;
+
+  document.getElementById('inv-unit-rate').textContent = `₹${unitPrice} / box`;
+  document.getElementById('inv-qty-count').textContent = `${currentQty} Boxes`;
+  document.getElementById('inv-total-price').textContent = `₹${total.toLocaleString('en-IN')}`;
+}
+
+// GPS / MAP LOCATOR LOGIC
+function detectGPSLocation() {
+  const gpsText = document.getElementById('gps-text');
+  const gpsIcon = document.getElementById('gps-icon');
+  const gpsBadge = document.getElementById('gps-status-badge');
+
+  if (!navigator.geolocation) {
+    alert('Location service is not supported by your browser. Please type your Udaipur address.');
+    return;
+  }
+
+  gpsText.textContent = 'Locating...';
+  gpsIcon.textContent = '⏳';
+
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      const lat = pos.coords.latitude;
+      const lng = pos.coords.longitude;
+      attachedGPSLocation = `https://www.google.com/maps?q=${lat},${lng}`;
+      gpsText.textContent = 'Location Pinned!';
+      gpsIcon.textContent = '✓';
+      gpsBadge.style.display = 'block';
+      gpsBadge.innerHTML = `📍 GPS Attached: <a href="${attachedGPSLocation}" target="_blank" style="color:#0F766E; text-decoration:underline;">View Google Maps Pin</a>`;
+      
+      const addrBox = document.getElementById('inp-address');
+      if (!addrBox.value.trim()) {
+        addrBox.value = `Udaipur Delivery (GPS Pinned: ${lat.toFixed(4)}, ${lng.toFixed(4)})`;
+      }
+    },
+    (err) => {
+      gpsText.textContent = 'Attach Live Map Pin';
+      gpsIcon.textContent = '📍';
+      alert('Could not auto-fetch GPS. Please type your shop/house address in the box.');
+    },
+    { enableHighAccuracy: true, timeout: 8000 }
+  );
+}
+
+// SUBMIT ORDER TO RISHABH ON WHATSAPP
+function submitOrderToWhatsApp() {
+  const { l, w, h, cost, ply } = currentOrderBox;
+  const unitPrice = calculateSellingPrice(cost, l, w, h);
+  const total = currentQty * unitPrice;
+
+  const shopName = document.getElementById('inp-shop').value.trim() || 'Direct Merchant';
+  const address = document.getElementById('inp-address').value.trim() || 'Udaipur City';
+  const phone = document.getElementById('inp-phone').value.trim();
+
+  if (!phone || phone.length < 10) {
+    alert('Please enter your 10-digit WhatsApp number so we can confirm delivery timing!');
+    document.getElementById('inp-phone').focus();
+    return;
+  }
+
+  // Trigger celebration confetti animation!
+  confetti({
+    particleCount: 80,
+    spread: 70,
+    origin: { y: 0.7 }
+  });
+
+  // Compose Structured Order Manifest
+  const waMessage = 
+`📦 *CONFIRMED PACKAGING ORDER - BOX COMPANY*
+━━━━━━━━━━━━━━━━━━━━
+• *Box Size:* ${l} x ${w} x ${h} Inches (${ply}-Ply)
+• *Quantity:* ${currentQty} Boxes
+• *Rate:* ₹${unitPrice} / box
+• *Total Payable:* ₹${total.toLocaleString('en-IN')}
+• *Delivery:* 45-Min Express Doorstep Delivery in Udaipur
+
+🏢 *Shop / Brand:* ${shopName}
+📍 *Delivery Address:* ${address}
+${attachedGPSLocation ? `🗺️ *Google Maps Pin:* ${attachedGPSLocation}\n` : ''}📞 *Customer Phone:* ${phone}
+━━━━━━━━━━━━━━━━━━━━
+_Please confirm order dispatch and send UPI QR code!_`;
+
+  const waUrl = `https://wa.me/918619661325?text=${encodeURIComponent(waMessage)}`;
+
+  setTimeout(() => {
+    window.open(waUrl, '_blank');
+    closeOrderModal();
+  }, 400);
+}
+
+// Initialize 3D Engine on DOM load
+window.addEventListener('DOMContentLoaded', () => {
+  initHero3D();
+});
+</script>
+</body>
+</html>
