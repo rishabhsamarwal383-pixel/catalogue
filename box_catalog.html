@@ -1252,9 +1252,241 @@
     font-weight: 700;
     color: var(--brand-primary);
     text-decoration: underline;
+    /* Admin DBMS Modal Styles */
+  .admin-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 99999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+  }
+  .admin-modal-backdrop.active { display: flex; }
+  .admin-dbms-sheet {
+    background: #FFFFFF;
+    width: 100%;
+    max-width: 880px;
+    max-height: 90vh;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.35);
+    overflow: hidden;
+    animation: modalPop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .admin-dbms-header {
+    background: #0F172A;
+    color: #FFFFFF;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .admin-dbms-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .admin-dbms-close {
+    background: #334155;
+    color: #FFFFFF;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 1.1rem;
     cursor: pointer;
   }
-
+  .admin-dbms-body {
+    padding: 16px;
+    overflow-y: auto;
+    flex: 1;
+  }
+  .admin-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  @media (max-width: 640px) {
+    .admin-kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .admin-kpi-card {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 10px 12px;
+    text-align: center;
+  }
+  .admin-kpi-val {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0F172A;
+    margin-top: 4px;
+  }
+  .admin-kpi-lbl {
+    font-size: 0.7rem;
+    color: #64748B;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .admin-tabs-nav {
+    display: flex;
+    gap: 6px;
+    border-bottom: 1.5px solid #E2E8F0;
+    margin-bottom: 14px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+  .admin-tab-btn {
+    padding: 8px 12px;
+    border: none;
+    background: none;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #64748B;
+    cursor: pointer;
+    border-bottom: 2.5px solid transparent;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+  }
+  .admin-tab-btn.active {
+    color: #0F172A;
+    border-bottom-color: #0F172A;
+  }
+  .admin-table-wrap {
+    overflow-x: auto;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    max-height: 380px;
+  }
+  .admin-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.74rem;
+    text-align: left;
+  }
+  .admin-data-table th {
+    position: sticky;
+    top: 0;
+    background: #F1F5F9;
+    padding: 8px 10px;
+    font-weight: 800;
+    color: #334155;
+    border-bottom: 1px solid #CBD5E1;
+    white-space: nowrap;
+    z-index: 1;
+  }
+  .admin-data-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #F1F5F9;
+    color: #1E293B;
+    white-space: nowrap;
+  }
+  .admin-data-table tr:hover { background: #F8FAFC; }
+  .btn-open-dbms {
+    background: #F8FAFC;
+    border: 1.5px solid #CBD5E1;
+    color: #334155;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+  }
+  .btn-open-dbms:hover {
+    background: #0F172A;
+    color: #FFFFFF;
+    border-color: #0F172A;
+  }
+  .btn-admin-export {
+    background: #ECFDF5;
+    border: 1px solid #A7F3D0;
+    color: #065F46;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .btn-admin-export:hover { background: #D1FAE5; }
+  .gsheet-setup-card {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 14px;
+  }
+  .gsheet-steps-box {
+    background: #FFFFFF;
+    border: 1px solid #CBD5E1;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.76rem;
+    color: #1E293B;
+    line-height: 1.6;
+  }
+  .btn-copy-script {
+    background: #0F172A;
+    color: #FFFFFF;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .btn-save-webhook {
+    background: #059669;
+    color: #FFFFFF;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .btn-sync-all {
+    background: #4F46E5;
+    color: #FFFFFF;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .btn-admin-json-export {
+    background: #F1F5F9;
+    border: 1px solid #CBD5E1;
+    color: #334155;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .btn-admin-clear {
+    background: none;
+    border: none;
+    color: #DC2626;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
+  }
 
   /* Store Showroom Footer */
   .store-footer {
@@ -2261,8 +2493,209 @@
         </a>
       </div>
       <p class="store-footer-copy">&copy; 2026 Box Company Udaipur &bull; 53 Standard Corrugated Box Sizes in Ready Inventory</p>
+      <div style="text-align:center; margin-top:12px; padding-top:8px; border-top:1px dashed #E2D9C8;">
+        <button type="button" class="btn-open-dbms" onclick="openAdminDBMSModal()">
+          <span>📊</span> Live Business DBMS & Orders Hub
+        </button>
+      </div>
     </div>
   </footer>
+
+  <!-- =========================================================================
+       ADMIN BUSINESS DBMS & REALTIME ANALYTICS MODAL
+       ========================================================================= -->
+  <div class="admin-modal-backdrop" id="admin-dbms-modal" onclick="closeAdminDBMSModal(event)">
+    <div class="admin-dbms-sheet">
+      <div class="admin-dbms-header">
+        <div class="admin-dbms-title">
+          <span>📊</span> Box Company DBMS · Live Business Hub
+        </div>
+        <button type="button" class="admin-dbms-close" onclick="closeAdminDBMSModal()">&times;</button>
+      </div>
+
+      <div class="admin-dbms-body">
+        <!-- 4 KPI Summary Cards -->
+        <div class="admin-kpi-grid">
+          <div class="admin-kpi-card" style="border-left: 4px solid #10B981;">
+            <div class="admin-kpi-lbl">Total Orders</div>
+            <div class="admin-kpi-val" id="kpi-orders-count">0</div>
+          </div>
+          <div class="admin-kpi-card" style="border-left: 4px solid #F59E0B;">
+            <div class="admin-kpi-lbl">Total Sales (₹)</div>
+            <div class="admin-kpi-val" id="kpi-revenue-sum">₹0</div>
+          </div>
+          <div class="admin-kpi-card" style="border-left: 4px solid #6366F1;">
+            <div class="admin-kpi-lbl">App Installs</div>
+            <div class="admin-kpi-val" id="kpi-installs-count">0</div>
+          </div>
+          <div class="admin-kpi-card" style="border-left: 4px solid #0284C7;">
+            <div class="admin-kpi-lbl">Total Visitors</div>
+            <div class="admin-kpi-val" id="kpi-visitors-count">0</div>
+          </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="admin-tabs-nav">
+          <button class="admin-tab-btn active" onclick="switchAdminTab('orders', this)">📦 Orders Log (<span id="tab-cnt-orders">0</span>)</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('installs', this)">📲 App Installs (<span id="tab-cnt-installs">0</span>)</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('visitors', this)">👁️ Visitors (<span id="tab-cnt-visitors">0</span>)</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('analytics', this)">📊 Activity (<span id="tab-cnt-analytics">0</span>)</button>
+          <button class="admin-tab-btn" onclick="switchAdminTab('gsheet', this)">☁️ Google Sheets Sync</button>
+        </div>
+
+        <!-- TAB 1: ORDERS TABLE -->
+        <div id="admin-sec-orders" class="admin-section">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:6px;">
+            <span style="font-size:0.8rem; font-weight:800; color:#1E293B;">📦 Live Customer Orders</span>
+            <button type="button" class="btn-admin-export" onclick="exportOrdersCSV()">📥 Export Orders CSV</button>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-data-table">
+              <thead>
+                <tr>
+                  <th>Time (IST)</th>
+                  <th>Order ID</th>
+                  <th>Box Size</th>
+                  <th>Qty</th>
+                  <th>Total</th>
+                  <th>Customer Phone</th>
+                  <th>Address</th>
+                  <th>Landmark</th>
+                  <th>Pincode</th>
+                  <th>GPS Pin</th>
+                </tr>
+              </thead>
+              <tbody id="tbl-orders-body">
+                <tr><td colspan="10" style="text-align:center; padding:18px; color:#64748B;">No orders recorded yet. They will appear here in real-time as customers order!</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB 2: APP INSTALLS TABLE -->
+        <div id="admin-sec-installs" class="admin-section" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:6px;">
+            <span style="font-size:0.8rem; font-weight:800; color:#1E293B;">📲 App Installs & Downloads Log</span>
+            <button type="button" class="btn-admin-export" onclick="exportInstallsCSV()">📥 Export Installs CSV</button>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-data-table">
+              <thead>
+                <tr>
+                  <th>Time (IST)</th>
+                  <th>Event</th>
+                  <th>Platform</th>
+                  <th>Screen</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="tbl-installs-body">
+                <tr><td colspan="5" style="text-align:center; padding:18px; color:#64748B;">No app download events recorded yet.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB 3: VISITORS TABLE -->
+        <div id="admin-sec-visitors" class="admin-section" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:6px;">
+            <span style="font-size:0.8rem; font-weight:800; color:#1E293B;">👁️ Visitor Traffic & Sessions</span>
+            <button type="button" class="btn-admin-export" onclick="exportVisitorsCSV()">📥 Export Visitors CSV</button>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-data-table">
+              <thead>
+                <tr>
+                  <th>Time (IST)</th>
+                  <th>Visitor ID</th>
+                  <th>Referrer Source</th>
+                  <th>Platform</th>
+                  <th>Screen</th>
+                  <th>Language</th>
+                </tr>
+              </thead>
+              <tbody id="tbl-visitors-body">
+                <tr><td colspan="6" style="text-align:center; padding:18px; color:#64748B;">No visitor sessions recorded yet.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB 4: ANALYTICS & ACTIVITY -->
+        <div id="admin-sec-analytics" class="admin-section" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-size:0.8rem; font-weight:800; color:#1E293B;">📊 User Interactions & Event Log</span>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-data-table">
+              <thead>
+                <tr>
+                  <th>Time (IST)</th>
+                  <th>Action</th>
+                  <th>Item / Query</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody id="tbl-analytics-body">
+                <tr><td colspan="4" style="text-align:center; padding:18px; color:#64748B;">No interaction events recorded yet.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB 5: GOOGLE SHEETS CLOUD SYNC -->
+        <div id="admin-sec-gsheet" class="admin-section" style="display:none;">
+          <div class="gsheet-setup-card">
+            <div style="font-weight:800; font-size:0.95rem; color:#065F46; margin-bottom:8px;">
+              ☁️ Connect Your Google Spreadsheet in 2 Minutes
+            </div>
+            <p style="font-size:0.78rem; color:#475569; line-height:1.5; margin-bottom:12px;">
+              Your database is powered by Google Sheets. All orders, app installs, visitors, and events automatically flow into 5 organized tabs in your own Google Sheet.
+            </p>
+            <div class="gsheet-steps-box">
+              1️⃣ Open <a href="https://sheets.new" target="_blank" style="color:#059669; font-weight:700; text-decoration:underline;">sheets.new</a> in your browser.<br>
+              2️⃣ Click <strong>Extensions ➔ Apps Script</strong>.<br>
+              3️⃣ Click the button below to copy the master script, paste it in Apps Script and Save (💾).<br>
+              4️⃣ Click <strong>Deploy ➔ New deployment ➔ Web app</strong> (Access: <strong>Anyone</strong>).<br>
+              5️⃣ Copy your Web App URL and paste it into the box below!
+            </div>
+
+            <div style="margin: 14px 0;">
+              <button type="button" class="btn-copy-script" onclick="copyGoogleAppsScriptCode()">
+                📋 Copy Master Google Apps Script Code
+              </button>
+              <span id="script-copied-toast" style="display:none; font-size:0.75rem; color:#059669; font-weight:700; margin-left:10px;">✓ Code Copied to Clipboard!</span>
+            </div>
+
+            <div class="form-group" style="margin-top:14px;">
+              <label class="form-label">Your Google Apps Script Web App URL:</label>
+              <input type="url" id="inp-gsheet-webhook" class="form-input" placeholder="https://script.google.com/macros/s/AKfycb.../exec">
+            </div>
+
+            <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">
+              <button type="button" class="btn-save-webhook" onclick="saveGSheetWebhook()">
+                💾 Save & Connect Webhook
+              </button>
+              <button type="button" class="btn-sync-all" onclick="syncAllLocalDataToGoogleSheet()">
+                🔄 Push All Past Orders & Traffic to Sheet Now
+              </button>
+            </div>
+            <div id="webhook-save-status" style="margin-top:8px; font-size:0.75rem; font-weight:700;"></div>
+          </div>
+        </div>
+
+        <!-- Global DBMS Export Bar -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px; padding-top:12px; border-top:1px solid #E2E8F0; flex-wrap:wrap; gap:8px;">
+          <button type="button" class="btn-admin-json-export" onclick="exportAllDBMSJSON()">
+            📥 Download Full Backup (JSON)
+          </button>
+          <button type="button" class="btn-admin-clear" onclick="clearLocalDBMSData()">
+            🗑️ Reset Local Cache
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- =========================================================================
        INSTANT ORDER CHECKOUT POPUP MODAL (WITH MAP / GPS LOCATOR & MANUAL ADDRESS)
@@ -5904,12 +6337,34 @@ function processOrderAndOpenUPI() {
   currentUPIUrl = `upi://pay?pa=${encodeURIComponent(MERCHANT_UPI_ID)}&pn=${encodeURIComponent('Box Company Udaipur')}&am=${total}&cu=INR&tn=${encodeURIComponent(noteText)}`;
 
   // Store confirmed order manifest
+  const orderId = 'BOX-' + Date.now().toString().slice(-6);
   confirmedOrderData = {
+    orderId,
     l, w, h, cost, note, ply, currentQty, unitPrice, total,
     phone, address, landmark, pincode, shopName,
     gps: attachedGPSLocation,
     upiUrl: currentUPIUrl
   };
+
+  // Automatically log order to DBMS and Google Sheet
+  if (typeof sendDBMSLog === 'function') {
+    sendDBMSLog('order', {
+      orderId: orderId,
+      dimensions: `${l}x${w}x${h} Inches`,
+      l, w, h, ply,
+      quantity: currentQty,
+      unitPrice: unitPrice,
+      total: total,
+      phone: phone,
+      address: address,
+      landmark: landmark,
+      pincode: pincode,
+      shopName: shopName,
+      gps: attachedGPSLocation,
+      paymentMode: 'UPI Instant',
+      paymentStatus: 'UPI Initiated / Form Confirmed'
+    });
+  }
 
   // Populate Step 2 UPI Screen
   const dispAmt = document.getElementById('upi-display-amount');
@@ -5996,6 +6451,15 @@ function sendOrderReceiptToWhatsApp() {
     return;
   }
   const d = confirmedOrderData;
+
+  if (typeof sendDBMSLog === 'function') {
+    sendDBMSLog('analytics', {
+      action: 'WhatsApp Dispatch Receipt Sent',
+      item: `${d.l}x${d.w}x${d.h} Inches (${d.ply}-Ply)`,
+      details: `${d.currentQty} pcs · Total ₹${d.total} · Phone ${d.phone}`
+    });
+  }
+
   const waMessage = 
 `📦 *CONFIRMED PACKAGING ORDER & PAYMENT - BOX COMPANY*
 ━━━━━━━━━━━━━━━━━━━━
@@ -6219,11 +6683,24 @@ function startAppInstallation() {
   // 2. Immediately trigger native installation prompt
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
+  if (typeof sendDBMSLog === 'function') {
+    sendDBMSLog('download', {
+      eventType: 'Install App Initiated',
+      status: 'Prompt Triggered'
+    });
+  }
+
   if (deferredInstallPrompt) {
     deferredInstallPrompt.prompt();
     deferredInstallPrompt.userChoice.then((choiceResult) => {
       if (choiceResult.outcome === 'accepted') {
         showViewportToast('🎉 Box Company App installed successfully!');
+        if (typeof sendDBMSLog === 'function') {
+          sendDBMSLog('download', {
+            eventType: 'PWA Installed to Home Screen',
+            status: 'Accepted'
+          });
+        }
       }
       closeDownloadAppModal();
       deferredInstallPrompt = null;
@@ -6346,9 +6823,438 @@ window.addEventListener('DOMContentLoaded', () => {
     switchMobileView('catalog');
   }
 
+  // Log visitor session once per browser session
+  if (!sessionStorage.getItem('session_visitor_logged')) {
+    if (typeof sendDBMSLog === 'function') {
+      sendDBMSLog('visitor', {
+        referrer: document.referrer || 'Direct Visit',
+        language: navigator.language || 'en'
+      });
+    }
+    sessionStorage.setItem('session_visitor_logged', 'true');
+  }
+
+  // Check ?admin=true query parameter to open DBMS dashboard directly
+  if (new URLSearchParams(window.location.search).get('admin') === 'true') {
+    setTimeout(() => openAdminDBMSModal(), 600);
+  }
+
   // Automatic Install Popup for Browser Visitors!
   checkAutoShowInstallPopup();
 });
+
+/* =========================================================================
+   REALTIME BUSINESS DBMS & GOOGLE SHEETS CLOUD SYNC ENGINE
+   ========================================================================= */
+const DEFAULT_GSHEET_WEBHOOK = ''; // Fallback, overrideable via localStorage
+
+function getGSheetWebhook() {
+  return localStorage.getItem('box_gsheet_webhook') || DEFAULT_GSHEET_WEBHOOK;
+}
+
+function getOrCreateVisitorId() {
+  let vId = localStorage.getItem('box_dbms_visitor_id');
+  if (!vId) {
+    vId = 'V-' + Math.floor(100000 + Math.random() * 900000);
+    localStorage.setItem('box_dbms_visitor_id', vId);
+  }
+  return vId;
+}
+
+function sendDBMSLog(type, data) {
+  const nowIST = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+  const visitorId = getOrCreateVisitorId();
+
+  const record = {
+    type: type,
+    timestamp: nowIST,
+    visitorId: visitorId,
+    platform: navigator.platform || 'Unknown',
+    screen: `${window.innerWidth}x${window.innerHeight}`,
+    userAgent: navigator.userAgent,
+    ...data
+  };
+
+  // 1. Save to in-browser Local DBMS buffer
+  try {
+    const key = 'box_dbms_' + type;
+    let list = [];
+    const raw = localStorage.getItem(key);
+    if (raw) list = JSON.parse(raw);
+    list.unshift(record);
+    if (list.length > 250) list = list.slice(0, 250);
+    localStorage.setItem(key, JSON.stringify(list));
+  } catch (e) {
+    console.warn('Local DBMS storage note:', e);
+  }
+
+  // 2. Stream to Google Sheets Cloud Webhook if configured
+  const webhookUrl = getGSheetWebhook();
+  if (webhookUrl && webhookUrl.startsWith('https://script.google.com/')) {
+    try {
+      fetch(webhookUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(record)
+      }).catch(err => console.log('Google Sheets sync note:', err));
+    } catch (e) {}
+  }
+}
+
+// Global PWA install listener
+window.addEventListener('appinstalled', () => {
+  if (typeof sendDBMSLog === 'function') {
+    sendDBMSLog('download', {
+      eventType: 'PWA Installed on Device',
+      status: 'Installed Successfully'
+    });
+  }
+});
+
+// ADMIN DBMS MODAL CONTROLLERS
+function openAdminDBMSModal() {
+  const modal = document.getElementById('admin-dbms-modal');
+  if (modal) {
+    modal.classList.add('active');
+    renderAdminDBMS();
+  }
+}
+
+function closeAdminDBMSModal(e) {
+  if (e && e.target && e.target !== e.currentTarget && !e.target.classList.contains('admin-dbms-close')) {
+    return;
+  }
+  const modal = document.getElementById('admin-dbms-modal');
+  if (modal) modal.classList.remove('active');
+}
+
+function switchAdminTab(tabName, btnEl) {
+  document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+  if (btnEl) btnEl.classList.add('active');
+
+  const sections = ['orders', 'installs', 'visitors', 'analytics', 'gsheet'];
+  sections.forEach(s => {
+    const secEl = document.getElementById('admin-sec-' + s);
+    if (secEl) secEl.style.display = (s === tabName ? 'block' : 'none');
+  });
+}
+
+function renderAdminDBMS() {
+  // Load data from Local DBMS
+  const orders = JSON.parse(localStorage.getItem('box_dbms_order') || '[]');
+  const installs = JSON.parse(localStorage.getItem('box_dbms_download') || '[]');
+  const visitors = JSON.parse(localStorage.getItem('box_dbms_visitor') || '[]');
+  const analytics = JSON.parse(localStorage.getItem('box_dbms_analytics') || '[]');
+
+  // Update KPI Counters
+  const totalRevenue = orders.reduce((sum, o) => sum + (Number(o.total) || 0), 0);
+  const kpiOrd = document.getElementById('kpi-orders-count');
+  const kpiRev = document.getElementById('kpi-revenue-sum');
+  const kpiInst = document.getElementById('kpi-installs-count');
+  const kpiVis = document.getElementById('kpi-visitors-count');
+
+  if (kpiOrd) kpiOrd.textContent = orders.length;
+  if (kpiRev) kpiRev.textContent = '₹' + totalRevenue.toLocaleString('en-IN');
+  if (kpiInst) kpiInst.textContent = installs.length;
+  if (kpiVis) kpiVis.textContent = visitors.length;
+
+  // Update Tab Badges
+  const tOrd = document.getElementById('tab-cnt-orders');
+  const tInst = document.getElementById('tab-cnt-installs');
+  const tVis = document.getElementById('tab-cnt-visitors');
+  const tAna = document.getElementById('tab-cnt-analytics');
+  if (tOrd) tOrd.textContent = orders.length;
+  if (tInst) tInst.textContent = installs.length;
+  if (tVis) tVis.textContent = visitors.length;
+  if (tAna) tAna.textContent = analytics.length;
+
+  // Render Orders Table
+  const tblOrders = document.getElementById('tbl-orders-body');
+  if (tblOrders) {
+    if (orders.length === 0) {
+      tblOrders.innerHTML = '<tr><td colspan="10" style="text-align:center; padding:18px; color:#64748B;">No orders placed yet. Placed orders will automatically appear here!</td></tr>';
+    } else {
+      tblOrders.innerHTML = orders.map(o => `
+        <tr>
+          <td>${o.timestamp || '-'}</td>
+          <td><strong>${o.orderId || '-'}</strong></td>
+          <td>${o.dimensions || '-'}</td>
+          <td>${o.quantity || o.qty || '-'}</td>
+          <td style="color:#059669; font-weight:800;">₹${(o.total || 0).toLocaleString('en-IN')}</td>
+          <td><a href="tel:${o.phone}" style="color:#0284C7; font-weight:700;">+91 ${o.phone || '-'}</a></td>
+          <td>${o.address || '-'}</td>
+          <td>${o.landmark || '-'}</td>
+          <td>${o.pincode || '-'}</td>
+          <td>${o.gps ? `<a href="${o.gps}" target="_blank" style="color:#059669; text-decoration:underline;">📍 View Map</a>` : '-'}</td>
+        </tr>
+      `).join('');
+    }
+  }
+
+  // Render Installs Table
+  const tblInst = document.getElementById('tbl-installs-body');
+  if (tblInst) {
+    if (installs.length === 0) {
+      tblInst.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:18px; color:#64748B;">No app download events recorded yet.</td></tr>';
+    } else {
+      tblInst.innerHTML = installs.map(i => `
+        <tr>
+          <td>${i.timestamp || '-'}</td>
+          <td><strong>${i.eventType || 'App Install'}</strong></td>
+          <td>${i.platform || '-'}</td>
+          <td>${i.screen || '-'}</td>
+          <td><span style="color:#059669; font-weight:700;">${i.status || 'Success'}</span></td>
+        </tr>
+      `).join('');
+    }
+  }
+
+  // Render Visitors Table
+  const tblVis = document.getElementById('tbl-visitors-body');
+  if (tblVis) {
+    if (visitors.length === 0) {
+      tblVis.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:18px; color:#64748B;">No visitor sessions recorded yet.</td></tr>';
+    } else {
+      tblVis.innerHTML = visitors.map(v => `
+        <tr>
+          <td>${v.timestamp || '-'}</td>
+          <td><strong>${v.visitorId || '-'}</strong></td>
+          <td>${v.referrer || 'Direct'}</td>
+          <td>${v.platform || '-'}</td>
+          <td>${v.screen || '-'}</td>
+          <td>${v.language || 'en'}</td>
+        </tr>
+      `).join('');
+    }
+  }
+
+  // Render Analytics Table
+  const tblAna = document.getElementById('tbl-analytics-body');
+  if (tblAna) {
+    if (analytics.length === 0) {
+      tblAna.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:18px; color:#64748B;">No interaction events recorded yet.</td></tr>';
+    } else {
+      tblAna.innerHTML = analytics.map(a => `
+        <tr>
+          <td>${a.timestamp || '-'}</td>
+          <td><strong>${a.action || '-'}</strong></td>
+          <td>${a.item || a.searchQuery || '-'}</td>
+          <td>${a.total ? '₹' + a.total : (a.details || '-')}</td>
+        </tr>
+      `).join('');
+    }
+  }
+
+  // Set Google Sheets Webhook input value
+  const inpWebhook = document.getElementById('inp-gsheet-webhook');
+  if (inpWebhook) {
+    inpWebhook.value = getGSheetWebhook();
+  }
+}
+
+function saveGSheetWebhook() {
+  const inp = document.getElementById('inp-gsheet-webhook');
+  const status = document.getElementById('webhook-save-status');
+  if (!inp || !status) return;
+
+  const url = inp.value.trim();
+  if (url && !url.startsWith('https://script.google.com/')) {
+    status.style.color = '#DC2626';
+    status.textContent = '⚠️ Invalid URL. Must start with https://script.google.com/macros/s/.../exec';
+    return;
+  }
+
+  localStorage.setItem('box_gsheet_webhook', url);
+  status.style.color = '#059669';
+  status.textContent = url ? '✅ Google Sheets Webhook Connected Successfully!' : 'Cleared webhook URL.';
+}
+
+function copyGoogleAppsScriptCode() {
+  const code = `// BOX COMPANY UDAIPUR - MASTER GOOGLE APPS SCRIPT
+function onOpen() {
+  SpreadsheetApp.getUi().createMenu('⚡ Box Company DBMS').addItem('🚀 Setup Database Sheets', 'setupDatabase').addToUi();
+}
+function setupDatabase() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let o = ss.getSheetByName('📦 Orders') || ss.insertSheet('📦 Orders');
+  o.getRange(1, 1, 1, 12).setValues([['Timestamp (IST)','Order ID','Box Dimensions','Ply','Quantity','Unit Rate (₹)','Total (₹)','Customer Phone','Delivery Address','Landmark','Pincode','GPS Pin']]).setBackground('#065F46').setFontColor('#fff').setFontWeight('bold');
+  let d = ss.getSheetByName('📲 App Downloads') || ss.insertSheet('📲 App Downloads');
+  d.getRange(1, 1, 1, 6).setValues([['Timestamp (IST)','Event','Platform','Screen','Browser','Status']]).setBackground('#4F46E5').setFontColor('#fff').setFontWeight('bold');
+  let v = ss.getSheetByName('👁️ Visitors') || ss.insertSheet('👁️ Visitors');
+  v.getRange(1, 1, 1, 6).setValues([['Timestamp (IST)','Visitor ID','Referrer','Platform','Screen','Language']]).setBackground('#0284C7').setFontColor('#fff').setFontWeight('bold');
+  let a = ss.getSheetByName('📊 Analytics') || ss.insertSheet('📊 Analytics');
+  a.getRange(1, 1, 1, 5).setValues([['Timestamp (IST)','Action','Item / Dimensions','Query','Visitor ID']]).setBackground('#D97706').setFontColor('#fff').setFontWeight('bold');
+  SpreadsheetApp.flush();
+}
+function doPost(e) {
+  const lock = LockService.getScriptLock();
+  lock.tryLock(10000);
+  try {
+    let p = JSON.parse(e.postData.contents);
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const now = Utilities.formatDate(new Date(), 'Asia/Kolkata', 'yyyy-MM-dd HH:mm:ss');
+    if (p.type === 'order') {
+      (ss.getSheetByName('📦 Orders')||ss.insertSheet('📦 Orders')).appendRow([now, p.orderId, p.dimensions, p.ply, p.quantity, p.unitPrice, p.total, "'"+(p.phone||''), p.address, p.landmark, "'"+(p.pincode||''), p.gps||'']);
+    } else if (p.type === 'download') {
+      (ss.getSheetByName('📲 App Downloads')||ss.insertSheet('📲 App Downloads')).appendRow([now, p.eventType, p.platform, p.screen, p.browser, p.status]);
+    } else if (p.type === 'visitor') {
+      (ss.getSheetByName('👁️ Visitors')||ss.insertSheet('👁️ Visitors')).appendRow([now, p.visitorId, p.referrer, p.platform, p.screen, p.language]);
+    } else if (p.type === 'analytics') {
+      (ss.getSheetByName('📊 Analytics')||ss.insertSheet('📊 Analytics')).appendRow([now, p.action, p.item||'', p.searchQuery||'', p.visitorId]);
+    }
+    return ContentService.createTextOutput(JSON.stringify({status:'success'})).setMimeType(ContentService.MimeType.JSON);
+  } catch(err) {
+    return ContentService.createTextOutput(JSON.stringify({status:'error', error:err.toString()})).setMimeType(ContentService.MimeType.JSON);
+  } finally { lock.releaseLock(); }
+}`;
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(code).then(() => {
+      const toast = document.getElementById('script-copied-toast');
+      if (toast) {
+        toast.style.display = 'inline';
+        setTimeout(() => toast.style.display = 'none', 3000);
+      }
+    });
+  } else {
+    prompt('Copy Apps Script Code:', code);
+  }
+}
+
+function syncAllLocalDataToGoogleSheet() {
+  const webhookUrl = getGSheetWebhook();
+  const status = document.getElementById('webhook-save-status');
+  if (!webhookUrl || !webhookUrl.startsWith('https://script.google.com/')) {
+    alert('Please enter and save your Google Sheets Web App URL first!');
+    return;
+  }
+
+  const orders = JSON.parse(localStorage.getItem('box_dbms_order') || '[]');
+  const downloads = JSON.parse(localStorage.getItem('box_dbms_download') || '[]');
+  const visitors = JSON.parse(localStorage.getItem('box_dbms_visitor') || '[]');
+
+  if (status) {
+    status.style.color = '#4F46E5';
+    status.textContent = `🔄 Syncing ${orders.length} orders, ${downloads.length} downloads, ${visitors.length} visitors to Google Sheet...`;
+  }
+
+  [...orders, ...downloads, ...visitors].forEach(item => {
+    fetch(webhookUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(item)
+    }).catch(() => {});
+  });
+
+  setTimeout(() => {
+    if (status) {
+      status.style.color = '#059669';
+      status.textContent = '✅ All local data synced to Google Sheet!';
+    }
+  }, 1200);
+}
+
+// CSV EXPORT UTILITIES
+function downloadCSV(csvContent, filename) {
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+function exportOrdersCSV() {
+  const orders = JSON.parse(localStorage.getItem('box_dbms_order') || '[]');
+  if (orders.length === 0) {
+    alert('No orders in database to export.');
+    return;
+  }
+  const headers = ['Timestamp', 'Order ID', 'Box Dimensions', 'Ply', 'Quantity', 'Unit Rate', 'Total Amount', 'Customer Phone', 'Delivery Address', 'Landmark', 'Pincode', 'GPS Pin'];
+  const rows = orders.map(o => [
+    `"${o.timestamp || ''}"`,
+    `"${o.orderId || ''}"`,
+    `"${o.dimensions || ''}"`,
+    `"${o.ply || ''}"`,
+    `"${o.quantity || o.qty || ''}"`,
+    `"${o.unitPrice || ''}"`,
+    `"${o.total || ''}"`,
+    `"${o.phone || ''}"`,
+    `"${(o.address || '').replace(/"/g, '""')}"`,
+    `"${(o.landmark || '').replace(/"/g, '""')}"`,
+    `"${o.pincode || ''}"`,
+    `"${o.gps || ''}"`
+  ]);
+  const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+  downloadCSV(csv, `box_orders_${new Date().toISOString().slice(0,10)}.csv`);
+}
+
+function exportInstallsCSV() {
+  const installs = JSON.parse(localStorage.getItem('box_dbms_download') || '[]');
+  if (installs.length === 0) {
+    alert('No install events in database to export.');
+    return;
+  }
+  const headers = ['Timestamp', 'Event Type', 'Platform', 'Screen', 'Browser', 'Status'];
+  const rows = installs.map(i => [
+    `"${i.timestamp || ''}"`,
+    `"${i.eventType || ''}"`,
+    `"${i.platform || ''}"`,
+    `"${i.screen || ''}"`,
+    `"${(i.browser || '').replace(/"/g, '""')}"`,
+    `"${i.status || ''}"`
+  ]);
+  const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+  downloadCSV(csv, `box_app_installs_${new Date().toISOString().slice(0,10)}.csv`);
+}
+
+function exportVisitorsCSV() {
+  const visitors = JSON.parse(localStorage.getItem('box_dbms_visitor') || '[]');
+  if (visitors.length === 0) {
+    alert('No visitors in database to export.');
+    return;
+  }
+  const headers = ['Timestamp', 'Visitor ID', 'Referrer', 'Platform', 'Screen', 'Language'];
+  const rows = visitors.map(v => [
+    `"${v.timestamp || ''}"`,
+    `"${v.visitorId || ''}"`,
+    `"${(v.referrer || '').replace(/"/g, '""')}"`,
+    `"${v.platform || ''}"`,
+    `"${v.screen || ''}"`,
+    `"${v.language || ''}"`
+  ]);
+  const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+  downloadCSV(csv, `box_visitors_${new Date().toISOString().slice(0,10)}.csv`);
+}
+
+function exportAllDBMSJSON() {
+  const db = {
+    exportDate: new Date().toISOString(),
+    orders: JSON.parse(localStorage.getItem('box_dbms_order') || '[]'),
+    downloads: JSON.parse(localStorage.getItem('box_dbms_download') || '[]'),
+    visitors: JSON.parse(localStorage.getItem('box_dbms_visitor') || '[]'),
+    analytics: JSON.parse(localStorage.getItem('box_dbms_analytics') || '[]')
+  };
+  const jsonStr = JSON.stringify(db, null, 2);
+  const blob = new Blob([jsonStr], { type: 'application/json' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = `box_company_dbms_backup_${new Date().toISOString().slice(0,10)}.json`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+function clearLocalDBMSData() {
+  if (confirm('Are you sure you want to reset local cache? This will clear browser storage but keep your Google Sheets data safe.')) {
+    ['box_dbms_order', 'box_dbms_download', 'box_dbms_visitor', 'box_dbms_analytics'].forEach(k => localStorage.removeItem(k));
+    renderAdminDBMS();
+    alert('Local cache reset.');
+  }
+}
 </script>
 </body>
 </html>
