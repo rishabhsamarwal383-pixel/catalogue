@@ -10,7 +10,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Box Udaipur">
-<link rel="apple-touch-icon" href="icon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
 <link rel="icon" type="image/svg+xml" href="icon.svg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -7066,6 +7068,10 @@ function startAppInstallation() {
     });
   }
 
+  // 1. Immediately dismiss custom bottom sheet so screen is clean and there is zero overlap
+  const sheet = document.getElementById('download-app-modal');
+  if (sheet) sheet.classList.remove('active');
+
   if (deferredInstallPrompt) {
     deferredInstallPrompt.prompt();
     deferredInstallPrompt.userChoice.then((choiceResult) => {
@@ -7090,17 +7096,14 @@ function startAppInstallation() {
           });
         }
       }
-      closeDownloadAppModal();
       deferredInstallPrompt = null;
     });
   } else if (isIOS) {
-    closeDownloadAppModal();
     const iosModal = document.getElementById('ios-install-modal');
     if (iosModal) iosModal.classList.add('active');
   } else {
     // If browser doesn't support deferred prompt (or already prompted)
     showViewportToast('💡 Tap browser menu (⋮) -> "Add to Home screen" / "Install"');
-    closeDownloadAppModal();
   }
 }
 
