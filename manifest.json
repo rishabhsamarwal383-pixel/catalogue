@@ -1,20 +1,53 @@
 {
   "name": "Box Company Udaipur",
   "short_name": "Box Udaipur",
-  "description": "53 Ready Corrugated Box Sizes with 3D Preview & 45-Min Express Delivery in Udaipur",
+  "description": "Direct Corrugated Box Factory in Udaipur • 53 Ready Sizes • 3D Carton Inspection • 45-Min Express Doorstep Delivery Across Udaipur",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#13151A",
+  "background_color": "#1F1B18",
   "theme_color": "#1F1B18",
   "categories": ["shopping", "business"],
   "icons": [
     {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "maskable_icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
       "src": "icon.svg",
-      "sizes": "192x192 512x512",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot-wide.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "Box Company Udaipur 3D Studio & Factory Rates"
+    },
+    {
+      "src": "screenshot-narrow.jpg",
+      "sizes": "720x1280",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "Fast 45-Min Doorstep Delivery in Udaipur"
     }
   ]
 }
