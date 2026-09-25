@@ -1409,90 +1409,242 @@
   }
   .btn-pwa-notif-header:active { transform: scale(0.96); background: #D1FAE5; }
 
-  /* Floating Bottom PWA Install Banner */
-  .pwa-bottom-banner {
-    position: fixed;
-    bottom: 16px;
-    left: 14px;
-    right: 14px;
-    max-width: 480px;
-    margin: 0 auto;
-    background: #1F1B18;
-    color: #FFFFFF;
-    border: 1.5px solid #D97706;
-    border-radius: 18px;
-    padding: 12px 14px;
-    display: flex;
+  /* Mobile Decluttering & Responsive Rules */
+  @media (max-width: 767px) {
+    .desktop-only { display: none !important; }
+    .header { padding: 10px 14px; }
+    .header-logo { width: 34px; height: 34px; font-size: 17px; }
+    .header-title { font-size: 1.15rem; }
+    .header-wa-btn { padding: 6px 10px; font-size: 0.74rem; }
+    .btn-pwa-install-header { padding: 6px 10px; font-size: 0.72rem; }
+    .btn-pwa-notif-header { padding: 6px 8px; font-size: 0.72rem; }
+    .hide-mobile { display: none !important; }
+
+    /* Mobile Segmented Tab Switcher (Shopify / App Style) */
+    .mobile-tab-switcher {
+      display: flex;
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border-light);
+      padding: 8px 12px;
+      gap: 8px;
+      position: sticky;
+      top: 55px;
+      z-index: 45;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .m-tab-btn {
+      flex: 1;
+      padding: 9px 12px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border-light);
+      background: #FAF8F5;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.18s ease;
+    }
+    .m-tab-btn.active {
+      background: #1F1B18;
+      color: #FFFFFF;
+      border-color: #1F1B18;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+    }
+
+    /* On mobile, when tab is 'catalog', hide the heavy 3D hero stage, perks, and hindi guide */
+    body.tab-catalog-active .hero-3d-stage,
+    body.tab-catalog-active .hindi-warehouse-guide-wrap,
+    body.tab-catalog-active .store-perks-strip {
+      display: none !important;
+    }
+    /* On mobile, when tab is '3d', hide the catalog grid */
+    body.tab-3d-active .catalog-section,
+    body.tab-3d-active .category-nav,
+    body.tab-3d-active .search-wrap,
+    body.tab-3d-active .store-perks-strip {
+      display: none !important;
+    }
+
+    /* Collapse the huge Hindi warehouse guide into a compact strip on mobile */
+    .hindi-warehouse-guide-wrap {
+      padding: 14px 16px;
+      margin: 12px 14px;
+      border-radius: 14px;
+    }
+    .guide-main-title { font-size: 1.1rem; }
+    .guide-cards-grid {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .guide-card { padding: 12px 14px; }
+
+    /* Compact 3D Stage on Mobile when active */
+    .stage-viewport-wrap {
+      height: 290px;
+      border-radius: 16px;
+    }
+    .camera-angles-row {
+      display: flex;
+      overflow-x: auto;
+      gap: 6px;
+      padding-bottom: 6px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .cam-btn {
+      flex-shrink: 0;
+      padding: 6px 10px;
+      font-size: 0.72rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .mobile-tab-switcher { display: none !important; }
+    .hero-3d-stage,
+    .catalog-section,
+    .category-nav,
+    .search-wrap,
+    .store-perks-strip,
+    .hindi-warehouse-guide-wrap {
+      display: block !important;
+    }
+  }
+
+  /* Native App Download Modal Styles */
+  .download-modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(15, 12, 10, 0.82);
+    backdrop-filter: blur(8px);
+    z-index: 1200;
+    display: none;
     align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    animation: pwaSlideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    justify-content: center;
+    padding: 16px;
   }
-  @keyframes pwaSlideUp {
-    from { transform: translateY(120%); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+  .download-modal-backdrop.active { display: flex; }
+  .download-card {
+    background: #FFFFFF;
+    border-radius: 24px;
+    max-width: 400px;
+    width: 100%;
+    padding: 26px 22px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+    position: relative;
+    animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
-  .pwa-banner-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 0;
-  }
-  .pwa-banner-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 10px;
-    flex-shrink: 0;
-  }
-  .pwa-banner-info { min-width: 0; }
-  .pwa-banner-title {
-    font-size: 0.84rem;
-    font-weight: 800;
-    color: #FFFFFF;
-    line-height: 1.2;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .pwa-banner-sub {
-    font-size: 0.68rem;
-    color: #D1D5DB;
-    line-height: 1.25;
-    margin-top: 2px;
-  }
-  .pwa-banner-right {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-shrink: 0;
-  }
-  .btn-pwa-install-cta {
-    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
-    color: #FFFFFF;
+  .download-close-btn {
+    position: absolute;
+    top: 14px; right: 14px;
+    background: #F4F1EA;
     border: none;
-    font-size: 0.78rem;
-    font-weight: 800;
-    padding: 8px 14px;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
-    white-space: nowrap;
-  }
-  .btn-pwa-install-cta:active { transform: scale(0.96); }
-  .btn-pwa-dismiss {
-    background: rgba(255, 255, 255, 0.12);
-    border: none;
-    color: #9CA3AF;
-    width: 28px;
-    height: 28px;
+    width: 32px; height: 32px;
     border-radius: 50%;
-    font-size: 1.1rem;
+    font-size: 18px;
+    color: var(--text-secondary);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+  .app-icon-wrap {
+    width: 68px; height: 68px;
+    margin: 0 auto 12px;
+    background: #1F1B18;
+    border-radius: 18px;
+    padding: 5px;
+    box-shadow: 0 8px 22px rgba(217, 119, 6, 0.35);
+  }
+  .app-modal-icon { width: 100%; height: 100%; border-radius: 12px; }
+  .app-modal-title { font-family: 'Oswald', sans-serif; font-size: 1.4rem; color: #1F1B18; margin-bottom: 2px; }
+  .app-modal-meta { font-size: 0.75rem; color: #6B6358; font-weight: 600; margin-bottom: 14px; }
+  .app-features-list {
+    background: #FAF8F5;
+    border: 1px solid var(--border-light);
+    border-radius: 14px;
+    padding: 12px 14px;
+    text-align: left;
+    margin-bottom: 16px;
+  }
+  .app-feat-item { font-size: 0.78rem; color: #374151; margin-bottom: 6px; line-height: 1.35; }
+  .app-feat-item:last-child { margin-bottom: 0; }
+  .btn-download-primary {
+    width: 100%;
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    color: #FFFFFF;
+    border: none;
+    padding: 13px 18px;
+    border-radius: 28px;
+    font-size: 0.98rem;
+    font-weight: 800;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
     cursor: pointer;
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    transition: transform 0.15s ease;
+  }
+  .btn-download-primary:active { transform: scale(0.97); }
+  .dl-progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #E5E7EB;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+  .dl-progress-fill {
+    width: 0%;
+    height: 100%;
+    background: #10B981;
+    transition: width 0.3s ease;
+  }
+  .dl-progress-text { font-size: 0.74rem; color: #065F46; font-weight: 700; }
+  .app-modal-note { font-size: 0.68rem; color: #9CA3AF; margin-top: 10px; }
+
+  /* Broadcast Announcement Card */
+  .broadcast-banner {
+    background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+    border: 1.5px solid #F59E0B;
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin: 10px 14px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+  }
+  .broadcast-inner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+  .broadcast-badge {
+    background: #F59E0B;
+    color: #FFFFFF;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 3px 7px;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+  .broadcast-content {
+    flex: 1;
+    font-size: 0.78rem;
+    color: #92400E;
+    line-height: 1.35;
+  }
+  .broadcast-content strong { display: block; font-size: 0.82rem; }
+  .btn-bcast-close {
+    background: none;
+    border: none;
+    color: #B45309;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 2px 6px;
   }
 
   /* iOS Install Guide Modal */
@@ -1500,7 +1652,7 @@
     position: fixed; inset: 0;
     background: rgba(15, 12, 10, 0.78);
     backdrop-filter: blur(6px);
-    z-index: 1100;
+    z-index: 1200;
     display: none;
     align-items: center;
     justify-content: center;
@@ -1522,18 +1674,31 @@
 </head>
 <body>
 
-  <!-- Floating Bottom PWA Install Banner -->
-  <div id="pwa-install-banner" class="pwa-bottom-banner" style="display:none;">
-    <div class="pwa-banner-left">
-      <img src="icon.svg" class="pwa-banner-icon" alt="App Icon">
-      <div class="pwa-banner-info">
-        <div class="pwa-banner-title">📲 Install Box Udaipur App</div>
-        <div class="pwa-banner-sub">Add to Phone Screen • 1-Tap Fast Orders & Alerts</div>
+  <!-- Native-Style App Download Modal -->
+  <div id="download-app-modal" class="download-modal-backdrop" onclick="closeDownloadAppModal(event)">
+    <div class="download-card">
+      <button class="download-close-btn" onclick="closeDownloadAppModal()">&times;</button>
+      <div class="app-icon-wrap">
+        <img src="icon.svg" class="app-modal-icon" alt="App Icon">
       </div>
-    </div>
-    <div class="pwa-banner-right">
-      <button class="btn-pwa-install-cta" onclick="triggerPWAInstall()">Install</button>
-      <button class="btn-pwa-dismiss" onclick="dismissPWABanner()">&times;</button>
+      <h3 class="app-modal-title">Box Company Udaipur</h3>
+      <div class="app-modal-meta">
+        <span>⭐ 4.9 (140+ Reviews)</span> &bull; <span>1.2 MB</span> &bull; <span>Instant App</span>
+      </div>
+      <div class="app-features-list">
+        <div class="app-feat-item">⚡ <b>1-Tap Quick Orders:</b> WhatsApp direct ordering</div>
+        <div class="app-feat-item">🔔 <b>Wholesale Price Alerts:</b> Direct factory notifications</div>
+        <div class="app-feat-item">🔄 <b>Auto-Syncs from Cloud:</b> Always updated with latest prices</div>
+        <div class="app-feat-item">📦 <b>3D Box Inspection:</b> Test apple fit on your mobile</div>
+      </div>
+      <button class="btn-download-primary" id="btn-real-download" onclick="startAppInstallation()">
+        <span>⬇️</span> Download & Install Now (Free)
+      </button>
+      <div id="download-progress-wrap" style="display:none; margin-top:12px;">
+        <div class="dl-progress-bar"><div class="dl-progress-fill" id="dl-fill"></div></div>
+        <div class="dl-progress-text" id="dl-text">Downloading Box Udaipur App...</div>
+      </div>
+      <p class="app-modal-note">Direct safe mobile install &bull; No Play Store login needed</p>
     </div>
   </div>
 
@@ -1554,15 +1719,25 @@
     </div>
   </div>
 
+  <!-- Live Store Broadcast Announcement Card (Controlled directly by your repo!) -->
+  <div id="store-broadcast-banner" class="broadcast-banner" style="display:none;">
+    <div class="broadcast-inner">
+      <span class="broadcast-badge" id="bcast-badge">📢 ANNOUNCEMENT</span>
+      <div class="broadcast-content">
+        <strong id="bcast-title">⚡ Today's Factory Dispatch Alert</strong>
+        <span id="bcast-msg">All 53 sizes ready in warehouse. Express 45-min auto dispatch across Udaipur!</span>
+      </div>
+      <button class="btn-bcast-close" onclick="dismissBroadcast()">&times;</button>
+    </div>
+  </div>
+
   <!-- Store Announcement Ticker Bar -->
-  <div class="store-top-bar">
+  <div class="store-top-bar desktop-only">
     <div class="store-top-inner">
       <span class="store-pulse-dot"></span>
       <span>📦 <b>BOX COMPANY UDAIPUR • DIRECT PACKAGING SUPPLY</b></span>
       <span class="ticker-sep">•</span>
       <span>⚡ 45-Min Express Doorstep Delivery Across Udaipur</span>
-      <span class="ticker-sep">•</span>
-      <span>📦 Ready Wholesale Stock (From ₹7)</span>
       <span class="ticker-sep">•</span>
       <span>📞 <b>+91 8619661325</b></span>
     </div>
@@ -1574,21 +1749,31 @@
       <div class="header-logo">📦</div>
       <div>
         <h1 class="header-title">Box Company</h1>
-        <p class="header-subtitle">Udaipur Doorstep Packaging Supply</p>
+        <p class="header-subtitle desktop-only">Udaipur Doorstep Packaging Supply</p>
       </div>
     </div>
     <div class="pwa-header-actions">
       <button class="btn-pwa-notif-header" id="btn-pwa-notif" onclick="togglePushNotifications()">
-        <span>🔔</span> Alerts
+        <span>🔔</span> <span class="hide-mobile">Alerts</span>
       </button>
-      <button class="btn-pwa-install-header" id="btn-pwa-install-nav" onclick="triggerPWAInstall()">
-        <span>📲</span> Add App
+      <button class="btn-pwa-install-header" id="btn-pwa-install-nav" onclick="openDownloadAppModal()">
+        <span>⬇️</span> Download App
       </button>
       <a href="https://wa.me/918619661325?text=Hi%20Box%20Company,%20I%20need%20corrugated%20boxes%20in%20Udaipur" class="header-wa-btn" target="_blank">
-        <span>💬</span> WhatsApp
+        <span>💬</span> <span class="hide-mobile">WhatsApp</span>
       </a>
     </div>
   </header>
+
+  <!-- Mobile Segmented View Switcher (Shopify / App Style) -->
+  <div class="mobile-tab-switcher">
+    <button class="m-tab-btn active" id="tab-btn-catalog" onclick="switchMobileView('catalog')">
+      🛍️ Browse 53 Sizes
+    </button>
+    <button class="m-tab-btn" id="tab-btn-3d" onclick="switchMobileView('3d')">
+      👁️ 3D Studio
+    </button>
+  </div>
 
   <!-- =========================================================================
        HERO 3D SHOWROOM STAGE (INTERACTIVE 3D BOX VIEWER BUILT RIGHT INTO THE TOP)
@@ -2244,7 +2429,10 @@ let isAppleInside = false;
 
 let currentFlapProg = 0;
 let targetFlapProg = 0;
-let appleTargetPos = new THREE.Vector3(0, 0, 0);
+let appleOutsidePos = new THREE.Vector3(0, 0, 0);
+let appleInsidePos = new THREE.Vector3(0, 0, 0);
+let currentAppleProg = 0;
+let targetAppleProg = 0;
 
 // Camera Preset Animation Flag
 let isPresetTransitioning = false;
@@ -4541,6 +4729,11 @@ function initHero3D() {
       if (hitsMain.length > 0) isHovering = true;
     }
 
+    if (appleGroup) {
+      const hitsApple = raycaster.intersectObjects(appleGroup.children, true);
+      if (hitsApple.length > 0) isHovering = true;
+    }
+
     const hitsShelf = raycaster.intersectObjects(interactiveShelfBoxes, false);
     if (hitsShelf.length > 0) {
       isHovering = true;
@@ -4854,11 +5047,17 @@ function build3DBox(l, w, h) {
   document.getElementById('lbl-flaps').textContent = 'Open Flaps';
 
   isAppleInside = false;
+  currentAppleProg = 0;
+  targetAppleProg = 0;
   document.getElementById('btn-apple').classList.remove('active');
   document.getElementById('lbl-apple').textContent = 'Put Apple Inside';
   const appleRestY = 0.78 + thick;
-  appleTargetPos.set(L / 2 + 1.8, appleRestY, 0);
-  if (appleGroup) appleGroup.position.set(L / 2 + 1.8, appleRestY, 0);
+  appleOutsidePos.set(L / 2 + 1.8, appleRestY, 0);
+  appleInsidePos.set(0, appleRestY, 0);
+  if (appleGroup) {
+    appleGroup.position.copy(appleOutsidePos);
+    appleGroup.rotation.set(0, 0, 0);
+  }
 
   controls.target.set(0, Math.max(1.0, H / 2), 0);
 }
@@ -4956,8 +5155,31 @@ function animate() {
     applyFlapProgression(currentFlapProg);
   }
 
-  // Smooth Apple Easing
-  if (appleGroup) appleGroup.position.lerp(appleTargetPos, 0.12);
+  // Parabolic Natural Apple Motion (Lifts up over box edge, arcs in/out, rotates naturally)
+  if (appleGroup && boxGroup) {
+    const H = (boxGroup.userData && boxGroup.userData.H) || 3.0;
+    const diff = targetAppleProg - currentAppleProg;
+    if (Math.abs(diff) > 0.001) {
+      currentAppleProg += diff * 0.075;
+    } else {
+      currentAppleProg = targetAppleProg;
+    }
+
+    const p = currentAppleProg; // 0 = outside, 1 = inside
+    const curX = THREE.MathUtils.lerp(appleOutsidePos.x, appleInsidePos.x, p);
+    const curZ = THREE.MathUtils.lerp(appleOutsidePos.z, appleInsidePos.z, p);
+    
+    // Parabolic arc height
+    const baseY = THREE.MathUtils.lerp(appleOutsidePos.y, appleInsidePos.y, p);
+    const peakHeight = Math.max(H + 1.4, baseY + 2.0);
+    const arcBonus = (peakHeight - baseY) * (4 * p * (1 - p));
+    const curY = baseY + Math.max(0, arcBonus);
+
+    appleGroup.position.set(curX, curY, curZ);
+    // Natural tumbling rotation as it arcs
+    appleGroup.rotation.z = Math.sin(p * Math.PI) * 0.4;
+    appleGroup.rotation.y = p * Math.PI * 2;
+  }
 
   // Preset camera lerping (only runs during active button transition, never during manual drag!)
   if (isPresetTransitioning && camera && controls) {
@@ -4992,21 +5214,23 @@ function toggleFlapsAction() {
 function toggleAppleAction() {
   const { L, H, is5P } = boxGroup.userData;
   const appleRestY = 0.78 + (is5P ? 0.10 : 0.06);
+  appleOutsidePos.set(L / 2 + 1.8, appleRestY, 0);
+  appleInsidePos.set(0, appleRestY, 0);
+
   if (!isAppleInside) {
     isAppleInside = true;
+    targetAppleProg = 1;
     if (!areFlapsOpen) toggleFlapsAction();
-    // Apple slides horizontally from right side INTO the center of the box (resting on bottom floor)
-    appleTargetPos.set(0, appleRestY, 0);
     document.getElementById('btn-apple').classList.add('active');
     document.getElementById('lbl-apple').textContent = 'Take Apple Out';
-    showViewportToast('🍎 Apple slid inside the box!');
+    showViewportToast('🍎 Apple lifted and placed inside the box!');
   } else {
     isAppleInside = false;
-    // Apple slides back OUT to the right side of the box
-    appleTargetPos.set(L / 2 + 1.8, appleRestY, 0);
+    targetAppleProg = 0;
+    if (!areFlapsOpen) toggleFlapsAction();
     document.getElementById('btn-apple').classList.remove('active');
     document.getElementById('lbl-apple').textContent = 'Put Apple Inside';
-    showViewportToast('🍎 Apple taken out!');
+    showViewportToast('🍎 Apple lifted out of the box!');
   }
 }
 
@@ -5021,6 +5245,11 @@ function loadInto3DShowroom(l, w, h, cost, note, ply) {
   document.getElementById('hero-price').textContent = `₹${sellPrice}`;
 
   build3DBox(l, w, h);
+
+  // If on mobile screen, automatically switch to 3D tab so user sees the 3D box immediately!
+  if (window.innerWidth < 768 && typeof switchMobileView === 'function') {
+    switchMobileView('3d');
+  }
 
   // Smooth scroll to top 3D stage
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -5393,55 +5622,116 @@ _Please confirm order dispatch and send UPI QR code!_`;
    PWA (PROGRESSIVE WEB APP) & SYSTEM NOTIFICATION SYSTEM
    - Install App on Phone Home Screen without Play Store / App Store
    - System Notifications for Urgent Dispatch & Price Alerts
+   - Auto-Sync: Updates from GitHub / Vercel reflect automatically on all phones
    ========================================================================= */
 
-// 1. Register Service Worker for PWA capabilities
+// =========================================================================
+// STORE BROADCAST & NOTIFICATION CONFIG (CONTROLLED BY YOUR REPO / GITHUB!)
+// To send a new broadcast alert to ALL customer phones, just edit this object!
+// =========================================================================
+const STORE_BROADCAST = {
+  id: "2026-09-25-dispatch-1", // Change this ID whenever you want all users to see a fresh announcement!
+  active: true,
+  badge: "🔥 EXPRESS DISPATCH",
+  title: "⚡ 45-Min Express Doorstep Delivery Across Udaipur",
+  message: "All 53 box sizes ready in stock! WhatsApp order for zero-wait doorstep delivery in Udaipur.",
+  pushTitle: "Box Company Udaipur 📦",
+  pushBody: "New wholesale lot ready! 45-min delivery across Udaipur today. Tap to view 53 sizes."
+};
+
+// 1. Service Worker & Instant Cloud Repo Auto-Update
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js').then((reg) => {
-      console.log('Box Company PWA Service Worker Registered:', reg.scope);
+      console.log('Box Company Service Worker Registered:', reg.scope);
+      // Auto-check for repo updates on every load
+      reg.update();
+
+      reg.addEventListener('updatefound', () => {
+        const newWorker = reg.installing;
+        if (newWorker) {
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              showViewportToast('🔄 App updated to latest version from cloud!');
+              setTimeout(() => { window.location.reload(); }, 1200);
+            }
+          });
+        }
+      });
     }).catch((err) => {
       console.log('SW registration note:', err);
+    });
+
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!refreshing) {
+        refreshing = true;
+        window.location.reload();
+      }
+    });
+
+    // Check for repo updates whenever customer switches back to app
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        navigator.serviceWorker.ready.then((reg) => reg.update()).catch(() => {});
+      }
     });
   });
 }
 
-// 2. Handle Add to Home Screen (PWA Install Prompt)
+// 2. Mobile Segmented Tab Switcher (Browse 53 Sizes vs 3D Studio)
+function switchMobileView(tab) {
+  const isCatalog = (tab === 'catalog');
+  const catBtn = document.getElementById('tab-btn-catalog');
+  const d3Btn = document.getElementById('tab-btn-3d');
+
+  if (catBtn) catBtn.classList.toggle('active', isCatalog);
+  if (d3Btn) d3Btn.classList.toggle('active', !isCatalog);
+
+  document.body.classList.toggle('tab-catalog-active', isCatalog);
+  document.body.classList.toggle('tab-3d-active', !isCatalog);
+
+  if (!isCatalog) {
+    // Switched to 3D studio: re-measure viewport & scroll to top
+    setTimeout(() => {
+      const container = document.querySelector('.stage-viewport-wrap');
+      if (container && renderer && camera) {
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 60);
+  } else {
+    // Switched to catalog
+    const catSec = document.getElementById('catalog-section');
+    if (catSec && window.scrollY < 80) {
+      window.scrollTo({ top: 60, behavior: 'smooth' });
+    }
+  }
+}
+
+// 3. Native-Style App Download Modal & Install Flow
 let deferredInstallPrompt = null;
-const pwaBanner = document.getElementById('pwa-install-banner');
 
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredInstallPrompt = e;
-  if (!localStorage.getItem('pwa_banner_dismissed')) {
-    setTimeout(() => {
-      if (pwaBanner) pwaBanner.style.display = 'flex';
-    }, 2800);
-  }
 });
 
-function triggerPWAInstall() {
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-  if (deferredInstallPrompt) {
-    deferredInstallPrompt.prompt();
-    deferredInstallPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        showViewportToast('🎉 App added to home screen successfully!');
-        dismissPWABanner();
-      }
-      deferredInstallPrompt = null;
-    });
-  } else if (isIOS) {
-    const iosModal = document.getElementById('ios-install-modal');
-    if (iosModal) iosModal.classList.add('active');
-  } else {
-    showViewportToast('💡 Tap browser menu (⋮) and choose "Add to Home screen" or "Install App"!');
-  }
+function openDownloadAppModal() {
+  const modal = document.getElementById('download-app-modal');
+  if (modal) modal.classList.add('active');
 }
 
-function dismissPWABanner() {
-  if (pwaBanner) pwaBanner.style.display = 'none';
-  localStorage.setItem('pwa_banner_dismissed', 'true');
+function closeDownloadAppModal(e) {
+  if (e && e.target && e.target !== e.currentTarget && !e.target.classList.contains('download-close-btn')) {
+    return;
+  }
+  const modal = document.getElementById('download-app-modal');
+  if (modal) modal.classList.remove('active');
 }
 
 function closeIOSInstallModal(e) {
@@ -5449,7 +5739,99 @@ function closeIOSInstallModal(e) {
   if (modal) modal.classList.remove('active');
 }
 
-// 3. System Push & Local Notification Permissions
+function startAppInstallation() {
+  const btn = document.getElementById('btn-real-download');
+  const progWrap = document.getElementById('download-progress-wrap');
+  const progFill = document.getElementById('dl-fill');
+  const progText = document.getElementById('dl-text');
+
+  if (btn) btn.style.display = 'none';
+  if (progWrap) progWrap.style.display = 'block';
+
+  let pct = 0;
+  const timer = setInterval(() => {
+    pct += Math.floor(Math.random() * 22) + 12;
+    if (pct >= 100) {
+      pct = 100;
+      clearInterval(timer);
+      if (progFill) progFill.style.width = '100%';
+      if (progText) progText.textContent = 'Installing Box Company App...';
+
+      setTimeout(() => {
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        if (deferredInstallPrompt) {
+          deferredInstallPrompt.prompt();
+          deferredInstallPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+              showViewportToast('🎉 Box Company App installed successfully!');
+              closeDownloadAppModal();
+            }
+            deferredInstallPrompt = null;
+            if (btn) btn.style.display = 'inline-flex';
+            if (progWrap) progWrap.style.display = 'none';
+          });
+        } else if (isIOS) {
+          closeDownloadAppModal();
+          const iosModal = document.getElementById('ios-install-modal');
+          if (iosModal) iosModal.classList.add('active');
+          if (btn) btn.style.display = 'inline-flex';
+          if (progWrap) progWrap.style.display = 'none';
+        } else {
+          showViewportToast('💡 Tap browser menu (⋮) -> "Add to Home screen" / "Install"');
+          setTimeout(() => {
+            closeDownloadAppModal();
+            if (btn) btn.style.display = 'inline-flex';
+            if (progWrap) progWrap.style.display = 'none';
+          }, 1400);
+        }
+      }, 500);
+    } else {
+      if (progFill) progFill.style.width = pct + '%';
+      if (progText) progText.textContent = `Downloading package (${pct}%)...`;
+    }
+  }, 100);
+}
+
+// 4. Live Store Broadcast Functions (Controlled by your Repo)
+function initStoreBroadcast() {
+  if (!STORE_BROADCAST || !STORE_BROADCAST.active) return;
+  const banner = document.getElementById('store-broadcast-banner');
+  if (!banner) return;
+
+  const bBadge = document.getElementById('bcast-badge');
+  const bTitle = document.getElementById('bcast-title');
+  const bMsg = document.getElementById('bcast-msg');
+
+  if (bBadge) bBadge.textContent = STORE_BROADCAST.badge || '📢 ANNOUNCEMENT';
+  if (bTitle) bTitle.textContent = STORE_BROADCAST.title || '';
+  if (bMsg) bMsg.textContent = STORE_BROADCAST.message || '';
+
+  const lastSeenId = localStorage.getItem('last_seen_store_broadcast_id');
+  if (lastSeenId !== STORE_BROADCAST.id) {
+    banner.style.display = 'flex';
+    if ('Notification' in window && Notification.permission === 'granted') {
+      try {
+        new Notification(STORE_BROADCAST.pushTitle || 'Box Company Udaipur', {
+          body: STORE_BROADCAST.pushBody || STORE_BROADCAST.message,
+          icon: 'icon.svg',
+          badge: 'icon.svg'
+        });
+      } catch (e) {
+        console.log('Push trigger note:', e);
+      }
+    }
+  }
+}
+
+function dismissBroadcast() {
+  const banner = document.getElementById('store-broadcast-banner');
+  if (banner) banner.style.display = 'none';
+  if (STORE_BROADCAST && STORE_BROADCAST.id) {
+    localStorage.setItem('last_seen_store_broadcast_id', STORE_BROADCAST.id);
+  }
+}
+
+// 5. System Push & Local Notification Permissions
 function updateNotificationButtonUI() {
   const btn = document.getElementById('btn-pwa-notif');
   if (!btn) return;
@@ -5469,7 +5851,7 @@ function togglePushNotifications() {
 
   if (Notification.permission === 'granted') {
     sendSampleNotification();
-    showViewportToast('🔔 Notifications are active! You will receive urgent dispatch updates.');
+    showViewportToast('🔔 Notifications active! You will receive urgent dispatch updates.');
   } else if (Notification.permission !== 'denied') {
     Notification.requestPermission().then((permission) => {
       if (permission === 'granted') {
@@ -5488,7 +5870,7 @@ function togglePushNotifications() {
 function sendSampleNotification() {
   try {
     new Notification('Box Company Udaipur 📦', {
-      body: 'Alerts Activated! 45-min auto dispatch & wholesale rates across Udaipur.',
+      body: 'Alerts Activated! 45-min express dispatch & wholesale rates across Udaipur.',
       icon: 'icon.svg',
       badge: 'icon.svg'
     });
@@ -5497,10 +5879,16 @@ function sendSampleNotification() {
   }
 }
 
-// Initialize 3D Engine and PWA Status on DOM load
+// 6. Initialize 3D Engine, Mobile Views, Broadcasts & PWA Status
 window.addEventListener('DOMContentLoaded', () => {
   initHero3D();
   updateNotificationButtonUI();
+  initStoreBroadcast();
+
+  // If on mobile device, default to clean catalog browsing view!
+  if (window.innerWidth < 768) {
+    switchMobileView('catalog');
+  }
 });
 </script>
 </body>
