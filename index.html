@@ -840,15 +840,176 @@
   }
   .btn-pdp-view3d:hover { background: #E2DBD0; }
 
-  /* Fast WhatsApp Button & Collapsible Form */
-  .btn-fast-wa {
+  /* Required Form & Error Indicators */
+  .req-star {
+    color: #DC2626;
+    font-weight: 800;
+    margin-left: 2px;
+  }
+  .field-error-msg {
+    font-size: 0.72rem;
+    color: #DC2626;
+    font-weight: 700;
+    margin-top: 4px;
+    display: none;
+  }
+  .form-input.input-error, .form-textarea.input-error {
+    border-color: #DC2626 !important;
+    background-color: #FEF2F2 !important;
+  }
+  .form-row-2col {
+    display: flex;
+    gap: 10px;
+  }
+  @media (max-width: 480px) {
+    .form-row-2col {
+      flex-direction: column;
+      gap: 0;
+    }
+  }
+  .form-section-title {
+    font-size: 0.86rem;
+    font-weight: 800;
+    color: #1F1B18;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* UPI Step 2 Styles */
+  .upi-screen-wrapper {
+    animation: fadeInUPI 0.25s ease-out;
+  }
+  @keyframes fadeInUPI {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .upi-status-header {
+    background: #ECFDF5;
+    border: 1.5px solid #A7F3D0;
+    border-radius: 14px;
+    padding: 14px;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .upi-status-pill {
+    display: inline-block;
+    background: #059669;
+    color: #FFFFFF;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+  }
+  .upi-amount-hero {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: #064E3B;
+    line-height: 1.1;
+  }
+  .upi-status-desc {
+    font-size: 0.74rem;
+    color: #047857;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+  .btn-upi-app-direct {
+    width: 100%;
+    background: linear-gradient(135deg, #4F46E5 0%, #3730A3 100%);
+    color: #FFFFFF;
+    border: none;
+    padding: 14px 18px;
+    border-radius: 28px;
+    font-size: 1rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    box-shadow: 0 8px 22px rgba(79, 70, 229, 0.4);
+    transition: transform 0.15s ease;
+    margin-bottom: 12px;
+  }
+  .btn-upi-app-direct:active { transform: scale(0.97); }
+  .upi-qr-card {
+    background: #FFFFFF;
+    border: 1.5px dashed #CBD5E1;
+    border-radius: 14px;
+    padding: 12px;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .upi-qr-title {
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: #475569;
+    margin-bottom: 8px;
+  }
+  .upi-qr-frame {
+    display: inline-block;
+    padding: 8px;
+    background: #F8FAFC;
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    margin-bottom: 8px;
+  }
+  .upi-qr-frame img {
+    display: block;
+    width: 170px;
+    height: 170px;
+    border-radius: 6px;
+  }
+  .upi-id-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #F1F5F9;
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid #CBD5E1;
+    font-size: 0.78rem;
+  }
+  .upi-id-val {
+    font-family: monospace;
+    font-weight: 700;
+    color: #0F172A;
+  }
+  .btn-copy-upi {
+    background: #E2E8F0;
+    border: none;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: #334155;
+    cursor: pointer;
+  }
+  .btn-copy-upi:active { background: #CBD5E1; }
+  .upi-receipt-summary {
+    background: #FAF8F5;
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 0.74rem;
+    color: #44403C;
+    line-height: 1.55;
+    margin-bottom: 12px;
+  }
+  .upi-receipt-summary strong { color: #1C1917; }
+  .btn-send-wa-receipt {
     width: 100%;
     background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
     color: #FFFFFF;
     border: none;
-    padding: 13px 16px;
+    padding: 13px 18px;
     border-radius: 28px;
-    font-size: 0.95rem;
+    font-size: 0.94rem;
     font-weight: 800;
     display: flex;
     align-items: center;
@@ -856,23 +1017,19 @@
     gap: 8px;
     cursor: pointer;
     box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35);
-    margin-bottom: 12px;
     transition: transform 0.15s ease;
   }
-  .btn-fast-wa:active { transform: scale(0.97); }
-  .pdp-address-details {
-    background: #FAF8F5;
-    border: 1px solid var(--border-light);
-    border-radius: 12px;
-    padding: 10px 14px;
-    margin-bottom: 12px;
-  }
-  .pdp-summary-toggle {
-    font-size: 0.8rem;
+  .btn-send-wa-receipt:active { transform: scale(0.97); }
+  .btn-edit-order-details {
+    background: none;
+    border: none;
+    color: #78716C;
+    font-size: 0.76rem;
     font-weight: 700;
-    color: var(--brand-primary);
+    text-decoration: underline;
     cursor: pointer;
-    user-select: none;
+    display: block;
+    margin: 10px auto 0;
   }
   .pdp-trust-strip {
     display: grid;
@@ -1749,16 +1906,12 @@
         <div class="app-feat-item">📦 <b>3D Box Inspection:</b> Test apple fit on your mobile</div>
       </div>
       <button class="btn-download-primary" id="btn-real-download" onclick="startAppInstallation()">
-        <span>⬇️</span> Install App Now (Free)
+        <span>⬇️</span> Install App Now & Enable Alerts
       </button>
       <button type="button" class="btn-continue-browser" onclick="closeDownloadAppModal()">
         Continue in browser ➔
       </button>
-      <div id="download-progress-wrap" style="display:none; margin-top:12px;">
-        <div class="dl-progress-bar"><div class="dl-progress-fill" id="dl-fill"></div></div>
-        <div class="dl-progress-text" id="dl-text">Installing Box Udaipur App...</div>
-      </div>
-      <p class="app-modal-note">Fast 1-tap install &bull; Zero phone storage &bull; No Play Store login</p>
+      <p class="app-modal-note">Fast 1-tap install &bull; Zero phone storage &bull; Direct on Home Screen</p>
     </div>
   </div>
 
@@ -2121,130 +2274,200 @@
     <div class="order-sheet">
       <button class="modal-close-icon" onclick="closeOrderModal()">&times;</button>
       
-      <!-- Shopify Product Header -->
-      <div class="pdp-header">
-        <div class="pdp-badge-row">
-          <span class="pdp-badge-status" id="ord-badge">⚡ In Stock · 45-Min Express Dispatch</span>
-          <span class="pdp-rating">★★★★★ 4.9 (140+ Delivered)</span>
-        </div>
-        <div class="order-modal-box-title" id="ord-title">13 &times; 9 &times; 6 Inches</div>
-        <div class="order-modal-box-sub" id="ord-sub">3-Ply Heavy Corrugated Carton &bull; Dispo Well Standard</div>
-      </div>
-
-      <!-- Product Quick Visual & Fit Guide -->
-      <div class="pdp-preview-card">
-        <div class="pdp-svg-container" id="ord-svg-wrap"></div>
-        <div class="pdp-specs-col">
-          <div class="pdp-dim-grid">
-            <div class="dim-chip"><span class="dim-lbl">Length</span><strong id="pdp-len">13"</strong></div>
-            <div class="dim-chip"><span class="dim-lbl">Width</span><strong id="pdp-wid">9"</strong></div>
-            <div class="dim-chip"><span class="dim-lbl">Height</span><strong id="pdp-hgt">6"</strong></div>
+      <!-- STEP 1: QUANTITY & DELIVERY INFORMATION -->
+      <div id="order-view-details">
+        <!-- Shopify Product Header -->
+        <div class="pdp-header">
+          <div class="pdp-badge-row">
+            <span class="pdp-badge-status" id="ord-badge">⚡ In Stock · 45-Min Express Dispatch</span>
+            <span class="pdp-rating">★★★★★ 4.9 (140+ Delivered)</span>
           </div>
-          <div class="pdp-fits-tag">
-            <span class="fits-icon">💡</span>
-            <div class="fits-text">
-              <span class="fits-title">Fits Inside:</span>
-              <span class="fits-desc" id="pdp-fits-desc">Dustbin rolls, Kurtis, Shoes, Electronics</span>
+          <div class="order-modal-box-title" id="ord-title">13 &times; 9 &times; 6 Inches</div>
+          <div class="order-modal-box-sub" id="ord-sub">3-Ply Heavy Corrugated Carton &bull; Dispo Well Standard</div>
+        </div>
+
+        <!-- Product Quick Visual & Fit Guide -->
+        <div class="pdp-preview-card">
+          <div class="pdp-svg-container" id="ord-svg-wrap"></div>
+          <div class="pdp-specs-col">
+            <div class="pdp-dim-grid">
+              <div class="dim-chip"><span class="dim-lbl">Length</span><strong id="pdp-len">13"</strong></div>
+              <div class="dim-chip"><span class="dim-lbl">Width</span><strong id="pdp-wid">9"</strong></div>
+              <div class="dim-chip"><span class="dim-lbl">Height</span><strong id="pdp-hgt">6"</strong></div>
+            </div>
+            <div class="pdp-fits-tag">
+              <span class="fits-icon">💡</span>
+              <div class="fits-text">
+                <span class="fits-title">Fits Inside:</span>
+                <span class="fits-desc" id="pdp-fits-desc">Dustbin rolls, Kurtis, Shoes, Electronics</span>
+              </div>
+            </div>
+            <button type="button" class="btn-pdp-view3d" onclick="viewIn3DFromModal()">
+              <span>👁️</span> Test in 3D Showroom (Put Apple Inside)
+            </button>
+          </div>
+        </div>
+
+        <!-- Quantity & Volume Pricing Tier -->
+        <div class="form-group" style="margin-top: 14px;">
+          <label class="form-label">Select Quantity & Pack Savings:</label>
+          <div class="qty-chips-row">
+            <div class="qty-chip active" onclick="setQuantity(50, this)">
+              <div style="font-weight:800;">50 pcs</div>
+              <div style="font-size:0.6rem; color:#6B6358;">Standard</div>
+            </div>
+            <div class="qty-chip" onclick="setQuantity(100, this)">
+              <div style="font-weight:800;">100 pcs</div>
+              <div style="font-size:0.6rem; color:#059669; font-weight:700;">5% OFF</div>
+            </div>
+            <div class="qty-chip" onclick="setQuantity(250, this)">
+              <div style="font-weight:800;">250 pcs</div>
+              <div style="font-size:0.6rem; color:#059669; font-weight:700;">8% OFF</div>
+            </div>
+            <div class="qty-chip" onclick="setQuantity(500, this)">
+              <div style="font-weight:800;">500 pcs</div>
+              <div style="font-size:0.6rem; color:#059669; font-weight:700;">12% OFF</div>
             </div>
           </div>
-          <button type="button" class="btn-pdp-view3d" onclick="viewIn3DFromModal()">
-            <span>👁️</span> Test in 3D Showroom (Put Apple Inside)
-          </button>
+          <div class="custom-qty-wrapper">
+            <button type="button" class="qty-stepper-btn" onclick="stepQuantity(-25)">&minus;</button>
+            <input type="number" id="inp-custom-qty" value="50" min="50" step="25" oninput="customQuantityInput(this)">
+            <button type="button" class="qty-stepper-btn" onclick="stepQuantity(25)">&plus;</button>
+          </div>
+        </div>
+
+        <!-- Live Order Bill Summary -->
+        <div class="summary-invoice">
+          <div class="summary-row">
+            <span>Factory Wholesale Rate:</span>
+            <span id="inv-unit-rate">₹23 / box</span>
+          </div>
+          <div class="summary-row">
+            <span>Total Quantity:</span>
+            <span id="inv-qty-count">50 Boxes</span>
+          </div>
+          <div class="summary-row">
+            <span>Doorstep Delivery:</span>
+            <span style="color:#059669; font-weight:700;">FREE (Udaipur City)</span>
+          </div>
+          <div class="summary-total-row">
+            <span class="summary-total-label">Total Payable:</span>
+            <span class="summary-total-price" id="inv-total-price">₹1,150</span>
+          </div>
+        </div>
+
+        <!-- Required Delivery & Customer Details Section -->
+        <div class="form-section-title">
+          <span>📍</span> Delivery & Contact Details <span style="font-size:0.7rem; color:#DC2626; font-weight:700;">(Required)</span>
+        </div>
+
+        <!-- WhatsApp Phone Number (Required) -->
+        <div class="form-group">
+          <label class="form-label">WhatsApp Mobile Number <span class="req-star">*</span></label>
+          <input type="tel" id="inp-phone" class="form-input" placeholder="e.g. 98290XXXXX (10 Digits)" maxlength="10" oninput="clearFieldError('inp-phone', 'err-phone')">
+          <div class="field-error-msg" id="err-phone"></div>
+        </div>
+
+        <!-- Full Delivery Address (Required) + Live Map Pin -->
+        <div class="form-group">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; flex-wrap:wrap; gap:6px;">
+            <label class="form-label" style="margin-bottom:0;">Full Delivery Address in Udaipur <span class="req-star">*</span></label>
+            <button type="button" class="btn-gps-locate" onclick="detectGPSLocation()" style="background:#065F46; color:#FFFFFF; border:none; padding:5px 12px; border-radius:14px; font-size:0.72rem; font-weight:800; cursor:pointer; display:inline-flex; align-items:center; gap:5px; box-shadow:0 2px 8px rgba(6,95,70,0.3);">
+              <span id="gps-icon">📍</span> <span id="gps-text">Auto-Detect Live Map Pin</span>
+            </button>
+          </div>
+          <textarea id="inp-address" class="form-textarea" rows="2" placeholder="Shop/House number, building, road, colony or locality in Udaipur..." oninput="clearFieldError('inp-address', 'err-address')"></textarea>
+          <div id="gps-status-badge" style="display:none; margin-top:6px; font-size:0.72rem; color:#065F46; background:#ECFDF5; padding:6px 10px; border-radius:8px; font-weight:700; border:1px solid #A7F3D0;"></div>
+          <div class="field-error-msg" id="err-address"></div>
+        </div>
+
+        <!-- Landmark (Required) & Pincode (Required) in 2 columns -->
+        <div class="form-row-2col">
+          <div class="form-group" style="flex:1;">
+            <label class="form-label">Landmark <span class="req-star">*</span></label>
+            <input type="text" id="inp-landmark" class="form-input" placeholder="e.g. Near Delhi Gate / Opp. Bank" oninput="clearFieldError('inp-landmark', 'err-landmark')">
+            <div class="field-error-msg" id="err-landmark"></div>
+          </div>
+          <div class="form-group" style="width:130px;">
+            <label class="form-label">Pincode <span class="req-star">*</span></label>
+            <input type="tel" id="inp-pincode" class="form-input" placeholder="313001" maxlength="6" oninput="clearFieldError('inp-pincode', 'err-pincode')">
+            <div class="field-error-msg" id="err-pincode"></div>
+          </div>
+        </div>
+
+        <!-- Shop / Brand Name (Optional) -->
+        <div class="form-group">
+          <label class="form-label">Shop / Business / Brand Name <span style="font-weight:normal; color:#8C857B;">(Optional)</span></label>
+          <input type="text" id="inp-shop" class="form-input" placeholder="e.g. Maya Boutique / Sweet Shop">
+        </div>
+
+        <!-- Confirm & Pay Button -->
+        <button class="btn-confirm-order" onclick="processOrderAndOpenUPI()">
+          <span>⚡ Confirm Order & Pay ₹<span id="btn-pay-amount">1,150</span> via UPI</span>
+        </button>
+
+        <div class="order-trust-notice">
+          <span>🔒 100% Verified UPI Payment (GPay, PhonePe, Paytm, BHIM) · Instant Auto Dispatch</span>
+        </div>
+
+        <!-- Shopify Trust Badges Strip -->
+        <div class="pdp-trust-strip">
+          <div class="trust-badge-item"><span>🚚</span> 45-Min Express Auto Dispatch</div>
+          <div class="trust-badge-item"><span>⚡</span> 1-Tap UPI Payment</div>
+          <div class="trust-badge-item"><span>🧾</span> 100% Tax Invoice (GST)</div>
         </div>
       </div>
 
-      <!-- Quantity & Volume Pricing Tier -->
-      <div class="form-group" style="margin-top: 14px;">
-        <label class="form-label">Select Quantity & Pack Savings:</label>
-        <div class="qty-chips-row">
-          <div class="qty-chip active" onclick="setQuantity(50, this)">
-            <div style="font-weight:800;">50 pcs</div>
-            <div style="font-size:0.6rem; color:#6B6358;">Standard</div>
-          </div>
-          <div class="qty-chip" onclick="setQuantity(100, this)">
-            <div style="font-weight:800;">100 pcs</div>
-            <div style="font-size:0.6rem; color:#059669; font-weight:700;">5% OFF</div>
-          </div>
-          <div class="qty-chip" onclick="setQuantity(250, this)">
-            <div style="font-weight:800;">250 pcs</div>
-            <div style="font-size:0.6rem; color:#059669; font-weight:700;">8% OFF</div>
-          </div>
-          <div class="qty-chip" onclick="setQuantity(500, this)">
-            <div style="font-weight:800;">500 pcs</div>
-            <div style="font-size:0.6rem; color:#059669; font-weight:700;">12% OFF</div>
-          </div>
+      <!-- STEP 2: AUTO UPI PAYMENT SCREEN -->
+      <div id="order-view-upi" class="upi-screen-wrapper" style="display:none;">
+        <div class="upi-status-header">
+          <span class="upi-status-pill">ORDER REGISTERED</span>
+          <div class="upi-amount-hero" id="upi-display-amount">₹1,150</div>
+          <div class="upi-status-desc">⚡ Opening UPI App (PhonePe / Google Pay / Paytm)...</div>
         </div>
-        <div class="custom-qty-wrapper">
-          <button type="button" class="qty-stepper-btn" onclick="stepQuantity(-25)">&minus;</button>
-          <input type="number" id="inp-custom-qty" value="50" min="50" step="25" oninput="customQuantityInput(this)">
-          <button type="button" class="qty-stepper-btn" onclick="stepQuantity(25)">&plus;</button>
-        </div>
-      </div>
 
-      <!-- Live Order Bill Summary -->
-      <div class="summary-invoice">
-        <div class="summary-row">
-          <span>Factory Wholesale Rate:</span>
-          <span id="inv-unit-rate">₹23 / box</span>
-        </div>
-        <div class="summary-row">
-          <span>Total Quantity:</span>
-          <span id="inv-qty-count">50 Boxes</span>
-        </div>
-        <div class="summary-row">
-          <span>Doorstep Delivery:</span>
-          <span style="color:#059669; font-weight:700;">FREE (Udaipur City)</span>
-        </div>
-        <div class="summary-total-row">
-          <span class="summary-total-label">Total Amount:</span>
-          <span class="summary-total-price" id="inv-total-price">₹1,150</span>
-        </div>
-      </div>
+        <!-- Big Mobile Pay with UPI App Button -->
+        <button class="btn-upi-app-direct" onclick="triggerUPIIntentDirect()">
+          <span>📱</span>
+          <span>Pay ₹<span id="upi-btn-amount">1,150</span> with UPI App</span>
+        </button>
 
-      <!-- 1-Tap Fast WhatsApp Order (Direct Chat without typing form) -->
-      <button class="btn-fast-wa" onclick="instantWhatsAppOrder()">
-        <span>💬</span> 1-Tap Fast Order on WhatsApp
-      </button>
-
-      <!-- Optional Detailed Delivery Address Accordion -->
-      <details class="pdp-address-details" id="pdp-addr-toggle">
-        <summary class="pdp-summary-toggle">📝 Or Enter Delivery Address & Shop Name</summary>
-        <div style="padding-top:12px;">
-          <!-- Customer Shop/Business Name -->
-          <div class="form-group">
-            <label class="form-label">Shop / Business / Brand Name:</label>
-            <input type="text" id="inp-shop" class="form-input" placeholder="e.g. Maya Boutique / Sweet Shop / Delhi Gate">
+        <!-- QR Code & Scan Option -->
+        <div class="upi-qr-card">
+          <div class="upi-qr-title">Or Scan QR Code with any UPI App:</div>
+          <div class="upi-qr-frame">
+            <img id="upi-qr-img" src="" alt="Scan UPI QR Code to Pay" width="170" height="170">
           </div>
-
-          <!-- Free-Form Delivery Address with Map / GPS Detector -->
-          <div class="form-group">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-              <label class="form-label" style="margin-bottom:0;">Delivery Address in Udaipur:</label>
-              <button type="button" class="btn-gps-locate" onclick="detectGPSLocation()">
-                <span id="gps-icon">📍</span> <span id="gps-text">Attach Live Map Pin</span>
-              </button>
+          <div>
+            <div class="upi-id-badge">
+              <span>UPI:</span>
+              <strong class="upi-id-val" id="upi-id-text">8619661325@upi</strong>
+              <button type="button" class="btn-copy-upi" onclick="copyUPIId()">📋 Copy</button>
             </div>
-            <textarea id="inp-address" class="form-textarea" rows="2" placeholder="Type your shop name, street, road, colony or landmark in Udaipur..."></textarea>
-            <div id="gps-status-badge" style="display:none; margin-top:5px; font-size:0.7rem; color:#065F46; background:#ECFDF5; padding:4px 8px; border-radius:6px; font-weight:600;"></div>
+            <div id="upi-copy-toast" style="display:none; font-size:0.7rem; color:#059669; font-weight:700; margin-top:4px;">✓ UPI ID Copied!</div>
           </div>
-
-          <!-- Customer WhatsApp Phone Number -->
-          <div class="form-group">
-            <label class="form-label">WhatsApp Phone Number:</label>
-            <input type="tel" id="inp-phone" class="form-input" placeholder="e.g. 98290XXXXX" maxlength="10">
-          </div>
-
-          <button class="btn-confirm-order" onclick="submitOrderToWhatsApp()">
-            <span>📦</span> Send Complete Delivery Order
-          </button>
         </div>
-      </details>
 
-      <!-- Shopify Trust Badges Strip -->
-      <div class="pdp-trust-strip">
-        <div class="trust-badge-item"><span>🚚</span> 45-Min Express Auto Dispatch</div>
-        <div class="trust-badge-item"><span>💵</span> Gate-pe-Scan UPI on Delivery</div>
-        <div class="trust-badge-item"><span>🧾</span> 100% Tax Invoice (GST)</div>
+        <!-- Order Manifest Summary -->
+        <div class="upi-receipt-summary">
+          <div><strong>📦 Order:</strong> <span id="upi-receipt-box">13 x 9 x 6 Inches (3-Ply)</span></div>
+          <div><strong>🔢 Quantity:</strong> <span id="upi-receipt-qty">50 Boxes</span></div>
+          <div><strong>📞 WhatsApp:</strong> <span id="upi-receipt-phone">+91 98290XXXXX</span></div>
+          <div><strong>📍 Delivery To:</strong> <span id="upi-receipt-addr">Address</span></div>
+          <div><strong>🏛️ Landmark:</strong> <span id="upi-receipt-landmark">Landmark</span> &bull; <strong>Pincode:</strong> <span id="upi-receipt-pincode">313001</span></div>
+        </div>
+
+        <!-- WhatsApp Receipt Button -->
+        <button class="btn-send-wa-receipt" onclick="sendOrderReceiptToWhatsApp()">
+          <span>💬</span> Send Order Receipt on WhatsApp
+        </button>
+        <div style="font-size:0.68rem; color:#78716C; text-align:center; margin-top:6px;">
+          Send payment receipt or screenshot to dispatch team (+91 8619661325)
+        </div>
+
+        <button type="button" class="btn-edit-order-details" onclick="backToOrderForm()">
+          ← Edit Delivery Address or Quantity
+        </button>
       </div>
     </div>
   </div>
@@ -5504,6 +5727,22 @@ function openOrderModalDirect(l, w, h, cost, note, ply) {
 
   document.getElementById('ord-badge').textContent = '⚡ In Stock · 45-Min Express Dispatch';
 
+  // Always reset to Step 1 Form View
+  const vDetails = document.getElementById('order-view-details');
+  const vUPI = document.getElementById('order-view-upi');
+  if (vDetails) vDetails.style.display = 'block';
+  if (vUPI) vUPI.style.display = 'none';
+
+  // Clear previous validation error highlights
+  ['inp-phone', 'inp-address', 'inp-landmark', 'inp-pincode'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('input-error');
+  });
+  ['err-phone', 'err-address', 'err-landmark', 'err-pincode'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.textContent = ''; el.style.display = 'none'; }
+  });
+
   updateInvoiceCalculations();
   orderBackdrop.classList.add('active');
 }
@@ -5566,10 +5805,91 @@ function updateInvoiceCalculations() {
   document.getElementById('inv-unit-rate').innerHTML = rateText;
   document.getElementById('inv-qty-count').textContent = `${currentQty} Boxes`;
   document.getElementById('inv-total-price').textContent = `₹${total.toLocaleString('en-IN')}`;
+
+  const btnAmt = document.getElementById('btn-pay-amount');
+  if (btnAmt) btnAmt.textContent = total.toLocaleString('en-IN');
 }
 
-// 1-Tap Fast WhatsApp Order (Direct Chat without typing full address)
-function instantWhatsAppOrder() {
+// Configurable Merchant UPI ID for Box Company Udaipur
+const MERCHANT_UPI_ID = '8619661325@upi';
+let currentUPIUrl = '';
+let confirmedOrderData = null;
+
+// Form error management
+function clearFieldError(inputId, errId) {
+  const inputEl = document.getElementById(inputId);
+  const errEl = document.getElementById(errId);
+  if (inputEl) inputEl.classList.remove('input-error');
+  if (errEl) { errEl.textContent = ''; errEl.style.display = 'none'; }
+}
+
+function setFieldError(inputId, errId, message) {
+  const inputEl = document.getElementById(inputId);
+  const errEl = document.getElementById(errId);
+  if (inputEl) inputEl.classList.add('input-error');
+  if (errEl) { errEl.textContent = message; errEl.style.display = 'block'; }
+}
+
+// VALIDATE ALL REQUIRED FIELDS & TRIGGER AUTO UPI PAYMENT
+function processOrderAndOpenUPI() {
+  const phoneEl = document.getElementById('inp-phone');
+  const addrEl = document.getElementById('inp-address');
+  const landmarkEl = document.getElementById('inp-landmark');
+  const pincodeEl = document.getElementById('inp-pincode');
+  const shopEl = document.getElementById('inp-shop');
+
+  const phone = (phoneEl ? phoneEl.value : '').trim();
+  const address = (addrEl ? addrEl.value : '').trim();
+  const landmark = (landmarkEl ? landmarkEl.value : '').trim();
+  const pincode = (pincodeEl ? pincodeEl.value : '').trim();
+  const shopName = (shopEl ? shopEl.value : '').trim();
+
+  let hasError = false;
+  let firstErrEl = null;
+
+  // 1. Phone validation (10 digits starting with 6,7,8,9)
+  if (!phone || !/^[6-9]\d{9}$/.test(phone)) {
+    setFieldError('inp-phone', 'err-phone', '⚠️ 10-digit valid WhatsApp number dalein (jaise 9829012345).');
+    if (!firstErrEl) firstErrEl = phoneEl;
+    hasError = true;
+  } else {
+    clearFieldError('inp-phone', 'err-phone');
+  }
+
+  // 2. Full Address validation (minimum 5 characters)
+  if (!address || address.length < 5) {
+    setFieldError('inp-address', 'err-address', '⚠️ Pura delivery address (shop/house no., road, locality) zaroori hey.');
+    if (!firstErrEl) firstErrEl = addrEl;
+    hasError = true;
+  } else {
+    clearFieldError('inp-address', 'err-address');
+  }
+
+  // 3. Landmark validation (minimum 2 characters)
+  if (!landmark || landmark.length < 2) {
+    setFieldError('inp-landmark', 'err-landmark', '⚠️ Pass ka landmark (jaise Mandir, Circle, Bank) zaroori hey.');
+    if (!firstErrEl) firstErrEl = landmarkEl;
+    hasError = true;
+  } else {
+    clearFieldError('inp-landmark', 'err-landmark');
+  }
+
+  // 4. Pincode validation (6 digits)
+  if (!pincode || !/^\d{6}$/.test(pincode)) {
+    setFieldError('inp-pincode', 'err-pincode', '⚠️ 6-digit valid Pincode dalein (jaise 313001).');
+    if (!firstErrEl) firstErrEl = pincodeEl;
+    hasError = true;
+  } else {
+    clearFieldError('inp-pincode', 'err-pincode');
+  }
+
+  // If any required field is missing or invalid, focus and halt!
+  if (hasError) {
+    if (firstErrEl) firstErrEl.focus();
+    return;
+  }
+
+  // Calculate pricing & total
   const { l, w, h, cost, note, ply } = currentOrderBox;
   const baseRate = calculateSellingPrice(cost, l, w, h);
   let discount = 0;
@@ -5579,24 +5899,122 @@ function instantWhatsAppOrder() {
   const unitPrice = Math.max(4, Math.round(baseRate * (1 - discount)));
   const total = currentQty * unitPrice;
 
+  // Build UPI Deep Link
+  const noteText = `Box Order ${l}x${w}x${h} (${currentQty}pcs)`;
+  currentUPIUrl = `upi://pay?pa=${encodeURIComponent(MERCHANT_UPI_ID)}&pn=${encodeURIComponent('Box Company Udaipur')}&am=${total}&cu=INR&tn=${encodeURIComponent(noteText)}`;
+
+  // Store confirmed order manifest
+  confirmedOrderData = {
+    l, w, h, cost, note, ply, currentQty, unitPrice, total,
+    phone, address, landmark, pincode, shopName,
+    gps: attachedGPSLocation,
+    upiUrl: currentUPIUrl
+  };
+
+  // Populate Step 2 UPI Screen
+  const dispAmt = document.getElementById('upi-display-amount');
+  const btnAmt = document.getElementById('upi-btn-amount');
+  const qrImg = document.getElementById('upi-qr-img');
+  const recBox = document.getElementById('upi-receipt-box');
+  const recQty = document.getElementById('upi-receipt-qty');
+  const recPhone = document.getElementById('upi-receipt-phone');
+  const recAddr = document.getElementById('upi-receipt-addr');
+  const recLandmark = document.getElementById('upi-receipt-landmark');
+  const recPincode = document.getElementById('upi-receipt-pincode');
+  const upiIdTxt = document.getElementById('upi-id-text');
+
+  if (dispAmt) dispAmt.textContent = `₹${total.toLocaleString('en-IN')}`;
+  if (btnAmt) btnAmt.textContent = total.toLocaleString('en-IN');
+  if (qrImg) qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(currentUPIUrl)}`;
+  if (recBox) recBox.textContent = `${l} × ${w} × ${h} Inches (${ply}-Ply)`;
+  if (recQty) recQty.textContent = `${currentQty} Boxes (₹${unitPrice}/box)`;
+  if (recPhone) recPhone.textContent = `+91 ${phone}`;
+  if (recAddr) recAddr.textContent = shopName ? `${shopName}, ${address}` : address;
+  if (recLandmark) recLandmark.textContent = landmark;
+  if (recPincode) recPincode.textContent = pincode;
+  if (upiIdTxt) upiIdTxt.textContent = MERCHANT_UPI_ID;
+
+  // Switch Modal view from Step 1 to Step 2
+  const vDetails = document.getElementById('order-view-details');
+  const vUPI = document.getElementById('order-view-upi');
+  if (vDetails) vDetails.style.display = 'none';
+  if (vUPI) vUPI.style.display = 'block';
+
+  // Scroll modal sheet to top
+  const sheet = document.querySelector('.order-sheet');
+  if (sheet) sheet.scrollTop = 0;
+
+  // Trigger celebration confetti
   if (typeof confetti === 'function') {
-    confetti({ particleCount: 70, spread: 60, origin: { y: 0.7 } });
+    confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
   }
 
-  const waMsg = 
-`📦 *BOX ENQUIRY / DIRECT ORDER - BOX COMPANY UDAIPUR*
-━━━━━━━━━━━━━━━━━━━━
-• *Box Size:* ${l} x ${w} x ${h} Inches (${ply}-Ply)
-• *Use Case:* ${note || 'Packaging'}
-• *Quantity:* ${currentQty} Boxes
-• *Estimated Total:* ₹${total.toLocaleString('en-IN')} (approx ₹${unitPrice}/box)
-• *Delivery:* 45-Min Express Doorstep Delivery in Udaipur
-━━━━━━━━━━━━━━━━━━━━
-_Namaste! Please confirm availability, delivery timing & UPI QR code._`;
+  // AUTO-OPEN UPI INTENT ON MOBILE APPS (PhonePe, GPay, Paytm)
+  if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    setTimeout(() => {
+      window.location.href = currentUPIUrl;
+    }, 400);
+  }
+}
 
-  const waUrl = `https://wa.me/918619661325?text=${encodeURIComponent(waMsg)}`;
+// 1-Tap Trigger to Launch Native UPI Intent
+function triggerUPIIntentDirect() {
+  if (currentUPIUrl) {
+    window.location.href = currentUPIUrl;
+  }
+}
+
+// Copy Merchant UPI ID to Clipboard
+function copyUPIId() {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(MERCHANT_UPI_ID).then(() => {
+      const toast = document.getElementById('upi-copy-toast');
+      if (toast) {
+        toast.style.display = 'block';
+        setTimeout(() => { toast.style.display = 'none'; }, 2500);
+      }
+    }).catch(() => {
+      prompt('Copy UPI ID:', MERCHANT_UPI_ID);
+    });
+  } else {
+    prompt('Copy UPI ID:', MERCHANT_UPI_ID);
+  }
+}
+
+// Switch back to Step 1 to edit details
+function backToOrderForm() {
+  const vDetails = document.getElementById('order-view-details');
+  const vUPI = document.getElementById('order-view-upi');
+  if (vDetails) vDetails.style.display = 'block';
+  if (vUPI) vUPI.style.display = 'none';
+}
+
+// SUBMIT FINAL ORDER RECEIPT TO WHATSAPP
+function sendOrderReceiptToWhatsApp() {
+  if (!confirmedOrderData) {
+    alert('Please complete the order details first.');
+    return;
+  }
+  const d = confirmedOrderData;
+  const waMessage = 
+`📦 *CONFIRMED PACKAGING ORDER & PAYMENT - BOX COMPANY*
+━━━━━━━━━━━━━━━━━━━━
+• *Box Size:* ${d.l} x ${d.w} x ${d.h} Inches (${d.ply}-Ply)
+• *Quantity:* ${d.currentQty} Boxes
+• *Rate:* ₹${d.unitPrice} / box
+• *Total Payable:* ₹${d.total.toLocaleString('en-IN')}
+• *Payment Mode:* ⚡ UPI Instant Payment (${MERCHANT_UPI_ID})
+
+📍 *DELIVERY DISPATCH DETAILS:*
+• *WhatsApp Mobile:* +91 ${d.phone}
+${d.shopName ? `• *Shop/Brand:* ${d.shopName}\n` : ''}• *Delivery Address:* ${d.address}
+• *Landmark:* ${d.landmark}
+• *Pincode:* ${d.pincode}
+${d.gps ? `🗺️ *GPS Map Pin:* ${d.gps}\n` : ''}━━━━━━━━━━━━━━━━━━━━
+_Namaste! UPI payment initiated. Please dispatch the boxes & confirm timing._`;
+
+  const waUrl = `https://wa.me/918619661325?text=${encodeURIComponent(waMessage)}`;
   window.open(waUrl, '_blank');
-  closeOrderModal();
 }
 
 // GPS / MAP LOCATOR LOGIC
@@ -5624,9 +6042,10 @@ function detectGPSLocation() {
       gpsBadge.innerHTML = `📍 GPS Attached: <a href="${attachedGPSLocation}" target="_blank" style="color:#0F766E; text-decoration:underline;">View Google Maps Pin</a>`;
       
       const addrBox = document.getElementById('inp-address');
-      if (!addrBox.value.trim()) {
+      if (addrBox && !addrBox.value.trim()) {
         addrBox.value = `Udaipur Delivery (GPS Pinned: ${lat.toFixed(4)}, ${lng.toFixed(4)})`;
       }
+      clearFieldError('inp-address', 'err-address');
     },
     (err) => {
       gpsText.textContent = 'Attach Live Map Pin';
@@ -5635,53 +6054,6 @@ function detectGPSLocation() {
     },
     { enableHighAccuracy: true, timeout: 8000 }
   );
-}
-
-// SUBMIT ORDER TO RISHABH ON WHATSAPP
-function submitOrderToWhatsApp() {
-  const { l, w, h, cost, ply } = currentOrderBox;
-  const unitPrice = calculateSellingPrice(cost, l, w, h);
-  const total = currentQty * unitPrice;
-
-  const shopName = document.getElementById('inp-shop').value.trim() || 'Direct Merchant';
-  const address = document.getElementById('inp-address').value.trim() || 'Udaipur City';
-  const phone = document.getElementById('inp-phone').value.trim();
-
-  if (!phone || phone.length < 10) {
-    alert('Please enter your 10-digit WhatsApp number so we can confirm delivery timing!');
-    document.getElementById('inp-phone').focus();
-    return;
-  }
-
-  // Trigger celebration confetti animation!
-  confetti({
-    particleCount: 80,
-    spread: 70,
-    origin: { y: 0.7 }
-  });
-
-  // Compose Structured Order Manifest
-  const waMessage = 
-`📦 *CONFIRMED PACKAGING ORDER - BOX COMPANY*
-━━━━━━━━━━━━━━━━━━━━
-• *Box Size:* ${l} x ${w} x ${h} Inches (${ply}-Ply)
-• *Quantity:* ${currentQty} Boxes
-• *Rate:* ₹${unitPrice} / box
-• *Total Payable:* ₹${total.toLocaleString('en-IN')}
-• *Delivery:* 45-Min Express Doorstep Delivery in Udaipur
-
-🏢 *Shop / Brand:* ${shopName}
-📍 *Delivery Address:* ${address}
-${attachedGPSLocation ? `🗺️ *Google Maps Pin:* ${attachedGPSLocation}\n` : ''}📞 *Customer Phone:* ${phone}
-━━━━━━━━━━━━━━━━━━━━
-_Please confirm order dispatch and send UPI QR code!_`;
-
-  const waUrl = `https://wa.me/918619661325?text=${encodeURIComponent(waMessage)}`;
-
-  setTimeout(() => {
-    window.open(waUrl, '_blank');
-    closeOrderModal();
-  }, 400);
 }
 
 /* =========================================================================
@@ -5810,11 +6182,20 @@ function checkAutoShowInstallPopup() {
   const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
   if (isStandalone) return; // Never show if already opened inside installed app!
 
-  if (sessionStorage.getItem('install_popup_dismissed')) return; // Dismissed this session
-
   setTimeout(() => {
     openDownloadAppModal();
-  }, 1200);
+    // Prompt notification permission early if supported
+    if ('Notification' in window && Notification.permission === 'default') {
+      try {
+        Notification.requestPermission().then((perm) => {
+          if (perm === 'granted') {
+            updateNotificationButtonUI();
+            sendSampleNotification();
+          }
+        }).catch(() => {});
+      } catch (e) {}
+    }
+  }, 600);
 }
 
 function closeIOSInstallModal(e) {
@@ -5823,56 +6204,38 @@ function closeIOSInstallModal(e) {
 }
 
 function startAppInstallation() {
-  const btn = document.getElementById('btn-real-download');
-  const progWrap = document.getElementById('download-progress-wrap');
-  const progFill = document.getElementById('dl-fill');
-  const progText = document.getElementById('dl-text');
-
-  if (btn) btn.style.display = 'none';
-  if (progWrap) progWrap.style.display = 'block';
-
-  let pct = 0;
-  const timer = setInterval(() => {
-    pct += Math.floor(Math.random() * 22) + 12;
-    if (pct >= 100) {
-      pct = 100;
-      clearInterval(timer);
-      if (progFill) progFill.style.width = '100%';
-      if (progText) progText.textContent = 'Installing Box Company App...';
-
-      setTimeout(() => {
-        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-        if (deferredInstallPrompt) {
-          deferredInstallPrompt.prompt();
-          deferredInstallPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-              showViewportToast('🎉 Box Company App installed successfully!');
-              closeDownloadAppModal();
-            }
-            deferredInstallPrompt = null;
-            if (btn) btn.style.display = 'inline-flex';
-            if (progWrap) progWrap.style.display = 'none';
-          });
-        } else if (isIOS) {
-          closeDownloadAppModal();
-          const iosModal = document.getElementById('ios-install-modal');
-          if (iosModal) iosModal.classList.add('active');
-          if (btn) btn.style.display = 'inline-flex';
-          if (progWrap) progWrap.style.display = 'none';
-        } else {
-          showViewportToast('💡 Tap browser menu (⋮) -> "Add to Home screen" / "Install"');
-          setTimeout(() => {
-            closeDownloadAppModal();
-            if (btn) btn.style.display = 'inline-flex';
-            if (progWrap) progWrap.style.display = 'none';
-          }, 1400);
+  // 1. Immediately request notification permission
+  if ('Notification' in window && Notification.permission !== 'granted') {
+    try {
+      Notification.requestPermission().then((perm) => {
+        if (perm === 'granted') {
+          updateNotificationButtonUI();
+          sendSampleNotification();
         }
-      }, 500);
-    } else {
-      if (progFill) progFill.style.width = pct + '%';
-      if (progText) progText.textContent = `Downloading package (${pct}%)...`;
-    }
-  }, 100);
+      }).catch(() => {});
+    } catch (e) {}
+  }
+
+  // 2. Immediately trigger native installation prompt
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+  if (deferredInstallPrompt) {
+    deferredInstallPrompt.prompt();
+    deferredInstallPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        showViewportToast('🎉 Box Company App installed successfully!');
+      }
+      closeDownloadAppModal();
+      deferredInstallPrompt = null;
+    });
+  } else if (isIOS) {
+    closeDownloadAppModal();
+    const iosModal = document.getElementById('ios-install-modal');
+    if (iosModal) iosModal.classList.add('active');
+  } else {
+    showViewportToast('💡 Tap browser menu (⋮) -> "Add to Home screen" / "Install"');
+    closeDownloadAppModal();
+  }
 }
 
 // 4. Live Store Broadcast Functions (Controlled by your Repo)
