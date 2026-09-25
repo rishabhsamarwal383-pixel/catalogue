@@ -1,5 +1,5 @@
 // Box Company Udaipur - PWA Service Worker (Auto-Update & Push Notifications)
-const CACHE_NAME = 'box-co-v4';
+const CACHE_NAME = 'box-co-v5';
 const ASSETS_TO_CACHE = [
   './',
   './manifest.json',
