@@ -1,9 +1,14 @@
 // Box Company Udaipur - PWA Service Worker (Auto-Update & Push Notifications)
-const CACHE_NAME = 'box-co-v3';
+const CACHE_NAME = 'box-co-v4';
 const ASSETS_TO_CACHE = [
   './',
   './manifest.json',
-  './icon.svg'
+  './icon.svg',
+  './icon-192.png',
+  './icon-512.png',
+  './maskable_icon.png',
+  './apple-touch-icon.png',
+  './favicon.png'
 ];
 
 // Install: pre-cache assets and force immediate activation
