@@ -1470,6 +1470,50 @@
       display: none !important;
     }
 
+    /* Hide cluttered titles and meta rows on mobile so boxes appear immediately */
+    .cat-title-row { display: none !important; }
+    .section-meta-row { display: none !important; }
+    .store-top-bar { display: none !important; }
+    .header-subtitle { display: none !important; }
+
+    /* Compact search box */
+    .search-wrap {
+      padding: 6px 12px 2px 12px;
+    }
+    .search-box {
+      height: 42px;
+      border-radius: 12px;
+    }
+
+    /* Single compact horizontal category pill strip */
+    .category-nav {
+      padding: 4px 12px 6px 12px;
+      margin: 0;
+    }
+    .niche-scroll {
+      gap: 6px;
+      padding-bottom: 2px;
+    }
+    .niche-chip {
+      padding: 6px 11px;
+      font-size: 0.74rem;
+      border-radius: 16px;
+      white-space: nowrap;
+    }
+
+    /* Fast hardware-accelerated smooth scrolling grid */
+    .boxes-grid {
+      padding: 4px 10px 80px 10px;
+      gap: 8px;
+    }
+    .box-card {
+      contain: layout style;
+      transform: translateZ(0);
+      will-change: transform;
+      padding: 10px 8px;
+      border-radius: 14px;
+    }
+
     /* Collapse the huge Hindi warehouse guide into a compact strip on mobile */
     .hindi-warehouse-guide-wrap {
       padding: 14px 16px;
@@ -1603,7 +1647,20 @@
     transition: width 0.3s ease;
   }
   .dl-progress-text { font-size: 0.74rem; color: #065F46; font-weight: 700; }
-  .app-modal-note { font-size: 0.68rem; color: #9CA3AF; margin-top: 10px; }
+  .app-modal-note { font-size: 0.68rem; color: #9CA3AF; margin-top: 8px; }
+  .btn-continue-browser {
+    background: none;
+    border: none;
+    color: #6B6358;
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-top: 8px;
+    cursor: pointer;
+    padding: 6px 14px;
+    text-decoration: underline;
+    display: inline-block;
+  }
+  .btn-continue-browser:active { color: #1F1B18; }
 
   /* Broadcast Announcement Card */
   .broadcast-banner {
@@ -1692,13 +1749,16 @@
         <div class="app-feat-item">📦 <b>3D Box Inspection:</b> Test apple fit on your mobile</div>
       </div>
       <button class="btn-download-primary" id="btn-real-download" onclick="startAppInstallation()">
-        <span>⬇️</span> Download & Install Now (Free)
+        <span>⬇️</span> Install App Now (Free)
+      </button>
+      <button type="button" class="btn-continue-browser" onclick="closeDownloadAppModal()">
+        Continue in browser ➔
       </button>
       <div id="download-progress-wrap" style="display:none; margin-top:12px;">
         <div class="dl-progress-bar"><div class="dl-progress-fill" id="dl-fill"></div></div>
-        <div class="dl-progress-text" id="dl-text">Downloading Box Udaipur App...</div>
+        <div class="dl-progress-text" id="dl-text">Installing Box Udaipur App...</div>
       </div>
-      <p class="app-modal-note">Direct safe mobile install &bull; No Play Store login needed</p>
+      <p class="app-modal-note">Fast 1-tap install &bull; Zero phone storage &bull; No Play Store login</p>
     </div>
   </div>
 
@@ -1749,18 +1809,15 @@
       <div class="header-logo">📦</div>
       <div>
         <h1 class="header-title">Box Company</h1>
-        <p class="header-subtitle desktop-only">Udaipur Doorstep Packaging Supply</p>
+        <p class="header-subtitle desktop-only">Udaipur Express Packaging Supply</p>
       </div>
     </div>
     <div class="pwa-header-actions">
-      <button class="btn-pwa-notif-header" id="btn-pwa-notif" onclick="togglePushNotifications()">
-        <span>🔔</span> <span class="hide-mobile">Alerts</span>
-      </button>
       <button class="btn-pwa-install-header" id="btn-pwa-install-nav" onclick="openDownloadAppModal()">
-        <span>⬇️</span> Download App
+        <span>📲</span> <span class="hide-mobile">Install</span> App
       </button>
       <a href="https://wa.me/918619661325?text=Hi%20Box%20Company,%20I%20need%20corrugated%20boxes%20in%20Udaipur" class="header-wa-btn" target="_blank">
-        <span>💬</span> <span class="hide-mobile">WhatsApp</span>
+        <span>💬</span> <span>WhatsApp</span>
       </a>
     </div>
   </header>
@@ -1979,30 +2036,31 @@
   <!-- =========================================================================
        CATEGORY QUICK SELECTOR (ALL 53 SIZES STAYS AT FRONT!)
        ========================================================================= -->
+  <!-- Live Quick Search Bar (Prominent on top) -->
+  <div class="search-wrap">
+    <div class="search-box">
+      <input type="text" id="inp-search" placeholder="🔍 Search size (e.g. 13x9x6, 5-ply, saree, kurti...)" oninput="handleSearch(this.value)">
+      <span class="search-icon">🔍</span>
+    </div>
+  </div>
+
+  <!-- Category Quick Selector Strip -->
   <section class="category-nav">
-    <div class="cat-title-row">
+    <div class="cat-title-row desktop-only">
       <span class="cat-heading">Store Department Aisles</span>
       <span class="cat-hint">Tap any box to order</span>
     </div>
     <div class="niche-scroll">
-      <button class="niche-chip active" onclick="filterNiche('all', this)">📦 All 53 Standard Sizes</button>
-      <button class="niche-chip" onclick="filterNiche('popular', this)">🔥 Udaipur Top 8 Bestsellers</button>
-      <button class="niche-chip" onclick="filterNiche('dispo', this)">🗑️ Aisle 1: Dustbin Rolls (13x9x6)</button>
-      <button class="niche-chip" onclick="filterNiche('garments', this)">👗 Aisle 2: Kurti & Sarees</button>
-      <button class="niche-chip" onclick="filterNiche('shoes', this)">👟 Aisle 3: Shoes & Footwear</button>
-      <button class="niche-chip" onclick="filterNiche('sweets', this)">🍬 Aisle 4: Sweets & Bakery</button>
-      <button class="niche-chip" onclick="filterNiche('jewelry', this)">💎 Aisle 5: Jewelry & Compact</button>
-      <button class="niche-chip" onclick="filterNiche('heavy5', this)">🚚 Aisle 6: 5-Ply Heavy Industrial</button>
+      <button class="niche-chip active" onclick="filterNiche('all', this)">📦 All 53 Boxes</button>
+      <button class="niche-chip" onclick="filterNiche('popular', this)">🔥 Top Bestsellers</button>
+      <button class="niche-chip" onclick="filterNiche('heavy5', this)">🚚 5-Ply Heavy</button>
+      <button class="niche-chip" onclick="filterNiche('garments', this)">👗 Kurti & Sarees</button>
+      <button class="niche-chip" onclick="filterNiche('jewelry', this)">💎 Jewelry & Compact</button>
+      <button class="niche-chip" onclick="filterNiche('shoes', this)">👟 Shoes & Boots</button>
+      <button class="niche-chip" onclick="filterNiche('sweets', this)">🍬 Sweets & Bakery</button>
+      <button class="niche-chip" onclick="filterNiche('dispo', this)">🗑️ 13x9x6 Master Shipper</button>
     </div>
   </section>
-
-  <!-- Live Search Box -->
-  <div class="search-wrap">
-    <div class="search-box">
-      <input type="text" id="inp-search" placeholder="Search size e.g. 13x9x6, kurti, jewelry, 5-ply..." oninput="handleSearch(this.value)">
-      <span class="search-icon">🔍</span>
-    </div>
-  </div>
 
   <!-- =========================================================================
        ANIMATED BOX CATALOG GRID (REAL PHOTOREALISTIC BOXES)
@@ -4817,11 +4875,12 @@ function initHero3D() {
   });
 
   // 1. Warm Sunlit Key Floodlight (Focused on Custom Box & Turntable)
+  const isMobileScreen = window.innerWidth < 768;
   const keyLight = new THREE.DirectionalLight(0xFDE68A, 1.15);
   keyLight.position.set(16, 26, 16);
   keyLight.castShadow = true;
-  keyLight.shadow.mapSize.width = 2048;
-  keyLight.shadow.mapSize.height = 2048;
+  keyLight.shadow.mapSize.width = isMobileScreen ? 512 : 1024;
+  keyLight.shadow.mapSize.height = isMobileScreen ? 512 : 1024;
   keyLight.shadow.camera.near = 5;
   keyLight.shadow.camera.far = 70;
   keyLight.shadow.camera.left = -16;
@@ -4829,7 +4888,7 @@ function initHero3D() {
   keyLight.shadow.camera.top = 16;
   keyLight.shadow.camera.bottom = -16;
   keyLight.shadow.bias = -0.0003;
-  keyLight.shadow.radius = 2.5;
+  keyLight.shadow.radius = 2.0;
   scene.add(keyLight);
 
   // 2. Chiaroscuro Shadow Fill Light ("Little darkness on other side")
@@ -4854,7 +4913,14 @@ function initHero3D() {
 
   createTrue3DApple();
   build3DBox(activeBox.l, activeBox.w, activeBox.h);
-  animate();
+
+  // On desktop, activate loop immediately. On mobile, stay paused to save 100% CPU!
+  if (!isMobileScreen) {
+    is3DActive = true;
+    animate();
+  } else {
+    is3DActive = false;
+  }
 }
 
 function createTrue3DApple() {
@@ -5146,7 +5212,10 @@ function setCameraAngle(angle, btn) {
   }
 }
 
+let is3DActive = false;
+
 function animate() {
+  if (!is3DActive) return;
   requestAnimationFrame(animate);
 
   // Smooth Flap Easing
@@ -5692,7 +5761,9 @@ function switchMobileView(tab) {
   document.body.classList.toggle('tab-3d-active', !isCatalog);
 
   if (!isCatalog) {
-    // Switched to 3D studio: re-measure viewport & scroll to top
+    // Switched to 3D studio: wake up 3D engine, re-measure viewport & scroll to top
+    is3DActive = true;
+    animate();
     setTimeout(() => {
       const container = document.querySelector('.stage-viewport-wrap');
       if (container && renderer && camera) {
@@ -5705,7 +5776,8 @@ function switchMobileView(tab) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 60);
   } else {
-    // Switched to catalog
+    // Switched to catalog: freeze 3D engine completely to save 100% CPU & battery!
+    is3DActive = false;
     const catSec = document.getElementById('catalog-section');
     if (catSec && window.scrollY < 80) {
       window.scrollTo({ top: 60, behavior: 'smooth' });
@@ -5727,11 +5799,24 @@ function openDownloadAppModal() {
 }
 
 function closeDownloadAppModal(e) {
-  if (e && e.target && e.target !== e.currentTarget && !e.target.classList.contains('download-close-btn')) {
+  if (e && e.target && e.target !== e.currentTarget && !e.target.classList.contains('download-close-btn') && !e.target.classList.contains('btn-continue-browser')) {
     return;
   }
   const modal = document.getElementById('download-app-modal');
   if (modal) modal.classList.remove('active');
+  sessionStorage.setItem('install_popup_dismissed', 'true');
+}
+
+// Auto-show install popup when someone lands on mobile browser (NOT standalone PWA)
+function checkAutoShowInstallPopup() {
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  if (isStandalone) return; // Never show if already opened inside installed app!
+
+  if (sessionStorage.getItem('install_popup_dismissed')) return; // Dismissed this session
+
+  setTimeout(() => {
+    openDownloadAppModal();
+  }, 1200);
 }
 
 function closeIOSInstallModal(e) {
@@ -5889,6 +5974,9 @@ window.addEventListener('DOMContentLoaded', () => {
   if (window.innerWidth < 768) {
     switchMobileView('catalog');
   }
+
+  // Automatic Install Popup for Browser Visitors!
+  checkAutoShowInstallPopup();
 });
 </script>
 </body>
