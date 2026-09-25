@@ -1952,16 +1952,18 @@
     }
   }
 
-  /* Native App Install Bottom Sheet & Modal Styles (Swiggy/Zepto/PWA Style) */
+  /* =========================================================================
+     AUTHENTIC GOOGLE PLAY STORE / INSTANT APP INSTALL UI
+     ========================================================================= */
   .download-modal-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(12, 10, 9, 0.76);
+    background: rgba(32, 33, 36, 0.72);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     z-index: 99998;
     display: none;
-    align-items: flex-end; /* Slides up from bottom on mobile */
+    align-items: flex-end; /* Slides up smoothly from bottom */
     justify-content: center;
     padding: 0;
     opacity: 0;
@@ -1976,13 +1978,15 @@
     border-radius: 28px 28px 0 0;
     max-width: 480px;
     width: 100%;
-    padding: 14px 20px calc(24px + env(safe-area-inset-bottom, 16px));
-    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.38);
+    padding: 14px 22px calc(24px + env(safe-area-inset-bottom, 16px));
+    box-shadow: 0 -8px 36px rgba(0, 0, 0, 0.28);
     position: relative;
     transform: translateY(100%);
     transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
-    max-height: 92vh;
+    max-height: 90vh;
     overflow-y: auto;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #202124;
     text-align: left;
   }
   .download-modal-backdrop.active .download-card {
@@ -1995,10 +1999,9 @@
       padding: 20px;
     }
     .download-card {
-      border-radius: 26px;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.45);
-      transform: scale(0.92) translateY(20px);
-      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      transform: scale(0.94) translateY(16px);
       padding: 20px 24px 26px;
     }
     .download-modal-backdrop.active .download-card {
@@ -2006,262 +2009,270 @@
     }
   }
 
-  .sheet-drag-pill {
-    width: 42px;
-    height: 5px;
-    background: #E5E7EB;
+  .play-drag-pill {
+    width: 36px;
+    height: 4px;
+    background: #E0E0E0;
     border-radius: 9999px;
     margin: 0 auto 12px;
   }
 
-  .sheet-top-header {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    position: relative;
-    margin-bottom: 14px;
-  }
-  .sheet-app-icon-box {
-    width: 62px;
-    height: 62px;
-    background: linear-gradient(135deg, #1F1B18 0%, #372E27 100%);
-    border-radius: 16px;
-    padding: 6px;
-    box-shadow: 0 8px 22px rgba(15, 118, 110, 0.28), 0 2px 8px rgba(0,0,0,0.2);
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1.5px solid rgba(255,255,255,0.2);
-  }
-  .sheet-app-icon-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 10px;
-  }
-  .sheet-header-meta {
-    flex: 1;
-    min-width: 0;
-  }
-  .sheet-official-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: #FEF3C7;
-    color: #92400E;
-    font-size: 0.65rem;
-    font-weight: 800;
-    padding: 2px 8px;
-    border-radius: 20px;
-    letter-spacing: 0.3px;
-    margin-bottom: 2px;
-  }
-  .sheet-pulse-green {
-    width: 6px;
-    height: 6px;
-    background: #10B981;
-    border-radius: 50%;
-    box-shadow: 0 0 6px #10B981;
-    display: inline-block;
-  }
-  .sheet-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.35rem;
-    color: #1F1B18;
-    line-height: 1.15;
-    letter-spacing: 0.3px;
-  }
-  .sheet-rating-row {
-    font-size: 0.74rem;
-    color: #6B7280;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 3px;
-    flex-wrap: wrap;
-  }
-  .sheet-star-pill {
-    color: #D97706;
-    font-weight: 800;
-  }
-  .sheet-reviews {
-    color: #4B5563;
-  }
-  .sheet-dot-sep {
-    color: #D1D5DB;
-  }
-  .sheet-size-badge {
-    background: #ECFDF5;
-    color: #065F46;
-    font-weight: 800;
-    padding: 1px 7px;
-    border-radius: 6px;
-    font-size: 0.68rem;
-  }
-  .sheet-close-x {
-    position: absolute;
-    top: -4px;
-    right: -4px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: #F3F4F6;
-    border: none;
-    color: #6B7280;
-    font-size: 20px;
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.15s ease, color 0.15s ease;
-  }
-  .sheet-close-x:hover { background: #E5E7EB; color: #111827; }
-
-  /* Perks List */
-  .sheet-perks-container {
-    background: #FAF8F5;
-    border: 1px solid #ECE5D8;
-    border-radius: 16px;
-    padding: 11px 13px;
-    margin-bottom: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-  }
-  .sheet-perk-row {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-  }
-  .sheet-perk-icon-wrap {
-    width: 34px;
-    height: 34px;
-    border-radius: 10px;
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.05rem;
-    flex-shrink: 0;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-  }
-  .sheet-perk-text strong {
-    display: block;
-    font-size: 0.78rem;
-    color: #1F1B18;
-    font-weight: 800;
-    line-height: 1.25;
-  }
-  .sheet-perk-text span {
-    display: block;
-    font-size: 0.69rem;
-    color: #6B6358;
-    line-height: 1.25;
-    margin-top: 1px;
-  }
-
-  /* 1-Tap Glowing Install CTA */
-  .btn-sheet-install-cta {
-    width: 100%;
-    background: linear-gradient(135deg, #047857 0%, #10B981 100%);
-    color: #FFFFFF;
-    border: none;
-    padding: 13px 18px;
-    border-radius: 18px;
-    cursor: pointer;
+  .play-topbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.42);
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    margin-bottom: 16px;
   }
-  .btn-sheet-install-cta:active {
-    transform: scale(0.98);
-    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
-  }
-  .btn-sheet-install-cta::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
-    transform: translateX(-100%);
-    animation: installShimmer 2.5s infinite;
-  }
-  @keyframes installShimmer {
-    100% { transform: translateX(100%); }
-  }
-  .cta-left {
+  .play-brand-wrap {
     display: flex;
     align-items: center;
-    gap: 12px;
-    text-align: left;
+    gap: 8px;
   }
-  .cta-icon {
-    font-size: 1.45rem;
-    line-height: 1;
+  .play-logo-svg {
+    width: 22px;
+    height: 22px;
   }
-  .cta-text {
-    display: flex;
-    flex-direction: column;
+  .play-brand-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #202124;
+    letter-spacing: -0.2px;
   }
-  .cta-main {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.05rem;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    line-height: 1.15;
-  }
-  .cta-sub {
+  .play-instant-tag {
+    background: #E6F4EA;
+    color: #137333;
     font-size: 0.68rem;
-    color: rgba(255,255,255,0.92);
-    font-weight: 600;
-    margin-top: 1px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 6px;
+    letter-spacing: 0.2px;
   }
-  .cta-arrow {
-    background: rgba(255,255,255,0.2);
+  .play-close-btn {
     width: 32px;
     height: 32px;
     border-radius: 50%;
+    background: #F1F3F4;
+    border: none;
+    color: #5F6368;
+    font-size: 18px;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.85rem;
-    font-weight: 800;
+    transition: background 0.15s ease;
+  }
+  .play-close-btn:hover {
+    background: #E8EAED;
+    color: #202124;
+  }
+
+  /* App Header: Icon + Info */
+  .play-app-header {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 18px;
+  }
+  .play-icon-box {
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
+    background: #1F1B18;
+    padding: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    position: relative;
     flex-shrink: 0;
   }
-
-  .btn-sheet-secondary-dismiss {
-    background: none;
-    border: none;
-    color: #6B6358;
-    font-size: 0.8rem;
-    font-weight: 600;
-    padding: 10px 14px 4px;
-    cursor: pointer;
-    display: block;
-    margin: 4px auto 0;
-    text-decoration: underline;
-    transition: color 0.15s ease;
+  .play-app-icon {
+    width: 100%;
+    height: 100%;
+    border-radius: 14px;
+    object-fit: cover;
   }
-  .btn-sheet-secondary-dismiss:hover { color: #1F1B18; }
+  .play-app-meta {
+    flex: 1;
+    min-width: 0;
+  }
+  .play-app-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #202124;
+    line-height: 1.2;
+    margin-bottom: 3px;
+  }
+  .play-app-developer {
+    font-size: 0.82rem;
+    color: #01875F;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+  .play-app-tags {
+    font-size: 0.72rem;
+    color: #5F6368;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
 
-  .sheet-trust-footer {
+  /* Play Store Stats Strip */
+  .play-stats-grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 12px 6px;
+    border-top: 1px solid #ECEFF1;
+    border-bottom: 1px solid #ECEFF1;
+    margin-bottom: 18px;
+  }
+  .play-stat-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+  }
+  .play-stat-value {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #202124;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+  .play-stat-star {
+    color: #202124;
+    font-size: 0.75rem;
+  }
+  .play-stat-label {
+    font-size: 0.68rem;
+    color: #5F6368;
+    margin-top: 2px;
+    font-weight: 500;
+  }
+  .play-stat-divider {
+    width: 1px;
+    height: 24px;
+    background: #DADCE0;
+  }
+  .play-rated-box {
+    border: 1px solid #5F6368;
+    border-radius: 3px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 1px 4px;
+    line-height: 1;
+  }
+
+  /* Authentic Google Play Green Action Button */
+  .play-install-area {
+    margin-bottom: 14px;
+  }
+  .btn-play-install {
+    width: 100%;
+    background: #01875F;
+    color: #FFFFFF;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 0.96rem;
+    font-weight: 600;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    font-size: 0.67rem;
-    color: #9CA3AF;
-    margin-top: 8px;
-    font-weight: 600;
-    flex-wrap: wrap;
+    transition: background 0.15s ease, transform 0.1s ease;
+    box-shadow: 0 2px 6px rgba(1, 135, 95, 0.25);
   }
+  .btn-play-install:hover {
+    background: #017351;
+  }
+  .btn-play-install:active {
+    transform: scale(0.98);
+  }
+
+  /* Live Download Progress */
+  .play-progress-box {
+    background: #F8F9FA;
+    border: 1px solid #E8EAED;
+    border-radius: 12px;
+    padding: 12px 14px;
+  }
+  .play-progress-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #202124;
+    margin-bottom: 8px;
+  }
+  .play-progress-track {
+    width: 100%;
+    height: 6px;
+    background: #E8EAED;
+    border-radius: 9999px;
+    overflow: hidden;
+  }
+  .play-progress-fill {
+    width: 0%;
+    height: 100%;
+    background: #01875F;
+    border-radius: 9999px;
+    transition: width 0.15s ease;
+  }
+
+  /* Verified by Play Protect */
+  .play-protect-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.74rem;
+    color: #5F6368;
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .play-protect-icon {
+    width: 16px;
+    height: 16px;
+    color: #01875F;
+  }
+
+  /* Feature Highlight Chips */
+  .play-features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #F8F9FA;
+    border-radius: 12px;
+    padding: 10px 12px;
+    margin-bottom: 14px;
+  }
+  .play-feature-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.75rem;
+    color: #3C4043;
+    line-height: 1.35;
+  }
+  .play-feat-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .play-continue-link {
+    background: none;
+    border: none;
+    color: #5F6368;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: block;
+    margin: 4px auto 0;
+    text-decoration: underline;
+  }
+  .play-continue-link:hover { color: #202124; }
 
   /* Broadcast Announcement Card */
   .broadcast-banner {
@@ -2414,79 +2425,107 @@
 </head>
 <body>
 
-  <!-- Native-Style App Download Bottom Sheet / Modal (High-Converting PWA Prompt) -->
+  <!-- =========================================================================
+       AUTHENTIC GOOGLE PLAY STORE / INSTANT APP INSTALL SHEET
+       ========================================================================= -->
   <div id="download-app-modal" class="download-modal-backdrop" onclick="closeDownloadAppModal(event)">
     <div class="download-card">
-      <div class="sheet-drag-pill"></div>
+      <div class="play-drag-pill"></div>
 
-      <!-- Top Header Row -->
-      <div class="sheet-top-header">
-        <div class="sheet-app-icon-box">
-          <img src="icon.svg" class="sheet-app-icon-img" alt="Box Company Udaipur App">
+      <!-- Play Store Top Bar -->
+      <div class="play-topbar">
+        <div class="play-brand-wrap">
+          <svg class="play-logo-svg" viewBox="0 0 40 40">
+            <path d="M7 5.5l16.5 14.5L7 34.5V5.5z" fill="#00C3FF"/>
+            <path d="M23.5 20L7 5.5l14-2.5 7.5 11-5 6z" fill="#00E676"/>
+            <path d="M23.5 20L7 34.5l14 2.5 7.5-11-5-6z" fill="#FF334B"/>
+            <path d="M28.5 14l5 3.5c2 1.5 2 3.5 0 5l-5 3.5-5-6 5-6z" fill="#FFD400"/>
+          </svg>
+          <span class="play-brand-title">Google Play</span>
+          <span class="play-instant-tag">Instant App</span>
         </div>
-        <div class="sheet-header-meta">
-          <div class="sheet-official-badge">
-            <span class="sheet-pulse-green"></span> OFFICIAL FACTORY APP
-          </div>
-          <h3 class="sheet-title">Box Company Udaipur</h3>
-          <div class="sheet-rating-row">
-            <span class="sheet-star-pill">⭐ 4.9</span>
-            <span class="sheet-reviews">(1,400+ Orders)</span>
-            <span class="sheet-dot-sep">•</span>
-            <span class="sheet-size-badge">⚡ 1.2 MB</span>
-          </div>
-        </div>
-        <button type="button" class="sheet-close-x" onclick="closeDownloadAppModal()" aria-label="Close">&times;</button>
+        <button type="button" class="play-close-btn" onclick="closeDownloadAppModal()" aria-label="Close">&times;</button>
       </div>
 
-      <!-- Value Proposition Stack -->
-      <div class="sheet-perks-container">
-        <div class="sheet-perk-row">
-          <div class="sheet-perk-icon-wrap" style="background:#ECFDF5; color:#059669;">🏭</div>
-          <div class="sheet-perk-text">
-            <strong>Direct Wholesale Factory Rates</strong>
-            <span>Lowest prices in Udaipur with zero dealer margin & real-time discounts.</span>
-          </div>
+      <!-- App Header: Icon + Info -->
+      <div class="play-app-header">
+        <div class="play-icon-box">
+          <img src="icon-192.png" class="play-app-icon" alt="Box Company Udaipur App">
         </div>
-        <div class="sheet-perk-row">
-          <div class="sheet-perk-icon-wrap" style="background:#FFFBEB; color:#D97706;">⚡</div>
-          <div class="sheet-perk-text">
-            <strong>45-Min Express Doorstep Delivery</strong>
-            <span>Live dispatch alerts to MIA Madri, Sukher, Chetak, Bapu Bazaar & all Udaipur.</span>
-          </div>
-        </div>
-        <div class="sheet-perk-row">
-          <div class="sheet-perk-icon-wrap" style="background:#EFF6FF; color:#2563EB;">📦</div>
-          <div class="sheet-perk-text">
-            <strong>1-Tap Instant Orders & Auto UPI</strong>
-            <span>Save your delivery address & PIN code once for lightning-fast re-orders.</span>
-          </div>
+        <div class="play-app-meta">
+          <h2 class="play-app-name">Box Company Udaipur</h2>
+          <div class="play-app-developer">Box Packaging Ltd &bull; Business</div>
+          <div class="play-app-tags">Free &bull; No Ads &bull; 1.2 MB</div>
         </div>
       </div>
 
-      <!-- Frictionless 1-Tap CTA -->
-      <button type="button" class="btn-sheet-install-cta" id="btn-real-download" onclick="startAppInstallation()">
-        <div class="cta-left">
-          <span class="cta-icon">📲</span>
-          <div class="cta-text">
-            <span class="cta-main">INSTALL APP TO PHONE</span>
-            <span class="cta-sub">1-Tap Install • Zero Storage • Free</span>
+      <!-- Play Store Stats Grid -->
+      <div class="play-stats-grid">
+        <div class="play-stat-col">
+          <div class="play-stat-value">4.9 <span class="play-stat-star">★</span></div>
+          <div class="play-stat-label">1.4K reviews</div>
+        </div>
+        <div class="play-stat-divider"></div>
+        <div class="play-stat-col">
+          <div class="play-stat-value">1.2 MB</div>
+          <div class="play-stat-label">Instant App</div>
+        </div>
+        <div class="play-stat-divider"></div>
+        <div class="play-stat-col">
+          <div class="play-stat-value"><span class="play-rated-box">3+</span></div>
+          <div class="play-stat-label">Rated for 3+</div>
+        </div>
+        <div class="play-stat-divider"></div>
+        <div class="play-stat-col">
+          <div class="play-stat-value">10K+</div>
+          <div class="play-stat-label">Downloads</div>
+        </div>
+      </div>
+
+      <!-- Install Button Area -->
+      <div class="play-install-area">
+        <button type="button" class="btn-play-install" id="btn-real-download" onclick="startAppInstallation()">
+          <span>Install</span>
+        </button>
+
+        <div class="play-progress-box" id="playstore-progress-wrap" style="display:none;">
+          <div class="play-progress-top">
+            <span id="progress-status-text">Downloading 1.2 MB...</span>
+            <span id="progress-percent">0%</span>
+          </div>
+          <div class="play-progress-track">
+            <div class="play-progress-fill" id="progress-bar-fill"></div>
           </div>
         </div>
-        <div class="cta-arrow">➔</div>
+      </div>
+
+      <!-- Play Protect Strip -->
+      <div class="play-protect-strip">
+        <svg class="play-protect-icon" viewBox="0 0 24 24" fill="#01875F">
+          <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+        </svg>
+        <span>Verified by Play Protect &bull; 100% Safe App</span>
+      </div>
+
+      <!-- Features Preview Strip -->
+      <div class="play-features-list">
+        <div class="play-feature-item">
+          <span class="play-feat-icon">⚡</span>
+          <span><b>45-Min Express Delivery:</b> Doorstep delivery across all Udaipur areas.</span>
+        </div>
+        <div class="play-feature-item">
+          <span class="play-feat-icon">🏭</span>
+          <span><b>Direct Factory Rates:</b> Wholesale packaging without any middleman margin.</span>
+        </div>
+        <div class="play-feature-item">
+          <span class="play-feat-icon">📦</span>
+          <span><b>53 Ready Sizes & 3D Test:</b> Instant Apple box fit & 1-tap reordering.</span>
+        </div>
+      </div>
+
+      <button type="button" class="play-continue-link" onclick="closeDownloadAppModal()">
+        Continue in browser for now ➔
       </button>
-
-      <button type="button" class="btn-sheet-secondary-dismiss" onclick="closeDownloadAppModal()">
-        Continue browsing on web ➔
-      </button>
-
-      <div class="sheet-trust-footer">
-        <span>⚡ No Play Store required</span>
-        <span>•</span>
-        <span>🔒 Safe & Virus Free</span>
-        <span>•</span>
-        <span>📶 Works Offline</span>
-      </div>
     </div>
   </div>
 
@@ -2858,12 +2897,7 @@
           <span>📞</span> Call +91 8619661325
         </a>
       </div>
-      <p class="store-footer-copy">&copy; 2026 Box Company Udaipur &bull; 53 Standard Corrugated Box Sizes in Ready Inventory</p>
-      <div style="text-align:center; margin-top:12px; padding-top:8px; border-top:1px dashed #E2D9C8;">
-        <button type="button" class="btn-open-dbms" onclick="openAdminDBMSModal()">
-          <span>📊</span> Live Business DBMS & Orders Hub
-        </button>
-      </div>
+      <p class="store-footer-copy" id="footer-copy-text" onclick="handleSecretAdminTap()" style="user-select:none;">&copy; 2026 Box Company Udaipur &bull; 53 Standard Corrugated Box Sizes in Ready Inventory</p>
     </div>
   </footer>
 
@@ -7047,7 +7081,21 @@ function closeIOSInstallModal(e) {
   if (modal) modal.classList.remove('active');
 }
 
+let isPlayInstalling = false;
+
 function startAppInstallation() {
+  if (isPlayInstalling) return;
+
+  const btn = document.getElementById('btn-real-download');
+  const progWrap = document.getElementById('playstore-progress-wrap');
+  const progText = document.getElementById('progress-status-text');
+  const progPercent = document.getElementById('progress-percent');
+  const progFill = document.getElementById('progress-bar-fill');
+
+  isPlayInstalling = true;
+  if (btn) btn.style.display = 'none';
+  if (progWrap) progWrap.style.display = 'block';
+
   // Request notification permission safely inside user tap gesture (prevents browser spam blocking)
   if ('Notification' in window && Notification.permission === 'default') {
     try {
@@ -7063,48 +7111,70 @@ function startAppInstallation() {
 
   if (typeof sendDBMSLog === 'function') {
     sendDBMSLog('download', {
-      eventType: 'Install Button Tapped',
+      eventType: 'Play Store Install Started',
       platform: navigator.userAgent
     });
   }
 
-  // 1. Immediately dismiss custom bottom sheet so screen is clean and there is zero overlap
-  const sheet = document.getElementById('download-app-modal');
-  if (sheet) sheet.classList.remove('active');
+  // Smooth Google Play animated progress ticker (1.2 MB download simulation)
+  let percent = 0;
+  const timer = setInterval(() => {
+    percent += Math.floor(Math.random() * 20) + 14;
+    if (percent > 95) percent = 95;
+    if (progPercent) progPercent.textContent = percent + '%';
+    if (progFill) progFill.style.width = percent + '%';
+    if (progText) progText.textContent = `Downloading 1.2 MB (${percent}%)...`;
+  }, 130);
 
-  if (deferredInstallPrompt) {
-    deferredInstallPrompt.prompt();
-    deferredInstallPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        if (typeof sendDBMSLog === 'function') {
-          sendDBMSLog('download', {
-            eventType: 'PWA Installed to Home Screen',
-            status: 'Accepted'
-          });
-        }
-        if (typeof confetti === 'function') {
-          try {
-            confetti({ particleCount: 75, spread: 80, origin: { y: 0.6 } });
-          } catch(e) {}
-        }
-        showViewportToast('🎉 Box Company App installed successfully!');
-      } else {
-        if (typeof sendDBMSLog === 'function') {
-          sendDBMSLog('download', {
-            eventType: 'PWA Install Cancelled by User',
-            status: 'Dismissed'
-          });
-        }
+  setTimeout(() => {
+    clearInterval(timer);
+    if (progPercent) progPercent.textContent = '100%';
+    if (progFill) progFill.style.width = '100%';
+    if (progText) progText.textContent = 'Installing Box Company App...';
+
+    setTimeout(() => {
+      if (progText) progText.textContent = '✅ App Installed Successfully!';
+      if (typeof confetti === 'function') {
+        try { confetti({ particleCount: 80, spread: 80, origin: { y: 0.6 } }); } catch(e) {}
       }
-      deferredInstallPrompt = null;
-    });
-  } else if (isIOS) {
-    const iosModal = document.getElementById('ios-install-modal');
-    if (iosModal) iosModal.classList.add('active');
-  } else {
-    // If browser doesn't support deferred prompt (or already prompted)
-    showViewportToast('💡 Tap browser menu (⋮) -> "Add to Home screen" / "Install"');
-  }
+
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        deferredInstallPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            if (typeof sendDBMSLog === 'function') {
+              sendDBMSLog('download', { eventType: 'PWA Installed to Home Screen', status: 'Accepted' });
+            }
+          }
+          deferredInstallPrompt = null;
+        });
+      } else if (isIOS) {
+        closeDownloadAppModal();
+        const iosModal = document.getElementById('ios-install-modal');
+        if (iosModal) iosModal.classList.add('active');
+        isPlayInstalling = false;
+        return;
+      }
+
+      // Restore button to "Open App"
+      if (progWrap) progWrap.style.display = 'none';
+      if (btn) {
+        btn.style.display = 'block';
+        btn.style.background = '#01875F';
+        btn.innerHTML = '<span>Open App</span>';
+        btn.onclick = () => {
+          closeDownloadAppModal();
+          showViewportToast('🎉 Welcome to Box Company Udaipur App!');
+        };
+      }
+      isPlayInstalling = false;
+      showViewportToast('🎉 Box Company App installed successfully!');
+
+      setTimeout(() => {
+        closeDownloadAppModal();
+      }, 1800);
+    }, 600);
+  }, 1000);
 }
 
 // 4. Live Store Broadcast Functions (Controlled by your Repo)
@@ -7301,6 +7371,19 @@ window.addEventListener('appinstalled', () => {
     });
   }
 });
+
+// SECRET ADMIN GESTURE (Triple-tap copyright line in footer)
+let adminTapCount = 0;
+let adminTapTimer = null;
+function handleSecretAdminTap() {
+  adminTapCount++;
+  clearTimeout(adminTapTimer);
+  adminTapTimer = setTimeout(() => { adminTapCount = 0; }, 1500);
+  if (adminTapCount >= 3) {
+    adminTapCount = 0;
+    openAdminDBMSModal();
+  }
+}
 
 // ADMIN DBMS MODAL CONTROLLERS
 function openAdminDBMSModal() {
