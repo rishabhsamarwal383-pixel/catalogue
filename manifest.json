@@ -1,0 +1,20 @@
+{
+  "name": "Box Company Udaipur",
+  "short_name": "Box Udaipur",
+  "description": "53 Ready Corrugated Box Sizes with 3D Preview & 45-Min Express Delivery in Udaipur",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#13151A",
+  "theme_color": "#1F1B18",
+  "categories": ["shopping", "business"],
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
