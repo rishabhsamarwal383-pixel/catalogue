@@ -1950,109 +1950,316 @@
     }
   }
 
-  /* Native App Download Modal Styles */
+  /* Native App Install Bottom Sheet & Modal Styles (Swiggy/Zepto/PWA Style) */
   .download-modal-backdrop {
-    position: fixed; inset: 0;
-    background: rgba(15, 12, 10, 0.82);
+    position: fixed;
+    inset: 0;
+    background: rgba(12, 10, 9, 0.76);
     backdrop-filter: blur(8px);
-    z-index: 1200;
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 99998;
     display: none;
-    align-items: center;
+    align-items: flex-end; /* Slides up from bottom on mobile */
     justify-content: center;
-    padding: 16px;
+    padding: 0;
+    opacity: 0;
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .download-modal-backdrop.active { display: flex; }
+  .download-modal-backdrop.active {
+    display: flex;
+    opacity: 1;
+  }
   .download-card {
     background: #FFFFFF;
-    border-radius: 24px;
-    max-width: 400px;
+    border-radius: 28px 28px 0 0;
+    max-width: 480px;
     width: 100%;
-    padding: 26px 22px;
-    text-align: center;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+    padding: 14px 20px calc(24px + env(safe-area-inset-bottom, 16px));
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.38);
     position: relative;
-    animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  .download-close-btn {
-    position: absolute;
-    top: 14px; right: 14px;
-    background: #F4F1EA;
-    border: none;
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    font-size: 18px;
-    color: var(--text-secondary);
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-  }
-  .app-icon-wrap {
-    width: 68px; height: 68px;
-    margin: 0 auto 12px;
-    background: #1F1B18;
-    border-radius: 18px;
-    padding: 5px;
-    box-shadow: 0 8px 22px rgba(217, 119, 6, 0.35);
-  }
-  .app-modal-icon { width: 100%; height: 100%; border-radius: 12px; }
-  .app-modal-title { font-family: 'Oswald', sans-serif; font-size: 1.4rem; color: #1F1B18; margin-bottom: 2px; }
-  .app-modal-meta { font-size: 0.75rem; color: #6B6358; font-weight: 600; margin-bottom: 14px; }
-  .app-features-list {
-    background: #FAF8F5;
-    border: 1px solid var(--border-light);
-    border-radius: 14px;
-    padding: 12px 14px;
+    transform: translateY(100%);
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    max-height: 92vh;
+    overflow-y: auto;
     text-align: left;
-    margin-bottom: 16px;
   }
-  .app-feat-item { font-size: 0.78rem; color: #374151; margin-bottom: 6px; line-height: 1.35; }
-  .app-feat-item:last-child { margin-bottom: 0; }
-  .btn-download-primary {
+  .download-modal-backdrop.active .download-card {
+    transform: translateY(0);
+  }
+
+  @media (min-width: 641px) {
+    .download-modal-backdrop {
+      align-items: center;
+      padding: 20px;
+    }
+    .download-card {
+      border-radius: 26px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+      transform: scale(0.92) translateY(20px);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 20px 24px 26px;
+    }
+    .download-modal-backdrop.active .download-card {
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  .sheet-drag-pill {
+    width: 42px;
+    height: 5px;
+    background: #E5E7EB;
+    border-radius: 9999px;
+    margin: 0 auto 12px;
+  }
+
+  .sheet-top-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    margin-bottom: 14px;
+  }
+  .sheet-app-icon-box {
+    width: 62px;
+    height: 62px;
+    background: linear-gradient(135deg, #1F1B18 0%, #372E27 100%);
+    border-radius: 16px;
+    padding: 6px;
+    box-shadow: 0 8px 22px rgba(15, 118, 110, 0.28), 0 2px 8px rgba(0,0,0,0.2);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid rgba(255,255,255,0.2);
+  }
+  .sheet-app-icon-img {
     width: 100%;
-    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+  }
+  .sheet-header-meta {
+    flex: 1;
+    min-width: 0;
+  }
+  .sheet-official-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #FEF3C7;
+    color: #92400E;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+    margin-bottom: 2px;
+  }
+  .sheet-pulse-green {
+    width: 6px;
+    height: 6px;
+    background: #10B981;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #10B981;
+    display: inline-block;
+  }
+  .sheet-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.35rem;
+    color: #1F1B18;
+    line-height: 1.15;
+    letter-spacing: 0.3px;
+  }
+  .sheet-rating-row {
+    font-size: 0.74rem;
+    color: #6B7280;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 3px;
+    flex-wrap: wrap;
+  }
+  .sheet-star-pill {
+    color: #D97706;
+    font-weight: 800;
+  }
+  .sheet-reviews {
+    color: #4B5563;
+  }
+  .sheet-dot-sep {
+    color: #D1D5DB;
+  }
+  .sheet-size-badge {
+    background: #ECFDF5;
+    color: #065F46;
+    font-weight: 800;
+    padding: 1px 7px;
+    border-radius: 6px;
+    font-size: 0.68rem;
+  }
+  .sheet-close-x {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #F3F4F6;
+    border: none;
+    color: #6B7280;
+    font-size: 20px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .sheet-close-x:hover { background: #E5E7EB; color: #111827; }
+
+  /* Perks List */
+  .sheet-perks-container {
+    background: #FAF8F5;
+    border: 1px solid #ECE5D8;
+    border-radius: 16px;
+    padding: 11px 13px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .sheet-perk-row {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+  }
+  .sheet-perk-icon-wrap {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    flex-shrink: 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .sheet-perk-text strong {
+    display: block;
+    font-size: 0.78rem;
+    color: #1F1B18;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+  .sheet-perk-text span {
+    display: block;
+    font-size: 0.69rem;
+    color: #6B6358;
+    line-height: 1.25;
+    margin-top: 1px;
+  }
+
+  /* 1-Tap Glowing Install CTA */
+  .btn-sheet-install-cta {
+    width: 100%;
+    background: linear-gradient(135deg, #047857 0%, #10B981 100%);
     color: #FFFFFF;
     border: none;
     padding: 13px 18px;
-    border-radius: 28px;
-    font-size: 0.98rem;
+    border-radius: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.42);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn-sheet-install-cta:active {
+    transform: scale(0.98);
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+  }
+  .btn-sheet-install-cta::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+    transform: translateX(-100%);
+    animation: installShimmer 2.5s infinite;
+  }
+  @keyframes installShimmer {
+    100% { transform: translateX(100%); }
+  }
+  .cta-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+  }
+  .cta-icon {
+    font-size: 1.45rem;
+    line-height: 1;
+  }
+  .cta-text {
+    display: flex;
+    flex-direction: column;
+  }
+  .cta-main {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    line-height: 1.15;
+  }
+  .cta-sub {
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.92);
+    font-weight: 600;
+    margin-top: 1px;
+  }
+  .cta-arrow {
+    background: rgba(255,255,255,0.2);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
     font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .btn-sheet-secondary-dismiss {
+    background: none;
+    border: none;
+    color: #6B6358;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 10px 14px 4px;
+    cursor: pointer;
+    display: block;
+    margin: 4px auto 0;
+    text-decoration: underline;
+    transition: color 0.15s ease;
+  }
+  .btn-sheet-secondary-dismiss:hover { color: #1F1B18; }
+
+  .sheet-trust-footer {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    cursor: pointer;
-    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
-    transition: transform 0.15s ease;
-  }
-  .btn-download-primary:active { transform: scale(0.97); }
-  .dl-progress-bar {
-    width: 100%;
-    height: 8px;
-    background: #E5E7EB;
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 6px;
-  }
-  .dl-progress-fill {
-    width: 0%;
-    height: 100%;
-    background: #10B981;
-    transition: width 0.3s ease;
-  }
-  .dl-progress-text { font-size: 0.74rem; color: #065F46; font-weight: 700; }
-  .app-modal-note { font-size: 0.68rem; color: #9CA3AF; margin-top: 8px; }
-  .btn-continue-browser {
-    background: none;
-    border: none;
-    color: #6B6358;
-    font-size: 0.82rem;
-    font-weight: 600;
+    font-size: 0.67rem;
+    color: #9CA3AF;
     margin-top: 8px;
-    cursor: pointer;
-    padding: 6px 14px;
-    text-decoration: underline;
-    display: inline-block;
+    font-weight: 600;
+    flex-wrap: wrap;
   }
-  .btn-continue-browser:active { color: #1F1B18; }
 
   /* Broadcast Announcement Card */
   .broadcast-banner {
@@ -2096,74 +2303,228 @@
     padding: 2px 6px;
   }
 
-  /* iOS Install Guide Modal */
+  /* iOS Install Guide Sheet */
   .ios-install-modal-backdrop {
-    position: fixed; inset: 0;
-    background: rgba(15, 12, 10, 0.78);
-    backdrop-filter: blur(6px);
-    z-index: 1200;
+    position: fixed;
+    inset: 0;
+    background: rgba(12, 10, 9, 0.78);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 99999;
     display: none;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
-    padding: 18px;
+    padding: 0;
   }
   .ios-install-modal-backdrop.active { display: flex; }
   .ios-install-card {
     background: #FFFFFF;
-    border-radius: 20px;
-    max-width: 380px;
+    border-radius: 28px 28px 0 0;
+    max-width: 440px;
     width: 100%;
-    padding: 24px 20px;
-    text-align: center;
-    box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+    padding: 16px 20px calc(24px + env(safe-area-inset-bottom, 16px));
+    text-align: left;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.4);
     position: relative;
-    animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: slideUpSheet 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
+  @media (min-width: 641px) {
+    .ios-install-modal-backdrop {
+      align-items: center;
+      padding: 20px;
+    }
+    .ios-install-card {
+      border-radius: 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      padding: 24px 22px;
+    }
+  }
+  .ios-header-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .ios-icon-box {
+    font-size: 2.2rem;
+    line-height: 1;
+  }
+  .ios-sheet-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.25rem;
+    color: #1F1B18;
+    line-height: 1.2;
+  }
+  .ios-sheet-sub {
+    font-size: 0.74rem;
+    color: #6B6358;
+    font-weight: 500;
+    margin-top: 1px;
+  }
+  .ios-steps-box {
+    background: #F4F1EA;
+    border: 1px solid #E4DDD2;
+    border-radius: 14px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .ios-step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.79rem;
+    color: #1F1B18;
+    line-height: 1.4;
+  }
+  .ios-step-num {
+    background: #1F1B18;
+    color: #FFFFFF;
+    font-size: 0.7rem;
+    font-weight: 800;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .btn-ios-done {
+    width: 100%;
+    background: #1F1B18;
+    color: #FFFFFF;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 14px;
+    font-weight: 800;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .btn-ios-done:active { background: #372E27; }
 </style>
 </head>
 <body>
 
-  <!-- Native-Style App Download Modal -->
+  <!-- Native-Style App Download Bottom Sheet / Modal (High-Converting PWA Prompt) -->
   <div id="download-app-modal" class="download-modal-backdrop" onclick="closeDownloadAppModal(event)">
     <div class="download-card">
-      <button class="download-close-btn" onclick="closeDownloadAppModal()">&times;</button>
-      <div class="app-icon-wrap">
-        <img src="icon.svg" class="app-modal-icon" alt="App Icon">
+      <div class="sheet-drag-pill"></div>
+
+      <!-- Top Header Row -->
+      <div class="sheet-top-header">
+        <div class="sheet-app-icon-box">
+          <img src="icon.svg" class="sheet-app-icon-img" alt="Box Company Udaipur App">
+        </div>
+        <div class="sheet-header-meta">
+          <div class="sheet-official-badge">
+            <span class="sheet-pulse-green"></span> OFFICIAL FACTORY APP
+          </div>
+          <h3 class="sheet-title">Box Company Udaipur</h3>
+          <div class="sheet-rating-row">
+            <span class="sheet-star-pill">⭐ 4.9</span>
+            <span class="sheet-reviews">(1,400+ Orders)</span>
+            <span class="sheet-dot-sep">•</span>
+            <span class="sheet-size-badge">⚡ 1.2 MB</span>
+          </div>
+        </div>
+        <button type="button" class="sheet-close-x" onclick="closeDownloadAppModal()" aria-label="Close">&times;</button>
       </div>
-      <h3 class="app-modal-title">Box Company Udaipur</h3>
-      <div class="app-modal-meta">
-        <span>⭐ 4.9 (140+ Reviews)</span> &bull; <span>1.2 MB</span> &bull; <span>Instant App</span>
+
+      <!-- Value Proposition Stack -->
+      <div class="sheet-perks-container">
+        <div class="sheet-perk-row">
+          <div class="sheet-perk-icon-wrap" style="background:#ECFDF5; color:#059669;">🏭</div>
+          <div class="sheet-perk-text">
+            <strong>Direct Wholesale Factory Rates</strong>
+            <span>Lowest prices in Udaipur with zero dealer margin & real-time discounts.</span>
+          </div>
+        </div>
+        <div class="sheet-perk-row">
+          <div class="sheet-perk-icon-wrap" style="background:#FFFBEB; color:#D97706;">⚡</div>
+          <div class="sheet-perk-text">
+            <strong>45-Min Express Doorstep Delivery</strong>
+            <span>Live dispatch alerts to MIA Madri, Sukher, Chetak, Bapu Bazaar & all Udaipur.</span>
+          </div>
+        </div>
+        <div class="sheet-perk-row">
+          <div class="sheet-perk-icon-wrap" style="background:#EFF6FF; color:#2563EB;">📦</div>
+          <div class="sheet-perk-text">
+            <strong>1-Tap Instant Orders & Auto UPI</strong>
+            <span>Save your delivery address & PIN code once for lightning-fast re-orders.</span>
+          </div>
+        </div>
       </div>
-      <div class="app-features-list">
-        <div class="app-feat-item">⚡ <b>1-Tap Quick Orders:</b> WhatsApp direct ordering</div>
-        <div class="app-feat-item">🔔 <b>Wholesale Price Alerts:</b> Direct factory notifications</div>
-        <div class="app-feat-item">🔄 <b>Auto-Syncs from Cloud:</b> Always updated with latest prices</div>
-        <div class="app-feat-item">📦 <b>3D Box Inspection:</b> Test apple fit on your mobile</div>
-      </div>
-      <button class="btn-download-primary" id="btn-real-download" onclick="startAppInstallation()">
-        <span>⬇️</span> Install App Now & Enable Alerts
+
+      <!-- Frictionless 1-Tap CTA -->
+      <button type="button" class="btn-sheet-install-cta" id="btn-real-download" onclick="startAppInstallation()">
+        <div class="cta-left">
+          <span class="cta-icon">📲</span>
+          <div class="cta-text">
+            <span class="cta-main">INSTALL APP TO PHONE</span>
+            <span class="cta-sub">1-Tap Install • Zero Storage • Free</span>
+          </div>
+        </div>
+        <div class="cta-arrow">➔</div>
       </button>
-      <button type="button" class="btn-continue-browser" onclick="closeDownloadAppModal()">
-        Continue in browser ➔
+
+      <button type="button" class="btn-sheet-secondary-dismiss" onclick="closeDownloadAppModal()">
+        Continue browsing on web ➔
       </button>
-      <p class="app-modal-note">Fast 1-tap install &bull; Zero phone storage &bull; Direct on Home Screen</p>
+
+      <div class="sheet-trust-footer">
+        <span>⚡ No Play Store required</span>
+        <span>•</span>
+        <span>🔒 Safe & Virus Free</span>
+        <span>•</span>
+        <span>📶 Works Offline</span>
+      </div>
     </div>
   </div>
 
-  <!-- iOS Safari Install Guide Modal -->
+  <!-- iOS Safari Install Guide Sheet -->
   <div id="ios-install-modal" class="ios-install-modal-backdrop" onclick="closeIOSInstallModal(event)">
     <div class="ios-install-card">
-      <div style="font-size:2.8rem; margin-bottom:8px;">📱</div>
-      <h3 style="font-size:1.15rem; font-weight:800; color:#1F1B18; margin-bottom:6px;">iPhone par App Add Karein</h3>
-      <p style="font-size:0.85rem; color:#6B6358; line-height:1.45; margin-bottom:16px;">
-        Bina App Store ke direct phone ki home screen par add ho jayega:
-      </p>
-      <div style="background:#F4F1EA; border-radius:12px; padding:12px 14px; text-align:left; font-size:0.82rem; color:#1F1B18; line-height:1.6; margin-bottom:16px;">
-        1️⃣ Safari ke bottom mein <strong>Share</strong> button (⎋) dabayein.<br>
-        2️⃣ Thoda scroll karke <strong>'Add to Home Screen' (➕)</strong> chunein.<br>
-        3️⃣ Upar <strong>'Add'</strong> dabayein — aapki screen par app icon aa jayega!
+      <div class="sheet-drag-pill"></div>
+      <div class="ios-header-row">
+        <div class="ios-icon-box">📱</div>
+        <div>
+          <h3 class="ios-sheet-title">iPhone par App Add Karein</h3>
+          <p class="ios-sheet-sub">Bina App Store ke direct apni Home Screen par lagayein:</p>
+        </div>
+        <button type="button" class="sheet-close-x" onclick="closeIOSInstallModal()">&times;</button>
       </div>
-      <button style="background:#1F1B18; color:#fff; border:none; padding:10px 24px; border-radius:12px; font-weight:700; font-size:0.85rem; cursor:pointer;" onclick="closeIOSInstallModal()">Theek Hai (Got it)</button>
+
+      <div class="ios-steps-box">
+        <div class="ios-step-item">
+          <div class="ios-step-num">1</div>
+          <div class="ios-step-content">
+            Safari ke bottom bar mein <strong>Share button (⎋)</strong> dabayein.
+          </div>
+        </div>
+        <div class="ios-step-item">
+          <div class="ios-step-num">2</div>
+          <div class="ios-step-content">
+            Thoda scroll karke <strong>'Add to Home Screen' (➕)</strong> chunein.
+          </div>
+        </div>
+        <div class="ios-step-item">
+          <div class="ios-step-num">3</div>
+          <div class="ios-step-content">
+            Upar right corner mein <strong>'Add'</strong> dabayein — Done!
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="btn-ios-done" onclick="closeIOSInstallModal()">
+        Theek Hai, Samajh Gaya (Got it)
+      </button>
     </div>
   </div>
 
@@ -6632,48 +6993,76 @@ window.addEventListener('beforeinstallprompt', (e) => {
 
 function openDownloadAppModal() {
   const modal = document.getElementById('download-app-modal');
-  if (modal) modal.classList.add('active');
+  if (modal) {
+    modal.classList.add('active');
+    if (typeof sendDBMSLog === 'function') {
+      sendDBMSLog('visitor', { action: 'Install Sheet Auto-Shown' });
+    }
+  }
 }
 
 function closeDownloadAppModal(e) {
-  if (e && e.target && e.target !== e.currentTarget && !e.target.classList.contains('download-close-btn') && !e.target.classList.contains('btn-continue-browser')) {
+  if (e && e.target && e.target !== e.currentTarget && 
+      !e.target.classList.contains('sheet-close-x') && 
+      !e.target.classList.contains('btn-sheet-secondary-dismiss') &&
+      !e.target.classList.contains('download-close-btn') &&
+      !e.target.classList.contains('btn-continue-browser')) {
     return;
   }
   const modal = document.getElementById('download-app-modal');
   if (modal) modal.classList.remove('active');
-  sessionStorage.setItem('install_popup_dismissed', 'true');
+  sessionStorage.setItem('box_install_sheet_dismissed', 'true');
 }
 
-// Install popup is now purely user-initiated via the 'Install App' header button
 function checkAutoShowInstallPopup() {
-  // Silent on page load — clean catalog experience without annoying popups!
+  // If user is already running the installed PWA in standalone mode, DO NOT show
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  if (isStandalone) {
+    return;
+  }
+
+  // If already dismissed in this browsing session, don't badger on every link click
+  if (sessionStorage.getItem('box_install_sheet_dismissed') === 'true') {
+    return;
+  }
+
+  // Smooth appearance 1.2s after landing so initial page paint is instantaneous and smooth
+  setTimeout(() => {
+    const stillStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    if (!stillStandalone && sessionStorage.getItem('box_install_sheet_dismissed') !== 'true') {
+      openDownloadAppModal();
+    }
+  }, 1200);
 }
 
 function closeIOSInstallModal(e) {
+  if (e && e.target && e.target !== e.currentTarget && 
+      !e.target.classList.contains('sheet-close-x') && 
+      !e.target.classList.contains('btn-ios-done')) {
+    return;
+  }
   const modal = document.getElementById('ios-install-modal');
   if (modal) modal.classList.remove('active');
 }
 
 function startAppInstallation() {
-  // 1. Immediately request notification permission
-  if ('Notification' in window && Notification.permission !== 'granted') {
+  // Request notification permission safely inside user tap gesture (prevents browser spam blocking)
+  if ('Notification' in window && Notification.permission === 'default') {
     try {
       Notification.requestPermission().then((perm) => {
         if (perm === 'granted') {
           updateNotificationButtonUI();
-          sendSampleNotification();
         }
       }).catch(() => {});
     } catch (e) {}
   }
 
-  // 2. Immediately trigger native installation prompt
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
   if (typeof sendDBMSLog === 'function') {
     sendDBMSLog('download', {
-      eventType: 'Install App Initiated',
-      status: 'Prompt Triggered'
+      eventType: 'Install Button Tapped',
+      platform: navigator.userAgent
     });
   }
 
@@ -6681,11 +7070,23 @@ function startAppInstallation() {
     deferredInstallPrompt.prompt();
     deferredInstallPrompt.userChoice.then((choiceResult) => {
       if (choiceResult.outcome === 'accepted') {
-        showViewportToast('🎉 Box Company App installed successfully!');
         if (typeof sendDBMSLog === 'function') {
           sendDBMSLog('download', {
             eventType: 'PWA Installed to Home Screen',
             status: 'Accepted'
+          });
+        }
+        if (typeof confetti === 'function') {
+          try {
+            confetti({ particleCount: 75, spread: 80, origin: { y: 0.6 } });
+          } catch(e) {}
+        }
+        showViewportToast('🎉 Box Company App installed successfully!');
+      } else {
+        if (typeof sendDBMSLog === 'function') {
+          sendDBMSLog('download', {
+            eventType: 'PWA Install Cancelled by User',
+            status: 'Dismissed'
           });
         }
       }
@@ -6697,6 +7098,7 @@ function startAppInstallation() {
     const iosModal = document.getElementById('ios-install-modal');
     if (iosModal) iosModal.classList.add('active');
   } else {
+    // If browser doesn't support deferred prompt (or already prompted)
     showViewportToast('💡 Tap browser menu (⋮) -> "Add to Home screen" / "Install"');
     closeDownloadAppModal();
   }
@@ -6801,6 +7203,7 @@ function ensure3DInitialized() {
 window.addEventListener('DOMContentLoaded', () => {
   updateNotificationButtonUI();
   initStoreBroadcast();
+  checkAutoShowInstallPopup();
 
   // If on desktop (>= 768px), initialize 3D immediately.
   // If on mobile (< 768px), DO NOT initialize 3D on load! Keeps mobile 100% lightweight & lag-free!
