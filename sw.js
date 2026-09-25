@@ -1,12 +1,12 @@
-// Box Company Udaipur - Progressive Web App Service Worker
-const CACHE_NAME = 'box-co-v1';
+// Box Company Udaipur - PWA Service Worker (Auto-Update & Push Notifications)
+const CACHE_NAME = 'box-co-v2';
 const ASSETS_TO_CACHE = [
   './',
-  './index.html',
   './manifest.json',
   './icon.svg'
 ];
 
+// Install: pre-cache assets and force immediate activation
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -16,6 +16,7 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
+// Activate: clean old caches and claim clients immediately
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
@@ -27,11 +28,35 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
+// Fetch: Network-first for index.html / main page so repo updates reflect immediately!
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
+  const url = new URL(event.request.url);
+
+  // For HTML documents: try network first so any repo update is received instantly!
+  if (event.request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname === '/') {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+          return response;
+        })
+        .catch(() => caches.match(event.request).then(cached => cached || caches.match('./index.html')))
+    );
+    return;
+  }
+
+  // For static assets: Cache-first
   event.respondWith(
     caches.match(event.request).then((cached) => {
-      return cached || fetch(event.request).catch(() => caches.match('./index.html'));
+      return cached || fetch(event.request).then((response) => {
+        if (response.status === 200) {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        }
+        return response;
+      }).catch(() => null);
     })
   );
 });
@@ -49,6 +74,33 @@ self.addEventListener('notificationclick', (event) => {
       if (clients.openWindow) {
         return clients.openWindow('./');
       }
+    })
+  );
+});
+
+// Push Notification Handler from Server / OneSignal
+self.addEventListener('push', (event) => {
+  let title = 'Box Company Udaipur 📦';
+  let body = 'New wholesale rates & express dispatch updates available!';
+  let icon = 'icon.svg';
+
+  if (event.data) {
+    try {
+      const data = event.data.json();
+      if (data.title) title = data.title;
+      if (data.body) body = data.body;
+      if (data.icon) icon = data.icon;
+    } catch (e) {
+      body = event.data.text();
+    }
+  }
+
+  event.waitUntil(
+    self.registration.showNotification(title, {
+      body: body,
+      icon: icon,
+      badge: icon,
+      vibrate: [200, 100, 200]
     })
   );
 });
