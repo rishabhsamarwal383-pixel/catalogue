@@ -6644,25 +6644,9 @@ function closeDownloadAppModal(e) {
   sessionStorage.setItem('install_popup_dismissed', 'true');
 }
 
-// Auto-show install popup when someone lands on mobile browser (NOT standalone PWA)
+// Install popup is now purely user-initiated via the 'Install App' header button
 function checkAutoShowInstallPopup() {
-  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-  if (isStandalone) return; // Never show if already opened inside installed app!
-
-  setTimeout(() => {
-    openDownloadAppModal();
-    // Prompt notification permission early if supported
-    if ('Notification' in window && Notification.permission === 'default') {
-      try {
-        Notification.requestPermission().then((perm) => {
-          if (perm === 'granted') {
-            updateNotificationButtonUI();
-            sendSampleNotification();
-          }
-        }).catch(() => {});
-      } catch (e) {}
-    }
-  }, 600);
+  // Silent on page load — clean catalog experience without annoying popups!
 }
 
 function closeIOSInstallModal(e) {
@@ -6841,9 +6825,6 @@ window.addEventListener('DOMContentLoaded', () => {
   if (new URLSearchParams(window.location.search).get('admin') === 'true') {
     setTimeout(() => openAdminDBMSModal(), 600);
   }
-
-  // Automatic Install Popup for Browser Visitors!
-  checkAutoShowInstallPopup();
 });
 
 /* =========================================================================
