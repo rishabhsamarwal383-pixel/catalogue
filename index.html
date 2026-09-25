@@ -205,13 +205,52 @@
   /* 3D WebGL Canvas Container */
   .stage-viewport-wrap {
     width: 100%;
-    height: 250px;
-    background: radial-gradient(circle at center, #FFFFFF 0%, #EDE7D8 100%);
+    height: 300px;
+    background: #13151A;
     border-radius: var(--radius-xl);
     position: relative;
-    box-shadow: inset 0 2px 6px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04);
-    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: inset 0 3px 12px rgba(0,0,0,0.4), 0 12px 32px rgba(0,0,0,0.15);
+    border: 1px solid #2B2F38;
     overflow: hidden;
+  }
+  .stage-viewport-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 48%, rgba(0,0,0,0) 45%, rgba(10,12,18,0.35) 80%, rgba(6,8,12,0.72) 100%);
+    border-radius: inherit;
+    z-index: 2;
+  }
+  @media (min-width: 640px) {
+    .stage-viewport-wrap {
+      height: 470px;
+    }
+  }
+  .viewport-toast {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-12px);
+    background: rgba(18, 20, 26, 0.94);
+    border: 1px solid rgba(251, 191, 36, 0.6);
+    color: #FDE68A;
+    padding: 7px 18px;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 10;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    white-space: nowrap;
+    backdrop-filter: blur(8px);
+  }
+  .viewport-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
   }
   #hero-webgl-canvas {
     width: 100% !important;
@@ -219,23 +258,29 @@
     display: block;
     cursor: grab;
     touch-action: none;
+    position: relative;
+    z-index: 1;
   }
   #hero-webgl-canvas:active { cursor: grabbing; }
 
   .stage-drag-pill {
     position: absolute;
-    bottom: 10px;
+    bottom: 12px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(31, 27, 24, 0.78);
-    backdrop-filter: blur(4px);
-    color: #FFFFFF;
+    background: rgba(18, 20, 26, 0.88);
+    backdrop-filter: blur(8px);
+    color: #FBBF24;
     font-size: 0.65rem;
-    font-weight: 600;
-    padding: 4px 12px;
+    font-weight: 700;
+    padding: 6px 15px;
     border-radius: 20px;
     pointer-events: none;
-    letter-spacing: 0.2px;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+    border: 1px solid rgba(251, 191, 36, 0.3);
+    white-space: nowrap;
+    z-index: 3;
   }
 
   /* Camera Angle Controls */
@@ -982,6 +1027,195 @@
     border-top: 1px solid var(--border-light);
     padding-top: 10px;
   }
+
+  /* Hindi Business Owner Warehouse Visit Guide Styles */
+  .hindi-warehouse-guide-wrap {
+    max-width: 1200px;
+    margin: 36px auto 16px auto;
+    padding: 30px 22px;
+    background: #FFFFFF;
+    border-radius: var(--radius-xl);
+    border: 2px solid #E5E7EB;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  }
+
+  .guide-header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #FEF3C7;
+    color: #92400E;
+    border: 1px solid #FCD34D;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .guide-main-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #111827;
+    line-height: 1.35;
+    margin-bottom: 8px;
+  }
+
+  .guide-sub-desc {
+    font-size: 0.96rem;
+    color: #4B5563;
+    line-height: 1.6;
+    margin-bottom: 22px;
+    max-width: 920px;
+  }
+
+  .guide-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 26px;
+  }
+
+  .guide-card {
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: var(--radius-lg);
+    padding: 20px 18px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .guide-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    border-color: #0F766E;
+  }
+
+  .guide-card-icon {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+
+  .guide-card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 6px;
+  }
+
+  .guide-card-text {
+    font-size: 0.88rem;
+    color: #4B5563;
+    line-height: 1.5;
+  }
+
+  .guide-steps-banner {
+    background: linear-gradient(135deg, #0F766E 0%, #064E3B 100%);
+    color: #FFFFFF;
+    border-radius: var(--radius-lg);
+    padding: 24px 20px;
+  }
+
+  .steps-banner-header {
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #FEF08A;
+  }
+
+  .steps-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+
+  .step-col {
+    background: rgba(255, 255, 255, 0.09);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: var(--radius-md);
+    padding: 14px 14px;
+  }
+
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    background: #F59E0B;
+    color: #111827;
+    font-weight: 800;
+    border-radius: 50%;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+  }
+
+  .step-desc {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: #E2E8F0;
+  }
+
+  .step-desc strong {
+    color: #FFFFFF;
+  }
+
+  .guide-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .btn-guide-wa {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #25D366;
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 12px 22px;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+
+  .btn-guide-wa:hover {
+    background: #1EBE5D;
+    transform: translateY(-2px);
+  }
+
+  .btn-guide-call {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    font-weight: 700;
+    font-size: 0.92rem;
+    padding: 12px 20px;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+
+  .btn-guide-call:hover {
+    background: rgba(255, 255, 255, 0.22);
+  }
+
+  .guide-timing-note {
+    font-size: 0.82rem;
+    color: #A7F3D0;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 12px;
+  }
 </style>
 </head>
 <body>
@@ -1037,15 +1271,20 @@
     <!-- 3D Canvas Stage -->
     <div class="stage-viewport-wrap">
       <canvas id="hero-webgl-canvas"></canvas>
-      <div class="stage-drag-pill">👆 Drag 360° &bull; Pinch to Zoom</div>
+      <div id="viewport-toast" class="viewport-toast">✨ Box Selected</div>
+      <div class="stage-drag-pill">👆 Click Any Shelf to Walk Up To It • Tap Box to Open/Close • Drag 360°</div>
     </div>
 
     <!-- Camera Angles Row -->
     <div class="camera-angles-row">
       <button class="cam-btn active" id="cam-orbit" onclick="setCameraAngle('orbit', this)">🔄 3D Free Rotate</button>
-      <button class="cam-btn" id="cam-front" onclick="setCameraAngle('front', this)">📦 Front</button>
-      <button class="cam-btn" id="cam-top" onclick="setCameraAngle('top', this)">📐 Top View</button>
-      <button class="cam-btn" id="cam-flaps" onclick="setCameraAngle('flaps', this)">🔍 Flap Zoom</button>
+      <button class="cam-btn" id="cam-main-table" onclick="setCameraAngle('main-table', this)">📦 Back to Main Table</button>
+      <button class="cam-btn" id="cam-stand-left" onclick="setCameraAngle('stand-left', this)">👀 Left Shelf (6"-11")</button>
+      <button class="cam-btn" id="cam-stand-back" onclick="setCameraAngle('stand-back', this)">👀 Back Shelf (10"-15")</button>
+      <button class="cam-btn" id="cam-stand-right" onclick="setCameraAngle('stand-right', this)">👀 Right Shelf (5-Ply)</button>
+      <button class="cam-btn" id="cam-warehouse" onclick="setCameraAngle('warehouse', this)">🏭 Warehouse 360°</button>
+      <button class="cam-btn" id="cam-front" onclick="setCameraAngle('front', this)">📦 Box Front</button>
+      <button class="cam-btn" id="cam-flaps" onclick="setCameraAngle('flaps', this)">🔍 Flaps Down</button>
     </div>
 
     <!-- Interactive 3D Controls -->
@@ -1110,6 +1349,105 @@
       </div>
     </div>
   </div>
+
+  <!-- =========================================================================
+       ONLINE ORDERING & 3D VISUALIZATION GUIDE
+       ========================================================================= -->
+  <section class="hindi-warehouse-guide-wrap" id="how-to-order-guide">
+    <div class="guide-header-badge">
+      <span class="badge-icon">📦</span> उदयपुर और पूरे राजस्थान में होम डिलीवरी उपलब्ध
+    </div>
+    <h2 class="guide-main-title">ऑनलाइन ऑर्डर करें • 3D में साइज देखें • घर बैठे डिलीवरी पाएं</h2>
+    <p class="guide-sub-desc">
+      सभी रिटेलर्स, ई-कॉमर्स सेलर्स, गारमेंट, स्वीट्स एवं हैंडीक्राफ्ट व्यापारियों के लिए — ऊपर 3D Showroom में बॉक्स की असली Shape-Size देखें, सही साइज चुनें, और सीधे WhatsApp पर ऑर्डर करें! 100% फैक्ट्री होलसेल रेट।
+    </p>
+
+    <!-- Virtual 3D Showroom Callout -->
+    <div style="background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); border: 2px solid #F59E0B; border-radius: 12px; padding: 16px 20px; margin: 14px 0 18px 0; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+      <div style="font-size: 2.2rem; line-height: 1;">👆</div>
+      <div style="flex: 1; min-width: 220px;">
+        <div style="font-weight: 800; font-size: 1.05rem; color: #92400E; margin-bottom: 3px;">⬆ ऊपर 3D Showroom में बॉक्स की असली Shape-Size देखें!</div>
+        <div style="font-size: 0.88rem; color: #78350F; line-height: 1.45;">
+          ऊपर दिए गए <strong>3D Virtual Showroom</strong> में सभी 53 साइज के बॉक्स को <strong>360° घुमाकर</strong> देखें। शेल्फ से बॉक्स क्लिक करें → टेबल पर आएगा → Flaps खोलें-बंद करें → 🍎 Apple अंदर रखकर फिटिंग देखें → सही साइज मिले तो नीचे ऑर्डर करें!
+        </div>
+      </div>
+      <a href="#hero3d-stage" style="background: #D97706; color: #fff; padding: 10px 18px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; text-decoration: none; white-space: nowrap; text-align: center;">🔼 3D Showroom देखें</a>
+    </div>
+
+    <!-- 4 Key Value Cards -->
+    <div class="guide-cards-grid">
+      <div class="guide-card">
+        <div class="guide-card-icon">🖥️</div>
+        <div class="guide-card-title">3D में Shape-Size देखें</div>
+        <div class="guide-card-text">
+          ऊपर 3D Showroom में हर बॉक्स को असली Dimensions में 360° घुमाकर देखें। Flaps खोलें, Apple अंदर रखें — बिना छुए परफेक्ट साइज चुनें!
+        </div>
+      </div>
+
+      <div class="guide-card">
+        <div class="guide-card-icon">📏</div>
+        <div class="guide-card-title">53 Ready Sizes उपलब्ध</div>
+        <div class="guide-card-text">
+          3-प्लाई और 5-प्लाई दोनों में 6" से 20" तक सभी स्टैंडर्ड साइज। कपड़े, मिठाई, जूते, इलेक्ट्रॉनिक — हर प्रोडक्ट के लिए परफेक्ट बॉक्स।
+        </div>
+      </div>
+
+      <div class="guide-card">
+        <div class="guide-card-icon">🚚</div>
+        <div class="guide-card-title">तुरंत डिलीवरी</div>
+        <div class="guide-card-text">
+          उदयपुर शहर में same-day डिलीवरी। राजस्थान के बाकी शहरों में 2-3 दिन में। बल्क ऑर्डर पर स्पेशल रेट।
+        </div>
+      </div>
+
+      <div class="guide-card">
+        <div class="guide-card-icon">💵</div>
+        <div class="guide-card-title">100% Advance UPI पेमेंट</div>
+        <div class="guide-card-text">
+          कोई हिडन चार्ज नहीं। फैक्ट्री होलसेल दर पर सीधा ऑर्डर। UPI / QR कोड से पेमेंट करें — पक्का GST बिल मिलेगा।
+        </div>
+      </div>
+    </div>
+
+    <!-- How to Order Step-by-Step -->
+    <div class="guide-steps-banner">
+      <div class="steps-banner-header">
+        <span class="steps-star">★</span> ऑर्डर करने की आसान 4-स्टेप प्रक्रिया:
+      </div>
+      <div class="steps-row" style="flex-wrap: wrap;">
+        <div class="step-col">
+          <div class="step-num">1</div>
+          <div class="step-desc"><strong>3D में देखें:</strong> ऊपर 3D Showroom में शेल्फ से बॉक्स क्लिक करें — असली Shape-Size 360° में देखें, Flaps खोलें, Apple डालकर फिटिंग चेक करें।</div>
+        </div>
+        <div class="step-col">
+          <div class="step-num">2</div>
+          <div class="step-desc"><strong>साइज चुनें:</strong> नीचे कैटलॉग में से अपने प्रोडक्ट के लिए सही साइज और प्लाई (3-Ply / 5-Ply) सेलेक्ट करें।</div>
+        </div>
+        <div class="step-col">
+          <div class="step-num">3</div>
+          <div class="step-desc"><strong>WhatsApp पर ऑर्डर:</strong> "Order Now" बटन दबाएं — WhatsApp पर साइज, क्वांटिटी और डिलीवरी एड्रेस भेजें।</div>
+        </div>
+        <div class="step-col">
+          <div class="step-num">4</div>
+          <div class="step-desc"><strong>UPI पेमेंट करें:</strong> QR कोड से 100% advance पेमेंट करें — आपका ऑर्डर तुरंत डिस्पैच होगा!</div>
+        </div>
+      </div>
+
+      <!-- Action Buttons Row -->
+      <div class="guide-cta-actions">
+        <a href="https://wa.me/919460835478?text=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87%2C%20%E0%A4%AE%E0%A5%81%E0%A4%9D%E0%A5%87%20%E0%A4%AC%E0%A5%89%E0%A4%95%E0%A5%8D%E0%A4%B8%20%E0%A4%91%E0%A4%B0%E0%A5%8D%E0%A4%A1%E0%A4%B0%20%E0%A4%95%E0%A4%B0%E0%A4%A8%E0%A4%BE%20%E0%A4%B9%E0%A5%88%E0%A5%A4" target="_blank" class="btn-guide-wa">
+          <span>📦</span> WhatsApp पर ऑर्डर करें
+        </a>
+        <a href="tel:+919460835478" class="btn-guide-call">
+          <span>📞</span> कॉल करें: +91 94608 35478
+        </a>
+      </div>
+
+      <div class="guide-timing-note">
+        ⏰ <strong>ऑर्डर समय:</strong> प्रातः 9:00 बजे से सायं 7:30 बजे (सोमवार से शनिवार) • 🚚 <strong>डिलीवरी:</strong> उदयपुर Same-Day • राजस्थान 2-3 दिन
+      </div>
+    </div>
+  </section>
 
   <!-- =========================================================================
        CATEGORY QUICK SELECTOR (ALL 53 SIZES STAYS AT FRONT!)
@@ -1512,8 +1850,192 @@ let appleTargetPos = new THREE.Vector3(0, 0, 0);
 
 // Camera Preset Animation Flag
 let isPresetTransitioning = false;
-let targetCamPos = new THREE.Vector3(12, 10, 14);
-let targetLookAt = new THREE.Vector3(0, 2.5, 0);
+let targetCamPos = new THREE.Vector3(0, 9.5, 23.5);
+let targetLookAt = new THREE.Vector3(0, 3.2, 0);
+
+// Interactive Shelf Boxes, Racks & Raycasting
+let interactiveShelfBoxes = [];
+let interactiveShelfRacks = [];
+let hoveredShelfBox = null;
+let raycaster = null;
+let mouse = null;
+let pointerDownPos = { x: 0, y: 0 };
+let toastTimer = null;
+
+// Texture Cache for Warehouse Shelf Box Printed Labels
+const shelfBoxTexCache = new Map();
+
+function setMeshEmissive(mesh, hex) {
+  if (!mesh || !mesh.material) return;
+  if (Array.isArray(mesh.material)) {
+    mesh.material.forEach(m => { if (m && m.emissive) m.emissive.setHex(hex); });
+  } else if (mesh.material.emissive) {
+    mesh.material.emissive.setHex(hex);
+  }
+}
+
+// Procedural high-contrast printed dimension label for shelf box front faces
+function getShelfBoxFaceTexture(item) {
+  const cacheKey = `${item.l}x${item.w}x${item.h}_${item.ply}_${item.cost}`;
+  if (shelfBoxTexCache.has(cacheKey)) {
+    return shelfBoxTexCache.get(cacheKey);
+  }
+
+  const canvas = document.createElement('canvas');
+  canvas.width = 512;
+  canvas.height = 384;
+  const ctx = canvas.getContext('2d');
+
+  const is5P = item.ply === 5;
+
+  // Base Corrugated Cardboard tone
+  const grad = ctx.createLinearGradient(0, 0, 512, 384);
+  grad.addColorStop(0, is5P ? '#B57E45' : '#CA955B');
+  grad.addColorStop(1, is5P ? '#98622C' : '#AA743B');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 512, 384);
+
+  // Subtle fluting texture stripes
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+  for (let y = 0; y < 384; y += 8) {
+    ctx.fillRect(0, y, 512, 2.5);
+  }
+
+  // Industrial Logistics White Placard Label
+  const lx = 26, ly = 22, lw = 460, lh = 340;
+  ctx.fillStyle = '#FFFFFF';
+  ctx.fillRect(lx, ly, lw, lh);
+
+  // Outer border & inner border
+  ctx.strokeStyle = '#1F2937';
+  ctx.lineWidth = 4;
+  ctx.strokeRect(lx, ly, lw, lh);
+
+  ctx.strokeStyle = '#E5E7EB';
+  ctx.lineWidth = 1.5;
+  ctx.strokeRect(lx + 8, ly + 8, lw - 16, lh - 16);
+
+  // Header Banner
+  ctx.fillStyle = is5P ? '#7C2D12' : '#065F46';
+  ctx.fillRect(lx + 10, ly + 10, lw - 20, 48);
+
+  // Brand & Ply Badge
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = 'bold 20px "Plus Jakarta Sans", sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('BOX CO. UDAIPUR', lx + 22, ly + 36);
+
+  ctx.font = 'bold 18px "Plus Jakarta Sans", sans-serif';
+  ctx.textAlign = 'right';
+  ctx.fillText(is5P ? '5-PLY HEAVY DUTY' : '3-PLY CORRUGATED', lx + lw - 22, ly + 36);
+
+  // Huge Bold Printed Dimensions (Centered, bold and crystal clear)
+  ctx.fillStyle = '#0F172A';
+  ctx.textAlign = 'center';
+  ctx.font = '800 62px "Plus Jakarta Sans", "Oswald", sans-serif';
+  ctx.fillText(`${item.l} × ${item.w} × ${item.h}"`, 256, ly + 130);
+
+  // Subtitle
+  ctx.fillStyle = '#64748B';
+  ctx.font = '600 17px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText(`LENGTH × WIDTH × HEIGHT (INCHES)`, 256, ly + 172);
+
+  // Divider Line
+  ctx.strokeStyle = '#E2E8F0';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(lx + 20, ly + 196);
+  ctx.lineTo(lx + lw - 20, ly + 196);
+  ctx.stroke();
+
+  // Price Tag (Left)
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#047857';
+  ctx.font = '800 32px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText(`₹${item.cost.toFixed(2)}`, lx + 22, ly + 236);
+
+  // Usage Note (Right)
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#1E293B';
+  ctx.font = '700 18px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText(item.note.toUpperCase(), lx + lw - 22, ly + 234);
+
+  // Bottom Logistics Footer: Barcode + Interactive hint
+  ctx.fillStyle = '#111827';
+  const barStart = lx + 22;
+  const barY = ly + 268;
+  const barH = 32;
+  const patternBars = [3, 2, 4, 1, 5, 2, 2, 4, 1, 3, 2, 5, 2, 4, 3, 2, 1, 4, 2, 3, 5, 1, 2, 4, 2, 3, 1, 5, 2, 3];
+  let currBx = barStart;
+  for (let i = 0; i < patternBars.length && currBx < lx + 210; i++) {
+    const bw = patternBars[i];
+    if (i % 2 === 0) {
+      ctx.fillRect(currBx, barY, bw, barH);
+    }
+    currBx += bw + 2;
+  }
+  ctx.fillStyle = '#64748B';
+  ctx.font = '600 12px monospace';
+  ctx.fillText(`BCU-${item.l}${item.w}${item.h}-${item.ply}P`, barStart, barY + barH + 14);
+
+  // "👆 CLICK TO PLACE ON TABLE" callout pill
+  ctx.fillStyle = '#FEF3C7';
+  ctx.strokeStyle = '#D97706';
+  ctx.lineWidth = 1.5;
+  const pillW = 210, pillH = 36, pillX = lx + lw - 22 - pillW, pillY = barY + 2;
+  ctx.beginPath();
+  if (ctx.roundRect) {
+    ctx.roundRect(pillX, pillY, pillW, pillH, 8);
+  } else {
+    ctx.rect(pillX, pillY, pillW, pillH);
+  }
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.fillStyle = '#92400E';
+  ctx.font = '800 13px "Plus Jakarta Sans", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('👆 CLICK TO LOAD ON TABLE', pillX + pillW / 2, pillY + 23);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.generateMipmaps = true;
+  texture.minFilter = THREE.LinearMipmapLinearFilter;
+  texture.magFilter = THREE.LinearFilter;
+  shelfBoxTexCache.set(cacheKey, texture);
+  return texture;
+}
+
+const SHELF_CATALOG_ITEMS = [
+  { l: 6, w: 4, h: 3.5, cost: 5.5, note: 'Tea & Spice Shipper', ply: 3 },
+  { l: 7, w: 5, h: 4, cost: 8.0, note: 'Bakery Cupcakes 2-Pack', ply: 3 },
+  { l: 8, w: 6, h: 4, cost: 8.0, note: 'Kurti Single / T-Shirt', ply: 3 },
+  { l: 9, w: 6, h: 3, cost: 9.0, note: 'Garments / Shirts', ply: 3 },
+  { l: 10, w: 10, h: 3, cost: 12.0, note: 'Flat Apparel / Saree', ply: 3 },
+  { l: 11, w: 6, h: 5, cost: 12.0, note: 'Shoe Box Regular', ply: 3 },
+  { l: 12, w: 10, h: 8, cost: 14.0, note: 'Electronic / Gadgets', ply: 3 },
+  { l: 13, w: 9, h: 6, cost: 15.0, note: 'Pack of 6 Master Box', ply: 3 },
+  { l: 14, w: 10, h: 6, cost: 16.0, note: 'Apparel Combo Pack', ply: 3 },
+  { l: 15, w: 12, h: 10, cost: 20.0, note: 'Large Multi-Item Shipper', ply: 3 },
+  { l: 16, w: 12, h: 12, cost: 22.0, note: 'Master Carton 16"', ply: 5 },
+  { l: 18, w: 14, h: 12, cost: 26.0, note: 'Heavy Duty Export Shipper', ply: 5 },
+  { l: 20, w: 14, h: 12, cost: 30.0, note: 'Industrial Machine Parts', ply: 5 },
+  { l: 5, w: 4, h: 2.5, cost: 5.0, note: 'Mobile Accessories', ply: 3 },
+  { l: 12, w: 12, h: 12, cost: 18.0, note: 'Heavy Machinery Component', ply: 5 },
+  { l: 16, w: 10, h: 8, cost: 18.0, note: 'Footwear Bulk Shipper', ply: 5 },
+  { l: 14, w: 14, h: 14, cost: 22.0, note: 'Heavy Cube Master', ply: 5 },
+  { l: 10, w: 8, h: 6, cost: 13.0, note: 'Universal Courier Shipper', ply: 3 }
+];
+
+function showViewportToast(text) {
+  const toast = document.getElementById('viewport-toast');
+  if (!toast) return;
+  toast.textContent = text;
+  toast.classList.add('show');
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2200);
+}
 
 /* --- PROCEDURAL TEXTURE GENERATORS --- */
 
@@ -1889,7 +2411,268 @@ function createContactShadowTexture() {
   return new THREE.CanvasTexture(canvas);
 }
 
-// 8. Packaging Store Inspection Workbench Counter Texture (1024x1024)
+// 8. Polished Industrial Concrete Warehouse Floor Texture (1024x1024)
+function createWarehouseFloorTexture() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 1024; canvas.height = 1024;
+  const ctx = canvas.getContext('2d');
+
+  // Base industrial concrete gradient
+  const grad = ctx.createLinearGradient(0, 0, 1024, 1024);
+  grad.addColorStop(0, '#A09B92');
+  grad.addColorStop(0.5, '#948F86');
+  grad.addColorStop(1, '#8A857C');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 1024, 1024);
+
+  // Micro-aggregate stipple (25,000 specks)
+  for (let i = 0; i < 25000; i++) {
+    const x = Math.random() * 1024, y = Math.random() * 1024;
+    ctx.fillStyle = Math.random() > 0.45 ? 'rgba(255,255,255,0.06)' : 'rgba(30,28,25,0.08)';
+    ctx.fillRect(x, y, Math.random() * 2 + 0.5, Math.random() * 2 + 0.5);
+  }
+
+  // Expansion joint grid lines
+  ctx.lineWidth = 2.5;
+  ctx.strokeStyle = 'rgba(40, 36, 32, 0.45)';
+  for (let p = 256; p < 1024; p += 256) {
+    ctx.beginPath(); ctx.moveTo(p, 0); ctx.lineTo(p, 1024); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(0, p); ctx.lineTo(1024, p); ctx.stroke();
+  }
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
+  for (let p = 256; p < 1024; p += 256) {
+    ctx.beginPath(); ctx.moveTo(p + 1.5, 0); ctx.lineTo(p + 1.5, 1024); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(0, p + 1.5); ctx.lineTo(1024, p + 1.5); ctx.stroke();
+  }
+
+  // Safety Yellow & Black Diagonal Hazard Caution Striping bounding central staging bay
+  const boxX = 160, boxY = 160, boxW = 704, boxH = 704, stripeW = 32;
+
+  function drawHazardStripe(x1, y1, w, h, isHoriz) {
+    ctx.save();
+    ctx.beginPath(); ctx.rect(x1, y1, w, h); ctx.clip();
+    ctx.fillStyle = '#F59E0B'; // Safety yellow
+    ctx.fillRect(x1, y1, w, h);
+
+    ctx.fillStyle = '#1F2937'; // Industrial dark charcoal
+    const step = 28;
+    if (isHoriz) {
+      for (let x = x1 - h; x < x1 + w + h; x += step) {
+        ctx.beginPath();
+        ctx.moveTo(x, y1);
+        ctx.lineTo(x + step * 0.5, y1);
+        ctx.lineTo(x + step * 0.5 - h, y1 + h);
+        ctx.lineTo(x - h, y1 + h);
+        ctx.closePath();
+        ctx.fill();
+      }
+    } else {
+      for (let y = y1 - w; y < y1 + h + w; y += step) {
+        ctx.beginPath();
+        ctx.moveTo(x1, y);
+        ctx.lineTo(x1 + w, y + w);
+        ctx.lineTo(x1 + w, y + w + step * 0.5);
+        ctx.lineTo(x1, y + step * 0.5);
+        ctx.closePath();
+        ctx.fill();
+      }
+    }
+    ctx.restore();
+  }
+
+  drawHazardStripe(boxX, boxY, boxW, stripeW, true);
+  drawHazardStripe(boxX, boxY + boxH - stripeW, boxW, stripeW, true);
+  drawHazardStripe(boxX, boxY, stripeW, boxH, false);
+  drawHazardStripe(boxX + boxW - stripeW, boxY, stripeW, boxH, false);
+
+  // White safety walkway lines
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.75)';
+  ctx.lineWidth = 3;
+  ctx.strokeRect(boxX - 6, boxY - 6, boxW + 12, boxH + 12);
+
+  // Stenciled industrial warehouse floor typography
+  ctx.save();
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
+  ctx.font = 'bold 16px "Plus Jakarta Sans", Arial, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('⚡ BOX COMPANY UDAIPUR • 45-MIN EXPRESS DISPATCH BAY 01 ⚡', 512, boxY + 22);
+  ctx.fillText('FORKLIFT ZONE • KEEP CLEAR • CORRUGATED PACKAGING FACILITY', 512, boxY + boxH - 10);
+  ctx.restore();
+
+  // Subtle curved tire forklift marks
+  ctx.strokeStyle = 'rgba(30, 26, 22, 0.08)';
+  ctx.lineWidth = 14;
+  ctx.beginPath();
+  ctx.arc(320, 1050, 480, Math.PI * 1.25, Math.PI * 1.55);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(700, 1050, 520, Math.PI * 1.45, Math.PI * 1.75);
+  ctx.stroke();
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(1, 1);
+  return texture;
+}
+
+// 9. Precision Turntable Inspection Platter Texture (1024x1024)
+function createTurntableTexture() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 1024; canvas.height = 1024;
+  const ctx = canvas.getContext('2d');
+  const cx = 512, cy = 512;
+
+  // Background: Matte graphite anti-static rubberized inspection mat
+  const bgGrad = ctx.createRadialGradient(cx, cy, 20, cx, cy, 510);
+  bgGrad.addColorStop(0, '#2D3035');
+  bgGrad.addColorStop(0.7, '#24262A');
+  bgGrad.addColorStop(0.94, '#1D1E22');
+  bgGrad.addColorStop(1.0, '#151619');
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, 1024, 1024);
+
+  // Micro stipple texture
+  for (let i = 0; i < 18000; i++) {
+    const rx = Math.random() * 1024, ry = Math.random() * 1024;
+    ctx.fillStyle = Math.random() > 0.5 ? 'rgba(255,255,255,0.035)' : 'rgba(0,0,0,0.06)';
+    ctx.fillRect(rx, ry, 1.2, 1.2);
+  }
+
+  // Outer Aluminum Beveled Rim
+  const rimGrad = ctx.createRadialGradient(cx, cy, 470, cx, cy, 510);
+  rimGrad.addColorStop(0, 'rgba(80, 85, 95, 0.2)');
+  rimGrad.addColorStop(0.75, 'rgba(160, 168, 180, 0.4)');
+  rimGrad.addColorStop(1, 'rgba(40, 45, 52, 0.9)');
+  ctx.fillStyle = rimGrad;
+  ctx.beginPath();
+  ctx.arc(cx, cy, 510, 0, Math.PI * 2);
+  ctx.arc(cx, cy, 472, 0, Math.PI * 2, true);
+  ctx.fill();
+
+  // Outer knurled degree tick marks & angles (360 degrees)
+  ctx.strokeStyle = 'rgba(215, 222, 232, 0.7)';
+  ctx.fillStyle = 'rgba(225, 232, 242, 0.85)';
+  ctx.font = 'bold 11px monospace';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+
+  for (let deg = 0; deg < 360; deg += 5) {
+    const rad = (deg * Math.PI) / 180;
+    const isMajor = deg % 45 === 0;
+    const isMid = deg % 15 === 0;
+    const tickLen = isMajor ? 14 : (isMid ? 9 : 5);
+    const rOuter = 494;
+    const rInner = rOuter - tickLen;
+
+    ctx.lineWidth = isMajor ? 2.0 : (isMid ? 1.4 : 0.8);
+    ctx.beginPath();
+    ctx.moveTo(cx + Math.cos(rad) * rOuter, cy + Math.sin(rad) * rOuter);
+    ctx.lineTo(cx + Math.cos(rad) * rInner, cy + Math.sin(rad) * rInner);
+    ctx.stroke();
+
+    if (isMajor) {
+      const textR = 464;
+      const tx = cx + Math.cos(rad) * textR;
+      const ty = cy + Math.sin(rad) * textR;
+      ctx.fillText(`${deg}°`, tx, ty);
+    }
+  }
+
+  // Inner Inspection Mat Boundary
+  ctx.strokeStyle = '#D97706';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.arc(cx, cy, 448, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // Precision 1-inch Orthogonal Grid
+  ctx.strokeStyle = 'rgba(217, 119, 6, 0.10)';
+  ctx.lineWidth = 1;
+  const gStep = 32;
+  for (let x = cx - 440; x <= cx + 440; x += gStep) {
+    ctx.beginPath(); ctx.moveTo(x, cy - 440); ctx.lineTo(x, cy + 440); ctx.stroke();
+  }
+  for (let y = cy - 440; y <= cy + 440; y += gStep) {
+    ctx.beginPath(); ctx.moveTo(cx - 440, y); ctx.lineTo(cx + 440, y); ctx.stroke();
+  }
+
+  // Concentric Sizing Circles in inches with size badges
+  const sizeRings = [
+    { r: 80, label: '6" BOX' },
+    { r: 140, label: '9" BOX' },
+    { r: 200, label: '12" BOX' },
+    { r: 260, label: '15" MASTER' },
+    { r: 320, label: '18" MASTER' },
+    { r: 380, label: '21" CARGO' }
+  ];
+
+  ctx.strokeStyle = 'rgba(245, 158, 11, 0.28)';
+  ctx.lineWidth = 1.5;
+  ctx.fillStyle = 'rgba(245, 158, 11, 0.85)';
+  ctx.font = 'bold 9px monospace';
+
+  sizeRings.forEach(ring => {
+    ctx.beginPath();
+    ctx.arc(cx, cy, ring.r, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.save();
+    ctx.translate(cx, cy - ring.r);
+    ctx.fillStyle = 'rgba(30, 32, 36, 0.9)';
+    ctx.fillRect(-35, -7, 70, 14);
+    ctx.strokeStyle = 'rgba(245, 158, 11, 0.5)';
+    ctx.strokeRect(-35, -7, 70, 14);
+    ctx.fillStyle = '#F59E0B';
+    ctx.fillText(ring.label, 0, 1);
+    ctx.restore();
+  });
+
+  // Central Crosshair Target
+  ctx.strokeStyle = '#10B981';
+  ctx.lineWidth = 1.8;
+  ctx.beginPath();
+  ctx.moveTo(cx - 30, cy); ctx.lineTo(cx + 30, cy);
+  ctx.moveTo(cx, cy - 30); ctx.lineTo(cx, cy + 30);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(cx, cy, 14, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // Laser-Etched Branding Badge (Top quadrant)
+  ctx.save();
+  ctx.translate(cx, cy - 230);
+  ctx.fillStyle = 'rgba(245, 158, 11, 0.9)';
+  ctx.font = 'bold 13px "Plus Jakarta Sans", Arial, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('BOX COMPANY UDAIPUR', 0, 0);
+  ctx.font = 'bold 9px monospace';
+  ctx.fillStyle = 'rgba(220, 225, 235, 0.7)';
+  ctx.fillText('ROTARY INSPECTION STAGE • BURSTING TESTED', 0, 14);
+  ctx.restore();
+
+  // Dual Scale Measuring Ruler (Bottom quadrant)
+  const rulerY = cy + 240;
+  ctx.fillStyle = 'rgba(18, 20, 24, 0.92)';
+  ctx.fillRect(cx - 240, rulerY, 480, 38);
+  ctx.strokeStyle = 'rgba(245, 158, 11, 0.7)';
+  ctx.lineWidth = 1.5;
+  ctx.strokeRect(cx - 240, rulerY, 480, 38);
+
+  ctx.fillStyle = '#F59E0B';
+  ctx.font = 'bold 9px monospace';
+  for (let inch = 0; inch <= 16; inch++) {
+    const rx = cx - 220 + (inch / 16) * 440;
+    ctx.beginPath(); ctx.moveTo(rx, rulerY); ctx.lineTo(rx, rulerY + 12); ctx.stroke();
+    ctx.fillText(`${inch}"`, rx, rulerY + 24);
+  }
+
+  const texture = new THREE.CanvasTexture(canvas);
+  return texture;
+}
+
+// 10. Packaging Inspection Workbench Counter Surface Texture (1024x1024)
 function createPackagingWorkbenchTexture() {
   const canvas = document.createElement('canvas');
   canvas.width = 1024; canvas.height = 1024;
@@ -1913,16 +2696,7 @@ function createPackagingWorkbenchTexture() {
     ctx.stroke();
   }
 
-  // Packaging alignment grid
-  ctx.strokeStyle = 'rgba(90, 65, 45, 0.07)';
-  ctx.lineWidth = 1;
-  const gridSize = 64;
-  for (let i = 0; i <= 1024; i += gridSize) {
-    ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 1024); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(1024, i); ctx.stroke();
-  }
-
-  // Heavy Industrial Steel Ruler along front edge (bottom)
+  // Heavy Industrial Steel Ruler along front edge
   const rulerY = 955;
   ctx.fillStyle = 'rgba(215, 195, 170, 0.92)';
   ctx.fillRect(35, rulerY, 954, 52);
@@ -1937,15 +2711,6 @@ function createPackagingWorkbenchTexture() {
     const rx = 35 + (inIdx / 24) * 954;
     ctx.beginPath(); ctx.moveTo(rx, rulerY); ctx.lineTo(rx, rulerY + 18); ctx.stroke();
     ctx.fillText(`${inIdx}"`, rx, rulerY + 36);
-
-    if (inIdx < 24) {
-      const halfX = rx + (1 / 48) * 954;
-      ctx.beginPath(); ctx.moveTo(halfX, rulerY); ctx.lineTo(halfX, rulerY + 12); ctx.stroke();
-      const q1X = rx + (0.5 / 48) * 954;
-      const q3X = rx + (1.5 / 48) * 954;
-      ctx.beginPath(); ctx.moveTo(q1X, rulerY); ctx.lineTo(q1X, rulerY + 7); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(q3X, rulerY); ctx.lineTo(q3X, rulerY + 7); ctx.stroke();
-    }
   }
 
   // Store Inspection Stencil Stamped on Workbench
@@ -1967,9 +2732,612 @@ function createPackagingWorkbenchTexture() {
   return texture;
 }
 
+// 11. Wooden Pallet Texture (512x512)
+function createPalletTexture() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 512; canvas.height = 512;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#C29867';
+  ctx.fillRect(0, 0, 512, 512);
+
+  const plankH = 512 / 6;
+  for (let i = 0; i < 6; i++) {
+    const y = i * plankH;
+    ctx.fillStyle = i % 2 === 0 ? '#B88B58' : '#C79D6C';
+    ctx.fillRect(0, y, 512, plankH - 4);
+
+    ctx.strokeStyle = 'rgba(110, 75, 40, 0.12)';
+    for (let g = 0; g < 8; g++) {
+      ctx.lineWidth = 1 + Math.random() * 1.5;
+      ctx.beginPath();
+      ctx.moveTo(0, y + Math.random() * plankH);
+      ctx.bezierCurveTo(170, y + Math.random() * plankH, 340, y + Math.random() * plankH, 512, y + Math.random() * plankH);
+      ctx.stroke();
+    }
+
+    ctx.fillStyle = '#6E4924';
+    ctx.fillRect(0, y + plankH - 4, 512, 4);
+
+    [30, 256, 482].forEach(nx => {
+      ctx.fillStyle = '#3E2E20';
+      ctx.beginPath(); ctx.arc(nx, y + plankH / 2, 3, 0, Math.PI * 2); ctx.fill();
+    });
+  }
+
+  // HT / IPPC stencil
+  ctx.save();
+  ctx.translate(256, 256);
+  ctx.rotate(-0.04);
+  ctx.strokeStyle = 'rgba(70, 45, 20, 0.6)';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(-60, -20, 120, 40);
+  ctx.fillStyle = 'rgba(70, 45, 20, 0.65)';
+  ctx.font = 'bold 12px Arial, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('IPPC • HT', 0, -4);
+  ctx.font = 'bold 9px monospace';
+  ctx.fillText('IN-RAJ-UDZ-01', 0, 12);
+  ctx.restore();
+
+  return new THREE.CanvasTexture(canvas);
+}
+
+// 12. Stacked Corrugated Boxes Texture (512x512)
+function createStackedBoxesTexture() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 512; canvas.height = 512;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#BE874E';
+  ctx.fillRect(0, 0, 512, 512);
+
+  const cols = 2, rows = 3;
+  const bw = 512 / cols, bh = 512 / rows;
+
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const bx = c * bw, by = r * bh;
+      ctx.fillStyle = (r + c) % 2 === 0 ? '#C48E55' : '#B88248';
+      ctx.fillRect(bx + 2, by + 2, bw - 4, bh - 4);
+
+      ctx.strokeStyle = '#6E451C';
+      ctx.lineWidth = 2.5;
+      ctx.strokeRect(bx, by, bw, bh);
+
+      // Flap center seam & brown packing tape
+      ctx.fillStyle = 'rgba(160, 110, 55, 0.85)';
+      ctx.fillRect(bx, by + bh / 2 - 7, bw, 14);
+
+      // Shipping label sticker on box
+      const lx = bx + 20, ly = by + 18;
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(lx, ly, 75, 45);
+      ctx.fillStyle = '#1F2937';
+      ctx.font = 'bold 7px monospace';
+      ctx.fillText('BOX COMPANY', lx + 4, ly + 10);
+      ctx.fillText('UDAIPUR • DISPATCH', lx + 4, ly + 19);
+
+      // Barcode lines
+      for (let b = lx + 4; b < lx + 70; b += 3 + (b % 4)) {
+        ctx.fillRect(b, ly + 25, 2, 14);
+      }
+
+      // THIS SIDE UP arrows
+      ctx.strokeStyle = '#4B2810';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.moveTo(bx + bw - 28, by + 35);
+      ctx.lineTo(bx + bw - 28, by + 18);
+      ctx.lineTo(bx + bw - 33, by + 24);
+      ctx.moveTo(bx + bw - 28, by + 18);
+      ctx.lineTo(bx + bw - 23, by + 24);
+      ctx.stroke();
+    }
+  }
+
+  // Black strapping bands
+  ctx.fillStyle = '#18181B';
+  ctx.fillRect(110, 0, 8, 512);
+  ctx.fillRect(390, 0, 8, 512);
+  ctx.fillRect(0, 150, 512, 8);
+  ctx.fillRect(0, 350, 512, 8);
+
+  return new THREE.CanvasTexture(canvas);
+}
+
+// 13. Bundles of Flat Folded Corrugated Cartons Texture (512x512)
+function createFlatCartonBundleTexture() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 512; canvas.height = 512;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#B07B45';
+  ctx.fillRect(0, 0, 512, 512);
+
+  for (let y = 0; y < 512; y += 8) {
+    ctx.fillStyle = y % 16 === 0 ? '#C4905A' : '#94612E';
+    ctx.fillRect(0, y, 512, 4);
+    ctx.strokeStyle = '#6E421A';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (let x = 0; x < 512; x += 12) {
+      ctx.lineTo(x, y + 2);
+      ctx.lineTo(x + 6, y + 6);
+    }
+    ctx.stroke();
+  }
+
+  // White strapping bands
+  ctx.fillStyle = '#F3F4F6';
+  ctx.fillRect(120, 0, 12, 512);
+  ctx.fillRect(370, 0, 12, 512);
+
+  // Bundle tag
+  ctx.fillStyle = '#FFFFFF';
+  ctx.fillRect(175, 200, 162, 60);
+  ctx.strokeStyle = '#D97706';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(175, 200, 162, 60);
+  ctx.fillStyle = '#1F2937';
+  ctx.font = 'bold 11px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('BOX COMPANY UDAIPUR', 256, 222);
+  ctx.fillText('BUNDLE: 25 PCS', 256, 238);
+  ctx.font = '8px monospace';
+  ctx.fillText('FLUTE: B-FLUTE 3-PLY', 256, 252);
+
+  return new THREE.CanvasTexture(canvas);
+}
+
+// 14. Giant Kraft Paper Fluting Roll Texture (256x256)
+function createKraftPaperRollTexture() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 256; canvas.height = 256;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#B5824C';
+  ctx.fillRect(0, 0, 256, 256);
+
+  ctx.strokeStyle = 'rgba(120, 75, 30, 0.25)';
+  for (let r = 20; r < 128; r += 2) {
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.arc(128, 128, r, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  ctx.fillStyle = '#4A2E12';
+  ctx.beginPath();
+  ctx.arc(128, 128, 24, 0, Math.PI * 2);
+  ctx.fill();
+
+  return new THREE.CanvasTexture(canvas);
+}
+
+// 15. Warehouse Ambient Sky Dome Backdrop Texture (1024x512) - Dark Industrial Panorama
+function createWarehouseSkyDomeTexture() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 1024; canvas.height = 512;
+  const ctx = canvas.getContext('2d');
+
+  // Deep industrial slate-charcoal gradient
+  const grad = ctx.createLinearGradient(0, 0, 0, 512);
+  grad.addColorStop(0, '#101216');
+  grad.addColorStop(0.35, '#161920');
+  grad.addColorStop(0.7, '#1A1E26');
+  grad.addColorStop(1, '#181512');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 1024, 512);
+
+  // Distant Industrial Roof Truss Silhouettes
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.035)';
+  ctx.lineWidth = 3;
+  for (let x = 0; x < 1024; x += 64) {
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x + 120, 220);
+    ctx.stroke();
+  }
+  ctx.beginPath();
+  ctx.moveTo(0, 160);
+  ctx.lineTo(1024, 160);
+  ctx.stroke();
+
+  // Distant subtle skylights / high-bay glows
+  for (let x = 80; x < 1024; x += 180) {
+    ctx.fillStyle = 'rgba(147, 197, 253, 0.05)';
+    ctx.fillRect(x, 30, 80, 50);
+  }
+
+  // Faint warm high-bay amber glows in distant background
+  for (let x = 120; x < 1024; x += 220) {
+    const rgrad = ctx.createRadialGradient(x, 150, 4, x, 150, 60);
+    rgrad.addColorStop(0, 'rgba(251, 191, 36, 0.12)');
+    rgrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    ctx.fillStyle = rgrad;
+    ctx.beginPath();
+    ctx.arc(x, 150, 60, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  return new THREE.CanvasTexture(canvas);
+}
+
+// 16. Optical Bulb Corona Glow Texture (256x256)
+function createBulbCoronaTexture() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 256; canvas.height = 256;
+  const ctx = canvas.getContext('2d');
+  const cx = 128, cy = 128;
+  const grad = ctx.createRadialGradient(cx, cy, 4, cx, cy, 126);
+  grad.addColorStop(0, 'rgba(255, 255, 240, 1.0)');
+  grad.addColorStop(0.18, 'rgba(251, 191, 36, 0.85)');
+  grad.addColorStop(0.45, 'rgba(245, 158, 11, 0.35)');
+  grad.addColorStop(0.8, 'rgba(217, 119, 6, 0.10)');
+  grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 256, 256);
+  return new THREE.CanvasTexture(canvas);
+}
+
+// 17. Cinematic Ground Light Pool Texture with Fresnel Wire Rings (512x512)
+function createCinematicLightPoolTexture() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 512; canvas.height = 512;
+  const ctx = canvas.getContext('2d');
+  const cx = 256, cy = 256;
+
+  // Radial golden warm light wash
+  const grad = ctx.createRadialGradient(cx, cy, 12, cx, cy, 250);
+  grad.addColorStop(0, 'rgba(251, 191, 36, 0.48)');
+  grad.addColorStop(0.35, 'rgba(245, 158, 11, 0.24)');
+  grad.addColorStop(0.70, 'rgba(180, 83, 9, 0.08)');
+  grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 512, 512);
+
+  // Subtle concentric Fresnel wire grating / fixture ribs
+  ctx.strokeStyle = 'rgba(254, 240, 138, 0.08)';
+  ctx.lineWidth = 1.5;
+  [45, 90, 140, 195].forEach(r => {
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.stroke();
+  });
+
+  return new THREE.CanvasTexture(canvas);
+}
+
+// --- AUTHENTIC INDIAN WAREHOUSE GRAPHICS & CULTURAL ARTIFACTS ---
+
+// 1. Sacred Mandir Altar Plaque (श्री गणेशाय नमः • शुभ लाभ)
+function createMandirShrineTexture() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 512; canvas.height = 512;
+  const ctx = canvas.getContext('2d');
+
+  // Deep rich royal vermilion/crimson temple backdrop
+  const grad = ctx.createLinearGradient(0, 0, 512, 512);
+  grad.addColorStop(0, '#881337');
+  grad.addColorStop(0.5, '#7F1D1D');
+  grad.addColorStop(1, '#581C87');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 512, 512);
+
+  // Ornate double gold border with corner rosettes
+  ctx.strokeStyle = '#F59E0B';
+  ctx.lineWidth = 10;
+  ctx.strokeRect(18, 18, 476, 476);
+  ctx.strokeStyle = '#FCD34D';
+  ctx.lineWidth = 3;
+  ctx.strokeRect(32, 32, 448, 448);
+
+  // Traditional Kalash/Temple header arch
+  ctx.fillStyle = '#FEF3C7';
+  ctx.font = 'bold 30px "Plus Jakarta Sans", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('॥ श्री गणेशाय नमः ॥', 256, 75);
+
+  // Swastik and Shubh Labh
+  ctx.fillStyle = '#FBBF24';
+  ctx.font = '800 46px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText('शुभ', 95, 240);
+
+  // Central Auspicious Swastika
+  ctx.font = '800 68px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText('卐', 256, 248);
+
+  ctx.font = '800 46px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText('लाभ', 417, 240);
+
+  // Ganesha Devotional Invocation
+  ctx.fillStyle = '#FDE68A';
+  ctx.font = 'bold 24px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText('॥ सिद्धि विनायक नमो नमः ॥', 256, 320);
+
+  // Factory Blessing Footer
+  ctx.fillStyle = '#FCD34D';
+  ctx.font = '700 19px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText('उदयपुर पैकेजिंग डिपो • रिद्धि-सिद्धि', 256, 435);
+
+  return new THREE.CanvasTexture(canvas);
+}
+
+// 2. Authentic Hindi Industrial Safety & Warning Signboards
+function createSafetySignTexture(type) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 512; canvas.height = 256;
+  const ctx = canvas.getContext('2d');
+
+  if (type === 'safety') {
+    // Industrial safety yellow with hazard stripe border
+    ctx.fillStyle = '#F59E0B';
+    ctx.fillRect(0, 0, 512, 256);
+
+    ctx.strokeStyle = '#111827';
+    ctx.lineWidth = 10;
+    ctx.strokeRect(10, 10, 492, 236);
+
+    // Hazard striped header bar
+    ctx.fillStyle = '#111827';
+    ctx.fillRect(10, 10, 492, 38);
+    ctx.fillStyle = '#FBBF24';
+    ctx.font = '800 20px "Plus Jakarta Sans", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('★ सुरक्षा निर्देश • FACTORY SAFETY ★', 256, 36);
+
+    // Iconic Indian safety slogan
+    ctx.fillStyle = '#111827';
+    ctx.font = '900 36px "Plus Jakarta Sans", sans-serif';
+    ctx.fillText('सावधानी हटी, दुर्घटना घटी', 256, 115);
+
+    ctx.font = '800 22px "Plus Jakarta Sans", sans-serif';
+    ctx.fillStyle = '#1F2937';
+    ctx.fillText('सुरक्षा ही सर्वोपरि है • SAFETY FIRST', 256, 165);
+
+    ctx.font = '600 16px "Plus Jakarta Sans", sans-serif';
+    ctx.fillStyle = '#374151';
+    ctx.fillText('गोदाम में गति सीमा 10 किमी/घंटा • लोडिंग क्षेत्र', 256, 210);
+  } else {
+    // Red & white fire safety / no smoking sign
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(0, 0, 512, 256);
+
+    ctx.strokeStyle = '#DC2626';
+    ctx.lineWidth = 12;
+    ctx.strokeRect(10, 10, 492, 236);
+
+    ctx.fillStyle = '#DC2626';
+    ctx.fillRect(10, 10, 492, 50);
+
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = '900 24px "Plus Jakarta Sans", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('अग्निशमन चेतावनी • DANGER', 256, 44);
+
+    ctx.fillStyle = '#B91C1C';
+    ctx.font = '900 36px "Plus Jakarta Sans", sans-serif';
+    ctx.fillText('धूम्रपान सख्त मना है', 256, 128);
+
+    ctx.fillStyle = '#1F2937';
+    ctx.font = '800 22px "Plus Jakarta Sans", sans-serif';
+    ctx.fillText('NO SMOKING ZONE', 256, 172);
+
+    ctx.font = '600 16px "Plus Jakarta Sans", sans-serif';
+    ctx.fillStyle = '#4B5563';
+    ctx.fillText('ज्वलनशील क्राफ्ट पेपर एवं कोरोगेटेड गोदाम', 256, 212);
+  }
+
+  return new THREE.CanvasTexture(canvas);
+}
+
+// 3. Digital Weighing Platform Display Texture (18.45 kg)
+function createWeighingScaleTexture() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 256; canvas.height = 128;
+  const ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = '#0F172A';
+  ctx.fillRect(0, 0, 256, 128);
+
+  ctx.strokeStyle = '#334155';
+  ctx.lineWidth = 4;
+  ctx.strokeRect(6, 6, 244, 116);
+
+  // Red LED digital readout
+  ctx.fillStyle = '#EF4444';
+  ctx.shadowColor = '#DC2626';
+  ctx.shadowBlur = 8;
+  ctx.font = '800 42px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('18.45 kg', 128, 70);
+  ctx.shadowBlur = 0;
+
+  // Indicators
+  ctx.fillStyle = '#22C55E';
+  ctx.font = '700 13px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText('TARE: OK • CALIBRATED', 128, 104);
+
+  return new THREE.CanvasTexture(canvas);
+}
+
+// 4. Red Cloth Indian Bahi-Khata Ledger Texture
+function createBahiKhataCoverTexture() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 256; canvas.height = 256;
+  const ctx = canvas.getContext('2d');
+
+  // Traditional vermilion red khadi book cloth
+  ctx.fillStyle = '#991B1B';
+  ctx.fillRect(0, 0, 256, 256);
+
+  // Cloth texture grain
+  ctx.fillStyle = 'rgba(0,0,0,0.08)';
+  for (let i = 0; i < 256; i += 4) {
+    ctx.fillRect(0, i, 256, 1.5);
+    ctx.fillRect(i, 0, 1.5, 256);
+  }
+
+  // Golden Devanagari lettering
+  ctx.fillStyle = '#FDE68A';
+  ctx.font = '800 24px "Plus Jakarta Sans", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('॥ श्री ॥', 128, 60);
+
+  ctx.font = '800 28px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText('बही-खाता', 128, 120);
+
+  ctx.font = '700 16px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText('डिस्पैच चालान रजिस्टर', 128, 160);
+  ctx.fillText('उदयपुर डिपो', 128, 195);
+
+  return new THREE.CanvasTexture(canvas);
+}
+
+// 5. Grand Industrial Warehouse Overhead Depot Board Texture
+function createGrandDepotSignTexture() {
+  const canvas = document.createElement('canvas');
+  canvas.width = 1024; canvas.height = 256;
+  const ctx = canvas.getContext('2d');
+
+  // Deep royal midnight blue backdrop with subtle metallic border
+  ctx.fillStyle = '#0B132B';
+  ctx.fillRect(0, 0, 1024, 256);
+
+  ctx.strokeStyle = '#D97706';
+  ctx.lineWidth = 10;
+  ctx.strokeRect(10, 10, 1004, 236);
+
+  ctx.strokeStyle = '#FDE68A';
+  ctx.lineWidth = 3;
+  ctx.strokeRect(22, 22, 980, 212);
+
+  // Traditional Auspicious Header
+  ctx.fillStyle = '#FBBF24';
+  ctx.font = '800 24px "Plus Jakarta Sans", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('॥ श्री गणेशाय नमः ॥                ★                ॥ शुभ लाभ ॥', 512, 60);
+
+  // Main Depot Title
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = '900 44px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText('बॉक्स कंपनी उदयपुर • केंद्रीय भंडारण डिपो', 512, 126);
+
+  // Subtitle / Industrial Logistics info
+  ctx.fillStyle = '#93C5FD';
+  ctx.font = '700 22px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText('UDAIPUR CENTRAL CORRUGATED PACKAGING & DISPATCH DEPOT', 512, 175);
+
+  ctx.fillStyle = '#CBD5E1';
+  ctx.font = '600 16px "Plus Jakarta Sans", sans-serif';
+  ctx.fillText('GSTIN: 08AAACR1234F1Z5 • 3-PLY & 5-PLY HEAVY DUTY CORRUGATED BOXES', 512, 215);
+
+  return new THREE.CanvasTexture(canvas);
+}
+
+// Helper to construct Indian warehouse props: Signs, Weighing Scale, Jute Bags
+function buildIndianWarehouseElements(group) {
+  const indGroup = new THREE.Group();
+
+  // Helper to build overhead hanging sign with vertical steel drop struts connecting to ceiling
+  function createOverheadHangingSign(width, height, texture, posX, posY, posZ) {
+    const signGroup = new THREE.Group();
+    signGroup.position.set(posX, posY, posZ);
+
+    const signMesh = new THREE.Mesh(
+      new THREE.BoxGeometry(width, height, 0.15),
+      new THREE.MeshStandardMaterial({ map: texture, roughness: 0.4 })
+    );
+    signMesh.castShadow = true;
+    signGroup.add(signMesh);
+
+    // Outer protective steel framing
+    const frameGeo = new THREE.BoxGeometry(width + 0.15, height + 0.15, 0.18);
+    const frameMesh = new THREE.Mesh(frameGeo, steelFrameMat);
+    signGroup.add(frameMesh);
+
+    // Dual vertical steel unistrut hanger rods extending up to ceiling truss (y = 21.4)
+    const hangerLen = 21.4 - (posY + height / 2);
+    if (hangerLen > 0) {
+      const rodGeo = new THREE.CylinderGeometry(0.045, 0.045, hangerLen, 8);
+      const spanOffset = width * 0.35;
+      [-spanOffset, spanOffset].forEach(rx => {
+        const rod = new THREE.Mesh(rodGeo, steelFrameMat);
+        rod.position.set(rx, height / 2 + hangerLen / 2, 0);
+        signGroup.add(rod);
+      });
+    }
+
+    return signGroup;
+  }
+
+  // 1. Hindi Industrial Safety Slogan Board (सावधानी हटी, दुर्घटना घटी)
+  const safetyTex = createSafetySignTexture('safety');
+  const signSafety = createOverheadHangingSign(8.2, 2.7, safetyTex, -12.0, 14.8, -26.5);
+  indGroup.add(signSafety);
+
+  // 2. Central Grand Depot Board (बॉक्स कंपनी उदयपुर)
+  const depotTex = createGrandDepotSignTexture();
+  const signDepot = createOverheadHangingSign(11.0, 2.7, depotTex, 0, 14.8, -26.5);
+  indGroup.add(signDepot);
+
+  // 3. Fire Warning Board (धूम्रपान सख्त मना है)
+  const noSmokeTex = createSafetySignTexture('nosmoking');
+  const signNoSmoke = createOverheadHangingSign(8.2, 2.7, noSmokeTex, 12.0, 14.8, -26.5);
+  indGroup.add(signNoSmoke);
+
+  // 4. Heavy Industrial Floor Weighing Scale (धर्मकांटा)
+  const scale = new THREE.Group();
+  scale.position.set(-7.5, -6.5, 13.0);
+
+  const scaleDeck = new THREE.Mesh(
+    new THREE.BoxGeometry(3.4, 0.35, 3.2),
+    new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.7, roughness: 0.4 })
+  );
+  scaleDeck.position.set(0, 0.175, 0);
+  scaleDeck.receiveShadow = true;
+  scale.add(scaleDeck);
+
+  const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 3.6, 12), steelFrameMat);
+  pole.position.set(1.4, 1.8, -1.3);
+  scale.add(pole);
+
+  const scaleTex = createWeighingScaleTexture();
+  const head = new THREE.Mesh(
+    new THREE.BoxGeometry(1.3, 0.75, 0.25),
+    new THREE.MeshStandardMaterial({ map: scaleTex, roughness: 0.3 })
+  );
+  head.position.set(1.4, 3.6, -1.3);
+  scale.add(head);
+  indGroup.add(scale);
+
+  // 5. Stacks of Jute Bags near floor pallet
+  [[-11.5, -6.5, 10.5]].forEach(([bx, by, bz]) => {
+    [0, 0.65, 1.3].forEach((sy, idx) => {
+      const jute = new THREE.Mesh(
+        new THREE.BoxGeometry(3.6, 0.6, 2.4),
+        new THREE.MeshStandardMaterial({ color: 0x9A7B56, roughness: 0.9 })
+      );
+      jute.position.set(bx, by + sy + 0.3, bz);
+      jute.rotation.y = (idx * 0.15);
+      indGroup.add(jute);
+    });
+  });
+
+  group.add(indGroup);
+  return indGroup;
+}
+
 /* --- MASTER MATERIALS --- */
-let masterBumpTex, masterRoughTex, cutEdgeTex, tapeTex, contactShadowTex, workbenchTex;
+let masterBumpTex, masterRoughTex, cutEdgeTex, tapeTex, contactShadowTex;
+let warehouseFloorTex, turntableTopTex, workbenchTex, palletWoodTex, stackedBoxesTex, flatCartonBundleTex, kraftRollTex, skyDomeTex;
+let bulbCoronaTex, lightPoolTex;
 let cardboardFrontMat, cardboardBackMat, cardboardPlainMat, cardboardInnerMat, cutEdgeMat, tapeMat, workbenchMat;
+let warehouseFloorMat, turntableTopMat, turntableRimMat, ledGlowMat, steelFrameMat;
+let rackBlueMat, rackOrangeMat, palletWoodMat, stackedBoxesMat, flatCartonBundleMat, kraftPaperRollMat;
+let skyDomeMat, highBayLampMat, lampBulbMat, ductMat, sprinklerPipeMat, volumetricConeMat, palletJackYellowMat;
+let bulbCoronaMat, lightPoolMat, dustParticles;
 
 function initMaterials() {
   masterBumpTex = createMasterKraftBump();
@@ -1977,7 +3345,17 @@ function initMaterials() {
   cutEdgeTex = createFluteCutEdgeTexture();
   tapeTex = createReinforcedTapeTexture();
   contactShadowTex = createContactShadowTexture();
+
+  warehouseFloorTex = createWarehouseFloorTexture();
+  turntableTopTex = createTurntableTexture();
   workbenchTex = createPackagingWorkbenchTexture();
+  palletWoodTex = createPalletTexture();
+  stackedBoxesTex = createStackedBoxesTexture();
+  flatCartonBundleTex = createFlatCartonBundleTexture();
+  kraftRollTex = createKraftPaperRollTexture();
+  skyDomeTex = createWarehouseSkyDomeTexture();
+  bulbCoronaTex = createBulbCoronaTexture();
+  lightPoolTex = createCinematicLightPoolTexture();
 
   cardboardFrontMat = new THREE.MeshStandardMaterial({
     map: createMasterKraftDiffuse(false, true),
@@ -2028,9 +3406,684 @@ function initMaterials() {
 
   workbenchMat = new THREE.MeshStandardMaterial({
     map: workbenchTex,
-    roughness: 0.74,
-    metalness: 0.03
+    roughness: 0.72,
+    metalness: 0.04
   });
+
+  warehouseFloorMat = new THREE.MeshStandardMaterial({
+    map: warehouseFloorTex,
+    roughness: 0.58,
+    metalness: 0.08
+  });
+
+  turntableTopMat = new THREE.MeshStandardMaterial({
+    map: turntableTopTex,
+    roughness: 0.72,
+    metalness: 0.12
+  });
+
+  turntableRimMat = new THREE.MeshStandardMaterial({
+    color: 0x9CA3AF,
+    roughness: 0.28,
+    metalness: 0.85
+  });
+
+  ledGlowMat = new THREE.MeshBasicMaterial({
+    color: 0xF59E0B,
+    transparent: true,
+    opacity: 0.45
+  });
+
+  steelFrameMat = new THREE.MeshStandardMaterial({
+    color: 0x1F242B,
+    roughness: 0.55,
+    metalness: 0.75
+  });
+
+  rackBlueMat = new THREE.MeshStandardMaterial({
+    color: 0x1D4ED8,
+    roughness: 0.45,
+    metalness: 0.25
+  });
+
+  rackOrangeMat = new THREE.MeshStandardMaterial({
+    color: 0xEA580C,
+    roughness: 0.45,
+    metalness: 0.25
+  });
+
+  palletWoodMat = new THREE.MeshStandardMaterial({
+    map: palletWoodTex,
+    roughness: 0.88,
+    metalness: 0.02
+  });
+
+  stackedBoxesMat = new THREE.MeshStandardMaterial({
+    map: stackedBoxesTex,
+    roughness: 0.84,
+    metalness: 0.02
+  });
+
+  flatCartonBundleMat = new THREE.MeshStandardMaterial({
+    map: flatCartonBundleTex,
+    roughness: 0.86,
+    metalness: 0.02
+  });
+
+  kraftPaperRollMat = new THREE.MeshStandardMaterial({
+    map: kraftRollTex,
+    roughness: 0.85,
+    metalness: 0.02
+  });
+
+  skyDomeMat = new THREE.MeshBasicMaterial({
+    map: skyDomeTex,
+    side: THREE.BackSide
+  });
+
+  highBayLampMat = new THREE.MeshStandardMaterial({
+    color: 0x18181B,
+    roughness: 0.35,
+    metalness: 0.8
+  });
+
+  lampBulbMat = new THREE.MeshBasicMaterial({
+    color: 0xFFF275
+  });
+
+  bulbCoronaMat = new THREE.SpriteMaterial({
+    map: bulbCoronaTex,
+    color: 0xFFF275,
+    transparent: true,
+    opacity: 0.88,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
+
+  lightPoolMat = new THREE.MeshBasicMaterial({
+    map: lightPoolTex,
+    transparent: true,
+    opacity: 0.72,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false
+  });
+
+  ductMat = new THREE.MeshStandardMaterial({
+    color: 0x9BA2AC,
+    roughness: 0.28,
+    metalness: 0.85
+  });
+
+  sprinklerPipeMat = new THREE.MeshStandardMaterial({
+    color: 0xDC2626,
+    roughness: 0.45,
+    metalness: 0.40
+  });
+
+  volumetricConeMat = new THREE.MeshBasicMaterial({
+    color: 0xFDE68A,
+    transparent: true,
+    opacity: 0.09,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    side: THREE.DoubleSide
+  });
+
+  palletJackYellowMat = new THREE.MeshStandardMaterial({
+    color: 0xF59E0B,
+    roughness: 0.35,
+    metalness: 0.40
+  });
+}
+
+// Build Improved Platform (Rotary Inspection Turntable & Heavy-Duty Workbench)
+function buildPlatformAndWorkbench(scene) {
+  const platformGroup = new THREE.Group();
+
+  // 1. Turntable Rotary Inspection Platter (Top sits flush at y = 0.0)
+  const turntableGeo = new THREE.CylinderGeometry(9.6, 9.7, 0.35, 48);
+  const turntableMesh = new THREE.Mesh(turntableGeo, [turntableRimMat, turntableTopMat, turntableRimMat]);
+  turntableMesh.position.set(0, -0.175, 0);
+  turntableMesh.receiveShadow = true;
+  platformGroup.add(turntableMesh);
+
+  // Turntable Underglow LED Ring
+  const ledRingGeo = new THREE.RingGeometry(9.0, 9.75, 48);
+  const ledRing = new THREE.Mesh(ledRingGeo, ledGlowMat);
+  ledRing.rotation.x = -Math.PI / 2;
+  ledRing.position.set(0, -0.34, 0);
+  platformGroup.add(ledRing);
+
+  // 2. Heavy-Duty Inspection Table Deck (Top at y = -0.35, bottom at y = -1.20)
+  const benchTopGeo = new THREE.BoxGeometry(25.0, 0.85, 19.0);
+  const benchTop = new THREE.Mesh(benchTopGeo, workbenchMat);
+  benchTop.position.set(0, -0.775, 0);
+  benchTop.receiveShadow = true;
+  platformGroup.add(benchTop);
+
+  // 4 Steel Corner Brackets
+  [[-12.4, -9.4], [12.4, -9.4], [-12.4, 9.4], [12.4, 9.4]].forEach(([cx, cz]) => {
+    const bracket = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.88, 0.8), steelFrameMat);
+    bracket.position.set(cx, -0.775, cz);
+    platformGroup.add(bracket);
+  });
+
+  // 3. Heavy Tubular Steel Legs (From y = -1.20 down to y = -6.50, height = 5.3)
+  const legGeo = new THREE.BoxGeometry(0.9, 5.3, 0.9);
+  const legPositions = [
+    [-11.5, -8.4], [11.5, -8.4],
+    [-11.5, 8.4], [11.5, 8.4]
+  ];
+
+  legPositions.forEach(([lx, lz]) => {
+    const leg = new THREE.Mesh(legGeo, steelFrameMat);
+    leg.position.set(lx, -3.85, lz);
+    leg.castShadow = true;
+    platformGroup.add(leg);
+
+    // Leveling Foot Pad on concrete floor
+    const foot = new THREE.Mesh(new THREE.CylinderGeometry(0.85, 0.85, 0.16, 16), steelFrameMat);
+    foot.position.set(lx, -6.42, lz);
+    platformGroup.add(foot);
+  });
+
+  // 4. Horizontal Steel Reinforcement Stretchers
+  const longStretcherGeo = new THREE.BoxGeometry(22.8, 0.45, 0.6);
+  const backStretcher = new THREE.Mesh(longStretcherGeo, steelFrameMat);
+  backStretcher.position.set(0, -5.0, -8.4);
+  platformGroup.add(backStretcher);
+
+  const frontStretcher = new THREE.Mesh(longStretcherGeo, steelFrameMat);
+  frontStretcher.position.set(0, -5.0, 8.4);
+  platformGroup.add(frontStretcher);
+
+  const sideStretcherGeo = new THREE.BoxGeometry(0.6, 0.45, 16.6);
+  const leftStretcher = new THREE.Mesh(sideStretcherGeo, steelFrameMat);
+  leftStretcher.position.set(-11.5, -5.0, 0);
+  platformGroup.add(leftStretcher);
+
+  const rightStretcher = new THREE.Mesh(sideStretcherGeo, steelFrameMat);
+  rightStretcher.position.set(11.5, -5.0, 0);
+  platformGroup.add(rightStretcher);
+
+  // Lower Storage Wire-Grid Shelf
+  const lowerShelf = new THREE.Mesh(new THREE.BoxGeometry(22.4, 0.15, 16.2), steelFrameMat);
+  lowerShelf.position.set(0, -4.8, 0);
+  platformGroup.add(lowerShelf);
+
+  // Storage items on lower shelf: Folded Flat Carton Bundles
+  const shelfBundle1 = new THREE.Mesh(new THREE.BoxGeometry(5.2, 1.1, 4.2), flatCartonBundleMat);
+  shelfBundle1.position.set(-5.5, -4.2, -1.0);
+  platformGroup.add(shelfBundle1);
+
+  const shelfBundle2 = new THREE.Mesh(new THREE.BoxGeometry(5.2, 1.1, 4.2), flatCartonBundleMat);
+  shelfBundle2.position.set(5.5, -4.2, -1.0);
+  platformGroup.add(shelfBundle2);
+
+  scene.add(platformGroup);
+}
+
+// Build Corrugated Box Warehouse Environment (Racks, Pallets, Box Stacks, Ceiling Lamps)
+function buildWarehouseEnvironment(scene) {
+  interactiveShelfBoxes = [];
+  interactiveShelfRacks = [];
+  const warehouseGroup = new THREE.Group();
+
+  // 1. Concrete Warehouse Floor at y = -6.50
+  const floorGeo = new THREE.PlaneGeometry(160, 160);
+  const floorMesh = new THREE.Mesh(floorGeo, warehouseFloorMat);
+  floorMesh.rotation.x = -Math.PI / 2;
+  floorMesh.position.set(0, -6.5, 0);
+  floorMesh.receiveShadow = true;
+  warehouseGroup.add(floorMesh);
+
+  // 2. Atmospheric Warehouse Sky Dome (Inverted Hemisphere)
+  const domeGeo = new THREE.SphereGeometry(95, 32, 18, 0, Math.PI * 2, 0, Math.PI * 0.55);
+  const domeMesh = new THREE.Mesh(domeGeo, skyDomeMat);
+  domeMesh.position.set(0, -6.5, 0);
+  warehouseGroup.add(domeMesh);
+
+  // Helper to build warehouse ceiling trusses, roof purlins, HVAC air ducting & fire sprinkler pipes
+  function buildCeilingAndUtilities(group) {
+    const trussZ = [-28, -14, 0, 14, 28];
+    const span = 76;
+    const trussH = 3.6;
+    const trussTopY = 25.0;
+    const trussBotY = trussTopY - trussH;
+
+    // Transverse Triangular Steel Roof Trusses
+    trussZ.forEach(tz => {
+      const truss = new THREE.Group();
+      truss.position.set(0, 0, tz);
+
+      // Top Chord
+      const topChord = new THREE.Mesh(new THREE.BoxGeometry(span, 0.35, 0.35), steelFrameMat);
+      topChord.position.set(0, trussTopY, 0);
+      truss.add(topChord);
+
+      // Bottom Chord (Tie Beam)
+      const botChord = new THREE.Mesh(new THREE.BoxGeometry(span, 0.35, 0.35), steelFrameMat);
+      botChord.position.set(0, trussBotY, 0);
+      truss.add(botChord);
+
+      // Vertical & Diagonal Web Struts
+      for (let x = -34; x <= 34; x += 8.5) {
+        const vPost = new THREE.Mesh(new THREE.BoxGeometry(0.25, trussH, 0.25), steelFrameMat);
+        vPost.position.set(x, (trussTopY + trussBotY) / 2, 0);
+        truss.add(vPost);
+
+        if (x < 34) {
+          const diag = new THREE.Mesh(new THREE.BoxGeometry(0.2, 9.2, 0.2), steelFrameMat);
+          diag.position.set(x + 4.25, (trussTopY + trussBotY) / 2, 0);
+          diag.rotation.z = Math.atan2(trussH, 8.5);
+          truss.add(diag);
+        }
+      }
+      group.add(truss);
+    });
+
+    // Longitudinal Structural Purlins connecting roof trusses
+    [-25, -12, 0, 12, 25].forEach(px => {
+      const purlin = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.3, 64), steelFrameMat);
+      purlin.position.set(px, trussTopY + 0.18, 0);
+      group.add(purlin);
+    });
+
+    // Galvanized Spiral HVAC Exhaust Air Duct
+    const mainDuct = new THREE.Mesh(new THREE.CylinderGeometry(0.9, 0.9, 72, 24), ductMat);
+    mainDuct.rotation.z = Math.PI / 2;
+    mainDuct.position.set(0, 20.2, -9);
+    group.add(mainDuct);
+
+    // Duct support hanger rods
+    [-24, -8, 8, 24].forEach(dx => {
+      const strap = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 4.8, 8), steelFrameMat);
+      strap.position.set(dx, 22.6, -9);
+      group.add(strap);
+    });
+
+    // Fire Sprinkler Safety-Red Water Pipe Line
+    const sprinklerMain = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 72, 12), sprinklerPipeMat);
+    sprinklerMain.rotation.z = Math.PI / 2;
+    sprinklerMain.position.set(0, 20.8, 9);
+    group.add(sprinklerMain);
+
+    // Brass sprinkler drop heads
+    for (let sx = -30; sx <= 30; sx += 10) {
+      const drop = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.6, 8), sprinklerPipeMat);
+      drop.position.set(sx, 20.5, 9);
+      group.add(drop);
+    }
+  }
+
+  // Helper to build industrial hydraulic hand pallet truck (yellow pallet jack)
+  function buildPalletJack(group, posX, posY, posZ, rotY) {
+    const jack = new THREE.Group();
+    jack.position.set(posX, posY, posZ);
+    jack.rotation.y = rotY;
+
+    // Dual Steel Lifting Forks
+    [-0.65, 0.65].forEach(fx => {
+      const fork = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.22, 4.2), palletJackYellowMat);
+      fork.position.set(fx, 0.15, -1.8);
+      jack.add(fork);
+
+      // Front tandem load rollers
+      const roller = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.45, 12), steelFrameMat);
+      roller.rotation.z = Math.PI / 2;
+      roller.position.set(fx, 0.15, -3.7);
+      jack.add(roller);
+    });
+
+    // Hydraulic Pump & Rear Chassis Housing
+    const chassis = new THREE.Mesh(new THREE.BoxGeometry(2.1, 0.9, 1.2), palletJackYellowMat);
+    chassis.position.set(0, 0.65, 0.4);
+    jack.add(chassis);
+
+    // Hydraulic Pump Cylinder
+    const cyl = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.24, 1.2, 16), steelFrameMat);
+    cyl.position.set(0, 1.1, 0.4);
+    jack.add(cyl);
+
+    // Steer Tiller Handle with triangular grip
+    const tiller = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 3.4, 8), palletJackYellowMat);
+    tiller.position.set(0, 2.5, 1.1);
+    tiller.rotation.x = 0.45;
+    jack.add(tiller);
+
+    const grip = new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.12, 0.6), steelFrameMat);
+    grip.position.set(0, 3.8, 1.8);
+    grip.rotation.x = 0.45;
+    jack.add(grip);
+
+    group.add(jack);
+  }
+
+  // Helper to create individual interactive catalogue boxes on warehouse shelves
+  function createShelfBoxMesh(item, boxW, boxH, boxD, x, y, z, rotY, category) {
+    const geo = new THREE.BoxGeometry(boxW, boxH, boxD);
+    const is5P = item.ply === 5;
+    // IMPORTANT: Clone material per box so hover emissive glow only affects THIS box, not all boxes
+    const sideMat = (is5P ? cardboardBackMat : cardboardPlainMat).clone();
+    const frontTex = getShelfBoxFaceTexture(item);
+    const frontMat = new THREE.MeshStandardMaterial({
+      map: frontTex,
+      bumpMap: masterBumpTex,
+      bumpScale: 0.035,
+      roughness: 0.80,
+      metalness: 0.02
+    });
+    // In Three.js BoxGeometry: [4] is +Z (front face pointing out to user)
+    const boxMaterials = [sideMat, sideMat, sideMat, sideMat, frontMat, sideMat];
+    const mesh = new THREE.Mesh(geo, boxMaterials);
+    mesh.position.set(x, y + boxH / 2, z);
+    mesh.rotation.y = rotY || 0;
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    mesh.userData = { boxData: item, isShelfBox: true, shelfCategory: category };
+    interactiveShelfBoxes.push(mesh);
+    return mesh;
+  }
+
+  // Matrix of shelf boxes arranged in strict ascending order
+  function getRackBayBoxes(category, tierIdx, bayIdx) {
+    if (category === 'small') {
+      const table = [
+        [{ l: 6, w: 4, h: 3.5, cost: 5.5, note: 'Tea & Spice Shipper', ply: 3 }, { l: 6, w: 4, h: 3.5, cost: 5.5, note: 'Tea & Spice Shipper', ply: 3 }],
+        [{ l: 7, w: 5, h: 4, cost: 8.0, note: 'Bakery Cupcakes 2-Pack', ply: 3 }, { l: 7, w: 5, h: 4, cost: 8.0, note: 'Bakery Cupcakes 2-Pack', ply: 3 }],
+        [{ l: 8, w: 6, h: 4, cost: 8.0, note: 'Kurti Single / T-Shirt', ply: 3 }, { l: 8, w: 6, h: 4, cost: 8.0, note: 'Kurti Single / T-Shirt', ply: 3 }],
+        [{ l: 9, w: 6, h: 3, cost: 9.0, note: 'Garments / Shirts', ply: 3 }, { l: 9, w: 6, h: 3, cost: 9.0, note: 'Garments / Shirts', ply: 3 }],
+        [{ l: 10, w: 8, h: 6, cost: 13.0, note: 'Universal Courier Shipper', ply: 3 }, { l: 10, w: 8, h: 6, cost: 13.0, note: 'Universal Courier Shipper', ply: 3 }],
+        [{ l: 10, w: 10, h: 3, cost: 12.0, note: 'Flat Apparel / Saree', ply: 3 }, { l: 10, w: 10, h: 3, cost: 12.0, note: 'Flat Apparel / Saree', ply: 3 }],
+        [{ l: 11, w: 6, h: 5, cost: 12.0, note: 'Shoe Box Regular', ply: 3 }, { l: 11, w: 6, h: 5, cost: 12.0, note: 'Shoe Box Regular', ply: 3 }],
+        [{ l: 11, w: 6, h: 5, cost: 12.0, note: 'Shoe Box Regular', ply: 3 }, { l: 11, w: 6, h: 5, cost: 12.0, note: 'Shoe Box Regular', ply: 3 }],
+        [{ l: 6, w: 4, h: 3.5, cost: 5.5, note: 'Tea & Spice Shipper', ply: 3 }, { l: 7, w: 5, h: 4, cost: 8.0, note: 'Bakery Cupcakes 2-Pack', ply: 3 }],
+        [{ l: 8, w: 6, h: 4, cost: 8.0, note: 'Kurti Single / T-Shirt', ply: 3 }, { l: 9, w: 6, h: 3, cost: 9.0, note: 'Garments / Shirts', ply: 3 }]
+      ];
+      return table[tierIdx * 2 + bayIdx] || table[0];
+    } else if (category === 'medium') {
+      const table = [
+        [{ l: 10, w: 8, h: 6, cost: 13.0, note: 'Universal Courier Shipper', ply: 3 }, { l: 12, w: 10, h: 8, cost: 14.0, note: 'Electronic / Gadgets', ply: 3 }],
+        [{ l: 12, w: 10, h: 8, cost: 14.0, note: 'Electronic / Gadgets', ply: 3 }, { l: 12, w: 10, h: 8, cost: 14.0, note: 'Electronic / Gadgets', ply: 3 }],
+        [{ l: 12, w: 10, h: 8, cost: 14.0, note: 'Electronic / Gadgets', ply: 3 }, { l: 13, w: 9, h: 6, cost: 15.0, note: 'Pack of 6 Master Box', ply: 3 }],
+        [{ l: 13, w: 9, h: 6, cost: 15.0, note: 'Pack of 6 Master Box', ply: 3 }, { l: 13, w: 9, h: 6, cost: 15.0, note: 'Pack of 6 Master Box', ply: 3 }],
+        [{ l: 13, w: 9, h: 6, cost: 15.0, note: 'Pack of 6 Master Box', ply: 3 }, { l: 14, w: 10, h: 6, cost: 16.0, note: 'Apparel Combo Pack', ply: 3 }],
+        [{ l: 14, w: 10, h: 6, cost: 16.0, note: 'Apparel Combo Pack', ply: 3 }, { l: 14, w: 10, h: 6, cost: 16.0, note: 'Apparel Combo Pack', ply: 3 }],
+        [{ l: 14, w: 10, h: 6, cost: 16.0, note: 'Apparel Combo Pack', ply: 3 }, { l: 15, w: 12, h: 10, cost: 20.0, note: 'Large Multi-Item Shipper', ply: 3 }],
+        [{ l: 15, w: 12, h: 10, cost: 20.0, note: 'Large Multi-Item Shipper', ply: 3 }, { l: 15, w: 12, h: 10, cost: 20.0, note: 'Large Multi-Item Shipper', ply: 3 }],
+        [{ l: 14, w: 14, h: 14, cost: 22.0, note: 'Heavy Cube Master', ply: 5 }, null],
+        [{ l: 15, w: 12, h: 10, cost: 20.0, note: 'Large Multi-Item Shipper', ply: 3 }, null]
+      ];
+      return table[tierIdx * 2 + bayIdx] || table[0];
+    } else {
+      const table = [
+        [{ l: 14, w: 14, h: 14, cost: 22.0, note: 'Heavy Cube Master', ply: 5 }, null],
+        [{ l: 16, w: 10, h: 8, cost: 18.0, note: 'Footwear Bulk Shipper', ply: 5 }, { l: 16, w: 10, h: 8, cost: 18.0, note: 'Footwear Bulk Shipper', ply: 5 }],
+        [{ l: 16, w: 10, h: 8, cost: 18.0, note: 'Footwear Bulk Shipper', ply: 5 }, null],
+        [{ l: 16, w: 12, h: 12, cost: 22.0, note: 'Master Carton 16"', ply: 5 }, null],
+        [{ l: 16, w: 12, h: 12, cost: 22.0, note: 'Master Carton 16"', ply: 5 }, null],
+        [{ l: 18, w: 14, h: 12, cost: 26.0, note: 'Heavy Duty Export Shipper', ply: 5 }, null],
+        [{ l: 18, w: 14, h: 12, cost: 26.0, note: 'Heavy Duty Export Shipper', ply: 5 }, null],
+        [{ l: 20, w: 14, h: 12, cost: 30.0, note: 'Industrial Machine Parts', ply: 5 }, null],
+        [{ l: 18, w: 14, h: 12, cost: 26.0, note: 'Heavy Duty Export Shipper', ply: 5 }, null],
+        [{ l: 20, w: 14, h: 12, cost: 30.0, note: 'Industrial Machine Parts', ply: 5 }, null]
+      ];
+      return table[tierIdx * 2 + bayIdx] || table[0];
+    }
+  }
+
+  // Populate shelf bay with boxes in strict ascending order with front printed labels
+  function populateShelfBayAscending(rack, px, baseY, bayDepth, itemPrimary, itemSecondary, stackCount, category) {
+    if (!itemPrimary) return;
+    const scale = 0.20;
+    const w1 = Math.min(2.3, itemPrimary.l * scale);
+    const h1 = Math.min(2.1, itemPrimary.h * scale);
+    const d1 = Math.min(3.4, itemPrimary.w * scale);
+
+    if (itemSecondary) {
+      const w2 = Math.min(2.3, itemSecondary.l * scale);
+      const h2 = Math.min(2.1, itemSecondary.h * scale);
+      const d2 = Math.min(3.4, itemSecondary.w * scale);
+
+      const b1 = createShelfBoxMesh(itemPrimary, w1, h1, d1, px - 1.15, baseY, 0, 0, category);
+      const b2 = createShelfBoxMesh(itemSecondary, w2, h2, d2, px + 1.15, baseY, 0, 0, category);
+      rack.add(b1);
+      rack.add(b2);
+
+      if (h1 < 1.4 && stackCount > 1) {
+        const bTop = createShelfBoxMesh(itemPrimary, w1, h1, d1, px - 1.15, baseY + h1, 0, 0, category);
+        rack.add(bTop);
+      }
+    } else {
+      if (w1 > 2.6) {
+        const bCenter = createShelfBoxMesh(itemPrimary, w1, h1, d1, px, baseY, 0, 0, category);
+        rack.add(bCenter);
+      } else {
+        const bLeft = createShelfBoxMesh(itemPrimary, w1, h1, d1, px - 1.1, baseY, 0, 0, category);
+        const bRight = createShelfBoxMesh(itemPrimary, w1, h1, d1, px + 1.1, baseY, 0, 0, category);
+        rack.add(bLeft);
+        rack.add(bRight);
+        if (h1 < 1.3 && stackCount > 1) {
+          const bStack = createShelfBoxMesh(itemPrimary, w1, h1, d1, px - 1.1, baseY + h1, 0, 0, category);
+          rack.add(bStack);
+        }
+      }
+    }
+  }
+
+  // Helper to build a modular heavy-duty industrial pallet rack bay with top shelf cover
+  function createPalletRack(width, depth, height, tiers, posX, posY, posZ, rotY, category) {
+    const rack = new THREE.Group();
+    rack.position.set(posX, posY, posZ);
+    rack.rotation.y = rotY;
+
+    const uprightCols = [-width/2, 0, width/2];
+    const postGeo = new THREE.BoxGeometry(0.4, height, 0.4);
+
+    uprightCols.forEach(ux => {
+      [-depth/2, depth/2].forEach(uz => {
+        const post = new THREE.Mesh(postGeo, rackBlueMat);
+        post.position.set(ux, height / 2, uz);
+        post.userData = { isShelfStructure: true, shelfCategory: category };
+        interactiveShelfRacks.push(post);
+        rack.add(post);
+      });
+      for (let by = 1.5; by < height - 1; by += 2.8) {
+        const brace = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.15, depth), steelFrameMat);
+        brace.position.set(ux, by, 0);
+        brace.rotation.x = 0.35;
+        brace.userData = { isShelfStructure: true, shelfCategory: category };
+        interactiveShelfRacks.push(brace);
+        rack.add(brace);
+      }
+    });
+
+    // Top Capping Shelf & Beams (Covers and caps open upright rods completely)
+    [-depth/2, depth/2].forEach(bz => {
+      const topBeam = new THREE.Mesh(new THREE.BoxGeometry(width + 0.3, 0.45, 0.25), rackOrangeMat);
+      topBeam.position.set(0, height - 0.22, bz);
+      topBeam.userData = { isShelfStructure: true, shelfCategory: category };
+      interactiveShelfRacks.push(topBeam);
+      rack.add(topBeam);
+    });
+    uprightCols.forEach(ux => {
+      const crossBeam = new THREE.Mesh(new THREE.BoxGeometry(0.25, 0.45, depth), steelFrameMat);
+      crossBeam.position.set(ux, height - 0.22, 0);
+      crossBeam.userData = { isShelfStructure: true, shelfCategory: category };
+      interactiveShelfRacks.push(crossBeam);
+      rack.add(crossBeam);
+    });
+    const topDeck = new THREE.Mesh(new THREE.BoxGeometry(width + 0.4, 0.35, depth + 0.3), palletWoodMat);
+    topDeck.position.set(0, height + 0.05, 0);
+    topDeck.userData = { isShelfStructure: true, shelfCategory: category };
+    interactiveShelfRacks.push(topDeck);
+    rack.add(topDeck);
+
+    const beamGeo = new THREE.BoxGeometry(width + 0.2, 0.45, 0.2);
+    tiers.forEach((ty, tIdx) => {
+      [-depth/2, depth/2].forEach(bz => {
+        const beam = new THREE.Mesh(beamGeo, rackOrangeMat);
+        beam.position.set(0, ty, bz);
+        beam.userData = { isShelfStructure: true, shelfCategory: category };
+        interactiveShelfRacks.push(beam);
+        rack.add(beam);
+      });
+
+      [-width * 0.26, width * 0.26].forEach((px, bIdx) => {
+        const pallet = new THREE.Mesh(new THREE.BoxGeometry(4.8, 0.45, depth - 0.4), palletWoodMat);
+        pallet.position.set(px, ty + 0.25, 0);
+        pallet.receiveShadow = true;
+        pallet.userData = { isShelfStructure: true, shelfCategory: category };
+        interactiveShelfRacks.push(pallet);
+        rack.add(pallet);
+
+        const [pItem, sItem] = getRackBayBoxes(category, tIdx, bIdx);
+        populateShelfBayAscending(rack, px, ty + 0.48, depth - 0.6, pItem, sItem, 2, category);
+      });
+    });
+
+    // Populate Top Shelf Deck (tIdx = 4)
+    [-width * 0.26, width * 0.26].forEach((px, bIdx) => {
+      const [pItem, sItem] = getRackBayBoxes(category, 4, bIdx);
+      populateShelfBayAscending(rack, px, height + 0.23, depth - 0.6, pItem, sItem, 1, category);
+    });
+
+    return rack;
+  }
+
+  // Back Wall Pallet Racks (Spacious authentic godown position at z = -26.0)
+  const backRack = createPalletRack(38, 4.6, 17, [0.4, 4.6, 8.8, 13.0], 0, -6.5, -26.0, 0, 'medium');
+  warehouseGroup.add(backRack);
+
+  // Left Wall Pallet Racks (x = -25.0)
+  const leftRack = createPalletRack(32, 4.6, 17, [0.4, 4.6, 8.8, 13.0], -25.0, -6.5, 0, Math.PI / 2, 'small');
+  warehouseGroup.add(leftRack);
+
+  // Right Wall Pallet Racks (x = +25.0)
+  const rightRack = createPalletRack(32, 4.6, 17, [0.4, 4.6, 8.8, 13.0], 25.0, -6.5, 0, -Math.PI / 2, 'heavy');
+  warehouseGroup.add(rightRack);
+
+  // Free-standing floor pallets with box stacks
+  [[-14, 15], [14, 15]].forEach(([fx, fz]) => {
+    const fPallet = new THREE.Mesh(new THREE.BoxGeometry(4.8, 0.45, 4.0), palletWoodMat);
+    fPallet.position.set(fx, -6.275, fz);
+    warehouseGroup.add(fPallet);
+
+    const fStack = new THREE.Mesh(new THREE.BoxGeometry(4.6, 3.6, 3.8), stackedBoxesMat);
+    fStack.position.set(fx, -6.275 + 0.225 + 1.8, fz);
+    warehouseGroup.add(fStack);
+  });
+
+  // Industrial Hydraulic Pallet Jack (Yellow manual hand truck)
+  buildPalletJack(warehouseGroup, -11.5, -6.5, 14.5, -0.35);
+
+  // Industrial Ceiling Framework: Trusses, Ducting, Sprinklers
+  buildCeilingAndUtilities(warehouseGroup);
+
+  // Indian Warehouse Authentic Elements: Mandir, Signs, Weighing Scale, Chai, Ledger
+  buildIndianWarehouseElements(warehouseGroup);
+
+  // 3. Dedicated Overhead Product Lamp (Directly Above Custom Box at 0, 16.5, 0)
+  const productLamp = new THREE.Group();
+  productLamp.position.set(0, 16.5, 0);
+
+  // Steel hanger conduit connecting lamp to ceiling truss at y = 25
+  const hangerPipe = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 8.5, 8), steelFrameMat);
+  hangerPipe.position.set(0, 4.25, 0);
+  productLamp.add(hangerPipe);
+
+  // Electrical conduit junction cap
+  const jBox = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.35, 0.3, 12), steelFrameMat);
+  jBox.position.set(0, 0.85, 0);
+  productLamp.add(jBox);
+
+  // Spun-metal dark enamel industrial reflector shade
+  const shade = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 2.2, 1.4, 24, 1, false), highBayLampMat);
+  shade.position.set(0, 0.1, 0);
+  productLamp.add(shade);
+
+  // Warm golden reflective interior reflector lining
+  const shadeInner = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.42, 2.15, 1.35, 24, 1, true),
+    new THREE.MeshStandardMaterial({ color: 0xF59E0B, roughness: 0.28, metalness: 0.82, side: THREE.BackSide })
+  );
+  shadeInner.position.set(0, 0.1, 0);
+  productLamp.add(shadeInner);
+
+  // Real incandescent/sodium glowing yellow bulb spherical element
+  const hotBulb = new THREE.Mesh(new THREE.SphereGeometry(0.72, 24, 16), lampBulbMat);
+  hotBulb.position.set(0, -0.45, 0);
+  productLamp.add(hotBulb);
+
+  // Optical luminous corona flare sprite around the yellow bulb
+  const coronaSprite = new THREE.Sprite(bulbCoronaMat);
+  coronaSprite.position.set(0, -0.45, 0);
+  coronaSprite.scale.set(7.5, 7.5, 1.0);
+  productLamp.add(coronaSprite);
+
+  // Highly focused downward cinematic SpotLight on custom box & turntable
+  const productSpot = new THREE.SpotLight(0xFDE68A, 2.85, 48, Math.PI * 0.28, 0.82, 1.15);
+  productSpot.position.set(0, 16.0, 0);
+  productSpot.target.position.set(0, 0, 0);
+  productSpot.castShadow = true;
+  productSpot.shadow.mapSize.width = 2048;
+  productSpot.shadow.mapSize.height = 2048;
+  productSpot.shadow.bias = -0.0003;
+  productSpot.shadow.radius = 2.0;
+  warehouseGroup.add(productSpot);
+  warehouseGroup.add(productSpot.target);
+
+  // Warm local point glow filling the fixture & table
+  const bulbPoint = new THREE.PointLight(0xFBBF24, 1.6, 20, 1.5);
+  bulbPoint.position.set(0, 15.8, 0);
+  warehouseGroup.add(bulbPoint);
+
+  warehouseGroup.add(productLamp);
+
+  // 4 Overhead Industrial High-Bay UFO LED Pendant Lamps
+  const lampPositions = [
+    [-14, 19, -12], [14, 19, -12],
+    [-14, 19, 14], [14, 19, 14]
+  ];
+
+  lampPositions.forEach(([lx, ly, lz]) => {
+    const lamp = new THREE.Group();
+    lamp.position.set(lx, ly, lz);
+
+    const cable = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 9, 8), steelFrameMat);
+    cable.position.set(0, 4.5, 0);
+    lamp.add(cable);
+
+    const housing = new THREE.Mesh(new THREE.CylinderGeometry(1.4, 0.8, 0.7, 16), highBayLampMat);
+    lamp.add(housing);
+
+    const bulb = new THREE.Mesh(new THREE.CylinderGeometry(1.25, 1.25, 0.1, 16), lampBulbMat);
+    bulb.position.set(0, -0.36, 0);
+    lamp.add(bulb);
+
+    // Warm optical corona flare for corner lamps
+    const cornerCorona = new THREE.Sprite(bulbCoronaMat);
+    cornerCorona.position.set(0, -0.4, 0);
+    cornerCorona.scale.set(4.5, 4.5, 1.0);
+    lamp.add(cornerCorona);
+
+    const downLight = new THREE.PointLight(0xFDE68A, 0.42, 38);
+    downLight.position.set(0, -0.6, 0);
+    lamp.add(downLight);
+
+    warehouseGroup.add(lamp);
+  });
+
+  // 4 Warehouse Structural Steel Columns (I-Beams)
+  [[-38, -38], [38, -38], [-38, 38], [38, 38]].forEach(([cx, cz]) => {
+    const col = new THREE.Mesh(new THREE.BoxGeometry(1.2, 34, 1.2), steelFrameMat);
+    col.position.set(cx, 10.5, cz);
+    warehouseGroup.add(col);
+  });
+
+  // Overhead warehouse signage and mandir are constructed in buildIndianWarehouseElements cleanly above shelves
+
+  scene.add(warehouseGroup);
 }
 
 function initHero3D() {
@@ -2040,28 +4093,32 @@ function initHero3D() {
   const width = container.clientWidth;
   const height = container.clientHeight;
 
-  scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xF5EFEB);
+  initMaterials();
 
-  camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 100);
-  camera.position.set(13, 11, 15);
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x13151A);
+  scene.fog = new THREE.Fog(0x13151A, 22, 85);
+
+  camera = new THREE.PerspectiveCamera(48, width / height, 0.1, 160);
+  camera.position.set(13, 11, 16);
 
   renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setSize(width, height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.04;
+  renderer.toneMappingExposure = 1.12;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   controls = new THREE.OrbitControls(camera, canvas);
+  controls.target.set(0, 2.5, 0);
   controls.enableDamping = true;
   controls.dampingFactor = 0.08;
   controls.rotateSpeed = 0.95;
-  controls.maxDistance = 28;
-  controls.minDistance = 6;
-  controls.maxPolarAngle = Math.PI / 2 + 0.04;
+  controls.maxDistance = 58;
+  controls.minDistance = 5.0;
+  controls.maxPolarAngle = Math.PI / 2 + 0.18;
   controls.autoRotate = false; // Never fight user touch/drag!
 
   controls.addEventListener('start', () => {
@@ -2069,54 +4126,147 @@ function initHero3D() {
     document.querySelectorAll('.cam-btn').forEach(b => b.classList.remove('active'));
   });
 
-  // 1. Warm Studio Key Light
-  const keyLight = new THREE.DirectionalLight(0xFFF7EC, 1.15);
-  keyLight.position.set(16, 24, 16);
+  // Interactive Raycasting Setup
+  raycaster = new THREE.Raycaster();
+  mouse = new THREE.Vector2();
+
+  canvas.addEventListener('pointerdown', (e) => {
+    pointerDownPos.x = e.clientX;
+    pointerDownPos.y = e.clientY;
+  });
+
+  canvas.addEventListener('pointermove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    if (!scene || !camera || !raycaster) return;
+
+    raycaster.setFromCamera(mouse, camera);
+
+    let isHovering = false;
+    if (boxGroup) {
+      const hitsMain = raycaster.intersectObjects(boxGroup.children, true);
+      if (hitsMain.length > 0) isHovering = true;
+    }
+
+    const hitsShelf = raycaster.intersectObjects(interactiveShelfBoxes, false);
+    if (hitsShelf.length > 0) {
+      isHovering = true;
+      const hitObj = hitsShelf[0].object;
+      if (hoveredShelfBox !== hitObj) {
+        if (hoveredShelfBox) setMeshEmissive(hoveredShelfBox, 0x000000);
+        hoveredShelfBox = hitObj;
+        setMeshEmissive(hoveredShelfBox, 0x2E1A08);
+      }
+    } else {
+      if (hoveredShelfBox) setMeshEmissive(hoveredShelfBox, 0x000000);
+      hoveredShelfBox = null;
+
+      // Check if hovering over shelf rack structure
+      const hitsRack = raycaster.intersectObjects(interactiveShelfRacks, false);
+      if (hitsRack.length > 0) {
+        isHovering = true;
+      }
+    }
+
+    canvas.style.cursor = isHovering ? 'pointer' : 'grab';
+  });
+
+  canvas.addEventListener('pointerup', (e) => {
+    const dist = Math.hypot(e.clientX - pointerDownPos.x, e.clientY - pointerDownPos.y);
+    if (dist > 6) return; // Camera was dragged, not clicked
+
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    if (!scene || !camera || !raycaster) return;
+
+    raycaster.setFromCamera(mouse, camera);
+
+    // 1. Clicked on Apple -> Toggle Apple In/Out!
+    if (appleGroup) {
+      const hitsApple = raycaster.intersectObjects(appleGroup.children, true);
+      if (hitsApple.length > 0) {
+        toggleAppleAction();
+        return;
+      }
+    }
+
+    // 2. Clicked on Main Showcase Box -> Toggle Flaps!
+    if (boxGroup) {
+      const hitsMain = raycaster.intersectObjects(boxGroup.children, true);
+      if (hitsMain.length > 0) {
+        toggleFlapsAction();
+        showViewportToast(areFlapsOpen ? '📦 Flaps Opened' : '📦 Flaps Closed');
+        return;
+      }
+    }
+
+    // 2. Clicked on a Shelf Box -> Load into 3D Showroom (stay at current view so user can keep browsing!)
+    const hitsShelf = raycaster.intersectObjects(interactiveShelfBoxes, false);
+    if (hitsShelf.length > 0) {
+      const hitObj = hitsShelf[0].object;
+      const bData = hitObj.userData.boxData;
+
+      if (bData) {
+        loadInto3DShowroom(bData.l, bData.w, bData.h, bData.cost, bData.note, bData.ply);
+        showViewportToast(`✨ ${bData.l}×${bData.w}×${bData.h}" placed on Main Table! Click "Back to Main Table" to view it.`);
+      }
+      setMeshEmissive(hitObj, 0xF59E0B);
+      setTimeout(() => { setMeshEmissive(hitObj, 0x000000); }, 380);
+      return;
+    }
+
+    // 3. Clicked directly on Shelf Rack Structure (Beams, Posts, Deck, Pallets) -> Walk Camera to Shelf!
+    const hitsRack = raycaster.intersectObjects(interactiveShelfRacks, false);
+    if (hitsRack.length > 0) {
+      const cat = hitsRack[0].object.userData.shelfCategory || 'medium';
+      const camPreset = cat === 'small' ? 'stand-left' : (cat === 'heavy' ? 'stand-right' : 'stand-back');
+      const btn = document.getElementById(`cam-${camPreset}`);
+      setCameraAngle(camPreset, btn);
+
+      const shelfName = cat === 'small' ? 'Left Shelf (6"-11")' : (cat === 'heavy' ? 'Right Shelf (5-Ply Heavy)' : 'Back Shelf (10"-15")');
+      showViewportToast(`📍 Walking to ${shelfName} — click any box to load it!`);
+      return;
+    }
+  });
+
+  // 1. Warm Sunlit Key Floodlight (Focused on Custom Box & Turntable)
+  const keyLight = new THREE.DirectionalLight(0xFDE68A, 1.15);
+  keyLight.position.set(16, 26, 16);
   keyLight.castShadow = true;
   keyLight.shadow.mapSize.width = 2048;
   keyLight.shadow.mapSize.height = 2048;
   keyLight.shadow.camera.near = 5;
-  keyLight.shadow.camera.far = 60;
-  keyLight.shadow.camera.left = -12;
-  keyLight.shadow.camera.right = 12;
-  keyLight.shadow.camera.top = 12;
-  keyLight.shadow.camera.bottom = -12;
+  keyLight.shadow.camera.far = 70;
+  keyLight.shadow.camera.left = -16;
+  keyLight.shadow.camera.right = 16;
+  keyLight.shadow.camera.top = 16;
+  keyLight.shadow.camera.bottom = -16;
   keyLight.shadow.bias = -0.0003;
   keyLight.shadow.radius = 2.5;
   scene.add(keyLight);
 
-  // 2. Cool Sky Bounce Fill Light
-  const fillLight = new THREE.DirectionalLight(0xDBEBFA, 0.45);
-  fillLight.position.set(-16, 14, -12);
+  // 2. Chiaroscuro Shadow Fill Light ("Little darkness on other side")
+  const fillLight = new THREE.DirectionalLight(0x0F172A, 0.14);
+  fillLight.position.set(-18, 14, -14);
   scene.add(fillLight);
 
-  // 3. Golden Rim Backlight for razor-sharp edge pop
-  const rimLight = new THREE.DirectionalLight(0xFFE2B8, 0.75);
-  rimLight.position.set(0, 18, -22);
+  // 3. Golden Amber Rim Backlight (Razor-sharp kraft fluting & edge pop)
+  const rimLight = new THREE.DirectionalLight(0xF59E0B, 0.95);
+  rimLight.position.set(0, 19, -24);
   scene.add(rimLight);
 
-  // 4. Soft Ambient Hemisphere Light
-  const hemiLight = new THREE.HemisphereLight(0xFFFFFF, 0x8C6B4A, 0.50);
+  // 4. Soft Ambient Hemisphere Light (Moody dark ceiling / warm kraft floor bounce)
+  const hemiLight = new THREE.HemisphereLight(0x222630, 0x14100C, 0.30);
   scene.add(hemiLight);
 
-  // 5. Packaging Store Inspection Workbench (Baltic Birch table with inch ruler & warehouse stencil)
-  const benchGeo = new THREE.BoxGeometry(32, 1.0, 32);
-  const workbenchMesh = new THREE.Mesh(benchGeo, workbenchMat);
-  workbenchMesh.position.set(0, -0.5, 0); // Top surface sits flush at y = 0!
-  workbenchMesh.receiveShadow = true;
-  scene.add(workbenchMesh);
+  // 5. Build Improved Platform and Workbench
+  buildPlatformAndWorkbench(scene);
 
-  // Studio Floor Shadow receiver beneath table
-  const floor = new THREE.Mesh(
-    new THREE.PlaneGeometry(60, 60),
-    new THREE.ShadowMaterial({ opacity: 0.15 })
-  );
-  floor.rotation.x = -Math.PI / 2;
-  floor.position.y = -1.01;
-  floor.receiveShadow = true;
-  scene.add(floor);
+  // 6. Build Corrugated Box Warehouse Environment (Racks, Pallets, Box Stacks, Ceiling Trusses, Volumetric Lights, Pallet Jack)
+  buildWarehouseEnvironment(scene);
 
-  initMaterials();
   createTrue3DApple();
   build3DBox(activeBox.l, activeBox.w, activeBox.h);
   animate();
@@ -2191,8 +4341,25 @@ function build3DBox(l, w, h) {
   innerFloor.position.set(0, thick + 0.005, 0);
   boxGroup.add(innerFloor);
 
-  // Front Wall (With ISO Shipping Marks)
-  const frontMats = [cardboardPlainMat, cardboardPlainMat, cutEdgeMat, cutEdgeMat, cardboardFrontMat, cardboardInnerMat];
+  // Front Wall (With bold printed size & logistics placard matching shelf box)
+  const heroFrontTex = getShelfBoxFaceTexture({
+    l: activeBox.l,
+    w: activeBox.w,
+    h: activeBox.h,
+    cost: activeBox.cost,
+    note: activeBox.note,
+    ply: activeBox.ply
+  });
+
+  const heroFrontMat = new THREE.MeshStandardMaterial({
+    map: heroFrontTex,
+    bumpMap: masterBumpTex,
+    bumpScale: 0.035,
+    roughness: 0.80,
+    metalness: 0.02
+  });
+
+  const frontMats = [cardboardPlainMat, cardboardPlainMat, cutEdgeMat, cutEdgeMat, heroFrontMat, cardboardInnerMat];
   const front = new THREE.Mesh(new THREE.BoxGeometry(L, H, thick), frontMats);
   front.position.set(0, H / 2, W / 2 - thick / 2);
   front.castShadow = true;
@@ -2219,13 +4386,15 @@ function build3DBox(l, w, h) {
 
   // 4 Hinged RSC Top Flaps
   const flapReach = W / 2;
+  const innerFlapW = Math.max(0.1, W - thick * 2 - 0.04);
+  const innerReach = Math.min(L * 0.46, W / 2);
   const flapMats = [cardboardPlainMat, cardboardPlainMat, cardboardPlainMat, cardboardInnerMat, cutEdgeMat, cutEdgeMat];
 
   // Front Outer Flap
   flapFrontHinge = new THREE.Group();
   flapFrontHinge.position.set(0, H, W / 2);
   const fFrontMesh = new THREE.Mesh(new THREE.BoxGeometry(L, thick, flapReach), flapMats);
-  fFrontMesh.position.set(0, 0, -flapReach / 2);
+  fFrontMesh.position.set(0, thick / 2, -flapReach / 2);
   fFrontMesh.castShadow = true;
   flapFrontHinge.add(fFrontMesh);
   boxGroup.add(flapFrontHinge);
@@ -2234,25 +4403,25 @@ function build3DBox(l, w, h) {
   flapBackHinge = new THREE.Group();
   flapBackHinge.position.set(0, H, -W / 2);
   const fBackMesh = new THREE.Mesh(new THREE.BoxGeometry(L, thick, flapReach), flapMats);
-  fBackMesh.position.set(0, 0, flapReach / 2);
+  fBackMesh.position.set(0, thick / 2, flapReach / 2);
   fBackMesh.castShadow = true;
   flapBackHinge.add(fBackMesh);
   boxGroup.add(flapBackHinge);
 
-  // Left Inner Flap
+  // Left Inner Flap (Smaller Side Flap)
   flapLeftHinge = new THREE.Group();
-  flapLeftHinge.position.set(-L / 2, H, 0);
-  const fLeftMesh = new THREE.Mesh(new THREE.BoxGeometry(flapReach, thick, W), flapMats);
-  fLeftMesh.position.set(flapReach / 2, -thick, 0);
+  flapLeftHinge.position.set(-L / 2 + thick, H, 0);
+  const fLeftMesh = new THREE.Mesh(new THREE.BoxGeometry(innerReach, thick, innerFlapW), flapMats);
+  fLeftMesh.position.set(innerReach / 2, -thick / 2, 0);
   fLeftMesh.castShadow = true;
   flapLeftHinge.add(fLeftMesh);
   boxGroup.add(flapLeftHinge);
 
-  // Right Inner Flap
+  // Right Inner Flap (Smaller Side Flap)
   flapRightHinge = new THREE.Group();
-  flapRightHinge.position.set(L / 2, H, 0);
-  const fRightMesh = new THREE.Mesh(new THREE.BoxGeometry(flapReach, thick, W), flapMats);
-  fRightMesh.position.set(-flapReach / 2, -thick, 0);
+  flapRightHinge.position.set(L / 2 - thick, H, 0);
+  const fRightMesh = new THREE.Mesh(new THREE.BoxGeometry(innerReach, thick, innerFlapW), flapMats);
+  fRightMesh.position.set(-innerReach / 2, -thick / 2, 0);
   fRightMesh.castShadow = true;
   flapRightHinge.add(fRightMesh);
   boxGroup.add(flapRightHinge);
@@ -2260,7 +4429,7 @@ function build3DBox(l, w, h) {
   // Reinforced Sealing Tape Along Center Seam
   const tapeGeo = new THREE.BoxGeometry(L + 0.1, 0.005, 0.85);
   tapeMesh = new THREE.Mesh(tapeGeo, tapeMat);
-  tapeMesh.position.set(0, H + thick / 2 + 0.002, 0);
+  tapeMesh.position.set(0, H + thick + 0.003, 0);
   tapeMesh.castShadow = true;
   boxGroup.add(tapeMesh);
 
@@ -2291,46 +4460,90 @@ function build3DBox(l, w, h) {
   isAppleInside = false;
   document.getElementById('btn-apple').classList.remove('active');
   document.getElementById('lbl-apple').textContent = 'Put Apple Inside';
-  appleTargetPos.set(L / 2 + 2.2, 0.9, 0);
+  appleTargetPos.set(L / 2 + 2.2, H * 0.15, 0);
+  if (appleGroup) appleGroup.position.set(L / 2 + 2.2, H * 0.15, 0);
 
   controls.target.set(0, H / 2, 0);
 }
 
 function applyFlapProgression(prog) {
-  if (!flapFrontHinge) return;
-  const maxOpen = 2.25;
-  flapFrontHinge.rotation.x = prog * maxOpen;
-  flapBackHinge.rotation.x = -prog * maxOpen;
-  flapLeftHinge.rotation.z = -prog * (maxOpen * 0.9);
-  flapRightHinge.rotation.z = prog * (maxOpen * 0.9);
+  if (!flapFrontHinge || !flapBackHinge || !flapLeftHinge || !flapRightHinge) return;
+
+  // Maximum rotation angle: ~255 degrees (4.45 rad) so all 4 flaps fold downwards along the outside walls under gravity
+  const maxOpen = 4.45;
+
+  // Phase 1: Outer Flaps (Front & Back) open first (from prog 0.0 to 0.70)
+  const outerP = Math.min(1, Math.max(0, prog / 0.70));
+  const outerEase = outerP * outerP * (3 - 2 * outerP);
+
+  // Phase 2: Smaller Inner Flaps (Left & Right) lift clear and hang down (from prog 0.20 to 1.0)
+  const innerP = Math.min(1, Math.max(0, (prog - 0.20) / 0.80));
+  const innerEase = innerP * innerP * (3 - 2 * innerP);
+
+  // Front Outer Flap swings Up and folds all the way Downwards in front (+X rotation)
+  flapFrontHinge.rotation.x = outerEase * maxOpen;
+  // Back Outer Flap swings Up and folds all the way Downwards in back (-X rotation)
+  flapBackHinge.rotation.x = -outerEase * maxOpen;
+
+  // Left Smaller Inner Flap swings Up and folds Downwards to the left (+Z rotation)
+  flapLeftHinge.rotation.z = innerEase * maxOpen;
+  // Right Smaller Inner Flap swings Up and folds Downwards to the right (-Z rotation)
+  flapRightHinge.rotation.z = -innerEase * maxOpen;
 
   // Tape split/fade behavior
   if (tapeMesh) {
-    tapeMesh.scale.z = Math.max(0.001, 1 - prog * 1.5);
-    tapeMesh.material.opacity = Math.max(0, 0.96 * (1 - prog * 2.2));
+    tapeMesh.scale.z = Math.max(0.001, 1 - outerP * 1.5);
+    tapeMesh.material.opacity = Math.max(0, 0.96 * (1 - outerP * 2.2));
   }
 }
 
 // Camera Angle Presets (Smooth transition without blocking manual drag)
 function setCameraAngle(angle, btn) {
   document.querySelectorAll('.cam-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
+  if (btn) {
+    btn.classList.add('active');
+  } else {
+    const defaultBtn = document.getElementById(`cam-${angle}`);
+    if (defaultBtn) defaultBtn.classList.add('active');
+  }
 
-  const { H } = boxGroup.userData;
+  const { H } = (boxGroup && boxGroup.userData) ? boxGroup.userData : { H: 4.5 };
   isPresetTransitioning = true;
 
   if (angle === 'orbit') {
-    targetCamPos.set(13, 11, 15);
+    targetCamPos.set(13, 11, 16);
     targetLookAt.set(0, H / 2, 0);
+  } else if (angle === 'main-table') {
+    // Return to Main Inspection Table & Showcase Box (clear eye-level view)
+    targetCamPos.set(0, 5.5, 18);
+    targetLookAt.set(0, H / 2, 0);
+  } else if (angle === 'stand-left') {
+    // Stand in front of Left Shelf — offset z=+4 to see between the upright posts, not through one
+    targetCamPos.set(-15.5, 2.0, 4.0);
+    targetLookAt.set(-25.0, 2.5, 4.0);
+  } else if (angle === 'stand-back') {
+    // Stand in front of Back Shelf — offset x=+6 to avoid the center upright post at x=0
+    targetCamPos.set(6.0, 2.0, -15.5);
+    targetLookAt.set(6.0, 2.5, -26.0);
+  } else if (angle === 'stand-right') {
+    // Stand in front of Right Shelf — offset z=-4 to see between the upright posts
+    targetCamPos.set(15.5, 2.0, -4.0);
+    targetLookAt.set(25.0, 2.5, -4.0);
+  } else if (angle === 'warehouse') {
+    targetCamPos.set(0, 10.5, 27.0);
+    targetLookAt.set(0, 3.5, 0);
+  } else if (angle === 'ceiling') {
+    targetCamPos.set(0, 3.5, 24);
+    targetLookAt.set(0, 17.5, 0);
   } else if (angle === 'front') {
-    targetCamPos.set(0, H / 2 + 1, 18);
+    targetCamPos.set(0, H / 2 + 0.8, 16);
     targetLookAt.set(0, H / 2, 0);
   } else if (angle === 'top') {
-    targetCamPos.set(0, 18, 0.05);
+    targetCamPos.set(0, 20, 0.05);
     targetLookAt.set(0, H / 2, 0);
   } else if (angle === 'flaps') {
     if (!areFlapsOpen) toggleFlapsAction();
-    targetCamPos.set(7, H + 4.5, 9);
+    targetCamPos.set(6, H + 4.5, 9);
     targetLookAt.set(0, H * 0.8, 0);
   }
 }
@@ -2378,18 +4591,22 @@ function toggleFlapsAction() {
 }
 
 function toggleAppleAction() {
-  const { L } = boxGroup.userData;
+  const { L, H } = boxGroup.userData;
   if (!isAppleInside) {
     isAppleInside = true;
     if (!areFlapsOpen) toggleFlapsAction();
-    appleTargetPos.set(0, 0.9, 0);
+    // Apple slides horizontally from right side INTO the center of the box (realistic placement)
+    appleTargetPos.set(0, H * 0.15, 0);
     document.getElementById('btn-apple').classList.add('active');
     document.getElementById('lbl-apple').textContent = 'Take Apple Out';
+    showViewportToast('🍎 Apple slid inside the box!');
   } else {
     isAppleInside = false;
-    appleTargetPos.set(L / 2 + 2.2, 0.9, 0);
+    // Apple slides back OUT to the right side of the box
+    appleTargetPos.set(L / 2 + 2.2, H * 0.15, 0);
     document.getElementById('btn-apple').classList.remove('active');
     document.getElementById('lbl-apple').textContent = 'Put Apple Inside';
+    showViewportToast('🍎 Apple taken out!');
   }
 }
 
