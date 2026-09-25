@@ -3,7 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
-<title>Box Company Udaipur - 3D Box Studio & Instant Order</title>
+<!-- PWA Web App Manifest & Mobile App Capabilities -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1F1B18">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Box Udaipur">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
@@ -686,7 +695,7 @@
   .order-sheet {
     background: #FFFFFF;
     width: 100%;
-    max-width: 440px;
+    max-width: 520px;
     border-radius: 24px 24px 0 0;
     padding: 22px 20px 28px;
     box-shadow: 0 -10px 40px rgba(0,0,0,0.3);
@@ -710,15 +719,185 @@
     to { opacity: 1; transform: scale(1); }
   }
 
-  .sheet-header {
+  /* Shopify Product Header */
+  .pdp-header {
     border-bottom: 1.5px solid var(--border-light);
     padding-bottom: 12px;
-    margin-bottom: 16px;
-    position: relative;
+    margin-bottom: 14px;
+    padding-right: 36px;
   }
+  .pdp-badge-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .pdp-badge-status {
+    background: #ECFDF5;
+    color: #065F46;
+    font-size: 0.68rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 12px;
+  }
+  .pdp-rating {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #D97706;
+  }
+  .order-modal-box-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.55rem;
+    line-height: 1.15;
+    color: var(--text-primary);
+  }
+  .order-modal-box-sub {
+    font-size: 0.76rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  /* Product Quick Visual & Fit Guide */
+  .pdp-preview-card {
+    display: flex;
+    gap: 14px;
+    background: #FAF8F5;
+    border: 1px solid var(--border-light);
+    border-radius: 14px;
+    padding: 12px;
+    margin-bottom: 14px;
+    align-items: center;
+  }
+  .pdp-svg-container {
+    width: 105px;
+    height: 90px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    border-radius: 10px;
+    border: 1px solid var(--border-light);
+    padding: 4px;
+  }
+  .pdp-specs-col {
+    flex: 1;
+    min-width: 0;
+  }
+  .pdp-dim-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    margin-bottom: 6px;
+  }
+  .dim-chip {
+    background: #FFFFFF;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    padding: 3px 4px;
+    text-align: center;
+  }
+  .dim-lbl {
+    display: block;
+    font-size: 0.58rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .dim-chip strong {
+    font-size: 0.76rem;
+    color: var(--text-primary);
+  }
+  .pdp-fits-tag {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    background: #FEF3C7;
+    border: 1px solid #FDE68A;
+    border-radius: 8px;
+    padding: 5px 8px;
+    margin-bottom: 8px;
+  }
+  .fits-icon { font-size: 0.85rem; line-height: 1.2; }
+  .fits-text { font-size: 0.72rem; color: #78350F; line-height: 1.3; }
+  .fits-title { font-weight: 800; display: block; }
+  .btn-pdp-view3d {
+    width: 100%;
+    background: #EDE8DF;
+    border: 1px solid #D8D0C2;
+    color: #4A3E31;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: background 0.15s ease;
+  }
+  .btn-pdp-view3d:hover { background: #E2DBD0; }
+
+  /* Fast WhatsApp Button & Collapsible Form */
+  .btn-fast-wa {
+    width: 100%;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: #FFFFFF;
+    border: none;
+    padding: 13px 16px;
+    border-radius: 28px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35);
+    margin-bottom: 12px;
+    transition: transform 0.15s ease;
+  }
+  .btn-fast-wa:active { transform: scale(0.97); }
+  .pdp-address-details {
+    background: #FAF8F5;
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+  }
+  .pdp-summary-toggle {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--brand-primary);
+    cursor: pointer;
+    user-select: none;
+  }
+  .pdp-trust-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    border-top: 1px solid var(--border-light);
+    padding-top: 12px;
+    margin-top: 10px;
+  }
+  .trust-badge-item {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.25;
+  }
+  .trust-badge-item span {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 2px;
+  }
+
   .modal-close-icon {
     position: absolute;
-    top: 0; right: 0;
+    top: 16px; right: 16px;
     background: #F4F1EA;
     border: none;
     width: 32px; height: 32px;
@@ -727,27 +906,7 @@
     color: var(--text-secondary);
     display: flex; align-items: center; justify-content: center;
     cursor: pointer;
-  }
-  .order-modal-badge {
-    display: inline-block;
-    background: #ECFDF5;
-    color: #065F46;
-    font-size: 0.65rem;
-    font-weight: 800;
-    padding: 3px 8px;
-    border-radius: 12px;
-    margin-bottom: 4px;
-  }
-  .order-modal-box-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.45rem;
-    line-height: 1.15;
-    color: var(--text-primary);
-  }
-  .order-modal-box-sub {
-    font-size: 0.74rem;
-    color: var(--text-secondary);
-    font-weight: 500;
+    z-index: 10;
   }
 
   /* Form Groups */
@@ -1210,15 +1369,190 @@
     background: rgba(255, 255, 255, 0.22);
   }
 
-  .guide-timing-note {
-    font-size: 0.82rem;
-    color: #A7F3D0;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    padding-top: 12px;
+  /* PWA Install & Notification Bar & Buttons */
+  .pwa-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-pwa-install-header {
+    background: #FEF3C7;
+    border: 1px solid #F59E0B;
+    color: #92400E;
+    font-size: 0.74rem;
+    font-weight: 800;
+    padding: 7px 12px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+  .btn-pwa-install-header:active { transform: scale(0.96); background: #FDE68A; }
+
+  .btn-pwa-notif-header {
+    background: #ECFDF5;
+    border: 1px solid #10B981;
+    color: #065F46;
+    font-size: 0.74rem;
+    font-weight: 800;
+    padding: 7px 12px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+  }
+  .btn-pwa-notif-header:active { transform: scale(0.96); background: #D1FAE5; }
+
+  /* Floating Bottom PWA Install Banner */
+  .pwa-bottom-banner {
+    position: fixed;
+    bottom: 16px;
+    left: 14px;
+    right: 14px;
+    max-width: 480px;
+    margin: 0 auto;
+    background: #1F1B18;
+    color: #FFFFFF;
+    border: 1.5px solid #D97706;
+    border-radius: 18px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    animation: pwaSlideUp 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes pwaSlideUp {
+    from { transform: translateY(120%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  .pwa-banner-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+  .pwa-banner-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+  .pwa-banner-info { min-width: 0; }
+  .pwa-banner-title {
+    font-size: 0.84rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .pwa-banner-sub {
+    font-size: 0.68rem;
+    color: #D1D5DB;
+    line-height: 1.25;
+    margin-top: 2px;
+  }
+  .pwa-banner-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .btn-pwa-install-cta {
+    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+    color: #FFFFFF;
+    border: none;
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 8px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+    white-space: nowrap;
+  }
+  .btn-pwa-install-cta:active { transform: scale(0.96); }
+  .btn-pwa-dismiss {
+    background: rgba(255, 255, 255, 0.12);
+    border: none;
+    color: #9CA3AF;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  /* iOS Install Guide Modal */
+  .ios-install-modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(15, 12, 10, 0.78);
+    backdrop-filter: blur(6px);
+    z-index: 1100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+  }
+  .ios-install-modal-backdrop.active { display: flex; }
+  .ios-install-card {
+    background: #FFFFFF;
+    border-radius: 20px;
+    max-width: 380px;
+    width: 100%;
+    padding: 24px 20px;
+    text-align: center;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+    position: relative;
+    animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 </style>
 </head>
 <body>
+
+  <!-- Floating Bottom PWA Install Banner -->
+  <div id="pwa-install-banner" class="pwa-bottom-banner" style="display:none;">
+    <div class="pwa-banner-left">
+      <img src="icon.svg" class="pwa-banner-icon" alt="App Icon">
+      <div class="pwa-banner-info">
+        <div class="pwa-banner-title">📲 Install Box Udaipur App</div>
+        <div class="pwa-banner-sub">Add to Phone Screen • 1-Tap Fast Orders & Alerts</div>
+      </div>
+    </div>
+    <div class="pwa-banner-right">
+      <button class="btn-pwa-install-cta" onclick="triggerPWAInstall()">Install</button>
+      <button class="btn-pwa-dismiss" onclick="dismissPWABanner()">&times;</button>
+    </div>
+  </div>
+
+  <!-- iOS Safari Install Guide Modal -->
+  <div id="ios-install-modal" class="ios-install-modal-backdrop" onclick="closeIOSInstallModal(event)">
+    <div class="ios-install-card">
+      <div style="font-size:2.8rem; margin-bottom:8px;">📱</div>
+      <h3 style="font-size:1.15rem; font-weight:800; color:#1F1B18; margin-bottom:6px;">iPhone par App Add Karein</h3>
+      <p style="font-size:0.85rem; color:#6B6358; line-height:1.45; margin-bottom:16px;">
+        Bina App Store ke direct phone ki home screen par add ho jayega:
+      </p>
+      <div style="background:#F4F1EA; border-radius:12px; padding:12px 14px; text-align:left; font-size:0.82rem; color:#1F1B18; line-height:1.6; margin-bottom:16px;">
+        1️⃣ Safari ke bottom mein <strong>Share</strong> button (⎋) dabayein.<br>
+        2️⃣ Thoda scroll karke <strong>'Add to Home Screen' (➕)</strong> chunein.<br>
+        3️⃣ Upar <strong>'Add'</strong> dabayein — aapki screen par app icon aa jayega!
+      </div>
+      <button style="background:#1F1B18; color:#fff; border:none; padding:10px 24px; border-radius:12px; font-weight:700; font-size:0.85rem; cursor:pointer;" onclick="closeIOSInstallModal()">Theek Hai (Got it)</button>
+    </div>
+  </div>
 
   <!-- Store Announcement Ticker Bar -->
   <div class="store-top-bar">
@@ -1243,9 +1577,17 @@
         <p class="header-subtitle">Udaipur Doorstep Packaging Supply</p>
       </div>
     </div>
-    <a href="https://wa.me/918619661325?text=Hi%20Box%20Company,%20I%20need%20corrugated%20boxes%20in%20Udaipur" class="header-wa-btn" target="_blank">
-      <span>💬</span> WhatsApp Store
-    </a>
+    <div class="pwa-header-actions">
+      <button class="btn-pwa-notif-header" id="btn-pwa-notif" onclick="togglePushNotifications()">
+        <span>🔔</span> Alerts
+      </button>
+      <button class="btn-pwa-install-header" id="btn-pwa-install-nav" onclick="triggerPWAInstall()">
+        <span>📲</span> Add App
+      </button>
+      <a href="https://wa.me/918619661325?text=Hi%20Box%20Company,%20I%20need%20corrugated%20boxes%20in%20Udaipur" class="header-wa-btn" target="_blank">
+        <span>💬</span> WhatsApp
+      </a>
+    </div>
   </header>
 
   <!-- =========================================================================
@@ -1435,11 +1777,11 @@
 
       <!-- Action Buttons Row -->
       <div class="guide-cta-actions">
-        <a href="https://wa.me/919460835478?text=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87%2C%20%E0%A4%AE%E0%A5%81%E0%A4%9D%E0%A5%87%20%E0%A4%AC%E0%A5%89%E0%A4%95%E0%A5%8D%E0%A4%B8%20%E0%A4%91%E0%A4%B0%E0%A5%8D%E0%A4%A1%E0%A4%B0%20%E0%A4%95%E0%A4%B0%E0%A4%A8%E0%A4%BE%20%E0%A4%B9%E0%A5%88%E0%A5%A4" target="_blank" class="btn-guide-wa">
+        <a href="https://wa.me/918619661325?text=%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87%2C%20%E0%A4%AE%E0%A5%81%E0%A4%9D%E0%A5%87%20%E0%A4%AC%E0%A5%89%E0%A4%95%E0%A5%8D%E0%A4%B8%20%E0%A4%91%E0%A4%B0%E0%A5%8D%E0%A4%A1%E0%A4%B0%20%E0%A4%95%E0%A4%B0%E0%A4%A8%E0%A4%BE%20%E0%A4%B9%E0%A5%88%E0%A5%A4" target="_blank" class="btn-guide-wa">
           <span>📦</span> WhatsApp पर ऑर्डर करें
         </a>
-        <a href="tel:+919460835478" class="btn-guide-call">
-          <span>📞</span> कॉल करें: +91 94608 35478
+        <a href="tel:+918619661325" class="btn-guide-call">
+          <span>📞</span> कॉल करें: +91 8619661325
         </a>
       </div>
 
@@ -1461,9 +1803,11 @@
       <button class="niche-chip active" onclick="filterNiche('all', this)">📦 All 53 Standard Sizes</button>
       <button class="niche-chip" onclick="filterNiche('popular', this)">🔥 Udaipur Top 8 Bestsellers</button>
       <button class="niche-chip" onclick="filterNiche('dispo', this)">🗑️ Aisle 1: Dustbin Rolls (13x9x6)</button>
-      <button class="niche-chip" onclick="filterNiche('garments', this)">👗 Aisle 2: Kurti & Garments</button>
-      <button class="niche-chip" onclick="filterNiche('jewelry', this)">💎 Aisle 3: Jewelry & Compact</button>
-      <button class="niche-chip" onclick="filterNiche('heavy5', this)">🚚 Aisle 4: 5-Ply Heavy Industrial</button>
+      <button class="niche-chip" onclick="filterNiche('garments', this)">👗 Aisle 2: Kurti & Sarees</button>
+      <button class="niche-chip" onclick="filterNiche('shoes', this)">👟 Aisle 3: Shoes & Footwear</button>
+      <button class="niche-chip" onclick="filterNiche('sweets', this)">🍬 Aisle 4: Sweets & Bakery</button>
+      <button class="niche-chip" onclick="filterNiche('jewelry', this)">💎 Aisle 5: Jewelry & Compact</button>
+      <button class="niche-chip" onclick="filterNiche('heavy5', this)">🚚 Aisle 6: 5-Ply Heavy Industrial</button>
     </div>
   </section>
 
@@ -1527,24 +1871,65 @@
   <!-- =========================================================================
        INSTANT ORDER CHECKOUT POPUP MODAL (WITH MAP / GPS LOCATOR & MANUAL ADDRESS)
        ========================================================================= -->
+  <!-- =========================================================================
+       SHOPIFY-STYLE PRODUCT DETAIL PAGE (POPUP QUICK-VIEW & CHECKOUT)
+       ========================================================================= -->
   <div class="order-modal-backdrop" id="order-backdrop" onclick="closeOrderBackdrop(event)">
     <div class="order-sheet">
       <button class="modal-close-icon" onclick="closeOrderModal()">&times;</button>
       
-      <div class="sheet-header">
-        <span class="order-modal-badge" id="ord-badge">⚡ 45-Min Express Doorstep Delivery</span>
+      <!-- Shopify Product Header -->
+      <div class="pdp-header">
+        <div class="pdp-badge-row">
+          <span class="pdp-badge-status" id="ord-badge">⚡ In Stock · 45-Min Express Dispatch</span>
+          <span class="pdp-rating">★★★★★ 4.9 (140+ Delivered)</span>
+        </div>
         <div class="order-modal-box-title" id="ord-title">13 &times; 9 &times; 6 Inches</div>
         <div class="order-modal-box-sub" id="ord-sub">3-Ply Heavy Corrugated Carton &bull; Dispo Well Standard</div>
       </div>
 
-      <!-- Quantity Picker -->
-      <div class="form-group">
-        <label class="form-label">Select Quantity (MOQ: 50 Boxes):</label>
+      <!-- Product Quick Visual & Fit Guide -->
+      <div class="pdp-preview-card">
+        <div class="pdp-svg-container" id="ord-svg-wrap"></div>
+        <div class="pdp-specs-col">
+          <div class="pdp-dim-grid">
+            <div class="dim-chip"><span class="dim-lbl">Length</span><strong id="pdp-len">13"</strong></div>
+            <div class="dim-chip"><span class="dim-lbl">Width</span><strong id="pdp-wid">9"</strong></div>
+            <div class="dim-chip"><span class="dim-lbl">Height</span><strong id="pdp-hgt">6"</strong></div>
+          </div>
+          <div class="pdp-fits-tag">
+            <span class="fits-icon">💡</span>
+            <div class="fits-text">
+              <span class="fits-title">Fits Inside:</span>
+              <span class="fits-desc" id="pdp-fits-desc">Dustbin rolls, Kurtis, Shoes, Electronics</span>
+            </div>
+          </div>
+          <button type="button" class="btn-pdp-view3d" onclick="viewIn3DFromModal()">
+            <span>👁️</span> Test in 3D Showroom (Put Apple Inside)
+          </button>
+        </div>
+      </div>
+
+      <!-- Quantity & Volume Pricing Tier -->
+      <div class="form-group" style="margin-top: 14px;">
+        <label class="form-label">Select Quantity & Pack Savings:</label>
         <div class="qty-chips-row">
-          <div class="qty-chip active" onclick="setQuantity(50, this)">50 pcs</div>
-          <div class="qty-chip" onclick="setQuantity(100, this)">100 pcs</div>
-          <div class="qty-chip" onclick="setQuantity(250, this)">250 pcs</div>
-          <div class="qty-chip" onclick="setQuantity(500, this)">500 pcs</div>
+          <div class="qty-chip active" onclick="setQuantity(50, this)">
+            <div style="font-weight:800;">50 pcs</div>
+            <div style="font-size:0.6rem; color:#6B6358;">Standard</div>
+          </div>
+          <div class="qty-chip" onclick="setQuantity(100, this)">
+            <div style="font-weight:800;">100 pcs</div>
+            <div style="font-size:0.6rem; color:#059669; font-weight:700;">5% OFF</div>
+          </div>
+          <div class="qty-chip" onclick="setQuantity(250, this)">
+            <div style="font-weight:800;">250 pcs</div>
+            <div style="font-size:0.6rem; color:#059669; font-weight:700;">8% OFF</div>
+          </div>
+          <div class="qty-chip" onclick="setQuantity(500, this)">
+            <div style="font-weight:800;">500 pcs</div>
+            <div style="font-size:0.6rem; color:#059669; font-weight:700;">12% OFF</div>
+          </div>
         </div>
         <div class="custom-qty-wrapper">
           <button type="button" class="qty-stepper-btn" onclick="stepQuantity(-25)">&minus;</button>
@@ -1553,38 +1938,14 @@
         </div>
       </div>
 
-      <!-- Customer Shop/Business Name -->
-      <div class="form-group">
-        <label class="form-label">Shop / Business / Brand Name:</label>
-        <input type="text" id="inp-shop" class="form-input" placeholder="e.g. Dispo Well / Maya Boutique / Sweet Shop">
-      </div>
-
-      <!-- Free-Form Delivery Address with Map / GPS Detector -->
-      <div class="form-group">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-          <label class="form-label" style="margin-bottom:0;">Delivery Address in Udaipur:</label>
-          <button type="button" class="btn-gps-locate" onclick="detectGPSLocation()">
-            <span id="gps-icon">📍</span> <span id="gps-text">Attach Live Map Pin</span>
-          </button>
-        </div>
-        <textarea id="inp-address" class="form-textarea" rows="2" placeholder="Type your shop name, street, road, colony or landmark in Udaipur (e.g. Shop #14, Road No. 3, MIA Madri / Near Delhi Gate)..."></textarea>
-        <div id="gps-status-badge" style="display:none; margin-top:5px; font-size:0.7rem; color:#065F46; background:#ECFDF5; padding:4px 8px; border-radius:6px; font-weight:600;"></div>
-      </div>
-
-      <!-- Customer WhatsApp Phone Number -->
-      <div class="form-group">
-        <label class="form-label">WhatsApp Phone Number (For Dispatch Updates):</label>
-        <input type="tel" id="inp-phone" class="form-input" placeholder="e.g. 98290XXXXX" maxlength="10">
-      </div>
-
       <!-- Live Order Bill Summary -->
       <div class="summary-invoice">
         <div class="summary-row">
-          <span>Box Rate:</span>
+          <span>Factory Wholesale Rate:</span>
           <span id="inv-unit-rate">₹23 / box</span>
         </div>
         <div class="summary-row">
-          <span>Quantity:</span>
+          <span>Total Quantity:</span>
           <span id="inv-qty-count">50 Boxes</span>
         </div>
         <div class="summary-row">
@@ -1592,19 +1953,56 @@
           <span style="color:#059669; font-weight:700;">FREE (Udaipur City)</span>
         </div>
         <div class="summary-total-row">
-          <span class="summary-total-label">Total Payable:</span>
+          <span class="summary-total-label">Total Amount:</span>
           <span class="summary-total-price" id="inv-total-price">₹1,150</span>
         </div>
       </div>
 
-      <!-- Confirm Order Button -->
-      <button class="btn-confirm-order" onclick="submitOrderToWhatsApp()">
-        <span>💬</span> Confirm Order on WhatsApp
+      <!-- 1-Tap Fast WhatsApp Order (Direct Chat without typing form) -->
+      <button class="btn-fast-wa" onclick="instantWhatsAppOrder()">
+        <span>💬</span> 1-Tap Fast Order on WhatsApp
       </button>
-      <div class="order-trust-notice">
-        🔒 Pay on delivery or advance UPI. Direct warehouse dispatch.
+
+      <!-- Optional Detailed Delivery Address Accordion -->
+      <details class="pdp-address-details" id="pdp-addr-toggle">
+        <summary class="pdp-summary-toggle">📝 Or Enter Delivery Address & Shop Name</summary>
+        <div style="padding-top:12px;">
+          <!-- Customer Shop/Business Name -->
+          <div class="form-group">
+            <label class="form-label">Shop / Business / Brand Name:</label>
+            <input type="text" id="inp-shop" class="form-input" placeholder="e.g. Maya Boutique / Sweet Shop / Delhi Gate">
+          </div>
+
+          <!-- Free-Form Delivery Address with Map / GPS Detector -->
+          <div class="form-group">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <label class="form-label" style="margin-bottom:0;">Delivery Address in Udaipur:</label>
+              <button type="button" class="btn-gps-locate" onclick="detectGPSLocation()">
+                <span id="gps-icon">📍</span> <span id="gps-text">Attach Live Map Pin</span>
+              </button>
+            </div>
+            <textarea id="inp-address" class="form-textarea" rows="2" placeholder="Type your shop name, street, road, colony or landmark in Udaipur..."></textarea>
+            <div id="gps-status-badge" style="display:none; margin-top:5px; font-size:0.7rem; color:#065F46; background:#ECFDF5; padding:4px 8px; border-radius:6px; font-weight:600;"></div>
+          </div>
+
+          <!-- Customer WhatsApp Phone Number -->
+          <div class="form-group">
+            <label class="form-label">WhatsApp Phone Number:</label>
+            <input type="tel" id="inp-phone" class="form-input" placeholder="e.g. 98290XXXXX" maxlength="10">
+          </div>
+
+          <button class="btn-confirm-order" onclick="submitOrderToWhatsApp()">
+            <span>📦</span> Send Complete Delivery Order
+          </button>
+        </div>
+      </details>
+
+      <!-- Shopify Trust Badges Strip -->
+      <div class="pdp-trust-strip">
+        <div class="trust-badge-item"><span>🚚</span> 45-Min Express Auto Dispatch</div>
+        <div class="trust-badge-item"><span>💵</span> Gate-pe-Scan UPI on Delivery</div>
+        <div class="trust-badge-item"><span>🧾</span> 100% Tax Invoice (GST)</div>
       </div>
-      <a class="modal-view-3d-link" onclick="viewIn3DFromModal()">👁️ View This Size in 3D Showroom at Top</a>
     </div>
   </div>
 
@@ -2039,14 +2437,19 @@ function showViewportToast(text) {
 
 /* --- PROCEDURAL TEXTURE GENERATORS --- */
 
-// 1. High-Res Multi-Layer Kraft Paper Diffuse Texture (1024x1024) - GOLDEN-TAN NATURAL KRAFT
+const kraftTexCache = new Map();
+
+// 1. High-Res Multi-Layer Kraft Paper Diffuse Texture (512x512 optimized for instant mobile load)
 function createMasterKraftDiffuse(is5Ply, hasMarks) {
+  const cacheKey = `${is5Ply}_${hasMarks}`;
+  if (kraftTexCache.has(cacheKey)) return kraftTexCache.get(cacheKey);
+
   const canvas = document.createElement('canvas');
-  canvas.width = 1024; canvas.height = 1024;
+  canvas.width = 512; canvas.height = 512;
   const ctx = canvas.getContext('2d');
 
-  // Base natural golden-tan kraft color gradient (Lightened from muddy brown to authentic virgin kraft)
-  const baseGrad = ctx.createLinearGradient(0, 0, 1024, 1024);
+  // Base natural golden-tan kraft color gradient
+  const baseGrad = ctx.createLinearGradient(0, 0, 512, 512);
   if (is5Ply) {
     baseGrad.addColorStop(0, '#B8834A');
     baseGrad.addColorStop(0.5, '#A97239');
@@ -2057,11 +2460,11 @@ function createMasterKraftDiffuse(is5Ply, hasMarks) {
     baseGrad.addColorStop(1, '#AB753C');
   }
   ctx.fillStyle = baseGrad;
-  ctx.fillRect(0, 0, 1024, 1024);
+  ctx.fillRect(0, 0, 512, 512);
 
-  // Organic pulp clouds / uneven paper slurry
-  for (let i = 0; i < 45; i++) {
-    const rx = Math.random() * 1024, ry = Math.random() * 1024, rad = 35 + Math.random() * 130;
+  // Organic pulp clouds
+  for (let i = 0; i < 20; i++) {
+    const rx = Math.random() * 512, ry = Math.random() * 512, rad = 25 + Math.random() * 70;
     const g = ctx.createRadialGradient(rx, ry, 0, rx, ry, rad);
     g.addColorStop(0, Math.random() > 0.5 ? 'rgba(235, 185, 130, 0.16)' : 'rgba(120, 70, 30, 0.11)');
     g.addColorStop(1, 'rgba(0,0,0,0)');
@@ -2069,59 +2472,54 @@ function createMasterKraftDiffuse(is5Ply, hasMarks) {
     ctx.beginPath(); ctx.arc(rx, ry, rad, 0, Math.PI * 2); ctx.fill();
   }
 
-  // 45,000 multi-scale organic wood pulp fibers
-  for (let i = 0; i < 45000; i++) {
-    const px = Math.random() * 1024, py = Math.random() * 1024;
+  // Multi-scale organic wood pulp fibers (optimized count for instant rendering)
+  for (let i = 0; i < 2200; i++) {
+    const px = Math.random() * 512, py = Math.random() * 512;
     const rType = Math.random();
     if (rType < 0.45) {
-      // Dark recycled wood fibers
-      ctx.strokeStyle = `rgba(50, 25, 10, ${0.06 + Math.random() * 0.12})`;
-      ctx.lineWidth = 0.8 + Math.random() * 0.8;
+      ctx.strokeStyle = `rgba(50, 25, 10, ${0.08 + Math.random() * 0.14})`;
+      ctx.lineWidth = 0.8 + Math.random() * 0.7;
       const len = 2 + Math.random() * 4;
       const angle = Math.random() * Math.PI * 2;
       ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px + Math.cos(angle) * len, py + Math.sin(angle) * len); ctx.stroke();
     } else if (rType < 0.82) {
-      // Light bleached straw / flax fibers
-      ctx.strokeStyle = `rgba(255, 235, 205, ${0.08 + Math.random() * 0.14})`;
-      ctx.lineWidth = 0.7 + Math.random() * 0.6;
+      ctx.strokeStyle = `rgba(255, 235, 205, ${0.10 + Math.random() * 0.15})`;
+      ctx.lineWidth = 0.7 + Math.random() * 0.5;
       const len = 2 + Math.random() * 5;
       const angle = Math.random() * Math.PI * 2;
       ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px + Math.cos(angle) * len, py + Math.sin(angle) * len); ctx.stroke();
     } else {
-      // Dark specks of unbleached bark
-      ctx.fillStyle = `rgba(45, 20, 8, ${0.16 + Math.random() * 0.25})`;
+      ctx.fillStyle = `rgba(45, 20, 8, ${0.18 + Math.random() * 0.25})`;
       ctx.fillRect(px, py, 1.2, 1.2);
     }
   }
 
-  // Vertical corrugation flute washboard telegraphing bands (alternating ridge highlight & trough shadow)
-  const fluteSpacing = is5Ply ? 16 : 12;
-  for (let x = 0; x < 1024; x += fluteSpacing) {
+  // Corrugation fluting telegraphing bands
+  const fluteSpacing = is5Ply ? 14 : 10;
+  for (let x = 0; x < 512; x += fluteSpacing) {
     const fluteGrad = ctx.createLinearGradient(x, 0, x + fluteSpacing, 0);
-    fluteGrad.addColorStop(0, 'rgba(40, 20, 5, 0.07)');
+    fluteGrad.addColorStop(0, 'rgba(40, 20, 5, 0.06)');
     fluteGrad.addColorStop(0.35, 'rgba(255, 245, 225, 0.05)');
-    fluteGrad.addColorStop(0.7, 'rgba(40, 20, 5, 0.04)');
-    fluteGrad.addColorStop(1, 'rgba(40, 20, 5, 0.07)');
+    fluteGrad.addColorStop(0.7, 'rgba(40, 20, 5, 0.03)');
+    fluteGrad.addColorStop(1, 'rgba(40, 20, 5, 0.06)');
     ctx.fillStyle = fluteGrad;
-    ctx.fillRect(x, 0, fluteSpacing, 1024);
+    ctx.fillRect(x, 0, fluteSpacing, 512);
   }
 
-  // Die-cutter score lines (folding crease indentations)
-  ctx.fillStyle = 'rgba(50, 25, 10, 0.24)';
-  ctx.fillRect(0, 250, 1024, 3);
-  ctx.fillRect(0, 774, 1024, 3);
+  // Die-cutter score lines
+  ctx.fillStyle = 'rgba(50, 25, 10, 0.22)';
+  ctx.fillRect(0, 125, 512, 2);
+  ctx.fillRect(0, 387, 512, 2);
 
   if (hasMarks) {
-    // Authentic Industrial Box Maker's Certificate (BMC) Stamp on bottom right
-    drawBoxCertificateStamp(ctx, 820, 800, is5Ply);
-
-    // Official ISO Shipping & Handling Graphics on front left
-    drawShippingMarks(ctx, 140, 680);
+    drawBoxCertificateStamp(ctx, 410, 400, is5Ply);
+    drawShippingMarks(ctx, 70, 340);
   }
 
   const texture = new THREE.CanvasTexture(canvas);
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
+  kraftTexCache.set(cacheKey, texture);
   return texture;
 }
 
@@ -2235,31 +2633,24 @@ function drawShippingMarks(ctx, ox, oy) {
   ctx.restore();
 }
 
-// 2. High-Res Kraft Bump Map (1024x1024) - TACTILE CORRUGATION FLUTING & WOOD FIBER GRAIN
+// 2. High-Res Kraft Bump Map (256x256 seamless repeat - 16x faster computation)
 function createMasterKraftBump() {
   const canvas = document.createElement('canvas');
-  canvas.width = 1024; canvas.height = 1024;
+  canvas.width = 256; canvas.height = 256;
   const ctx = canvas.getContext('2d');
   ctx.fillStyle = '#808080';
-  ctx.fillRect(0, 0, 1024, 1024);
+  ctx.fillRect(0, 0, 256, 256);
 
-  const imgData = ctx.getImageData(0, 0, 1024, 1024);
+  const imgData = ctx.getImageData(0, 0, 256, 256);
   const data = imgData.data;
   const period = 12;
 
-  for (let y = 0; y < 1024; y++) {
-    for (let x = 0; x < 1024; x++) {
-      const idx = (y * 1024 + x) * 4;
+  for (let y = 0; y < 256; y++) {
+    for (let x = 0; x < 256; x++) {
+      const idx = (y * 256 + x) * 4;
       const flute = Math.sin((x / period) * Math.PI * 2) * 22;
       const noise = (Math.random() - 0.5) * 16;
-      let val = 128 + flute + noise;
-
-      const distToScore1 = Math.abs(y - 250);
-      const distToScore2 = Math.abs(y - 774);
-      if (distToScore1 < 4) val -= (4 - distToScore1) * 18;
-      if (distToScore2 < 4) val -= (4 - distToScore2) * 18;
-
-      val = Math.max(0, Math.min(255, val));
+      let val = Math.max(0, Math.min(255, 128 + flute + noise));
       data[idx] = val;
       data[idx + 1] = val;
       data[idx + 2] = val;
@@ -2270,6 +2661,7 @@ function createMasterKraftBump() {
   const texture = new THREE.CanvasTexture(canvas);
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
+  texture.repeat.set(4, 4);
   return texture;
 }
 
@@ -2425,8 +2817,8 @@ function createWarehouseFloorTexture() {
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, 1024, 1024);
 
-  // Micro-aggregate stipple (25,000 specks)
-  for (let i = 0; i < 25000; i++) {
+  // Micro-aggregate stipple (3,000 specks - fast load)
+  for (let i = 0; i < 3000; i++) {
     const x = Math.random() * 1024, y = Math.random() * 1024;
     ctx.fillStyle = Math.random() > 0.45 ? 'rgba(255,255,255,0.06)' : 'rgba(30,28,25,0.08)';
     ctx.fillRect(x, y, Math.random() * 2 + 0.5, Math.random() * 2 + 0.5);
@@ -2533,8 +2925,8 @@ function createTurntableTexture() {
   ctx.fillStyle = bgGrad;
   ctx.fillRect(0, 0, 1024, 1024);
 
-  // Micro stipple texture
-  for (let i = 0; i < 18000; i++) {
+  // Micro stipple texture (fast load)
+  for (let i = 0; i < 2500; i++) {
     const rx = Math.random() * 1024, ry = Math.random() * 1024;
     ctx.fillStyle = Math.random() > 0.5 ? 'rgba(255,255,255,0.035)' : 'rgba(0,0,0,0.06)';
     ctx.fillRect(rx, ry, 1.2, 1.2);
@@ -4026,8 +4418,8 @@ function buildWarehouseEnvironment(scene) {
   productSpot.position.set(0, 16.0, 0);
   productSpot.target.position.set(0, 0, 0);
   productSpot.castShadow = true;
-  productSpot.shadow.mapSize.width = 2048;
-  productSpot.shadow.mapSize.height = 2048;
+  productSpot.shadow.mapSize.width = 1024;
+  productSpot.shadow.mapSize.height = 1024;
   productSpot.shadow.bias = -0.0003;
   productSpot.shadow.radius = 2.0;
   warehouseGroup.add(productSpot);
@@ -4104,7 +4496,7 @@ function initHero3D() {
 
   renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setSize(width, height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.12;
@@ -4312,7 +4704,8 @@ function createTrue3DApple() {
   leaf.rotation.set(0.4, 0.2, 0.3);
   appleGroup.add(leaf);
 
-  appleGroup.scale.set(0.9, 0.9, 0.9);
+  // Apple is mathematically sized to a real 3-inch fruit (diameter = 1.56 units)
+  appleGroup.scale.set(0.78, 0.78, 0.78);
   scene.add(appleGroup);
 }
 
@@ -4321,12 +4714,15 @@ function build3DBox(l, w, h) {
   boxGroup = new THREE.Group();
 
   const is5P = activeBox.ply === 5;
-  const maxDim = Math.max(l, w, h);
-  const scale = 7.0 / maxDim;
-  const L = l * scale, W = w * scale, H = h * scale;
-  boxGroup.userData = { L, W, H, scale, is5P };
+  // TRUE RELATIVE REAL-WORLD SCALE:
+  // 1 inch = 0.52 units in 3D world space.
+  // 4x4x4" box = 2.08 x 2.08 x 2.08 units (fits 1 apple snugly).
+  // 14x14x14" box = 7.28 x 7.28 x 7.28 units (massive master carton).
+  const INCH_SCALE = 0.52;
+  const L = l * INCH_SCALE, W = w * INCH_SCALE, H = h * INCH_SCALE;
+  boxGroup.userData = { L, W, H, scale: INCH_SCALE, is5P, realL: l, realW: w, realH: h };
 
-  const thick = is5P ? 0.12 : 0.08;
+  const thick = is5P ? 0.10 : 0.06;
 
   // Box Base Floor
   const bottom = new THREE.Mesh(new THREE.BoxGeometry(L, thick, W), cardboardPlainMat);
@@ -4460,10 +4856,11 @@ function build3DBox(l, w, h) {
   isAppleInside = false;
   document.getElementById('btn-apple').classList.remove('active');
   document.getElementById('lbl-apple').textContent = 'Put Apple Inside';
-  appleTargetPos.set(L / 2 + 2.2, H * 0.15, 0);
-  if (appleGroup) appleGroup.position.set(L / 2 + 2.2, H * 0.15, 0);
+  const appleRestY = 0.78 + thick;
+  appleTargetPos.set(L / 2 + 1.8, appleRestY, 0);
+  if (appleGroup) appleGroup.position.set(L / 2 + 1.8, appleRestY, 0);
 
-  controls.target.set(0, H / 2, 0);
+  controls.target.set(0, Math.max(1.0, H / 2), 0);
 }
 
 function applyFlapProgression(prog) {
@@ -4507,16 +4904,18 @@ function setCameraAngle(angle, btn) {
     if (defaultBtn) defaultBtn.classList.add('active');
   }
 
-  const { H } = (boxGroup && boxGroup.userData) ? boxGroup.userData : { H: 4.5 };
+  const { H, L, W } = (boxGroup && boxGroup.userData) ? boxGroup.userData : { H: 4.5, L: 6, W: 4.5 };
   isPresetTransitioning = true;
 
   if (angle === 'orbit') {
-    targetCamPos.set(13, 11, 16);
-    targetLookAt.set(0, H / 2, 0);
+    const camDist = Math.max(13, Math.min(22, Math.max(L || 6, W || 5, H) * 2.2));
+    targetCamPos.set(camDist * 0.68, Math.max(7.0, H + 5.0), camDist * 0.85);
+    targetLookAt.set(0, Math.max(1.0, H / 2), 0);
   } else if (angle === 'main-table') {
     // Return to Main Inspection Table & Showcase Box (clear eye-level view)
-    targetCamPos.set(0, 5.5, 18);
-    targetLookAt.set(0, H / 2, 0);
+    const camDist = Math.max(12, Math.min(20, Math.max(L || 6, W || 5, H) * 2.1));
+    targetCamPos.set(0, Math.max(3.2, H / 2 + 2.2), camDist);
+    targetLookAt.set(0, Math.max(1.0, H / 2), 0);
   } else if (angle === 'stand-left') {
     // Stand in front of Left Shelf — offset z=+4 to see between the upright posts, not through one
     targetCamPos.set(-15.5, 2.0, 4.0);
@@ -4591,19 +4990,20 @@ function toggleFlapsAction() {
 }
 
 function toggleAppleAction() {
-  const { L, H } = boxGroup.userData;
+  const { L, H, is5P } = boxGroup.userData;
+  const appleRestY = 0.78 + (is5P ? 0.10 : 0.06);
   if (!isAppleInside) {
     isAppleInside = true;
     if (!areFlapsOpen) toggleFlapsAction();
-    // Apple slides horizontally from right side INTO the center of the box (realistic placement)
-    appleTargetPos.set(0, H * 0.15, 0);
+    // Apple slides horizontally from right side INTO the center of the box (resting on bottom floor)
+    appleTargetPos.set(0, appleRestY, 0);
     document.getElementById('btn-apple').classList.add('active');
     document.getElementById('lbl-apple').textContent = 'Take Apple Out';
     showViewportToast('🍎 Apple slid inside the box!');
   } else {
     isAppleInside = false;
     // Apple slides back OUT to the right side of the box
-    appleTargetPos.set(L / 2 + 2.2, H * 0.15, 0);
+    appleTargetPos.set(L / 2 + 1.8, appleRestY, 0);
     document.getElementById('btn-apple').classList.remove('active');
     document.getElementById('lbl-apple').textContent = 'Put Apple Inside';
     showViewportToast('🍎 Apple taken out!');
@@ -4703,6 +5103,12 @@ function filterNiche(niche, btn) {
   } else if (niche === 'garments') {
     titleEl.textContent = '👗 Kurti, Sarees & Apparel Packaging';
     renderGrid(BOX_DATA.filter(b => (b[0] >= 8 && b[0] <= 14) && (b[1] >= 6 && b[1] <= 11) && b[2] <= 5));
+  } else if (niche === 'shoes') {
+    titleEl.textContent = '👟 Shoes & Footwear Boxes';
+    renderGrid(BOX_DATA.filter(b => (b[0] >= 10 && b[0] <= 14) && (b[1] >= 6 && b[1] <= 9) && (b[2] >= 4 && b[2] <= 8)));
+  } else if (niche === 'sweets') {
+    titleEl.textContent = '🍬 Sweets, Bakery & Food Packaging';
+    renderGrid(BOX_DATA.filter(b => (b[4] && (b[4].toLowerCase().includes('sweet') || b[4].toLowerCase().includes('bakery') || b[4].toLowerCase().includes('spice') || b[4].toLowerCase().includes('tea') || b[4].toLowerCase().includes('snack')))));
   } else if (niche === 'jewelry') {
     titleEl.textContent = '💎 Jewelry, Watch & Cosmetics Boxes';
     renderGrid(BOX_DATA.filter(b => Math.max(b[0], b[1], b[2]) <= 7));
@@ -4743,20 +5149,65 @@ function triggerOrderModalForActive() {
   openOrderModalDirect(activeBox.l, activeBox.w, activeBox.h, activeBox.cost, activeBox.note, activeBox.ply);
 }
 
+// Human-friendly "What Fits Inside" description generator based on box dimensions and notes
+function getBoxFitsDescription(l, w, h, note) {
+  const n = (note || '').toLowerCase();
+  if (l === 13 && w === 9 && h === 6) return 'Dustbin Roll 6-Pack, Kurtis, Shoes, Electronic Gadgets';
+  if (n.includes('kurti') || n.includes('saree') || n.includes('garment') || n.includes('shirt') || n.includes('poshak') || n.includes('apparel')) {
+    return 'Kurtis, Sarees, Folded T-Shirts, Formal Shirts, Ethnic Wear';
+  }
+  if (n.includes('shoe') || n.includes('boot')) {
+    return 'Footwear, Men\'s Loafers/Sneakers, Women\'s Heels, Heavy Boxes';
+  }
+  if (n.includes('sweet') || n.includes('bakery') || n.includes('snack') || n.includes('choco')) {
+    return 'Mithai Boxes (500g - 1kg), Bakery Cookies, Dry Fruits, Gift Hampers';
+  }
+  if (n.includes('jewelry') || n.includes('watch') || n.includes('ring') || n.includes('earring') || n.includes('trinket')) {
+    return 'Jewelry Gift Boxes, Luxury Watches, Cosmetic Creams, Mini Crafts';
+  }
+  if (n.includes('mug') || n.includes('cup') || n.includes('bottle') || n.includes('tea') || n.includes('spice')) {
+    return 'Ceramic Mugs, Glass Bottles, Spices Jars, Candles';
+  }
+  if (n.includes('phone') || n.includes('mobile') || n.includes('eyewear') || n.includes('sunglasses')) {
+    return 'Mobile Phones, Hard Sunglasses Cases, Electronics, Wallets';
+  }
+  if (n.includes('export') || n.includes('master') || n.includes('cargo') || n.includes('heavy') || (l >= 15 && w >= 12)) {
+    return 'Heavy Industrial Cargo, Machinery Parts, Fragile Marble Statues, Master Dispatches';
+  }
+  return `${note || 'Standard Cargo'} • General Retail & Courier Packaging`;
+}
+
 function openOrderModalDirect(l, w, h, cost, note, ply) {
   currentOrderBox = { l, w, h, cost, note, ply };
-  const unitPrice = calculateSellingPrice(cost, l, w, h);
-
+  
   document.getElementById('ord-title').innerHTML = `${l} &times; ${w} &times; ${h} Inches`;
   document.getElementById('ord-sub').textContent = `${ply}-Ply Corrugated Carton \u2022 ${note || 'Standard Shipping'}`;
+  
+  // Render high-contrast SVG preview inside product detail modal
+  const svgWrap = document.getElementById('ord-svg-wrap');
+  if (svgWrap) {
+    svgWrap.innerHTML = makePhotorealisticBoxSVG(l, w, h, ply);
+  }
 
-  // Reset Quantity
+  // Update dimension chips
+  const lenEl = document.getElementById('pdp-len');
+  const widEl = document.getElementById('pdp-wid');
+  const hgtEl = document.getElementById('pdp-hgt');
+  if (lenEl) lenEl.textContent = `${l}"`;
+  if (widEl) widEl.textContent = `${w}"`;
+  if (hgtEl) hgtEl.textContent = `${h}"`;
+
+  // Update "Fits Inside" tag
+  const fitsEl = document.getElementById('pdp-fits-desc');
+  if (fitsEl) fitsEl.textContent = getBoxFitsDescription(l, w, h, note);
+
+  // Reset Quantity to 50 pcs trial
   currentQty = 50;
   document.getElementById('inp-custom-qty').value = 50;
   document.querySelectorAll('.qty-chip').forEach(c => c.classList.remove('active'));
   document.querySelector('.qty-chip').classList.add('active');
 
-  document.getElementById('ord-badge').textContent = '⚡ 45-Min Express Doorstep Delivery';
+  document.getElementById('ord-badge').textContent = '⚡ In Stock · 45-Min Express Dispatch';
 
   updateInvoiceCalculations();
   orderBackdrop.classList.add('active');
@@ -4802,12 +5253,55 @@ function customQuantityInput(input) {
 }
 
 function updateInvoiceCalculations() {
-  const unitPrice = calculateSellingPrice(currentOrderBox.cost, currentOrderBox.l, currentOrderBox.w, currentOrderBox.h);
+  const baseRate = calculateSellingPrice(currentOrderBox.cost, currentOrderBox.l, currentOrderBox.w, currentOrderBox.h);
+  
+  // Volume tiered discount: 100 pcs: 5%, 250 pcs: 8%, 500 pcs: 12%
+  let discount = 0;
+  if (currentQty >= 500) discount = 0.12;
+  else if (currentQty >= 250) discount = 0.08;
+  else if (currentQty >= 100) discount = 0.05;
+
+  const unitPrice = Math.max(4, Math.round(baseRate * (1 - discount)));
   const total = currentQty * unitPrice;
 
-  document.getElementById('inv-unit-rate').textContent = `₹${unitPrice} / box`;
+  const rateText = discount > 0 
+    ? `₹${unitPrice} / box <span style="font-size:0.68rem; color:#059669; text-decoration:line-through; margin-left:4px;">₹${baseRate}</span>` 
+    : `₹${unitPrice} / box`;
+
+  document.getElementById('inv-unit-rate').innerHTML = rateText;
   document.getElementById('inv-qty-count').textContent = `${currentQty} Boxes`;
   document.getElementById('inv-total-price').textContent = `₹${total.toLocaleString('en-IN')}`;
+}
+
+// 1-Tap Fast WhatsApp Order (Direct Chat without typing full address)
+function instantWhatsAppOrder() {
+  const { l, w, h, cost, note, ply } = currentOrderBox;
+  const baseRate = calculateSellingPrice(cost, l, w, h);
+  let discount = 0;
+  if (currentQty >= 500) discount = 0.12;
+  else if (currentQty >= 250) discount = 0.08;
+  else if (currentQty >= 100) discount = 0.05;
+  const unitPrice = Math.max(4, Math.round(baseRate * (1 - discount)));
+  const total = currentQty * unitPrice;
+
+  if (typeof confetti === 'function') {
+    confetti({ particleCount: 70, spread: 60, origin: { y: 0.7 } });
+  }
+
+  const waMsg = 
+`📦 *BOX ENQUIRY / DIRECT ORDER - BOX COMPANY UDAIPUR*
+━━━━━━━━━━━━━━━━━━━━
+• *Box Size:* ${l} x ${w} x ${h} Inches (${ply}-Ply)
+• *Use Case:* ${note || 'Packaging'}
+• *Quantity:* ${currentQty} Boxes
+• *Estimated Total:* ₹${total.toLocaleString('en-IN')} (approx ₹${unitPrice}/box)
+• *Delivery:* 45-Min Express Doorstep Delivery in Udaipur
+━━━━━━━━━━━━━━━━━━━━
+_Namaste! Please confirm availability, delivery timing & UPI QR code._`;
+
+  const waUrl = `https://wa.me/918619661325?text=${encodeURIComponent(waMsg)}`;
+  window.open(waUrl, '_blank');
+  closeOrderModal();
 }
 
 // GPS / MAP LOCATOR LOGIC
@@ -4895,9 +5389,118 @@ _Please confirm order dispatch and send UPI QR code!_`;
   }, 400);
 }
 
-// Initialize 3D Engine on DOM load
+/* =========================================================================
+   PWA (PROGRESSIVE WEB APP) & SYSTEM NOTIFICATION SYSTEM
+   - Install App on Phone Home Screen without Play Store / App Store
+   - System Notifications for Urgent Dispatch & Price Alerts
+   ========================================================================= */
+
+// 1. Register Service Worker for PWA capabilities
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').then((reg) => {
+      console.log('Box Company PWA Service Worker Registered:', reg.scope);
+    }).catch((err) => {
+      console.log('SW registration note:', err);
+    });
+  });
+}
+
+// 2. Handle Add to Home Screen (PWA Install Prompt)
+let deferredInstallPrompt = null;
+const pwaBanner = document.getElementById('pwa-install-banner');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  if (!localStorage.getItem('pwa_banner_dismissed')) {
+    setTimeout(() => {
+      if (pwaBanner) pwaBanner.style.display = 'flex';
+    }, 2800);
+  }
+});
+
+function triggerPWAInstall() {
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  if (deferredInstallPrompt) {
+    deferredInstallPrompt.prompt();
+    deferredInstallPrompt.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        showViewportToast('🎉 App added to home screen successfully!');
+        dismissPWABanner();
+      }
+      deferredInstallPrompt = null;
+    });
+  } else if (isIOS) {
+    const iosModal = document.getElementById('ios-install-modal');
+    if (iosModal) iosModal.classList.add('active');
+  } else {
+    showViewportToast('💡 Tap browser menu (⋮) and choose "Add to Home screen" or "Install App"!');
+  }
+}
+
+function dismissPWABanner() {
+  if (pwaBanner) pwaBanner.style.display = 'none';
+  localStorage.setItem('pwa_banner_dismissed', 'true');
+}
+
+function closeIOSInstallModal(e) {
+  const modal = document.getElementById('ios-install-modal');
+  if (modal) modal.classList.remove('active');
+}
+
+// 3. System Push & Local Notification Permissions
+function updateNotificationButtonUI() {
+  const btn = document.getElementById('btn-pwa-notif');
+  if (!btn) return;
+  if ('Notification' in window && Notification.permission === 'granted') {
+    btn.innerHTML = '<span>🔔</span> Alerts On';
+    btn.style.background = '#D1FAE5';
+    btn.style.borderColor = '#10B981';
+    btn.style.color = '#065F46';
+  }
+}
+
+function togglePushNotifications() {
+  if (!('Notification' in window)) {
+    alert('This browser does not support notifications.');
+    return;
+  }
+
+  if (Notification.permission === 'granted') {
+    sendSampleNotification();
+    showViewportToast('🔔 Notifications are active! You will receive urgent dispatch updates.');
+  } else if (Notification.permission !== 'denied') {
+    Notification.requestPermission().then((permission) => {
+      if (permission === 'granted') {
+        updateNotificationButtonUI();
+        sendSampleNotification();
+        showViewportToast('🎉 Notifications Enabled! Delivery & price alerts active.');
+      } else {
+        showViewportToast('⚠️ Notifications blocked. You can enable them in browser settings.');
+      }
+    });
+  } else {
+    showViewportToast('⚠️ Notifications blocked. You can enable them in site settings.');
+  }
+}
+
+function sendSampleNotification() {
+  try {
+    new Notification('Box Company Udaipur 📦', {
+      body: 'Alerts Activated! 45-min auto dispatch & wholesale rates across Udaipur.',
+      icon: 'icon.svg',
+      badge: 'icon.svg'
+    });
+  } catch (e) {
+    console.log('Notification display note:', e);
+  }
+}
+
+// Initialize 3D Engine and PWA Status on DOM load
 window.addEventListener('DOMContentLoaded', () => {
   initHero3D();
+  updateNotificationButtonUI();
 });
 </script>
 </body>
