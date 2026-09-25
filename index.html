@@ -595,7 +595,7 @@
     transition: transform 0.25s ease;
   }
   .box-card:hover .card-svg-wrap { transform: scale(1.06); }
-  .card-svg-wrap svg { width: 100%; height: 100%; max-height: 84px; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.08)); }
+  .card-svg-wrap svg { width: 100%; height: 100%; max-height: 84px; }
 
   .card-size-title {
     font-size: 0.96rem;
@@ -2382,15 +2382,8 @@ function makePhotorealisticBoxSVG(l, w, h, ply) {
   const uid = `${l}_${w}_${h}_${ply}`;
 
   return `
-  <svg viewBox="-4 -2 ${totalW + 8} ${totalH + 14}" xmlns="http://www.w3.org/2000/svg" style="overflow:visible; filter: drop-shadow(0 4px 8px rgba(130, 85, 40, 0.12));">
+  <svg viewBox="-4 -2 ${totalW + 8} ${totalH + 14}" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;">
     <defs>
-      <!-- Real Kraft Paper Fiber Noise Filter -->
-      <filter id="kraftFiber-${uid}" x="0%" y="0%" width="100%" height="100%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" result="noise"/>
-        <feColorMatrix type="matrix" values="0 0 0 0 0.8  0 0 0 0 0.6  0 0 0 0 0.4  0 0 0 0.22 0" in="noise" result="coloredNoise"/>
-        <feBlend mode="multiply" in="SourceGraphic" in2="coloredNoise"/>
-      </filter>
-
       <!-- Facet Gradients -->
       <linearGradient id="topG-${uid}" x1="0" y1="0" x2="1" y2="1">
         <stop offset="0%" stop-color="${topColor1}"/>
@@ -2412,8 +2405,8 @@ function makePhotorealisticBoxSVG(l, w, h, ply) {
         <stop offset="100%" stop-color="#925E28"/>
       </linearGradient>
       <radialGradient id="shG-${uid}" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="rgba(35, 20, 8, 0.35)"/>
-        <stop offset="65%" stop-color="rgba(50, 28, 12, 0.10)"/>
+        <stop offset="0%" stop-color="rgba(35, 20, 8, 0.28)"/>
+        <stop offset="65%" stop-color="rgba(50, 28, 12, 0.08)"/>
         <stop offset="100%" stop-color="rgba(0, 0, 0, 0)"/>
       </radialGradient>
       <!-- Vertical Corrugation Fluting Washboard Pattern -->
@@ -2427,14 +2420,14 @@ function makePhotorealisticBoxSVG(l, w, h, ply) {
     <ellipse cx="${shadowCx}" cy="${shadowCy}" rx="${(wl + ox) * 0.58}" ry="${(wh + oy) * 0.22}" fill="url(#shG-${uid})"/>
 
     <!-- Top Face -->
-    <polygon points="${topPoly}" fill="url(#topG-${uid})" stroke="rgba(70,35,10,0.25)" stroke-width="0.75" filter="url(#kraftFiber-${uid})"/>
+    <polygon points="${topPoly}" fill="url(#topG-${uid})" stroke="rgba(70,35,10,0.25)" stroke-width="0.75"/>
     <!-- Top Flap Seam Line -->
     <line x1="${mAD.x}" y1="${mAD.y}" x2="${mBC.x}" y2="${mBC.y}" stroke="rgba(60,30,10,0.5)" stroke-width="0.9"/>
     <!-- Reinforced Sealing Tape on Top -->
     <polygon points="${tapePoly}" fill="url(#tapeG-${uid})" stroke="rgba(70,35,10,0.3)" stroke-width="0.5"/>
 
     <!-- Front Face -->
-    <polygon points="${frontPoly}" fill="url(#frontG-${uid})" stroke="rgba(70,35,10,0.3)" stroke-width="0.75" filter="url(#kraftFiber-${uid})"/>
+    <polygon points="${frontPoly}" fill="url(#frontG-${uid})" stroke="rgba(70,35,10,0.3)" stroke-width="0.75"/>
     <polygon points="${frontPoly}" fill="url(#flutes-${uid})" opacity="0.9"/>
 
     <!-- Printed Shipping Marks on Front (Fragile Glass, Up Arrows, Barcode) -->
@@ -2452,7 +2445,7 @@ function makePhotorealisticBoxSVG(l, w, h, ply) {
     </g>
 
     <!-- Right Side Face -->
-    <polygon points="${sidePoly}" fill="url(#sideG-${uid})" stroke="rgba(70,35,10,0.35)" stroke-width="0.75" filter="url(#kraftFiber-${uid})"/>
+    <polygon points="${sidePoly}" fill="url(#sideG-${uid})" stroke="rgba(70,35,10,0.35)" stroke-width="0.75"/>
     <polygon points="${sidePoly}" fill="url(#flutes-${uid})" opacity="0.7"/>
 
     <!-- Factory Box Certificate Stamp on Side -->
@@ -5305,6 +5298,7 @@ function toggleAppleAction() {
 
 // Explicit function to load into 3D Showroom and scroll to top
 function loadInto3DShowroom(l, w, h, cost, note, ply) {
+  ensure3DInitialized();
   activeBox = { l, w, h, cost, note, ply };
   const sellPrice = calculateSellingPrice(cost, l, w, h);
 
@@ -5318,6 +5312,9 @@ function loadInto3DShowroom(l, w, h, cost, note, ply) {
   // If on mobile screen, automatically switch to 3D tab so user sees the 3D box immediately!
   if (window.innerWidth < 768 && typeof switchMobileView === 'function') {
     switchMobileView('3d');
+  } else {
+    is3DActive = true;
+    animate();
   }
 
   // Smooth scroll to top 3D stage
@@ -5762,6 +5759,7 @@ function switchMobileView(tab) {
 
   if (!isCatalog) {
     // Switched to 3D studio: wake up 3D engine, re-measure viewport & scroll to top
+    ensure3DInitialized();
     is3DActive = true;
     animate();
     setTimeout(() => {
@@ -5965,13 +5963,23 @@ function sendSampleNotification() {
 }
 
 // 6. Initialize 3D Engine, Mobile Views, Broadcasts & PWA Status
-window.addEventListener('DOMContentLoaded', () => {
+let is3DInitialized = false;
+
+function ensure3DInitialized() {
+  if (is3DInitialized) return;
+  is3DInitialized = true;
   initHero3D();
+}
+
+window.addEventListener('DOMContentLoaded', () => {
   updateNotificationButtonUI();
   initStoreBroadcast();
 
-  // If on mobile device, default to clean catalog browsing view!
-  if (window.innerWidth < 768) {
+  // If on desktop (>= 768px), initialize 3D immediately.
+  // If on mobile (< 768px), DO NOT initialize 3D on load! Keeps mobile 100% lightweight & lag-free!
+  if (window.innerWidth >= 768) {
+    ensure3DInitialized();
+  } else {
     switchMobileView('catalog');
   }
 
